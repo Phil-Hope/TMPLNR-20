@@ -23,7 +23,8 @@ export class AddShiftComponent implements OnInit {
   users: Observable<User[]>;
   form: FormGroup;
 
-  constructor(public shiftService: ShiftService, private userService: UserService, private fb: FormBuilder) { }
+  constructor(public shiftService: ShiftService, private userService: UserService, private fb: FormBuilder) {
+  }
 
   ngOnInit() {
     this.users = this.userService.getAllUsers();
@@ -34,6 +35,7 @@ export class AddShiftComponent implements OnInit {
       onDuty: ['', Validators.required],
       ShiftStatus: ['', Validators.required],
     });
+
   }
 
   get f() { return this.form.controls; }

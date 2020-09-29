@@ -223,11 +223,9 @@ class ScheduledShift
     }
 
     /**
-     * @param array $ShiftStatus
-     * @return $this
      * @Mutation()
      */
-    public function setShiftStatus(array $ShiftStatus): self
+    public function setShiftStatus($ShiftStatus)
     {
         $this->ShiftStatus = $ShiftStatus;
 

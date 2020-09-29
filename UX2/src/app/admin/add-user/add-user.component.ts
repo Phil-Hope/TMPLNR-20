@@ -26,7 +26,7 @@ export class AddUserComponent implements OnInit {
       contactNumber: ['', Validators.required],
       wagePerHour: ['', Validators.required],
       profilePicture: [''],
-      roles: this.fb.array([]),
+      roles: this.fb.array(['ROLE_ADMIN', 'ROLE_USER']),
       email: ['', Validators.required],
       password: ['', Validators.required]
     });

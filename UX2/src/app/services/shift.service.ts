@@ -43,8 +43,8 @@ export class ShiftService {
       );
   }
 
-  addShift(start: Date, end: Date, onDuty: string, ShiftStatus: string): Observable<ScheduledShift> {
-    return this.http.post<ScheduledShift>(environment.apiUrl,
+  addShift(start: Date, end: Date, onDuty: string, ShiftStatus: string): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/shifts`,
       {start, end, onDuty, ShiftStatus},
       {
         headers: new HttpHeaders({
@@ -53,7 +53,7 @@ export class ShiftService {
         withCredentials: true
       }).pipe(
         tap(_ => alert(`shift created!`)),
-      catchError(this.handleError<ScheduledShift>('add new shift'))
+      catchError(this.handleError<any>('add new shift'))
     );
   }
 

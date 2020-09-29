@@ -1,13 +1,13 @@
 export interface ScheduledShift {
-  id: string;
+  id?: string;
   start: Date;
   end: Date;
-  onDuty: {
+   onDuty: {
     id: string,
     firstName: string,
     lastName: string
   };
-  ShiftStatus: [];
+  ShiftStatus: string;
   readonly comments: {
     id: string;
     comment: string

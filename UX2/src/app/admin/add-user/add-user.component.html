@@ -1,14 +1,14 @@
 <app-header [pageTitle]="pageTitle"></app-header>
 <ion-content>
   <ion-card>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
       <ion-card-header>
         <ion-card-title style="text-align: center;">
           Enter New User Details Below
         </ion-card-title>
       </ion-card-header>
       <ion-card-content>
-
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <ion-list>
           <ion-row>
             <ion-col size="6">
@@ -16,7 +16,7 @@
                 <ion-label position="floating">
                   First Name
                 </ion-label>
-                <ion-input type="text" formControlName="firstName"></ion-input>
+                <ion-input formControlName="firstName"></ion-input>
               </ion-item>
             </ion-col>
 
@@ -25,7 +25,7 @@
                 <ion-label position="floating">
                   Last Name
                 </ion-label>
-                <ion-input type="text" formControlName="lastName"></ion-input>
+                <ion-input formControlName="lastName"></ion-input>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -38,7 +38,7 @@
                   <ion-icon name="call-outline"></ion-icon>
                   Contact Number
                 </ion-label>
-                <ion-input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" formControlName="contactNumber"></ion-input>
+                <ion-input formControlName="contactNumber"></ion-input>
               </ion-item>
             </ion-col>
 
@@ -47,7 +47,7 @@
               <ion-icon name="image-outline"></ion-icon>
               Profile Picture URL
             </ion-label>
-            <ion-input type="url" formControlName="profilePicture"></ion-input>
+            <ion-input formControlName="profilePicture"></ion-input>
           </ion-item>
           </ion-row>
           <ion-row>
@@ -58,18 +58,17 @@
             <ion-label>
               Wage Per Hour
             </ion-label>
-            <ion-input formControlName="wagePerHour" type="currency"></ion-input>
+            <ion-input formControlName="wagePerHour"></ion-input>
           </ion-item>
             </ion-col>
 
             <ion-col size="6">
               <ion-label>User Role</ion-label>
-              <ion-select multiple="true" formControlName="roles" placeholder="select role"></ion-select>
+              <ion-select formControlName="roles" placeholder="select role"></ion-select>
               <ion-select-option value="ROLE_USER">Employee</ion-select-option>
               <ion-select-option value="ROLE_ADMIN">Admin</ion-select-option>
             </ion-col>
           </ion-row>
-
 
           <ion-row>
             <ion-col size="6">
@@ -78,7 +77,7 @@
                   <ion-icon name="mail-outline"></ion-icon>
                   email
                 </ion-label>
-                <ion-input type="email" formControlName="email"></ion-input>
+                <ion-input formControlName="email"></ion-input>
               </ion-item>
             </ion-col>
 
@@ -98,8 +97,9 @@
           </ion-card-subtitle>
 
         </ion-list>
+        </form>
       </ion-card-content>
-    </form>
+
     <p>{{form.value | json}}</p>
   </ion-card>
 </ion-content>
