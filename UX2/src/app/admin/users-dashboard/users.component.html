@@ -1,0 +1,5 @@
+<ion-content>
+  <ion-card *ngFor="let employee of employees | async">
+    <ion-card-header>{{employee.firstName}} {{employee.lastName}}</ion-card-header>
+  </ion-card>
+</ion-content>

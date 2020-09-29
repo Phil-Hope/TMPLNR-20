@@ -1,0 +1,22 @@
+# Read the documentation: https://github.com/IndraGunawan/api-rate-limit-bundle/blob/master/Resources/doc/usage.md
+indragunawan_api_rate_limit:
+    enabled: true
+      cache: cache.api_rate_limit
+
+    header:
+        display: true
+        names:
+            limit: X-RateLimit-Limit
+            remaining: X-RateLimit-Remaining
+            rese1t: X-RateLimit-Reset
+
+    throttle:
+        default:
+            limit: 60 # max attempts per period
+            period: 60 # in seconds
+            sort: 'rate-limit-desc'
+
+    exception:
+        status_code: 429
+        message: 'API rate limit exceeded for %s.' # %s will be replace with client IP address
+        custom_exception: ~ # The exception has to extend Indragunawan\ApiRateLimitBundle\Exception\RateLimitExceededException

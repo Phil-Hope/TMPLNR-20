@@ -1,0 +1,868 @@
+type Comment {
+    comment: String!
+    comment_id: ObjectId
+    dateOfComment: DateTime!
+    employee_Id: Employee
+}
+
+input CommentEmployee_IdRelationInput {
+    create: EmployeeInsertInput
+    link: ObjectId
+}
+
+input CommentInsertInput {
+    dateOfComment: DateTime!
+    employee_Id: CommentEmployee_IdRelationInput
+    comment_id: ObjectId
+    comment: String!
+}
+
+input CommentQueryInput {
+    dateOfComment_lte: DateTime
+    comment_id_gte: ObjectId
+    dateOfComment_lt: DateTime
+    comment_in: [String]
+    comment_exists: Boolean
+    comment_id_lte: ObjectId
+    dateOfComment_in: [DateTime]
+    comment_id: ObjectId
+    comment_lt: String
+    dateOfComment_gte: DateTime
+    OR: [CommentQueryInput!]
+    comment_id_gt: ObjectId
+    employee_Id_exists: Boolean
+    comment_lte: String
+    employee_Id: EmployeeQueryInput
+    comment_id_nin: [ObjectId]
+    comment_ne: String
+    AND: [CommentQueryInput!]
+    comment_gte: String
+    comment_nin: [String]
+    dateOfComment: DateTime
+    dateOfComment_exists: Boolean
+    dateOfComment_gt: DateTime
+    comment_id_exists: Boolean
+    comment_id_in: [ObjectId]
+    comment_gt: String
+    comment_id_lt: ObjectId
+    comment_id_ne: ObjectId
+    dateOfComment_ne: DateTime
+    comment: String
+    dateOfComment_nin: [DateTime]
+}
+
+enum CommentSortByInput {
+    COMMENT_ASC
+    COMMENT_DESC
+    DATEOFCOMMENT_ASC
+    DATEOFCOMMENT_DESC
+    EMPLOYEE_ID_ASC
+    EMPLOYEE_ID_DESC
+    COMMENT_ID_ASC
+    COMMENT_ID_DESC
+}
+
+input CommentUpdateInput {
+    employee_Id_unset: Boolean
+    comment_id: ObjectId
+    comment_id_unset: Boolean
+    comment: String
+    comment_unset: Boolean
+    dateOfComment: DateTime
+    dateOfComment_unset: Boolean
+    employee_Id: CommentEmployee_IdRelationInput
+}
+
+"""
+The `DateTime` scalar type represents a DateTime. The DateTime is serialized as an RFC 3339 quoted string
+"""
+scalar DateTime
+
+type DeleteManyPayload {
+    deletedCount: Int!
+}
+
+type Employee {
+    city: String
+    displayName: String
+    email: String
+    employee_id: ObjectId
+    firstName: String
+    lastName: String
+    manager_id: Manager
+    mobile: String
+    password: String
+    phone: String
+    postcode: String
+    state: String
+    street: String
+    username: String
+    wage: String
+}
+
+input EmployeeInsertInput {
+    state: String
+    street: String
+    email: String
+    wage: String
+    manager_id: EmployeeManager_idRelationInput
+    displayName: String
+    username: String
+    city: String
+    employee_id: ObjectId
+    postcode: String
+    firstName: String
+    lastName: String
+    mobile: String
+    password: String
+    phone: String
+}
+
+input EmployeeManager_idRelationInput {
+    create: ManagerInsertInput
+    link: ObjectId
+}
+
+input EmployeeQueryInput {
+    employee_id_ne: ObjectId
+    password_lt: String
+    mobile: String
+    password: String
+    phone_gte: String
+    mobile_exists: Boolean
+    wage_gt: String
+    postcode: String
+    postcode_in: [String]
+    displayName_gt: String
+    firstName_gt: String
+    phone_in: [String]
+    email_ne: String
+    displayName_gte: String
+    lastName_lte: String
+    mobile_ne: String
+    password_ne: String
+    lastName_lt: String
+    employee_id_lt: ObjectId
+    employee_id_in: [ObjectId]
+    email_lt: String
+    username_gte: String
+    city_gte: String
+    street_ne: String
+    postcode_ne: String
+    displayName_lt: String
+    postcode_exists: Boolean
+    state_gte: String
+    mobile_lt: String
+    email_lte: String
+    lastName_gt: String
+    firstName_in: [String]
+    email: String
+    firstName_lt: String
+    city_lte: String
+    displayName_exists: Boolean
+    mobile_lte: String
+    employee_id_gte: ObjectId
+    displayName_nin: [String]
+    email_in: [String]
+    state_nin: [String]
+    username_lte: String
+    phone_exists: Boolean
+    street_exists: Boolean
+    password_nin: [String]
+    wage_lt: String
+    displayName: String
+    firstName_exists: Boolean
+    street_gt: String
+    wage_lte: String
+    lastName: String
+    firstName_lte: String
+    wage: String
+    employee_id_gt: ObjectId
+    postcode_nin: [String]
+    AND: [EmployeeQueryInput!]
+    email_nin: [String]
+    username_gt: String
+    manager_id_exists: Boolean
+    street_in: [String]
+    wage_gte: String
+    username: String
+    state_lt: String
+    username_in: [String]
+    username_ne: String
+    employee_id: ObjectId
+    manager_id: ManagerQueryInput
+    city: String
+    username_exists: Boolean
+    email_exists: Boolean
+    mobile_nin: [String]
+    firstName_ne: String
+    firstName_nin: [String]
+    street: String
+    password_exists: Boolean
+    street_lt: String
+    phone_lte: String
+    email_gte: String
+    employee_id_exists: Boolean
+    wage_exists: Boolean
+    wage_ne: String
+    state_ne: String
+    mobile_in: [String]
+    lastName_exists: Boolean
+    employee_id_lte: ObjectId
+    wage_nin: [String]
+    phone_gt: String
+    postcode_lte: String
+    firstName_gte: String
+    state_gt: String
+    street_nin: [String]
+    password_gte: String
+    city_in: [String]
+    lastName_nin: [String]
+    firstName: String
+    wage_in: [String]
+    password_gt: String
+    state_lte: String
+    displayName_ne: String
+    mobile_gt: String
+    city_ne: String
+    username_nin: [String]
+    displayName_lte: String
+    city_lt: String
+    city_exists: Boolean
+    postcode_gte: String
+    postcode_gt: String
+    phone_nin: [String]
+    username_lt: String
+    email_gt: String
+    employee_id_nin: [ObjectId]
+    lastName_ne: String
+    postcode_lt: String
+    phone_ne: String
+    OR: [EmployeeQueryInput!]
+    city_nin: [String]
+    state: String
+    password_in: [String]
+    street_gte: String
+    city_gt: String
+    state_in: [String]
+    phone: String
+    state_exists: Boolean
+    mobile_gte: String
+    password_lte: String
+    lastName_in: [String]
+    displayName_in: [String]
+    lastName_gte: String
+    phone_lt: String
+    street_lte: String
+}
+
+enum EmployeeSortByInput {
+    USERNAME_DESC
+    CITY_ASC
+    CITY_DESC
+    DISPLAYNAME_ASC
+    PHONE_ASC
+    PASSWORD_DESC
+    MANAGER_ID_DESC
+    STREET_DESC
+    POSTCODE_DESC
+    PHONE_DESC
+    MANAGER_ID_ASC
+    DISPLAYNAME_DESC
+    FIRSTNAME_DESC
+    PASSWORD_ASC
+    MOBILE_ASC
+    POSTCODE_ASC
+    WAGE_DESC
+    USERNAME_ASC
+    LASTNAME_ASC
+    WAGE_ASC
+    STREET_ASC
+    EMAIL_ASC
+    MOBILE_DESC
+    STATE_ASC
+    EMPLOYEE_ID_ASC
+    EMPLOYEE_ID_DESC
+    LASTNAME_DESC
+    EMAIL_DESC
+    FIRSTNAME_ASC
+    STATE_DESC
+}
+
+input EmployeeUpdateInput {
+    email: String
+    password: String
+    manager_id_unset: Boolean
+    state_unset: Boolean
+    wage_unset: Boolean
+    city: String
+    street: String
+    employee_id_unset: Boolean
+    displayName: String
+    phone_unset: Boolean
+    displayName_unset: Boolean
+    postcode_unset: Boolean
+    mobile_unset: Boolean
+    wage: String
+    employee_id: ObjectId
+    city_unset: Boolean
+    password_unset: Boolean
+    manager_id: EmployeeManager_idRelationInput
+    state: String
+    firstName_unset: Boolean
+    lastName_unset: Boolean
+    firstName: String
+    email_unset: Boolean
+    street_unset: Boolean
+    username_unset: Boolean
+    username: String
+    lastName: String
+    mobile: String
+    phone: String
+    postcode: String
+}
+
+type InsertManyPayload {
+    insertedIds: [ObjectId]!
+}
+
+type Location {
+    LocationName: String
+    city: String
+    email: String
+    location_id: ObjectId
+    manager: Manager
+    phoneNumber: String
+    postcode: String
+    state: String
+    street: String
+}
+
+input LocationInsertInput {
+    LocationName: String
+    email: String
+    manager: LocationManagerRelationInput
+    street: String
+    city: String
+    phoneNumber: String
+    state: String
+    postcode: String
+    location_id: ObjectId
+}
+
+input LocationManagerRelationInput {
+    create: ManagerInsertInput
+    link: ObjectId
+}
+
+input LocationQueryInput {
+    city_in: [String]
+    state_gt: String
+    location_id: ObjectId
+    location_id_in: [ObjectId]
+    postcode_lte: String
+    phoneNumber_in: [String]
+    AND: [LocationQueryInput!]
+    LocationName_in: [String]
+    OR: [LocationQueryInput!]
+    postcode_in: [String]
+    postcode_nin: [String]
+    email_gte: String
+    phoneNumber_exists: Boolean
+    street_lte: String
+    phoneNumber_gt: String
+    state_lte: String
+    postcode_gt: String
+    postcode_lt: String
+    location_id_exists: Boolean
+    email_in: [String]
+    email_exists: Boolean
+    phoneNumber_lt: String
+    city_exists: Boolean
+    email_lt: String
+    phoneNumber_ne: String
+    state_nin: [String]
+    LocationName: String
+    LocationName_lte: String
+    state_ne: String
+    street_lt: String
+    postcode_exists: Boolean
+    state_in: [String]
+    street_exists: Boolean
+    location_id_ne: ObjectId
+    state: String
+    city_lt: String
+    location_id_gte: ObjectId
+    LocationName_nin: [String]
+    postcode: String
+    email_gt: String
+    LocationName_gte: String
+    email: String
+    city_lte: String
+    street_gt: String
+    phoneNumber_nin: [String]
+    city_ne: String
+    location_id_nin: [ObjectId]
+    email_nin: [String]
+    location_id_lt: ObjectId
+    street_in: [String]
+    phoneNumber: String
+    LocationName_lt: String
+    phoneNumber_lte: String
+    street_nin: [String]
+    street_ne: String
+    city_nin: [String]
+    street_gte: String
+    LocationName_ne: String
+    postcode_gte: String
+    email_ne: String
+    state_exists: Boolean
+    location_id_gt: ObjectId
+    manager_exists: Boolean
+    phoneNumber_gte: String
+    LocationName_gt: String
+    state_gte: String
+    manager: ManagerQueryInput
+    city_gte: String
+    email_lte: String
+    location_id_lte: ObjectId
+    city_gt: String
+    LocationName_exists: Boolean
+    state_lt: String
+    postcode_ne: String
+    street: String
+    city: String
+}
+
+enum LocationSortByInput {
+    PHONENUMBER_ASC
+    EMAIL_DESC
+    STATE_ASC
+    STATE_DESC
+    STREET_DESC
+    LOCATIONNAME_DESC
+    CITY_ASC
+    POSTCODE_ASC
+    POSTCODE_DESC
+    LOCATION_ID_ASC
+    LOCATION_ID_DESC
+    STREET_ASC
+    PHONENUMBER_DESC
+    MANAGER_DESC
+    LOCATIONNAME_ASC
+    EMAIL_ASC
+    CITY_DESC
+    MANAGER_ASC
+}
+
+input LocationUpdateInput {
+    street_unset: Boolean
+    city_unset: Boolean
+    manager: LocationManagerRelationInput
+    postcode: String
+    manager_unset: Boolean
+    location_id: ObjectId
+    phoneNumber: String
+    postcode_unset: Boolean
+    phoneNumber_unset: Boolean
+    LocationName: String
+    LocationName_unset: Boolean
+    email: String
+    city: String
+    state: String
+    street: String
+    state_unset: Boolean
+    location_id_unset: Boolean
+    email_unset: Boolean
+}
+
+type Manager {
+    city: String
+    email: String
+    firstName: String
+    lastName: String
+    location: String
+    manager_id: ObjectId
+    mobile: String
+    password: String
+    phone: String
+    postcode: String
+    state: String
+    street: String
+    username: String
+}
+
+input ManagerInsertInput {
+    phone: String
+    password: String
+    city: String
+    state: String
+    manager_id: ObjectId
+    email: String
+    postcode: String
+    lastName: String
+    street: String
+    location: String
+    username: String
+    firstName: String
+    mobile: String
+}
+
+input ManagerQueryInput {
+    email_gt: String
+    state_lte: String
+    location_exists: Boolean
+    city_exists: Boolean
+    username_nin: [String]
+    password_lt: String
+    firstName_lte: String
+    password: String
+    password_gt: String
+    state_gte: String
+    street_nin: [String]
+    city_lt: String
+    postcode_lt: String
+    username_exists: Boolean
+    lastName: String
+    mobile_exists: Boolean
+    state: String
+    firstName_lt: String
+    firstName_nin: [String]
+    manager_id_gt: ObjectId
+    city_in: [String]
+    username_lte: String
+    OR: [ManagerQueryInput!]
+    firstName_exists: Boolean
+    lastName_gt: String
+    state_ne: String
+    postcode_gt: String
+    mobile_ne: String
+    manager_id_exists: Boolean
+    street_lt: String
+    city_ne: String
+    mobile_gt: String
+    email_lt: String
+    firstName_gte: String
+    state_nin: [String]
+    manager_id_ne: ObjectId
+    password_exists: Boolean
+    username_in: [String]
+    email_nin: [String]
+    firstName: String
+    email: String
+    street_gt: String
+    phone_gte: String
+    location_in: [String]
+    postcode_in: [String]
+    manager_id: ObjectId
+    mobile_gte: String
+    manager_id_in: [ObjectId]
+    lastName_exists: Boolean
+    lastName_gte: String
+    state_in: [String]
+    location_ne: String
+    phone_nin: [String]
+    street_exists: Boolean
+    state_exists: Boolean
+    city_gt: String
+    location_gt: String
+    manager_id_nin: [ObjectId]
+    username: String
+    mobile_in: [String]
+    email_ne: String
+    email_lte: String
+    email_in: [String]
+    city_lte: String
+    state_gt: String
+    location_gte: String
+    postcode_lte: String
+    city_nin: [String]
+    street_lte: String
+    location_lte: String
+    lastName_lte: String
+    email_gte: String
+    manager_id_gte: ObjectId
+    password_nin: [String]
+    lastName_lt: String
+    phone_lt: String
+    firstName_in: [String]
+    location: String
+    mobile_lte: String
+    email_exists: Boolean
+    street: String
+    username_gt: String
+    phone: String
+    phone_exists: Boolean
+    mobile_nin: [String]
+    username_lt: String
+    postcode_nin: [String]
+    lastName_ne: String
+    street_ne: String
+    password_gte: String
+    city: String
+    username_gte: String
+    AND: [ManagerQueryInput!]
+    password_ne: String
+    password_lte: String
+    phone_ne: String
+    mobile: String
+    street_gte: String
+    location_lt: String
+    postcode_ne: String
+    postcode_exists: Boolean
+    postcode: String
+    postcode_gte: String
+    lastName_in: [String]
+    state_lt: String
+    password_in: [String]
+    phone_in: [String]
+    lastName_nin: [String]
+    manager_id_lt: ObjectId
+    mobile_lt: String
+    city_gte: String
+    manager_id_lte: ObjectId
+    username_ne: String
+    street_in: [String]
+    firstName_ne: String
+    phone_gt: String
+    location_nin: [String]
+    firstName_gt: String
+    phone_lte: String
+}
+
+enum ManagerSortByInput {
+    MOBILE_DESC
+    MANAGER_ID_ASC
+    LOCATION_DESC
+    STREET_ASC
+    POSTCODE_DESC
+    LASTNAME_ASC
+    USERNAME_DESC
+    MOBILE_ASC
+    FIRSTNAME_ASC
+    CITY_ASC
+    USERNAME_ASC
+    PHONE_ASC
+    STATE_ASC
+    STATE_DESC
+    MANAGER_ID_DESC
+    LOCATION_ASC
+    EMAIL_ASC
+    PASSWORD_DESC
+    LASTNAME_DESC
+    STREET_DESC
+    POSTCODE_ASC
+    FIRSTNAME_DESC
+    PHONE_DESC
+    CITY_DESC
+    EMAIL_DESC
+    PASSWORD_ASC
+}
+
+input ManagerUpdateInput {
+    city_unset: Boolean
+    postcode: String
+    mobile: String
+    manager_id: ObjectId
+    username_unset: Boolean
+    location_unset: Boolean
+    phone_unset: Boolean
+    password_unset: Boolean
+    lastName_unset: Boolean
+    state: String
+    city: String
+    postcode_unset: Boolean
+    firstName: String
+    firstName_unset: Boolean
+    location: String
+    manager_id_unset: Boolean
+    email: String
+    username: String
+    email_unset: Boolean
+    phone: String
+    password: String
+    mobile_unset: Boolean
+    state_unset: Boolean
+    lastName: String
+    street: String
+    street_unset: Boolean
+}
+
+type Mutation {
+    deleteManyComments(query: CommentQueryInput): DeleteManyPayload
+    deleteManyEmployees(query: EmployeeQueryInput): DeleteManyPayload
+    deleteManyLocations(query: LocationQueryInput): DeleteManyPayload
+    deleteManyManagers(query: ManagerQueryInput): DeleteManyPayload
+    deleteManyShifts(query: ShiftQueryInput): DeleteManyPayload
+    deleteOneComment(query: CommentQueryInput!): Comment
+    deleteOneEmployee(query: EmployeeQueryInput!): Employee
+    deleteOneLocation(query: LocationQueryInput!): Location
+    deleteOneManager(query: ManagerQueryInput!): Manager
+    deleteOneShift(query: ShiftQueryInput!): Shift
+    insertManyComments(data: [CommentInsertInput!]!): InsertManyPayload
+    insertManyEmployees(data: [EmployeeInsertInput!]!): InsertManyPayload
+    insertManyLocations(data: [LocationInsertInput!]!): InsertManyPayload
+    insertManyManagers(data: [ManagerInsertInput!]!): InsertManyPayload
+    insertManyShifts(data: [ShiftInsertInput!]!): InsertManyPayload
+    insertOneComment(data: CommentInsertInput!): Comment
+    insertOneEmployee(data: EmployeeInsertInput!): Employee
+    insertOneLocation(data: LocationInsertInput!): Location
+    insertOneManager(data: ManagerInsertInput!): Manager
+    insertOneShift(data: ShiftInsertInput!): Shift
+    replaceOneComment(query: CommentQueryInput, data: CommentInsertInput!): Comment
+    replaceOneEmployee(query: EmployeeQueryInput, data: EmployeeInsertInput!): Employee
+    replaceOneLocation(query: LocationQueryInput, data: LocationInsertInput!): Location
+    replaceOneManager(query: ManagerQueryInput, data: ManagerInsertInput!): Manager
+    replaceOneShift(data: ShiftInsertInput!, query: ShiftQueryInput): Shift
+    updateManyComments(query: CommentQueryInput, set: CommentUpdateInput!): UpdateManyPayload
+    updateManyEmployees(query: EmployeeQueryInput, set: EmployeeUpdateInput!): UpdateManyPayload
+    updateManyLocations(query: LocationQueryInput, set: LocationUpdateInput!): UpdateManyPayload
+    updateManyManagers(set: ManagerUpdateInput!, query: ManagerQueryInput): UpdateManyPayload
+    updateManyShifts(query: ShiftQueryInput, set: ShiftUpdateInput!): UpdateManyPayload
+    updateOneComment(query: CommentQueryInput, set: CommentUpdateInput!): Comment
+    updateOneEmployee(query: EmployeeQueryInput, set: EmployeeUpdateInput!): Employee
+    updateOneLocation(query: LocationQueryInput, set: LocationUpdateInput!): Location
+    updateOneManager(query: ManagerQueryInput, set: ManagerUpdateInput!): Manager
+    updateOneShift(query: ShiftQueryInput, set: ShiftUpdateInput!): Shift
+    upsertOneComment(query: CommentQueryInput, data: CommentInsertInput!): Comment
+    upsertOneEmployee(data: EmployeeInsertInput!, query: EmployeeQueryInput): Employee
+    upsertOneLocation(query: LocationQueryInput, data: LocationInsertInput!): Location
+    upsertOneManager(query: ManagerQueryInput, data: ManagerInsertInput!): Manager
+    upsertOneShift(query: ShiftQueryInput, data: ShiftInsertInput!): Shift
+}
+
+scalar ObjectId
+
+type Query {
+    comment(query: CommentQueryInput): Comment
+    comments(query: CommentQueryInput, limit: Int = 100, sortBy: CommentSortByInput): [Comment]!
+    employee(query: EmployeeQueryInput): Employee
+    employees(query: EmployeeQueryInput, limit: Int = 100, sortBy: EmployeeSortByInput): [Employee]!
+    location(query: LocationQueryInput): Location
+    locations(limit: Int = 100, sortBy: LocationSortByInput, query: LocationQueryInput): [Location]!
+    manager(query: ManagerQueryInput): Manager
+    managers(sortBy: ManagerSortByInput, query: ManagerQueryInput, limit: Int = 100): [Manager]!
+    shift(query: ShiftQueryInput): Shift
+    shifts(query: ShiftQueryInput, limit: Int = 100, sortBy: ShiftSortByInput): [Shift]!
+}
+
+type Shift {
+    comments: Comment
+    employee: Employee
+    endAt: DateTime
+    location: Location
+    shift_id: ObjectId
+    startAt: DateTime
+    status: String
+}
+
+input ShiftCommentsRelationInput {
+    link: ObjectId
+    create: CommentInsertInput
+}
+
+input ShiftEmployeeRelationInput {
+    create: EmployeeInsertInput
+    link: ObjectId
+}
+
+input ShiftInsertInput {
+    status: String
+    employee: ShiftEmployeeRelationInput
+    location: ShiftLocationRelationInput
+    comments: ShiftCommentsRelationInput
+    shift_id: ObjectId
+    startAt: DateTime
+    endAt: DateTime
+}
+
+input ShiftLocationRelationInput {
+    create: LocationInsertInput
+    link: ObjectId
+}
+
+input ShiftQueryInput {
+    status_in: [String]
+    shift_id_lte: ObjectId
+    startAt_gte: DateTime
+    endAt_exists: Boolean
+    OR: [ShiftQueryInput!]
+    shift_id: ObjectId
+    endAt_nin: [DateTime]
+    location: LocationQueryInput
+    startAt_in: [DateTime]
+    endAt: DateTime
+    endAt_ne: DateTime
+    endAt_lte: DateTime
+    startAt_exists: Boolean
+    status_ne: String
+    status_exists: Boolean
+    shift_id_gte: ObjectId
+    status_gte: String
+    endAt_gt: DateTime
+    status_lte: String
+    status_gt: String
+    endAt_lt: DateTime
+    shift_id_exists: Boolean
+    endAt_in: [DateTime]
+    shift_id_in: [ObjectId]
+    comments: CommentQueryInput
+    shift_id_gt: ObjectId
+    startAt_lt: DateTime
+    startAt_gt: DateTime
+    status_nin: [String]
+    shift_id_lt: ObjectId
+    shift_id_ne: ObjectId
+    shift_id_nin: [ObjectId]
+    startAt_lte: DateTime
+    status_lt: String
+    startAt: DateTime
+    employee: EmployeeQueryInput
+    startAt_nin: [DateTime]
+    endAt_gte: DateTime
+    location_exists: Boolean
+    AND: [ShiftQueryInput!]
+    startAt_ne: DateTime
+    employee_exists: Boolean
+    status: String
+    comments_exists: Boolean
+}
+
+enum ShiftSortByInput {
+    EMPLOYEE_ASC
+    COMMENTS_DESC
+    LOCATION_ASC
+    SHIFT_ID_DESC
+    ENDAT_ASC
+    STATUS_DESC
+    EMPLOYEE_DESC
+    STARTAT_ASC
+    ENDAT_DESC
+    STATUS_ASC
+    LOCATION_DESC
+    COMMENTS_ASC
+    SHIFT_ID_ASC
+    STARTAT_DESC
+}
+
+input ShiftUpdateInput {
+    location: ShiftLocationRelationInput
+    employee_unset: Boolean
+    shift_id: ObjectId
+    comments: ShiftCommentsRelationInput
+    status_unset: Boolean
+    shift_id_unset: Boolean
+    endAt_unset: Boolean
+    status: String
+    comments_unset: Boolean
+    startAt_unset: Boolean
+    endAt: DateTime
+    employee: ShiftEmployeeRelationInput
+    startAt: DateTime
+    location_unset: Boolean
+}
+
+type UpdateManyPayload {
+    matchedCount: Int!
+    modifiedCount: Int!
+}

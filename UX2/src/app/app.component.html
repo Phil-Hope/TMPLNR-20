@@ -1,0 +1,101 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" menu-id="first" side="start">
+      <ion-content>
+        <ion-list lines="none">
+          <ion-list-header>
+            <ion-nav-link class="ion-activatable ripple-parent"  [routerLink]="['/']">
+              <ion-img src="https://media.publit.io/file/TMPLNR-2020.png" style="width: 3rem; height: 3rem;"></ion-img>
+            </ion-nav-link>
+            <span style="font-family: Quicksand, sans-serif"> TMPLNR-20</span>
+          </ion-list-header>
+        </ion-list>
+
+        <ion-list lines="none">
+          <ion-menu-toggle autoHide="false" >
+            <ion-item [routerLink]="['login']" class="ion-activatable ripple-parent"  routerLinkActive="active" routerDirection="root" detail="false">
+              <ion-icon slot="start" name="log-in-outline"></ion-icon>
+              <ion-label>
+                SignIn
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle autoHide="false" >
+            <ion-item [routerLink]="['register']" class="ion-activatable ripple-parent"  routerLinkActive="active" routerDirection="root" detail="false">
+              <ion-icon slot="start" name="create-outline"></ion-icon>
+              <ion-label>
+                Register
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle autoHide="false">
+            <ion-item [routerLink]="['contact']" class="ion-activatable ripple-parent"  routerLinkActive="active" routerDirection="root" detail="false">
+              <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+              <ion-label>
+                Contact
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle autoHide="false">
+            <ion-item [routerLink]="['shifts/calendar']" class="ion-activatable ripple-parent"  routerLinkActive="active" routerDirection="root" detail="false">
+              <ion-icon slot="start" name="calendar-outline"></ion-icon>
+              <ion-label>
+                Calendar
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle autoHide="false">
+            <ion-item [routerLink]="['shifts/add']" class="ion-activatable ripple-parent"  routerLinkActive="active" routerDirection="root" detail="false">
+              <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+              <ion-label>
+                Add Shift
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle autoHide="false">
+            <ion-item [routerLink]="['profile']" class="ion-activatable ripple-parent"  routerLinkActive="active" routerDirection="root" detail="false">
+              <ion-icon slot="start" name="calendar-outline"></ion-icon>
+              <ion-label>
+                Profile
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle autoHide="false">
+            <ion-item [routerLink]="['admin']" class="ion-activatable ripple-parent"  routerLinkActive="active" routerDirection="root" detail="false">
+              <ion-icon slot="start" name="grid-outline"></ion-icon>
+              <ion-label>
+                Dashboard
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle autoHide="false">
+            <ion-item [routerLink]="['/shifts']" class="ion-activatable ripple-parent"  routerLinkActive="active" routerDirection="root" detail="false">
+              <ion-icon slot="start" name="grid-outline"></ion-icon>
+              <ion-label>
+                Schedule
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle>
+            <ion-item button detail="false">
+              <ion-icon slot="start" name="log-out-outline"></ion-icon>
+              <ion-label>
+                Logout
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

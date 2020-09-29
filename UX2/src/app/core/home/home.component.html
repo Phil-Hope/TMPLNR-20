@@ -1,0 +1,32 @@
+
+<app-header
+  [pageTitle]="pageTitle"
+></app-header>
+<ion-content>
+  <ion-card>
+    <ion-card-title class="welcome-title">Hi there!</ion-card-title>
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          Already a User?
+        </ion-col>
+        <ion-col>
+          First visit?
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button  size="full" color="secondary" shape="round" [routerLink]="['login']">LOGIN</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button shape="round" color="success" size="full" [routerLink]="['register']">REGISTER</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+<img src="https://media.publit.io/file/organised.png" width="100%" alt="always feel organised" />
+
+</ion-content>
+  <app-footer></app-footer>
+
+

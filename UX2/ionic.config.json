@@ -1,0 +1,8 @@
+{
+  "name": "pln20",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

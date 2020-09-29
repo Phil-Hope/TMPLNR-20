@@ -1,0 +1,27 @@
+<app-header [pageTitle]="['Calendar']"></app-header>
+<ion-content>
+
+<mat-calendar>
+
+</mat-calendar>
+
+</ion-content>
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button>
+      <ion-icon size="small" [routerLink]="['../add']"  name="add-circle-outline"></ion-icon>
+      <ion-label>Add Shift</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button>
+      <ion-icon size="large" color="primary" name="calendar-outline"></ion-icon>
+      <ion-label>Calendar</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button [routerLink]="['/shifts']">
+      <ion-icon size="small" name="search-circle-outline"></ion-icon>
+      <ion-label>View All</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+</ion-tabs>

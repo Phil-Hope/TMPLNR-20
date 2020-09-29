@@ -1,0 +1,110 @@
+<app-header [pageTitle]="pageTitle"></app-header>
+<ion-content>
+  <ion-card>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <ion-card-header>
+        <ion-card-title style="text-align: center;">
+          Enter your details below
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+
+        <ion-list>
+          <ion-row>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">
+                  <span> First Name</span>
+                </ion-label>
+                <ion-input formControlName="firstName"></ion-input>
+              </ion-item>
+            </ion-col>
+
+
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">
+                  <span> Last Name</span>
+                </ion-label>
+                <ion-input formControlName="lastName"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+            <ion-row>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-label position="floating">
+                    <ion-icon name="call-outline"></ion-icon>
+                   <span> Contact Number</span>
+                  </ion-label>
+                  <ion-input formControlName="contactNumber"></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">
+                <ion-icon name="image-outline"></ion-icon>
+                <span> Profile Picture URL</span>
+              </ion-label>
+              <ion-input formControlName="profilePicture"></ion-input>
+            </ion-item>
+              </ion-col>
+            </ion-row>
+
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                  <ion-label position="floating">
+                    <ion-icon name="mail-outline"></ion-icon>
+                    <span> email</span>
+                  </ion-label>
+                  <ion-input formControlName="email"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+          <ion-row>
+                <ion-col>
+                  <ion-item>
+                  <ion-label position="floating">
+                    <ion-icon name="lock-closed-outline"></ion-icon>
+                   <span> password</span>
+                  </ion-label>
+                  <ion-input type="password" formControlName="password"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+          <ng-container *ngIf="submitted && f.password.errors">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+          </ng-container>
+
+          <ng-container *ngIf="submitted && f.confirmPassword.errors">
+            <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+            <div *ngIf="f.confirmPassword.errors.mustMatch">Password do not match</div>
+          </ng-container>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">
+                  <ion-icon name="lock-closed-outline"></ion-icon>
+                  <span> confirm password</span>
+                </ion-label>
+                <ion-input type="password" formControlName="confirmPassword"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+            <ion-card-subtitle>
+              <ion-button class="ion-activatable ripple-parent" color="secondary" type="submit"> Register</ion-button>
+            </ion-card-subtitle>
+        </ion-list>
+      </ion-card-content>
+    </form>
+  </ion-card>
+</ion-content>
+<app-footer></app-footer>
