@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
 import {map, tap} from "rxjs/operators";
 import {User} from "../../../interfaces/user.interface";
+import {ScheduledShift} from "../../../interfaces/shifts.interface";
 
 
 @Injectable()
@@ -29,7 +30,7 @@ export class UsersService {
   }
 
   getUserById(id: string): Observable<User> {
-    return this.http.get<User>(`${environment.apiUrl}/users/${id}`,
+    return this.http.get<User>(`${environment.apiUrl}/users/${id}.json`,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
@@ -37,6 +38,19 @@ export class UsersService {
       }).pipe(
       map((data: User) => data),
       tap(_ => console.log(`User with UUID: ${id} Fetched Successfully!`))
+    );
+  }
+
+  loadUsersShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('order[shifts]', 'ASC');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }), withCredentials: true
+      }).pipe(
+        map((data: ScheduledShift[]) => data),
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
     );
   }
 

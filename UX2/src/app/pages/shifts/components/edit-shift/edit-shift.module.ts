@@ -9,6 +9,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {AuthenticationService} from "../../../../services/authentication.service";
 import {ShiftsService} from "../../services/shifts.service";
 import {HttpConfigInterceptor} from "../../../../services/http.interceptor";
+import {ReactiveTypedFormsModule} from "@rxweb/reactive-form-validators";
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {HttpConfigInterceptor} from "../../../../services/http.interceptor";
     EditShiftPageRoutingModule,
     ComponentsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ReactiveTypedFormsModule
   ],
   declarations: [
     EditShiftPage

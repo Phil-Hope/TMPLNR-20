@@ -7,6 +7,7 @@ import {MenuController, Platform, ToastController} from '@ionic/angular';
 import {BehaviorSubject, Observable} from "rxjs";
 import {AuthenticationService} from "./services/authentication.service";
 import {filter, map, take} from "rxjs/operators";
+import {Storage} from "@ionic/storage";
 
 const TOKEN_KEY = 'token';
 
@@ -31,7 +32,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private storage: Storage
   ) {
     this.initializeApp();
   }
@@ -80,9 +82,9 @@ export class AppComponent {
   }
 
 
-  logout() {
+ async logout() {
     this.isAuthenticated = false;
-    localStorage.remove(TOKEN_KEY).then(() => {
+    await this.storage.clear().then(() => {
       this.router.navigateByUrl('/');
       this.userData = null;
     });

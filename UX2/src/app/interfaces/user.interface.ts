@@ -13,5 +13,6 @@ export interface User {
      start: Date;
      end: Date;
      ShiftStatus: string;
+     isApproved: boolean;
   };
 }

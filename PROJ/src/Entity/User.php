@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
@@ -20,7 +21,7 @@ use TheCodingMachine\GraphQLite\Annotations\Mutation;
 use TheCodingMachine\GraphQLite\Annotations\Query;
 use TheCodingMachine\GraphQLite\Annotations\Type;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
-
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 /**
  * User
  * @ApiResource(
@@ -35,6 +36,7 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
  *   "put"={"security"="is_granted('ROLE_ADMIN') or object.owner == user"}
  *   }
  * )
+ * @ApiFilter(OrderFilter::class, properties={"shifts": "ASC"})
  * @Type(name="Users")
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C74", columns={"email"})})
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")

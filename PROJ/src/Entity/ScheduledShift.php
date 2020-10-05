@@ -50,7 +50,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  * @ApiFilter(DateFilter::class, properties={"start", "end"})
  * @ApiFilter(BooleanFilter::class, properties={"isApproved"})
  * @ApiFilter(SearchFilter::class, properties={"id": "exact", "ShiftStatus": "exact"})
- * @ApiFilter(OrderFilter::class, properties={"start": "DESC"})
+ * @ApiFilter(OrderFilter::class, properties={"start": "ASC"})
  * @Type(name="Shifts")
  * @ORM\Table(name="scheduled_shift", indexes={@ORM\Index(name="IDX_E776626E7CB2CD68", columns={"on_duty_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\ScheduledShiftRepository")
@@ -70,14 +70,14 @@ class ScheduledShift
 
     /**
      * @var DateTime
-     * @Groups({"shift:read", "shift:write", "user:read", "comments:read"})
+     * @Groups({"shift:read", "shift:write", "user:read"})
      * @ORM\Column(name="start", type="datetime", nullable=false)
      */
     private $start;
 
     /**
      * @var DateTime
-     * @Groups({"shift:read", "shift:write", "user:read", "comments:read"})
+     * @Groups({"shift:read", "shift:write", "user:read"})
      * @ORM\Column(name="end", type="datetime", nullable=false)
      */
     private $end;
@@ -100,13 +100,13 @@ class ScheduledShift
     private $comments;
 
     /**
-     * @Groups({"shift:read", "shift:write"})
+     * @Groups({"shift:read", "shift:write", "user:read"})
      * @ORM\Column(type="string", name="shift_status", nullable=false)
      */
     private $ShiftStatus;
 
     /**
-     * @Groups({"shift:read", "shift:write"})
+     * @Groups({"shift:read", "shift:write", "user:read"})
      * @ORM\Column(type="boolean", name="is_approved", nullable=false)
      */
     private $isApproved;

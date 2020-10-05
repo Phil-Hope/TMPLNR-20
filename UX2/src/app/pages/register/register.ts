@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {first, map, tap} from 'rxjs/operators';
 import {environment} from "../../../environments/environment";
 import {AlertController} from '@ionic/angular';
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,13 @@ export class RegisterPage implements OnInit {
   loading = false;
   submitted = false;
   user: User;
-  constructor(private http: HttpClient, private fb: FormBuilder, public alert: AlertController) { }
+
+  constructor(
+    private http: HttpClient,
+    private fb: FormBuilder,
+    public alert: AlertController,
+    private authService: AuthenticationService
+  ) { }
 
   MustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
@@ -63,19 +70,16 @@ export class RegisterPage implements OnInit {
     if (this.form.invalid) {
       return;
     }
-
     this.loading = true;
-    this.http.post<User>(`${environment.apiUrl}/users`,{
-    firstName:  this.f.firstName.value,
-    lastName:  this.f.lastName.value,
-    email:  this.f.email.value,
-    contactNumber:  this.f.contactNumber.value,
-    profilePicture:  this.f.profilePicture.value,
-    wagePerHour:  this.f.wagePerHour.value,
-    roles:  this.f.roles.value,
-    password:  this.f.password.value
-    }
-
+    this.authService.register(
+    this.f.firstName.value,
+    this.f.lastName.value,
+    this.f.email.value,
+    this.f.contactNumber.value,
+    this.f.profilePicture.value,
+    this.f.wagePerHour.value,
+    this.f.roles.value,
+    this.f.password.value
    ).pipe(
      first()).subscribe();
     }

@@ -17,32 +17,37 @@
   </ion-list>
   <ion-list>
     <ion-list-header>
-      <ion-card-title class="ion-text-center">Upcoming Shifts</ion-card-title>
+      <ion-item *ngIf="user"><ion-avatar slot="start"><img src="{{user.profilePicture}}" style="width: 3rem; height: 3rem;"  alt="profile picture"/></ion-avatar>
+      <ion-card-title class="ion-text-center">Your Upcoming Shifts</ion-card-title>
+      </ion-item>
     </ion-list-header>
-    <ion-item style="font-size: 0.7rem; font-family: Quicksand, sans-serif;" class="ion-text-center">
-      <ion-col size="2"><strong>On Duty</strong></ion-col>
+    <ion-item style="font-size: 0.6rem; font-family: Quicksand, sans-serif;" class="ion-text-center">
       <ion-col size="2"><strong>Date</strong></ion-col>
       <ion-col size="2"><strong>Start</strong></ion-col>
       <ion-col size="2"><strong>Finish</strong></ion-col>
       <ion-col size="1.5"><strong>Level</strong></ion-col>
-      <ion-col size="2.5"><strong>Approved</strong></ion-col>
+      <ion-col size="2"><strong>Approved</strong></ion-col>
+      <ion-col size="3"></ion-col>
+
     </ion-item>
-    <div *ngFor="let shift of shifts | async">
-      <ion-item class="shifts ion-text-center" [class.selected]="shift === selectedShift" style="font-family: Quicksand, sans-serif; font-size: 0.7rem;">
-        <ion-avatar slot="start"><img src="{{shift.onDuty.profilePicture}}" style="width: 3rem; height: 3rem;" /></ion-avatar>
-        <ion-col>{{shift.start | date: 'shortDate'}}</ion-col>
-        <ion-col>{{shift.start | date: 'shortTime' }}</ion-col>
-        <ion-col>{{shift.end | date: 'shortTime'}}</ion-col>
+    <div *ngFor="let shifts of userShifts">
+      <ion-item *ngIf="userShifts" class="shifts ion-text-center" style="font-family: Quicksand, sans-serif; font-size: 0.7rem;">
+        <ion-col>{{shifts.start | date: 'shortDate'}}</ion-col>
+        <ion-col>{{shifts.start | date: 'shortTime' }}</ion-col>
+        <ion-col>{{shifts.end | date: 'shortTime'}}</ion-col>
         <ion-col>
-          <span *ngIf="shift.ShiftStatus === 'secondary'"><ion-icon color="secondary" size="large" name="person-circle-outline"></ion-icon></span>
-          <span *ngIf="shift.ShiftStatus === 'primary'"><ion-icon color="success"  size="large" name="person-circle-outline"></ion-icon></span></ion-col>
+          <span *ngIf="shifts.ShiftStatus === 'secondary'"><ion-icon color="secondary" size="large" name="person-circle-outline"></ion-icon></span>
+          <span *ngIf="shifts.ShiftStatus === 'primary'"><ion-icon color="success"  size="large" name="person-circle-outline"></ion-icon></span></ion-col>
         <ion-col>
-        <span *ngIf="shift.isApproved === false">
+        <span *ngIf="shifts.isApproved === false">
           <ion-icon size="large" color="danger" name="close-circle-outline"></ion-icon>
         </span>
-          <span *ngIf="shift.isApproved === true">
+          <span *ngIf="shifts.isApproved === true">
           <ion-icon size="large" color="success" name="checkmark-circle-outline"></ion-icon>
         </span>
+        </ion-col>
+        <ion-col>
+          <ion-button size="small" [routerLink]="['/shifts/', shifts.id, '/details']" color="secondary">view</ion-button>
         </ion-col>
       </ion-item>
     </div>
@@ -52,7 +57,7 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom">
     <ion-tab-button>
-      <ion-icon size="small" routerLink="add" name="add-circle-outline"></ion-icon>
+      <ion-icon size="small" routerLink="/shifts/add" name="add-circle-outline"></ion-icon>
       <ion-label>Add Shift</ion-label>
     </ion-tab-button>
 

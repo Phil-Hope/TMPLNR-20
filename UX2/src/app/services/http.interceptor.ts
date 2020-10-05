@@ -64,7 +64,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
   async presentAlert(status, reason) {
     const alert = await this.alertCtrl.create({
       header: status + ' Error',
-      subHeader: 'An error occurred!',
+      subHeader: 'Session Expired!',
       message: reason,
       buttons: ['OK']
     });

@@ -15,6 +15,8 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+
         main:
             anonymous: true
             stateless: true
@@ -31,6 +33,8 @@ security:
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
+                    - App\Security\LoginAuthenticator
+                entry_point: lexik_jwt_authentication.jwt_token_authenticator
                 # where to redirect after logout
                 # target: app_any_route
 
@@ -43,5 +47,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-    #     - { path: ^/admin, roles: ROLE_ADMIN }
+    #    - { path: ^/token/refresh, roles: IS_AUTHENTICATED_FULLY }
     #     - { path: ^/profile, roles: ROLE_USER }
+    #     - { path: ^/admin, roles: ROLE_ADMIN }

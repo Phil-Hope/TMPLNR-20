@@ -44,7 +44,23 @@ export class ShiftsService {
         map((data: ScheduledShift[]) => data),
         tap(_ => console.log('Fetched Upcoming Shifts Successfully!'))
       );
+  }
 
+  loadAwaitingApprovalShifts(): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss')
+      )
+      .set('order[start]', 'ASC')
+      .set('isApproved', 'false');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/shifts.json`,
+      {
+        params, headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        })
+      }).pipe(
+      map((data: ScheduledShift[]) => data),
+      tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!'))
+    );
   }
 
   getShiftById(id: string): Observable<ScheduledShift> {
@@ -56,6 +72,17 @@ export class ShiftsService {
       }).pipe(
       map((data: ScheduledShift) => data),
       tap(_ => console.log('Shift Fetched Successfully'))
+    );
+  }
+
+  approveShift(id: string, isApproved: boolean): Observable<ScheduledShift> {
+    return this.http.put<ScheduledShift>(`${environment.apiUrl}/shifts/${id}`,
+      {id, isApproved},
+      {headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }), withCredentials: true
+      }).pipe(
+        tap(_ => alert(`Shift ${id} has been approved!`))
     );
   }
 

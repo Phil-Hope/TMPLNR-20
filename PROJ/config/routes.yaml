@@ -10,5 +10,9 @@ authentication_token:
   path: /login
   methods: ['POST']
 
+gesdinet_jwt_refresh_token:
+  path: /token/refresh
+  controller: gesdinet.jwtrefreshtoken::refresh
+
 graphqlite_bundle:
   resource: '@GraphqliteBundle/Resources/config/routes.xml'

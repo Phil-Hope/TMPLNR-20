@@ -6,6 +6,7 @@ import {RegisterPageRoutingModule} from "./register-routing.module";
 import {ComponentsModule} from "../../shared/components.module";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @NgModule({
     imports: [
@@ -21,7 +22,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     RegisterPage
 
   ],
-  bootstrap: [RegisterPage]
+  bootstrap: [RegisterPage],
+  providers: [
+    AuthenticationService
+  ]
 })
 export class RegisterModule { }
 

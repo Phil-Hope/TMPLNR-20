@@ -47,7 +47,7 @@ export class EditShiftPage implements OnInit {
       end: '',
       onDuty: '',
       ShiftStatus: '',
-      isApproved: ''
+      isApproved: [false]
     });
   }
 

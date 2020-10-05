@@ -6,10 +6,28 @@
 parameters:
 
 services:
-    acme_api.event.authentication_success_lister:
+
+    acme_api.event.jwt_created_listener:
+        class: App\EventListener\JWTCreatedListener
+        arguments: [ '@request_stack' ]
+        tags:
+          - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
+
+    acme_api.event.authentication_success_listener:
         class: App\EventListener\AuthenticationSuccessListener
         tags:
           - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+
+    acme_api.event.jwt_expired_listener:
+        class: App\EventListener\TokenExpiredListener
+        tags:
+          - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_expired, method: onJWTExpired }
+
+    acme_api.event.authentication_failure_listener:
+        class: App\EventListener\AuthenticationFailureResponse
+        tags:
+          - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_failure, method: onAuthenticationFailureResponse }
+
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.

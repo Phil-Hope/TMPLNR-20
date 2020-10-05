@@ -27,11 +27,11 @@
             <ion-col style="text-align: center" size="3">END</ion-col>
             <ion-col size="3"></ion-col>
           </ion-row>
-          <ion-row style="font-size: 0.8rem; text-align: center; vertical-align: center; font-family: Quicksand, sans-serif;" *ngFor="let shift of user$.shifts ">
+          <ion-row style="font-size: 0.8rem; text-align: center; vertical-align: center; font-family: Quicksand, sans-serif;" *ngFor="let shift of (user$.shifts)">
             <ion-col size="3">{{shift.start | date: 'shortDate'}}</ion-col>
             <ion-col size="3">{{shift.start | date: 'shortTime'}}</ion-col>
             <ion-col size="3">{{shift.end | date: 'shortTime'}}</ion-col>
-            <ion-col size="3"><ion-button  size="small" color="secondary" routerLink="/shifts/details/{{shift.id}}">VIEW</ion-button></ion-col>
+            <ion-col size="3"><ion-button  size="small" color="secondary" routerLink="/users/{{user$.id}}/shifts">VIEW</ion-button></ion-col>
           </ion-row>
         </ion-list>
     </ion-card-content>

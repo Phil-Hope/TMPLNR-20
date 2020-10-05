@@ -1,37 +1,50 @@
 <app-header [pageTitle]="['Edit Shift']"></app-header>
 
 <ion-content>
-  <ion-card>
+
+  <ng-template #loading>
+    <ion-card style="padding: 3rem; margin-top: 4rem">
+      <ion-card-header><ion-title>Loading..</ion-title></ion-card-header>
+      <ion-card-content><ion-col class="ion-text-center"><ion-spinner></ion-spinner></ion-col></ion-card-content>
+    </ion-card>
+  </ng-template>
+
+  <ion-card style="margin-top: 2rem;" *ngIf="shift else loading">
     <ion-card-header>
       <ion-card-title class="ion-text-center" style="font-family: Quicksand, sans-serif">Edit Shift</ion-card-title>
     </ion-card-header>
     <form [formGroup]="form" (ngSubmit)="editShift()" >
-      <ion-item-group>
-        <ion-item>
-          <ion-label position="floating" class="ion-text-center" color="secondary"><span>Select Start Time</span></ion-label>
-          <ion-datetime
-            picker-format="DD MMM YY h:m A"
-            formControlName="start"
-            display-format="DD MMM YY h:m A"
-          >{{shift.start | date}}
-          </ion-datetime>
-        </ion-item>
-      </ion-item-group>
-      <ion-item-group>
-        <ion-item>
-          <ion-label position="floating" class="ion-text-center" color="secondary"><span>Select Finish Time</span></ion-label>
-          <ion-datetime
-            picker-format="DD MMM YY h:m A"
-            formControlName="end"
-            display-format="DD MMM YY h:m A"
-          >{{shift.end | date}}
-          </ion-datetime>
-        </ion-item>
-      </ion-item-group>
+      <ion-item-divider>
 
+        <ion-item>
+          <ion-label position="floating" class="ion-text-center" style="font-size: 0.8rem;" color="secondary"><span>Select Start Time</span></ion-label>
+          <ion-datetime
+            style="font-size: 0.8rem;"
+            picker-format="DD MMM YY h:mm A"
+            formControlName="start"
+            display-format="DD MMM YY h:mm A"
+            minuteValues="00,15,30,45"
+            value="{{shift.start}}"
+          >
+          </ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating" class="ion-text-center" style="font-size: 0.8rem;"  color="secondary"><span>Select Finish Time</span></ion-label>
+          <ion-datetime
+            style="font-size: 0.8rem;"
+            picker-format="DD MMM YY h:mm A"
+            formControlName="end"
+            display-format="DD MMM YY h:mm A"
+            minuteValues="00,15,30,45"
+            value="{{shift.end}}"
+          >
+          </ion-datetime>
+        </ion-item>
+
+      </ion-item-divider>
       <ion-item-group>
-        <ion-row>
-          <ion-col size="6">
+          <ion-item-divider>
             <ion-item>
               <ion-label position="floating" color="secondary">On Duty</ion-label>
               <ion-select formControlName="onDuty" placeholder="Select User">
@@ -45,23 +58,19 @@
                 </div>
               </ion-select>
             </ion-item>
-          </ion-col>
-          <ion-col size="6">
+
             <ion-item>
-              <ion-label position="floating" color="secondary">Shift Status</ion-label>
-              <ion-select formControlName="ShiftStatus" selectedText="{{shift.ShiftStatus}}" placeholder="Select Status">
+              <ion-label position="floating" color="secondary">Call Level</ion-label>
+              <ion-select formControlName="ShiftStatus" placeholder="Select Status">
                 <ion-select-option value="secondary">Secondary</ion-select-option>
                 <ion-select-option value="primary">Primary</ion-select-option>
               </ion-select>
             </ion-item>
+          </ion-item-divider>
             <ion-item>
-              <ion-label position="stacked">Approved</ion-label>
-              <ion-select formControlName="isApproved" placeholder="Select Approved Status"></ion-select>
-              <ion-select-option value="true">Approved</ion-select-option>
-              <ion-select-option value="false">Not Approved</ion-select-option>
+              <ion-checkbox slot="start" value="true"></ion-checkbox>
+              <ion-label color="secondary">Shift Approved</ion-label>
             </ion-item>
-          </ion-col>
-        </ion-row>
       </ion-item-group>
       <ion-col size="12">
         <ion-item>
@@ -69,7 +78,6 @@
         </ion-item>
       </ion-col>
     </form>
-    {{form.value | json}}
   </ion-card>
 
 </ion-content>

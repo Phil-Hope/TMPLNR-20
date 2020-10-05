@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterModule),
   },
   {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminPageModule),
+  },
+  {
     path: 'contact',
     loadChildren: () => import('./pages/home/components/contact/contact.module').then(m => m.ContactModule)
   },
@@ -66,6 +70,10 @@ const routes: Routes = [
     path: 'users/add',
     loadChildren: () => import('./pages/users/components/add-user/add-user.module').then(m => m.AddUserModule),
 
+  },
+  {
+    path: 'users/:id/shifts',
+    loadChildren: () => import('./pages/users/components/users-shifts/users-shifts.module').then(m => m.UsersShiftsModule),
   },
   {
     path: 'users/:id/details',
