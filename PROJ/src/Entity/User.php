@@ -4,10 +4,11 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Doctrine\UuidBinaryType;
+use Ramsey\Uuid\Lazy\LazyUuidFromString;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -19,11 +20,20 @@ use TheCodingMachine\GraphQLite\Annotations\Mutation;
 use TheCodingMachine\GraphQLite\Annotations\Query;
 use TheCodingMachine\GraphQLite\Annotations\Type;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
+
 /**
  * User
  * @ApiResource(
  *     normalizationContext={"groups"={"user:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"user:write"}, "swagger_definition_name"="Write"},
+ *   attributes={"security"="is_granted('ROLE_USER')"},
+ *   collectionOperations={
+ *   "get", "post"={"security"="is_granted('ROLE_ADMIN')"}
+ *   },
+ *   itemOperations={
+ *   "get",
+ *   "put"={"security"="is_granted('ROLE_ADMIN') or object.owner == user"}
+ *   }
  * )
  * @Type(name="Users")
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C74", columns={"email"})})
@@ -75,7 +85,7 @@ class User implements UserInterface
     private $lastName;
 
     /**
-     * @Groups({"user:read", "user:write"})
+     * @Groups({"user:read", "user:write", "shift:read"})
      * @ORM\Column(name="profile_picture", type="string", length=255, nullable=true)
      */
     private $profilePicture;
@@ -93,22 +103,23 @@ class User implements UserInterface
     private $contactNumber;
 
     /**
+     * @ApiSubresource()
      * @Groups({"user:read"})
      * @ORM\OneToMany(targetEntity=ScheduledShift::class, mappedBy="onDuty")
      */
     private $shifts;
 
-
     public function __construct()
     {
-        $this->shifts = new ArrayCollection();
+      $this->shifts = new ArrayCollection();
     }
 
     /**
      * @Field()
      * @ApiProperty(identifier=true)
+     * @return LazyUuidFromString|UuidInterface
      */
-    public function getId()
+    public function getId(): LazyUuidFromString
     {
         return $this->id;
     }
@@ -318,5 +329,6 @@ class User implements UserInterface
 
         return $this;
     }
+
 
 }

@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use App\Entity\User;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,39 +14,55 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserRepository extends ServiceEntityRepository
+class UserRepository extends EntityRepository implements UserLoaderInterface
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, User::class);
+  /**
+   * @param $username
+   * @return User
+   */
+  public function findUserByUsername($username)
+  {
+    return $this->findOneBy(array(
+      'username' => $username
+    ));
+  }
+
+  /**
+   * @param $email
+   * @return User
+   */
+  public function findUserByEmail($email)
+  {
+    return $this->findOneBy(array(
+      'email' => $email
+    ));
+  }
+
+  /**
+   * @return User
+   * @throws NonUniqueResultException
+   */
+  public function findAny()
+  {
+    return $this->createQueryBuilder('u')
+      ->setMaxResults(1)
+      ->getQuery()
+      ->getOneOrNullResult();
+  }
+
+  public function loadUserByUsername($username)
+  {
+    $user = $this->findUserByUsername($username);
+
+    // allow login by email too
+    if (!$user) {
+      $user = $this->findUserByEmail($username);
     }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+    if (!$user) {
+      throw new UsernameNotFoundException(sprintf('Email "%s" does not exist.', $username));
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+    return $user;
+  }
 }

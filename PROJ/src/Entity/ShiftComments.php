@@ -13,7 +13,17 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
  * ShiftComments
  * @ApiResource(
  *     normalizationContext={"groups"={"comments:read"}, "swagger_definition_name"="Read"},
- *     denormalizationContext={"groups"={"comments:write"}, "swagger_definition_name"="Write"}
+ *     denormalizationContext={"groups"={"comments:write"}, "swagger_definition_name"="Write"},
+ *   shortName="comments",
+ *   attributes={"securtiy"="is_granted('ROLE_USER')"},
+ *   collectionOperations={
+ *   "get", "post"
+ *   },
+ *   itemOperations={
+ *   "get",
+ *   "put"={"security"="is_granted('ROLE_ADMIN') or object.owner == user"},
+ *   "delete"={"security"="is_granted('ROLE_ADMIN') or object.owner == user"},
+ *   }
  * )
  * @ORM\Table(name="shift_comments", indexes={@ORM\Index(name="IDX_762A0E8E22BF0A45", columns={"authored_by_id"}), @ORM\Index(name="IDX_762A0E8EBB70BC0E", columns={"shift_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\ShiftCommentsRepository")

@@ -1,134 +1,65 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
-import {IonicModule} from '@ionic/angular';
-import {IonicStorageModule} from '@ionic/storage';
+import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
 import {AppComponent} from './app.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatTableModule} from '@angular/material/table';
-import {ShiftsResolver} from './services/shifts.resolver';
-
-
-import {AlertService, CommentService, ShiftService, UserService} from './services';
-import {ContactComponent, FooterComponent, HeaderComponent, HomeComponent, PageNotFoundComponent} from './core';
-
-import {LoginComponent, RegisterComponent} from './authentication';
-
-import {
-  AddShiftComponent,
-  DeleteShiftComponent,
-  EditShiftComponent,
-  ListShiftsComponent,
-  MyCalendarComponent,
-  ShiftDetailsComponent,
-} from './shifts';
-
-import {
-  AddUserComponent,
-  AdminComponent,
-  DashboardComponent,
-  DeleteUserComponent,
-  EditUserComponent,
-  UserDetailsComponent,
-  UsersComponent
-} from './admin';
-
-import {ProfileComponent} from './profile';
-import {Observable} from 'rxjs';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatPaginatorModule, MatProgressSpinnerModule, MatSelectModule, MatSortModule} from '@angular/material';
+import {AppRoutingModule} from "./app-routing.module";
+import {RouteReuseStrategy} from "@angular/router";
+import {AuthenticationService} from "./services/authentication.service";
+import {IonicStorageModule, Storage} from "@ionic/storage";
+import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
+import {HttpConfigInterceptor} from "./services/http.interceptor";
+import {ShiftsService} from "./pages/shifts/services/shifts.service";
 
+
+export function jwtOptionsFactory(storage) {
+  return {
+    tokenGetter: () => {
+      return storage.get('token');
+    }
+  };
+}
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AdminComponent,
-    HeaderComponent,
-    FooterComponent,
-    HomeComponent,
-    ContactComponent,
-    LoginComponent,
-    RegisterComponent,
-    AddShiftComponent,
-    MyCalendarComponent,
-    ShiftDetailsComponent,
-    ListShiftsComponent,
-    EditShiftComponent,
-    DeleteShiftComponent,
-    DashboardComponent,
-    UsersComponent,
-    AddUserComponent,
-    UserDetailsComponent,
-    EditUserComponent,
-    DeleteUserComponent,
-    ProfileComponent,
-    PageNotFoundComponent
-  ],
+
   imports: [
     BrowserModule,
-    MatNativeDateModule,
     IonicModule.forRoot(),
-    IonicStorageModule.forRoot(),
     BrowserAnimationsModule,
-    MatDatepickerModule,
-    MatInputModule,
-    MatSnackBarModule,
-    MatFormFieldModule,
-    MatTableModule,
-    MatButtonModule,
-    RouterModule.forRoot([
-      {path: '', component: HomeComponent},
-      {path: 'contact', component: ContactComponent},
-      {path: 'login', component: LoginComponent},
-      {path: 'register', component: RegisterComponent},
-      {path: 'shifts', component: ListShiftsComponent},
-      {path: 'shifts/add', component: AddShiftComponent},
-      {path: 'shifts/calendar', component: MyCalendarComponent},
-      {path: 'shifts/details/:id', component: ShiftDetailsComponent},
-      {path: 'shifts/edit/:id', component: EditShiftComponent},
-      {path: 'shifts/delete/:id', component: DeleteShiftComponent},
-      {path: 'admin', component: DashboardComponent},
-      {path: 'admin/users', component: UsersComponent},
-      {path: 'admin/users/add', component: AddUserComponent},
-      {path: 'admin/users/details/:id', component: UserDetailsComponent},
-      {path: 'admin/users/edit/:id', component: EditUserComponent},
-      {path: 'admin/users/delete/:id', component: DeleteUserComponent},
-      {path: 'api/users/:id', component: ProfileComponent},
-      {path: '**', component: PageNotFoundComponent}
-    ]),
+    IonicStorageModule.forRoot(),
+    AppRoutingModule,
+    JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptionsFactory,
+        deps: [Storage]
+      }
+    }),
     FormsModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-    ReactiveFormsModule,
-    MatProgressSpinnerModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatSelectModule
+    ReactiveFormsModule
+  ],
+  declarations: [
+    AppComponent
   ],
   bootstrap: [AppComponent],
-  providers: [InAppBrowser,
+  providers: [
+    InAppBrowser,
     StatusBar,
     SplashScreen,
-    ShiftService,
-    UserService,
-    CommentService,
-    AlertService,
-    ShiftsResolver
+    ShiftsService,
+    AuthenticationService,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ],
 
 })
-export class AppModule {
-  pageTitle: Observable<string>;
-}
+export class AppModule { }

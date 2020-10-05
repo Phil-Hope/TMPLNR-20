@@ -1,0 +1,85 @@
+<app-header [pageTitle]="pageTitle"></app-header>
+<ion-content>
+  <ion-card>
+  <ion-list>
+      <ion-list-header>
+        <ion-title style="text-align: center;">
+          Enter New User Details Below
+        </ion-title>
+      </ion-list-header>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <ion-list>
+
+          <ion-item-divider>
+              <ion-item>
+                <ion-label position="floating">
+                  First Name
+                </ion-label>
+                <ion-input formControlName="firstName"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">
+                  Last Name
+                </ion-label>
+                <ion-input formControlName="lastName"></ion-input>
+              </ion-item>
+          </ion-item-divider>
+              <ion-item>
+                <ion-label position="floating">
+                  <ion-icon name="call-outline"></ion-icon>
+                  Contact Number
+                </ion-label>
+                <ion-input formControlName="contactNumber"></ion-input>
+              </ion-item>
+          <ion-item>
+            <ion-label position="floating">
+              <ion-icon name="image-outline"></ion-icon>
+              Profile Picture URL
+            </ion-label>
+            <ion-input formControlName="profilePicture"></ion-input>
+          </ion-item>
+          <ion-item-divider>
+          <ion-item>
+            <ion-label position="floating">
+              Wage Per Hour
+            </ion-label>
+            <ion-input formControlName="wagePerHour"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label>Role</ion-label>
+              <ion-select formControlName="roles" placeholder="select role"></ion-select>
+              <ion-select-option value="ROLE_USER">Employee</ion-select-option>
+              <ion-select-option value="ROLE_ADMIN">Admin</ion-select-option>
+          </ion-item>
+          </ion-item-divider>
+              <ion-item>
+                <ion-label position="floating">
+                  <ion-icon name="mail-outline"></ion-icon>
+                  email
+                </ion-label>
+                <ion-input formControlName="email"></ion-input>
+              </ion-item>
+
+
+
+              <ion-item>
+                <ion-label position="floating">
+                  <ion-icon name="lock-closed-outline"></ion-icon>
+                  password
+                </ion-label>
+                <ion-input type="password" formControlName="password"></ion-input>
+              </ion-item>
+
+
+          <ion-card-subtitle>
+            <ion-button type="submit">Create User</ion-button>
+          </ion-card-subtitle>
+
+        </ion-list>
+        </form>
+
+    <p>{{form.value | json}}</p>
+  </ion-list>
+  </ion-card>
+</ion-content>
+<app-footer></app-footer>

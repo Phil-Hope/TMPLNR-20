@@ -1,0 +1,46 @@
+<app-header [pageTitle]='["Login"]'></app-header>
+
+<ion-content>
+  <ion-card>
+    <form (ngSubmit)="login()" [formGroup]="credentials">
+    <ion-card-header>
+      <ion-card-title>Please Login</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+
+        <ion-item>
+          <ion-label position="floating"><ion-icon name="mail-outline"></ion-icon><span> email</span></ion-label>
+          <ion-input id="email" type="text" formControlName="email"></ion-input>
+        </ion-item>
+
+        <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+          <span *ngIf="email.errors?.required">Email is required</span>
+          <span *ngIf="email.errors?.email">Email is invalid</span>
+        </div>
+
+        <ion-item>
+          <ion-label position="floating"><ion-icon name="lock-closed-outline"></ion-icon> <span>password</span></ion-label>
+          <ion-input id="password" type="password"  formControlName="password"></ion-input>
+        </ion-item>
+
+        <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+          <span *ngIf="password.errors?.required">Password is required</span>
+          <span *ngIf="password.errors?.minlength">Password needs to be 6 characters</span>
+        </div>
+
+        <ion-card-subtitle>
+          <ion-row><ion-col size="5">
+          <ion-button class="ion-activatable ripple-parent" size="full" [disabled]="!credentials.valid" color="success" type="submit"><ion-icon name="log-in-outline"></ion-icon> <span>login</span></ion-button> </ion-col>
+            <ion-col size="2" class="ion-text-center" style="margin-top: 0.7rem;"><ion-text>OR</ion-text></ion-col>
+            <ion-col size="5">
+            <ion-button class="ion-activatable ripple-parent" size="full" color="secondary" [routerLink]="['/register']"><ion-icon name="person-add-outline"></ion-icon><span> REGISTER</span></ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card-subtitle>
+      </ion-list>
+    </ion-card-content>
+</form>
+  </ion-card>
+</ion-content>
+<app-footer></app-footer>

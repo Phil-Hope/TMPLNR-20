@@ -1,0 +1,39 @@
+<app-header [pageTitle]="['Shift Details']"></app-header>
+<ion-content>
+  <ion-card>
+    <ion-item>
+      <ion-col class="ion-text-center">Current Datetime</ion-col></ion-item>
+    <ion-item>
+      <ion-col class="ion-text-center">{{date | date: 'full'}}</ion-col>
+    </ion-item>
+  </ion-card>
+<ion-card>
+  <ion-card-header class="ion-text-center">
+    <ion-card-title><ion-button></ion-button>Scheduled Shift Details</ion-card-title>
+    <ion-item>on duty: {{ shift.onDuty.firstName }} {{ shift.onDuty.lastName }}</ion-item>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-row class="ion-text-center">
+        <ion-col size="12">
+          <h6 *ngIf="shift.isApproved === false" style="color: red; text-align: center">Not Yet Approved</h6>
+          <h6 *ngIf="shift.isApproved === true" style="color: #00bb00; text-align: center">Shift Approved</h6>
+        </ion-col>
+      </ion-row>
+      <ion-row><ion-col size="6">On Call Level:</ion-col><ion-col size="6" class="ion-text-center">
+        <span *ngIf="shift.ShiftStatus === 'primary'" style="color: #0B7FC7;">Primary</span>
+        <span *ngIf="shift.ShiftStatus === 'secondary'" style="color: #c79b2e;">Secondary</span>
+      </ion-col></ion-row>
+      <ion-item><ion-col size="6">Shift Date:</ion-col> <ion-col size="6"> {{shift.start | date}}
+    </ion-col></ion-item>
+    <ion-item>
+        <ion-col size="6">Start: <span style="font-size: 1.2rem;">{{shift.start | date: 'shortTime'}}</span></ion-col>
+      <ion-col size="6">Finish: <span style="font-size: 1.2rem;">{{shift.end | date: 'shortTime'}}</span></ion-col>
+    </ion-item>
+        <ion-button routerLink="/shifts/{{shift.id}}/edit" color="warning" >edit</ion-button>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
+</ion-content>
+<app-footer></app-footer>
+

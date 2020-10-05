@@ -4,7 +4,7 @@
       <ion-content>
         <ion-list lines="none">
           <ion-list-header>
-            <ion-nav-link class="ion-activatable ripple-parent"  [routerLink]="['/']">
+            <ion-nav-link class="ion-activatable ripple-parent"  routerLink="/home">
               <ion-img src="https://media.publit.io/file/TMPLNR-2020.png" style="width: 3rem; height: 3rem;"></ion-img>
             </ion-nav-link>
             <span style="font-family: Quicksand, sans-serif"> TMPLNR-20</span>
@@ -12,8 +12,9 @@
         </ion-list>
 
         <ion-list lines="none">
+          <div>
           <ion-menu-toggle autoHide="false" >
-            <ion-item [routerLink]="['login']" class="ion-activatable ripple-parent"  routerLinkActive="active" routerDirection="root" detail="false">
+            <ion-item [routerLink]="['login']" class="ion-activatable ripple-parent" routerDirection="root" detail="false">
               <ion-icon slot="start" name="log-in-outline"></ion-icon>
               <ion-label>
                 SignIn
@@ -31,16 +32,17 @@
           </ion-menu-toggle>
 
           <ion-menu-toggle autoHide="false">
-            <ion-item [routerLink]="['contact']" class="ion-activatable ripple-parent"  routerLinkActive="active" routerDirection="root" detail="false">
+            <ion-item [routerLink]="['contact']" class="ion-activatable ripple-parent" routerDirection="root" detail="false">
               <ion-icon slot="start" name="person-circle-outline"></ion-icon>
               <ion-label>
                 Contact
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
-
+          </div>
+          <div>
           <ion-menu-toggle autoHide="false">
-            <ion-item [routerLink]="['shifts/calendar']" class="ion-activatable ripple-parent"  routerLinkActive="active" routerDirection="root" detail="false">
+            <ion-item [routerLink]="['shifts/calendar']" class="ion-activatable ripple-parent" routerDirection="root" detail="false">
               <ion-icon slot="start" name="calendar-outline"></ion-icon>
               <ion-label>
                 Calendar
@@ -49,7 +51,7 @@
           </ion-menu-toggle>
 
           <ion-menu-toggle autoHide="false">
-            <ion-item [routerLink]="['shifts/add']" class="ion-activatable ripple-parent"  routerLinkActive="active" routerDirection="root" detail="false">
+            <ion-item [routerLink]="['shifts/add']" class="ion-activatable ripple-parent" routerDirection="root" detail="false">
               <ion-icon slot="start" name="add-circle-outline"></ion-icon>
               <ion-label>
                 Add Shift
@@ -58,7 +60,16 @@
           </ion-menu-toggle>
 
           <ion-menu-toggle autoHide="false">
-            <ion-item [routerLink]="['profile']" class="ion-activatable ripple-parent"  routerLinkActive="active" routerDirection="root" detail="false">
+            <ion-item [routerLink]="['users/add']" class="ion-activatable ripple-parent" routerDirection="root" detail="false">
+              <ion-icon name="person-add-outline" slot="start"></ion-icon>
+              <ion-label>
+                Add User
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle autoHide="false">
+            <ion-item [routerLink]="['users/:id/profile/']" class="ion-activatable ripple-parent"  routerDirection="root" detail="false">
               <ion-icon slot="start" name="calendar-outline"></ion-icon>
               <ion-label>
                 Profile
@@ -67,7 +78,7 @@
           </ion-menu-toggle>
 
           <ion-menu-toggle autoHide="false">
-            <ion-item [routerLink]="['admin']" class="ion-activatable ripple-parent"  routerLinkActive="active" routerDirection="root" detail="false">
+            <ion-item routerLink="admin" class="ion-activatable ripple-parent"  routerLinkActive="active" routerDirection="root" detail="false">
               <ion-icon slot="start" name="grid-outline"></ion-icon>
               <ion-label>
                 Dashboard
@@ -76,7 +87,7 @@
           </ion-menu-toggle>
 
           <ion-menu-toggle autoHide="false">
-            <ion-item [routerLink]="['/shifts']" class="ion-activatable ripple-parent"  routerLinkActive="active" routerDirection="root" detail="false">
+            <ion-item routerLink="shifts" class="ion-activatable ripple-parent" routerDirection="root" detail="false">
               <ion-icon slot="start" name="grid-outline"></ion-icon>
               <ion-label>
                 Schedule
@@ -86,12 +97,13 @@
 
           <ion-menu-toggle>
             <ion-item button detail="false">
-              <ion-icon slot="start" name="log-out-outline"></ion-icon>
+              <ion-icon slot="start" (click)="logout()" name="log-out-outline"></ion-icon>
               <ion-label>
                 Logout
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
+          </div>
         </ion-list>
       </ion-content>
     </ion-menu>

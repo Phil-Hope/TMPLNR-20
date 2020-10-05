@@ -21,13 +21,21 @@ use TheCodingMachine\GraphQLite\Annotations\Type;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
-
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 /**
  * ScheduledShift
  * @ApiResource(
  *     normalizationContext={"groups"={"shift:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"shift:write"}, "swagger_definition_name"="Write"},
- *   shortName="shifts",
+ *     shortName="shifts",
+ *   attributes={"security"="is_granted('ROLE_USER')"},
+ *   collectionOperations={
+ *   "get", "post"
+ *   },
+ *   itemOperations={
+ *   "get", "put"={"security"="is_granted('ROLE_ADMIN') or object.owner == user"}
+ *   },
  *     graphql={
  *         "item_query",
  *         "collection_query"={
@@ -40,7 +48,9 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
  *     }
  * )
  * @ApiFilter(DateFilter::class, properties={"start", "end"})
+ * @ApiFilter(BooleanFilter::class, properties={"isApproved"})
  * @ApiFilter(SearchFilter::class, properties={"id": "exact", "ShiftStatus": "exact"})
+ * @ApiFilter(OrderFilter::class, properties={"start": "DESC"})
  * @Type(name="Shifts")
  * @ORM\Table(name="scheduled_shift", indexes={@ORM\Index(name="IDX_E776626E7CB2CD68", columns={"on_duty_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\ScheduledShiftRepository")
@@ -73,7 +83,7 @@ class ScheduledShift
     private $end;
 
     /**
-     * @ApiSubresource()
+     *
      * @Groups({"shift:read", "shift:write"})
      * @ORM\ManyToOne(targetEntity="User", inversedBy="shifts")
      * @ORM\JoinColumns({
@@ -94,6 +104,12 @@ class ScheduledShift
      * @ORM\Column(type="string", name="shift_status", nullable=false)
      */
     private $ShiftStatus;
+
+    /**
+     * @Groups({"shift:read", "shift:write"})
+     * @ORM\Column(type="boolean", name="is_approved", nullable=false)
+     */
+    private $isApproved;
 
     public function __construct()
     {
@@ -228,6 +244,18 @@ class ScheduledShift
     public function setShiftStatus($ShiftStatus)
     {
         $this->ShiftStatus = $ShiftStatus;
+
+        return $this;
+    }
+
+    public function getIsApproved(): ?bool
+    {
+        return $this->isApproved;
+    }
+
+    public function setIsApproved(bool $isApproved): self
+    {
+        $this->isApproved = $isApproved;
 
         return $this;
     }
