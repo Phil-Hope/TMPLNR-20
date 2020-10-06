@@ -8,6 +8,9 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {AuthenticationService} from "./services/authentication.service";
 import {filter, map, take} from "rxjs/operators";
 import {Storage} from "@ionic/storage";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../environments/environment";
+import {User} from "./interfaces/user.interface";
 
 const TOKEN_KEY = 'token';
 
@@ -23,6 +26,7 @@ export class AppComponent {
   dark = false;
   id: Observable<any>;
   userData = BehaviorSubject;
+  user: User;
 
   constructor(
     private menu: MenuController,
@@ -33,7 +37,8 @@ export class AppComponent {
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
     private authService: AuthenticationService,
-    private storage: Storage
+    private storage: Storage,
+    private http: HttpClient,
   ) {
     this.initializeApp();
   }
@@ -58,6 +63,7 @@ export class AppComponent {
         .then(() => this.swUpdate.activateUpdate())
         .then(() => window.location.reload());
     });
+    this.getCurrentUser();
   }
 
   initializeApp() {
@@ -81,6 +87,10 @@ export class AppComponent {
     );
   }
 
+ async getCurrentUser() {
+      const id = await this.storage.get('id');
+      this.http.get<User>(`${environment.apiUrl}/users/${id}.json`).subscribe(data => this.user = data);
+  }
 
  async logout() {
     this.isAuthenticated = false;

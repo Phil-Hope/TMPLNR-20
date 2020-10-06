@@ -22,7 +22,7 @@ export class UsersService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        }), withCredentials: true
+        })
       }).pipe(
       map((data: User[]) => data),
       tap(_ => console.log('Users Retrieved Successfully!'))
@@ -34,7 +34,7 @@ export class UsersService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        }), withCredentials: true,
+        })
       }).pipe(
       map((data: User) => data),
       tap(_ => console.log(`User with UUID: ${id} Fetched Successfully!`))
@@ -47,7 +47,7 @@ export class UsersService {
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        }), withCredentials: true
+        })
       }).pipe(
         map((data: ScheduledShift[]) => data),
       tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
@@ -69,7 +69,7 @@ export class UsersService {
       {
         headers: new HttpHeaders({
           'Contact-Type': 'application/json'
-        }), withCredentials: true
+        })
       }).pipe(
       map((data: User) => data),
       tap(_ => alert(`User ${firstName} ${lastName} was Successfully Updated!`))
@@ -79,7 +79,7 @@ export class UsersService {
     return this.http.delete(`${environment.apiUrl}/users/${id}`,
       {headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        }), withCredentials: true
+        })
       }).pipe(
         tap(_ => alert('User Successfully Deleted!'))
     );
@@ -91,13 +91,14 @@ export class UsersService {
     contactNumber: string,
     email: string,
     password: string,
+    roles: string,
     profilePicture: string,
     wagePerHour: string): Observable<User> {
     return this.http.post<User>(`${environment.apiUrl}/users/`,
-      {firstName, lastName, contactNumber, email, password, profilePicture, wagePerHour},
+      {firstName, lastName, contactNumber, email, password, profilePicture, wagePerHour, roles},
       {headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        }), withCredentials: true,
+        })
       }).pipe(
         map((data: User) => data),
       tap(_ => alert(`User ${firstName} ${lastName} Created Successfully!`))

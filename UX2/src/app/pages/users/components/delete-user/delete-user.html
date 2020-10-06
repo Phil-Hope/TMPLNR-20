@@ -1,9 +1,32 @@
 <app-header></app-header>
 
-<ion-content>
-<p>
-  delete-user works!
-</p>
+<ion-content *ngIf="user">
+  <ion-list>
+    <ion-list-header>Delete User?</ion-list-header>
+    <ion-item-divider>
+      <ion-col size="4">
+        Name
+      </ion-col>
+      <ion-col size="4">
+        Email
+      </ion-col>
+      <ion-col size="4">
+        Contact Number
+      </ion-col>
+    </ion-item-divider>
+    <ion-item-divider>
+      <ion-col>{{user.firstName}} {{user.lastName}}</ion-col>
+      <ion-col>{{user.email}}</ion-col>
+      <ion-col>{{user.contactNumber}}</ion-col>
+    </ion-item-divider>
+    <ion-item>
+      <form [formGroup]="form" (ngSubmit)="deleteUser()">
+        <ion-input type="hidden" value="{{user.id}}" formControlName="id"></ion-input>
+        <ion-button type="submit" color="danger" size="small">DELETE</ion-button>
+      </form>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
 
 <app-footer></app-footer>

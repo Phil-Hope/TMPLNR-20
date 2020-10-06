@@ -24,11 +24,11 @@ export class ShiftDetailsPage implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.getShift(id);
+    this.getShift(id).subscribe((data: ScheduledShift) => this.shift = data);
   }
 
-  getShift(id: string) {
-    this.shiftsService.getShiftById(id).subscribe((data: ScheduledShift) => this.shift = data);
+  getShift(id: string): Observable<ScheduledShift> {
+   return this.shiftsService.getShiftById(id);
   }
 
 }

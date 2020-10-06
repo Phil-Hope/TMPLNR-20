@@ -68,8 +68,8 @@
             </ion-item>
           </ion-menu-toggle>
 
-          <ion-menu-toggle autoHide="false">
-            <ion-item [routerLink]="['users/:id/profile/']" class="ion-activatable ripple-parent"  routerDirection="root" detail="false">
+          <ion-menu-toggle *ngIf="user" autoHide="false">
+            <ion-item [routerLink]="['users/', user.id, '/profile']" class="ion-activatable ripple-parent"  routerDirection="root" detail="false">
               <ion-icon slot="start" name="calendar-outline"></ion-icon>
               <ion-label>
                 Profile

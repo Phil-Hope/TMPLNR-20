@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../../../interfaces/user.interface';
-import {HttpClient} from "@angular/common/http";
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {environment} from "../../../../../environments/environment";
 import {Observable} from "rxjs";
+import {UsersService} from "../../services/users.service";
+import {tap} from "rxjs/operators";
 
 
 @Component({
@@ -19,7 +20,7 @@ export class AddUserPage implements OnInit {
   user: User;
   form: FormGroup;
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {
+  constructor(private userService: UsersService, private fb: FormBuilder) {
   }
 
   ngOnInit() {
@@ -46,18 +47,18 @@ export class AddUserPage implements OnInit {
     if (this.form.invalid) {
       return;
     } else {
-      this.http.post<User>(`${environment.apiUrl}/shifts`,
-        {
-          firstName: this.f.firstName.value,
-          lastName: this.f.lastName.value,
-          contactNumber: this.f.contactNumber.value,
-          wagePerHour: this.f.wagePerHour.value,
-          profilePicture: this.f.profilePicture.value,
-          roles: this.f.roles.value,
-          email: this.f.email.value,
-          password: this.f.password.value
-        }
-      );
+      this.userService.addUser(
+          this.f.firstName.value,
+          this.f.lastName.value,
+          this.f.contactNumber.value,
+          this.f.wagePerHour.value,
+          this.f.profilePicture.value,
+          this.f.roles.value,
+          this.f.email.value,
+          this.f.password.value
+      ).pipe(
+          tap(_ => console.log('New User Added!')),
+      ).subscribe(data => this.user = data);
     }
   }
 }

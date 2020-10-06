@@ -68,7 +68,7 @@ export class ShiftsService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        }), withCredentials: true
+        })
       }).pipe(
       map((data: ScheduledShift) => data),
       tap(_ => console.log('Shift Fetched Successfully'))
@@ -80,7 +80,7 @@ export class ShiftsService {
       {id, isApproved},
       {headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        }), withCredentials: true
+        })
       }).pipe(
         tap(_ => alert(`Shift ${id} has been approved!`))
     );
@@ -92,7 +92,7 @@ export class ShiftsService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        }), withCredentials: true
+        })
       }).pipe(
       map((data: ScheduledShift) => data),
       tap(_ => alert('Shift Created Successfully!'))
@@ -105,7 +105,7 @@ export class ShiftsService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        }), withCredentials: true
+        })
       })
       .pipe(
         map((data: ScheduledShift) => data),
@@ -118,7 +118,7 @@ export class ShiftsService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        }), withCredentials: true
+        })
       }).pipe(
       tap(_ => alert(`User: ${id}, Deleted SuccessFully!`))
     );

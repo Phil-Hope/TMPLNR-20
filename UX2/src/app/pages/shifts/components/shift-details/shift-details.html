@@ -7,9 +7,24 @@
       <ion-col class="ion-text-center">{{date | date: 'full'}}</ion-col>
     </ion-item>
   </ion-card>
+
+  <ion-item-divider>
+    <ion-row style="font-family: Quicksand, sans-serif;" class="ion-text-center">
+      <ion-col style="font-size: 0.8rem;" size="3"><strong>Call Levels</strong></ion-col>
+      <ion-col size="3"><span style="font-size: 0.7rem;">Secondary</span></ion-col>
+      <ion-col size="1.5"><ion-icon color="secondary" style="font-size: 2rem;" name="person-circle-outline"></ion-icon>
+      </ion-col>
+      <ion-col size="3">
+        <span style="font-size: 0.7rem;">Primary</span></ion-col>
+      <ion-col size="1.5">
+        <ion-icon color="success" style="font-size: 2rem;" name="person-circle-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-item-divider>
+
 <ion-card>
   <ion-card-header class="ion-text-center">
-    <ion-card-title><ion-button></ion-button>Scheduled Shift Details</ion-card-title>
+    <ion-card-title><ion-back-button></ion-back-button>Scheduled Shift Details</ion-card-title>
     <ion-item>on duty: {{ shift.onDuty.firstName }} {{ shift.onDuty.lastName }}</ion-item>
   </ion-card-header>
   <ion-card-content>
@@ -35,5 +50,29 @@
   </ion-card-content>
 </ion-card>
 </ion-content>
-<app-footer></app-footer>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/shifts/add']">
+        <ion-icon size="small" name="add-circle-outline"></ion-icon>
+        <ion-label color="primary" style="font-size: 0.8rem; font-family: Quicksand, sans-serif">Add Shift</ion-label>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="secondary">
+      <ion-button [routerLink]="['/shifts/calendar']">
+        <ion-icon size="small"  name="calendar-outline"></ion-icon>
+        <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif">Calendar</ion-label>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/shifts']">
+        <ion-icon size="small" routerLinkActive="active"  name="search-circle-outline"></ion-icon>
+        <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif">View All</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+
 

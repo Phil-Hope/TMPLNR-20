@@ -1,38 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-
+import {Component, OnInit} from '@angular/core';
 import {ScheduledShift} from '../../../../interfaces/shifts.interface';
-import {Observable} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ShiftsService} from "../../services/shifts.service";
 
 @Component({
-  selector: 'app-delete-shift',
-  templateUrl: './delete-shift.html',
-  styleUrls: ['./delete-shift.scss'],
+    selector: 'app-delete-shift',
+    templateUrl: './delete-shift.html',
+    styleUrls: ['./delete-shift.scss'],
 })
 export class DeleteShiftPage implements OnInit {
 
-  selectedShift: ScheduledShift;
-  pageTitle: 'Delete Shift';
-  shift$: Observable<ScheduledShift>;
+    shift: ScheduledShift;
+    form: FormGroup;
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private shiftService: ShiftsService,
+        private fb: FormBuilder
+    ) {
+    }
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
- //   private shiftService: ShiftService,
-    private fb: FormBuilder
-  ) {
-  }
+    ngOnInit() {
+        this.form = this.fb.group({
+            id: ['', Validators.required]
+        });
+        const id = this.route.snapshot.paramMap.get('id');
+        this.shiftService.getShiftById(id).subscribe(data => this.shift = data);
+    }
+    get f() { return this.form.controls; }
 
-  ngOnInit() {
-//    const shiftId = this.route.snapshot.paramMap.get('id');
-//    this.shift$ = this.shiftService.findShiftById(shiftId);
-  }
-
-  goToShift(shift: ScheduledShift) {
-    const shiftId = shift ? shift.id : null;
-
-    this.router.navigate(['delete/', {id: shiftId}]).then(r => {});
-  }
+    submitDeleteShift() {
+        this.shiftService.deleteShift(this.f.id.value).subscribe(data => console.log(data));
+    }
 
 }

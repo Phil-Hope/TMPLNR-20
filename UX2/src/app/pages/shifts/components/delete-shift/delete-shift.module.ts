@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { IonicModule } from "@ionic/angular";
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { DeleteShiftPageRoutingModule } from "./delete-shift-routing.module";
 import { DeleteShiftPage } from "./delete-shift";
 import {ComponentsModule} from "../../../../shared/components.module";
@@ -11,13 +11,14 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {HttpConfigInterceptor} from "../../../../services/http.interceptor";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    IonicModule,
-    FormsModule,
-    DeleteShiftPageRoutingModule,
-    ComponentsModule
-  ],
+    imports: [
+        CommonModule,
+        IonicModule,
+        FormsModule,
+        DeleteShiftPageRoutingModule,
+        ComponentsModule,
+        ReactiveFormsModule
+    ],
   declarations: [
     DeleteShiftPage
   ],

@@ -10,6 +10,7 @@ import {AuthenticationService} from "../../../../services/authentication.service
 import {ShiftsService} from "../../services/shifts.service";
 import {HttpConfigInterceptor} from "../../../../services/http.interceptor";
 import {ReactiveTypedFormsModule} from "@rxweb/reactive-form-validators";
+import {UsersService} from "../../../users/services/users.service";
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import {ReactiveTypedFormsModule} from "@rxweb/reactive-form-validators";
   providers: [
     AuthenticationService,
     ShiftsService,
+      UsersService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })

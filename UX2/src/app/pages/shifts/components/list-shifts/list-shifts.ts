@@ -15,7 +15,7 @@ import {ShiftsService} from "../../services/shifts.service";
 export class ListShiftsPage implements OnInit {
 
   shifts$: Observable<ScheduledShift[]>;
-  shifts: Observable<ScheduledShift[]>;
+  shifts: ScheduledShift[];
   shift: ScheduledShift;
   date = new Date();
   selectedShift: ScheduledShift;
@@ -34,12 +34,11 @@ export class ListShiftsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.shifts = this.shiftService.loadUpcomingShifts();
-    this.shiftService.loadUpcomingShifts().subscribe((data) => data);
+    this.shiftService.loadUpcomingShifts().subscribe(data => this.shifts = data);
   }
 
-loadShifts(){
-     this.shiftService.loadAllShifts().subscribe(data => data);
+loadShifts(): Observable<ScheduledShift[]>{
+    return this.shiftService.loadUpcomingShifts();
 }
 
 }

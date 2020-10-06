@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {environment} from "../../../../../environments/environment";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ScheduledShift} from '../../../../interfaces/shifts.interface';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from "rxjs";
-import {map} from "rxjs/operators";
 import {User} from "../../../../interfaces/user.interface";
-
+import {UsersService} from "../../../users/services/users.service";
+import {ShiftsService} from "../../services/shifts.service";
+import {map, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-edit-shift',
@@ -16,9 +15,7 @@ import {User} from "../../../../interfaces/user.interface";
 })
 export class EditShiftPage implements OnInit {
 
-  id: string;
-
-  users: Observable<User[]>;
+  users: User[];
   shifts: ScheduledShift[];
   shift: ScheduledShift;
 
@@ -29,17 +26,17 @@ export class EditShiftPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private usersService: UsersService,
+    private shiftsService: ShiftsService
   ) {
   }
 
 
 
   ngOnInit() {
-    this.users = this.http.get<User[]>(`${environment.apiUrl}/users.json`);
+    this.usersService.loadAllUsers().subscribe(data => this.users = data);
 
-    this.id = this.route.snapshot.paramMap.get('id');
     this.getShiftForEdit().subscribe(shift => this.shift = shift);
 
     this.form = this.fb.group({
@@ -52,14 +49,8 @@ export class EditShiftPage implements OnInit {
   }
 
   getShiftForEdit(): Observable<ScheduledShift> {
-    return this.http.get<ScheduledShift>(`${environment.apiUrl}/shifts/${this.id}.json`,
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        }), withCredentials: true
-      }).pipe(
-      map((data: ScheduledShift) => data)
-    );
+    const id = this.route.snapshot.paramMap.get('id');
+    return this.shiftsService.getShiftById(id);
   }
 
   get f() { return this.form.controls; }
@@ -71,18 +62,17 @@ export class EditShiftPage implements OnInit {
     }
 
     this.loading = true;
-    this.http.put<ScheduledShift>(`${environment.apiUrl}/shifts/${this.id}`,
-      {
-        start: this.f.start.value,
-        finish: this.f.end.value,
-        onDuty: this.f.onDuty.value,
-        ShiftStatus: this.f.ShiftStatus.value,
-        isApproved: this.f.isApproved.value,
-      }, {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        }), withCredentials: true
-      }).subscribe(data => (data));
+    this.shiftsService.editShift(
+        this.f.start.value,
+        this.f.end.value,
+        this.f.onDuty.value,
+        this.f.ShiftStatus.value,
+        this.f.isApproved.value,
+    ).pipe(
+        map((res: ScheduledShift) => { this.router.navigateByUrl(`shifts/${res.id}/details`); }),
+        tap(_ => console.log('Shift edited successfully!'))
+    )
+        .subscribe(data => data);
   }
 
 }

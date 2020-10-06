@@ -10,9 +10,10 @@
       <ion-item>
         <ion-label position="floating" class="ion-text-center" color="secondary"><span>Select Start Time</span></ion-label>
       <ion-datetime
-        picker-format="DD MMM YY h:m A"
+        picker-format="DD MMM YY h:mm A"
         formControlName="start"
-        display-format="DD MMM YY h:m A"
+        display-format="DD MMM YY h:mm A"
+        minuteValues="00,15,30,45"
       >
       </ion-datetime>
       </ion-item>
@@ -21,9 +22,10 @@
       <ion-item>
         <ion-label position="floating" class="ion-text-center" color="secondary"><span>Select Finish Time</span></ion-label>
       <ion-datetime
-        picker-format="DD MMM YY h:m A"
+        picker-format="DD MMM YY h:mm A"
         formControlName="end"
-        display-format="DD MMM YY h:m A"
+        display-format="DD MMM YY h:mm A"
+        minuteValues="00,15,30,45"
       >
       </ion-datetime>
     </ion-item>
@@ -39,7 +41,7 @@
              <ion-select-option>Error.. No users found</ion-select-option>
            </ng-template>
            <div *ngIf="users else loadUsers" >
-           <ion-select-option *ngFor="let user of users | async" value="/users/{{this.user.id}}}">
+           <ion-select-option *ngFor="let user of users" value="/users/{{this.user.id}}}">
              {{this.user.firstName}} {{this.user.lastName}}
            </ion-select-option>
            </div>
@@ -64,7 +66,6 @@
  </ion-col>
     <ion-input formControlName="isApproved" type="hidden" value="false"></ion-input>
   </form>
-  {{form.value | json}}
 </ion-card>
 
 </ion-content>

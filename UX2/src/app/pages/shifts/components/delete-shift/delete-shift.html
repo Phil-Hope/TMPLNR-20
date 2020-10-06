@@ -1,8 +1,28 @@
-<app-header [pageTitle]="pageTitle"></app-header>
+<app-header [pageTitle]="['Delete Shift']"></app-header>
 <ion-content>
-  <ion-img src="https://media.publit.io/file/1-uvg.png" style="width: 100%"></ion-img>
+<ion-list>
+  <ion-list-header>Delete Shift?</ion-list-header>
+</ion-list>
+  <ion-item-divider>
+    <ion-col size="3">Start</ion-col>
+    <ion-col size="3">End</ion-col>
+    <ion-col size="3">On Duty</ion-col>
+    <ion-col size="3">Call Level</ion-col>
+  </ion-item-divider>
+  <ion-item-divider>
+    <ion-col size="3">{{shift.start | date: 'medium'}}</ion-col>
+    <ion-col size="3">{{shift.end | date: 'medium'}}</ion-col>
+    <ion-col size="3">{{shift.onDuty.firstName}} {{shift.onDuty.lastName}}</ion-col>
+    <ion-col size="3">{{shift.ShiftStatus}}</ion-col>
+  </ion-item-divider>
+  <ion-item>
+    <form [formGroup]="form" (ngSubmit)="submitDeleteShift()">
 
-  DELETE SHIFTS
-
+    </form>
+    <ion-input type="hidden" value="{{shift.id}}" formControlName="id"></ion-input>
+    <ion-button color="danger" size="small" type="submit">
+      DELETE
+    </ion-button>
+  </ion-item>
 </ion-content>
 <app-footer></app-footer>

@@ -1,5 +1,5 @@
 <app-header [pageTitle]="['Upcoming Shifts']"></app-header>
-<ion-content>
+<ion-content *ngIf="shifts">
 <ion-list>
   <ion-item-divider>
   <ion-row style="font-family: Quicksand, sans-serif;" class="ion-text-center">
@@ -22,7 +22,7 @@
       <ion-col size="1.5"><strong>Level</strong></ion-col>
       <ion-col size="2.5"><strong>Approved</strong></ion-col>
     </ion-item>
-    <div *ngFor="let shift of shifts | async">
+    <div *ngFor="let shift of shifts">
     <ion-item class="shifts ion-text-center" [class.selected]="shift === selectedShift" style="font-family: Quicksand, sans-serif; font-size: 0.7rem;">
     <ion-avatar slot="start"><img src="{{shift.onDuty.profilePicture}}" style="width: 3rem; height: 3rem;" /></ion-avatar>
       <ion-col>{{shift.start | date: 'shortDate'}}</ion-col>
