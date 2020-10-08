@@ -7,6 +7,7 @@ Prerequisites
 - Composer 
 - Yarn or NPM
 - Ionic CLI & Angular CLI
+- openssl
 
       npm install -g @angular/cli or yarn add -g @angular/cli
       npm install -g @ionic/cli or yarn add -g @ionic/cli
@@ -38,7 +39,7 @@ add a .env file with the following configuration:
      
      JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
      JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
-     JWT_PASSPHRASE= "this will be set upon installation"
+     JWT_PASSPHRASE= "MAKE_A_RANDOM_PASSPHRASE"
 
 open config/packages/nelmio_cors.yaml and ensure the following configuration is set:
 
@@ -70,10 +71,17 @@ _This will display the query that is required to map the schema correctly_
 
 To configure the JWT tokens, in your terminal, run: `mkdir/ -p config/jwt` _if directory does not yet exist_
 
-It will prompt you for a passphrase, this is found in the .env file. Copy paste the passphrase each time it is needed.
+It will prompt you for a passphrase, which is the one created in the .env file. Copy paste the passphrase each time it is needed.
 
 - `openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096`
 - `openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout`
+
+To load some dummy users and the Default admin user: 
+
+- In the root of the PROJ folder directory, you will find a file named "DB-data.php".
+- Open this folder and add the database settings required for a connection.
+- then in the PROJ root directory, run: `php DB-data.php`
+
 
 Now to start the symfony server, run:
  - `symfony server:ca:install`
@@ -94,17 +102,20 @@ This will start a webserver at `http://localhost:4200`
 
 Application Instructions:
 
-- Register new user
+I have set a default login for the admin user: 
 
-this will create a new user with Admin privileges.
-I have not yet set a redirect, but in the web tools bar you can see the post request for a new user and a 201 status code.
+- email: `admin@example.com`
+- password: `password`
 
-A HTTP only session cookie is given and used with all future requests. This also the same for a user login event.
+After login, you will be redirected to your profile page where you can update your details and change your password.
 
-You can then navigate to the add new shift page. Create a shift, and a post request with a 201 status code is received.
+The user session is tracked with a JWT token which is signed with rs256.
+This JWT can be decoded to see the payload but no sensitive information is available.
+The only way to hack a user's session is to first gain access to the private and public keys that have been generated in the earlier steps.
 
-Navigate to schedule, and you can see the new shift that has been created. To create a new user you can navigate to admin dashboard and click 
-add user. You can add a new user with the selected privileges. Navigate to users to view the new user.
+
+From here you may navigate to the shifts dashboard. Add some shifts! Check out the admin dashboard and calendars.
+
 
 
 

@@ -33,6 +33,6 @@ export class WelcomePage implements OnInit {
 
   async start() {
     await Storage.set({key: WELCOME_KEY, value: 'true'});
-    this.router.navigateByUrl('/home', { replaceUrl: true });
+    this.router.navigateByUrl('/login', { replaceUrl: true });
   }
 }

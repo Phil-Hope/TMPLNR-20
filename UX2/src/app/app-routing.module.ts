@@ -23,11 +23,6 @@ const routes: Routes = [
       .then(m => m.LoginModule),
   },
   {
-    path: 'register',
-    loadChildren: () => import('./pages/register/register.module')
-      .then(m => m.RegisterModule),
-  },
-  {
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin.module')
       .then(m => m.AdminPageModule),

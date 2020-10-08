@@ -52,7 +52,8 @@
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/html-extra": "^3.0",
         "twig/twig": "^2.12|^3.0",
-        "webonyx/graphql-php": "^0.13.5"
+        "webonyx/graphql-php": "^0.13.5",
+      "ext-pdo": "*"
     },
     "require-dev": {
         "symfony/browser-kit": "^5.1",
