@@ -1,0 +1,58 @@
+<app-header [pageTitle]="['Your Shifts']"></app-header>
+
+<ion-content>
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+<ion-card *ngIf="shifts else loading">
+<ion-grid>
+  <ion-row>
+    <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+    <ion-col>Date</ion-col>
+    <ion-col>Start</ion-col>
+    <ion-col>Finish</ion-col>
+    <ion-col>ShiftStatus</ion-col>
+    <ion-col>Approved?</ion-col>
+    </ion-item>
+  </ion-row>
+  <ion-row *ngFor="let shift of shifts">
+    <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+    <ion-col>{{shift.start | date: 'shortDate'}}</ion-col>
+    <ion-col>{{shift.start | date: 'shortTime'}}</ion-col>
+    <ion-col>{{shift.end | date: 'shortTime'}}</ion-col>
+    <ion-col>{{shift.ShiftStatus}}</ion-col>
+    <ion-col>{{shift.isApproved}}</ion-col>
+    </ion-item>
+  </ion-row>
+</ion-grid>
+</ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/users/profile']" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+        <ion-label>
+          Back to Profile
+        </ion-label>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+
+    </ion-title>
+    <ion-buttons>
+      <ion-button>
+        <ion-label>
+          Edit Details
+        </ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

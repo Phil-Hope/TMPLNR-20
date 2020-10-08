@@ -1,110 +1,92 @@
-<app-header [pageTitle]="pageTitle"></app-header>
-<ion-content>
-  <ion-card>
+<app-header [pageTitle]="['Register']"></app-header>
+<ion-content
+  [scrollEvents]="true"
+>
+  <app-header-banner></app-header-banner>
+  <ion-list lines="indent">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <ion-card-header>
-        <ion-card-title style="text-align: center;">
-          Enter your details below
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
 
-        <ion-list>
-          <ion-row>
-            <ion-col size="6">
-              <ion-item>
-                <ion-label position="floating">
-                  <span> First Name</span>
-                </ion-label>
-                <ion-input formControlName="firstName"></ion-input>
-              </ion-item>
-            </ion-col>
+      <ion-list-header>
+        Enter your details below
+      </ion-list-header>
+      <ion-row>
+        <ion-col>
+      <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-label position="floating"><ion-icon slot="start" name="person-circle-outline"></ion-icon> First Name
+        </ion-label>
+        <ion-input formControlName="firstName"></ion-input>
+      </ion-item>
+        </ion-col>
 
+        <ion-col>
+      <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-label position="floating"><ion-icon slot="start" name="person-circle"></ion-icon> Last Name</ion-label>
+        <ion-input formControlName="lastName"></ion-input>
+      </ion-item>
+        </ion-col>
+      </ion-row>
 
-            <ion-col size="6">
-              <ion-item>
-                <ion-label position="floating">
-                  <span> Last Name</span>
-                </ion-label>
-                <ion-input formControlName="lastName"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
+      <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-label position="floating">
+          <ion-icon slot="start" name="call-outline"></ion-icon> Contact Number
+        </ion-label>
+        <ion-input formControlName="contactNumber"></ion-input>
+      </ion-item>
 
-            <ion-row>
-              <ion-col size="6">
-                <ion-item>
-                  <ion-label position="floating">
-                    <ion-icon name="call-outline"></ion-icon>
-                   <span> Contact Number</span>
-                  </ion-label>
-                  <ion-input formControlName="contactNumber"></ion-input>
-                </ion-item>
-              </ion-col>
+      <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-label position="floating">
+          <ion-icon slot="start" name="image-outline"></ion-icon> Profile Picture URL
+        </ion-label>
+        <ion-input formControlName="profilePicture"></ion-input>
+      </ion-item>
 
-              <ion-col size="6">
-            <ion-item>
-              <ion-label position="floating">
-                <ion-icon name="image-outline"></ion-icon>
-                <span> Profile Picture URL</span>
-              </ion-label>
-              <ion-input formControlName="profilePicture"></ion-input>
-            </ion-item>
-              </ion-col>
-            </ion-row>
+      <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-label position="floating"><ion-icon slot="start" name="mail-outline"></ion-icon> Email</ion-label>
+        <ion-input formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-label position="floating">
+          <ion-icon slot="start" name="lock-closed-outline"></ion-icon> Password
+        </ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
 
-              <ion-row>
-                <ion-col>
-                  <ion-item>
-                  <ion-label position="floating">
-                    <ion-icon name="mail-outline"></ion-icon>
-                    <span> email</span>
-                  </ion-label>
-                  <ion-input formControlName="email"></ion-input>
-                  </ion-item>
-                </ion-col>
-              </ion-row>
+      <ng-container *ngIf="submitted && f.password.errors">
+        <div *ngIf="f.password.errors.required">Password is required</div>
+        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+      </ng-container>
 
-          <ion-row>
-                <ion-col>
-                  <ion-item>
-                  <ion-label position="floating">
-                    <ion-icon name="lock-closed-outline"></ion-icon>
-                   <span> password</span>
-                  </ion-label>
-                  <ion-input type="password" formControlName="password"></ion-input>
-                  </ion-item>
-                </ion-col>
-              </ion-row>
+      <ng-container *ngIf="submitted && f.confirmPassword.errors">
+        <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+        <div *ngIf="f.confirmPassword.errors.MustMatch">Password do not match</div>
+      </ng-container>
 
-          <ng-container *ngIf="submitted && f.password.errors">
-            <div *ngIf="f.password.errors.required">Password is required</div>
-            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-          </ng-container>
+      <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-label position="floating">
+          <ion-icon slot="start" name="lock-closed"></ion-icon> Confirm Password
+        </ion-label>
+        <ion-input type="password" formControlName="confirmPassword"></ion-input>
+      </ion-item>
 
-          <ng-container *ngIf="submitted && f.confirmPassword.errors">
-            <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
-            <div *ngIf="f.confirmPassword.errors.mustMatch">Password do not match</div>
-          </ng-container>
-
-          <ion-row>
-            <ion-col>
-              <ion-item>
-                <ion-label position="floating">
-                  <ion-icon name="lock-closed-outline"></ion-icon>
-                  <span> confirm password</span>
-                </ion-label>
-                <ion-input type="password" formControlName="confirmPassword"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-
-            <ion-card-subtitle>
-              <ion-button class="ion-activatable ripple-parent" color="secondary" type="submit"> Register</ion-button>
-            </ion-card-subtitle>
-        </ion-list>
-      </ion-card-content>
+      <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-col size="12">
+          <ion-button color="secondary" size="full" type="submit"> Register</ion-button>
+        </ion-col>
+      </ion-item>
     </form>
-  </ion-card>
+  </ion-list>
 </ion-content>
-<app-footer></app-footer>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{date | date: 'shortTime'}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/login']" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+      <ion-label>Login</ion-label>
+        <ion-icon slot="end" name="log-in-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

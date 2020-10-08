@@ -1,7 +1,8 @@
 <app-header [pageTitle]='["Login"]'></app-header>
 
 <ion-content>
-  <ion-card>
+  <app-header-banner></app-header-banner>
+  <ion-card style="padding-top: 3rem; padding-bottom: 3rem;">
     <form (ngSubmit)="login()" [formGroup]="credentials">
     <ion-card-header>
       <ion-card-title>Please Login</ion-card-title>
@@ -30,10 +31,10 @@
         </div>
 
         <ion-card-subtitle>
-          <ion-row><ion-col size="5">
-          <ion-button class="ion-activatable ripple-parent" size="full" [disabled]="!credentials.valid" color="success" type="submit"><ion-icon name="log-in-outline"></ion-icon> <span>login</span></ion-button> </ion-col>
-            <ion-col size="2" class="ion-text-center" style="margin-top: 0.7rem;"><ion-text>OR</ion-text></ion-col>
-            <ion-col size="5">
+          <ion-row><ion-col size="6">
+          <ion-button class="ion-activatable  ripple-parent" size="full" [disabled]="!credentials.valid" color="success" type="submit">
+            <ion-icon name="log-in-outline"></ion-icon> <span>login</span></ion-button> </ion-col>
+            <ion-col size="6">
             <ion-button class="ion-activatable ripple-parent" size="full" color="secondary" [routerLink]="['/register']"><ion-icon name="person-add-outline"></ion-icon><span> REGISTER</span></ion-button>
             </ion-col>
           </ion-row>
@@ -43,4 +44,11 @@
 </form>
   </ion-card>
 </ion-content>
-<app-footer></app-footer>
+<ion-footer>
+  <ion-toolbar>
+    <ion-back-button slot="start"
+    defaultHref="/home"
+    >
+    </ion-back-button>
+  </ion-toolbar>
+</ion-footer>

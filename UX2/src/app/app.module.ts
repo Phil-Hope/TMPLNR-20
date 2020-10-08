@@ -18,7 +18,6 @@ import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
 import {HttpConfigInterceptor} from "./services/http.interceptor";
 import {ShiftsService} from "./pages/shifts/services/shifts.service";
 
-
 export function jwtOptionsFactory(storage) {
   return {
     tokenGetter: () => {

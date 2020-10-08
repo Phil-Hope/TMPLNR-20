@@ -1,10 +1,11 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpParams, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpParams, HttpHeaders, HttpErrorResponse} from "@angular/common/http";
 import {ScheduledShift} from "../../../interfaces/shifts.interface";
-import {Observable} from "rxjs";
+import {Observable, throwError} from "rxjs";
 import {environment} from "../../../../environments/environment";
-import {map, tap} from "rxjs/operators";
+import {catchError, tap} from "rxjs/operators";
 import {format} from "date-fns";
+import {ShiftTrackerError} from "./shifts-errors.interface";
 
 @Injectable()
 export class ShiftsService {
@@ -16,41 +17,57 @@ export class ShiftsService {
   constructor(private http: HttpClient) {
   }
 
-  loadAllShifts(): Observable<ScheduledShift[]> {
+  loadAllShifts(): Observable<ScheduledShift[] | ShiftTrackerError> {
     const params = new HttpParams()
-      .set('order[start]', 'ASC');
+      .set('order[start]', 'asc');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/shifts.json`,
       {
         params, headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        }), withCredentials: true
+        })
       }).pipe(
-      map((data: ScheduledShift[]) => data),
-      tap(_ => console.log('Shifts Fetched Successfully!'))
+      tap(_ => console.log('Shifts Fetched Successfully!')),
+      catchError(err => this.handleHttpError(err))
     );
   }
 
-   loadUpcomingShifts(): Observable<ScheduledShift[]> {
+   loadAllUpcomingShifts(): Observable<ScheduledShift[] | ShiftTrackerError> {
     const params = new HttpParams()
       .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss')
       )
-      .set('order[start]', 'ASC');
+      .set('order[start]', 'asc');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/shifts.json`,
         {
           params, headers: new HttpHeaders({
             'Content-Type': 'application/json',
           })
         }).pipe(
-        map((data: ScheduledShift[]) => data),
-        tap(_ => console.log('Fetched Upcoming Shifts Successfully!'))
+        tap(_ => console.log('Fetched Upcoming Shifts Successfully!')),
+      catchError(err => this.handleHttpError(err))
       );
   }
 
-  loadAwaitingApprovalShifts(): Observable<ScheduledShift[]> {
+  loadAllPastShifts(): Observable<ScheduledShift[] | ShiftTrackerError> {
+    const params = new HttpParams()
+      .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss')
+      )
+      .set('order[start]', 'asc');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/shifts.json`,
+      {
+        params, headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        })
+      }).pipe(
+      tap(_ => console.log('Fetched Upcoming Shifts Successfully!')),
+      catchError(err => this.handleHttpError(err))
+    );
+  }
+
+  loadAwaitingApprovalShifts(): Observable<ScheduledShift[] | ShiftTrackerError> {
     const params = new HttpParams()
       .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss')
       )
-      .set('order[start]', 'ASC')
+      .set('order[start]', 'asc')
       .set('isApproved', 'false');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/shifts.json`,
       {
@@ -58,69 +75,223 @@ export class ShiftsService {
           'Content-Type': 'application/json',
         })
       }).pipe(
-      map((data: ScheduledShift[]) => data),
-      tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!'))
+      tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!')),
+      catchError(err => this.handleHttpError(err))
     );
   }
 
-  getShiftById(id: string): Observable<ScheduledShift> {
-    return this.http.get<ScheduledShift>(`${environment.apiUrl}/shifts/${id}`,
+  loadAllUpcomingApprovedShifts(): Observable<ScheduledShift[] | ShiftTrackerError> {
+    const params = new HttpParams()
+      .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss')
+      )
+      .set('order[start]', 'asc')
+      .set('isApproved', 'true');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/shifts.json`,
+      {
+        params, headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        })
+      }).pipe(
+      tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!')),
+      catchError(err => this.handleHttpError(err))
+    );
+  }
+
+  loadAllUpcomingPrimaryShifts(): Observable<ScheduledShift[] | ShiftTrackerError> {
+    const params = new HttpParams()
+      .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss')
+      )
+      .set('order[start]', 'asc')
+      .set('ShiftStatus', 'primary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/shifts.json`,
+      {
+        params, headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        })
+      }).pipe(
+      tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!')),
+      catchError(err => this.handleHttpError(err))
+    );
+  }
+
+  loadAllUpcomingSecondaryShifts(): Observable<ScheduledShift[] | ShiftTrackerError> {
+    const params = new HttpParams()
+      .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss')
+      )
+      .set('order[start]', 'asc')
+      .set('ShiftStatus', 'secondary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/shifts.json`,
+      {
+        params, headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        })
+      }).pipe(
+      tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!')),
+      catchError(err => this.handleHttpError(err))
+    );
+  }
+
+  loadUpcomingPendingSecondaryShifts(): Observable<ScheduledShift[] | ShiftTrackerError> {
+    const params = new HttpParams()
+      .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss')
+      )
+      .set('order[start]', 'asc')
+      .set('isApproved', 'false')
+      .set('ShiftStatus', 'secondary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/shifts.json`,
+      {
+        params, headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        })
+      }).pipe(
+      tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!')),
+      catchError(err => this.handleHttpError(err))
+    );
+  }
+
+  loadUpcomingPendingPrimaryShifts(): Observable<ScheduledShift[] | ShiftTrackerError> {
+    const params = new HttpParams()
+      .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss')
+      )
+      .set('order[start]', 'asc')
+      .set('isApproved', 'false')
+      .set('ShiftStatus', 'primary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/shifts.json`,
+      {
+        params, headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        })
+      }).pipe(
+      tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!')),
+      catchError(err => this.handleHttpError(err))
+    );
+  }
+
+  loadUpcomingApprovedPrimaryShifts(): Observable<ScheduledShift[] | ShiftTrackerError> {
+    const params = new HttpParams()
+      .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss')
+      )
+      .set('order[start]', 'asc')
+      .set('isApproved', 'true')
+      .set('ShiftStatus', 'primary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/shifts.json`,
+      {
+        params, headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        })
+      }).pipe(
+      tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!')),
+      catchError(err => this.handleHttpError(err))
+    );
+  }
+
+  loadUpcomingApprovedSecondaryShifts(): Observable<ScheduledShift[] | ShiftTrackerError> {
+    const params = new HttpParams()
+      .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss')
+      )
+      .set('order[start]', 'asc')
+      .set('isApproved', 'true')
+      .set('ShiftStatus', 'secondary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/shifts.json`,
+      {
+        params, headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        })
+      }).pipe(
+      tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!')),
+      catchError(err => this.handleHttpError(err))
+    );
+  }
+
+
+  getShiftById(id: string): Observable<ScheduledShift | ShiftTrackerError> {
+    return this.http.get<ScheduledShift>(`${environment.apiUrl}/shifts/${id}.json`,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         })
       }).pipe(
-      map((data: ScheduledShift) => data),
-      tap(_ => console.log('Shift Fetched Successfully'))
+      tap(_ => console.log('Shift Fetched Successfully')),
+      catchError(err => this.handleHttpError(err))
     );
   }
 
-  approveShift(id: string, isApproved: boolean): Observable<ScheduledShift> {
-    return this.http.put<ScheduledShift>(`${environment.apiUrl}/shifts/${id}`,
-      {id, isApproved},
+  approveShift(shift: ScheduledShift): Observable<ScheduledShift | ShiftTrackerError> {
+    return this.http.put<ScheduledShift>(`${environment.apiUrl}/shifts/${shift.id}`,
+      {start: shift.start,
+            end: shift.end,
+            onDuty: shift.onDuty,
+            ShiftStatus: shift.ShiftStatus,
+            isApproved: shift.isApproved
+      },
       {headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
-        tap(_ => alert(`Shift ${id} has been approved!`))
+        tap(_ => alert(`Shift ${shift.id} has been approved!`)),
+        tap(data => console.log('approve shift: ' + JSON.stringify(data))),
+        catchError(err => this.handleHttpError(err))
     );
   }
 
-  addShift(start: Date, end: Date, onDuty: string, ShiftStatus: string, isApproved: boolean): Observable<ScheduledShift> {
+  addShift(shift: ScheduledShift): Observable<ScheduledShift | ShiftTrackerError> {
     return this.http.post<ScheduledShift>(`${environment.apiUrl}/shifts`,
-      {start, end, onDuty, ShiftStatus, isApproved},
+      {
+        start: shift.start,
+        end: shift.end,
+        onDuty: shift.onDuty,
+        ShiftStatus: shift.ShiftStatus,
+        isApproved: shift.isApproved},
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         })
       }).pipe(
-      map((data: ScheduledShift) => data),
-      tap(_ => alert('Shift Created Successfully!'))
+      tap(_ => alert('Shift Created Successfully!')),
+      tap(data => console.log('create shift: ' + JSON.stringify(data)),
+      catchError(err => this.handleHttpError(err)))
     );
   }
 
-  editShift(id: string, start: Date, end: Date, ShiftStatus: string, isApproved: boolean) {
-    return this.http.put<ScheduledShift>(`${environment.apiUrl}/shifts/${id}`,
-      {id, start, end, ShiftStatus, isApproved},
+  editShift(shift: ScheduledShift): Observable<ScheduledShift | ShiftTrackerError> {
+    return this.http.put<ScheduledShift>(`${environment.apiUrl}/shifts/${shift.id}`,
+      {
+        start: shift.start,
+        end: shift.end,
+        onDuty: shift.onDuty,
+        ShiftStatus: shift.ShiftStatus,
+        isApproved: shift.isApproved
+      },
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         })
       })
       .pipe(
-        map((data: ScheduledShift) => data),
-        tap(_ => alert('Shift Edited Successfully!'))
+        tap(_ => alert('Shift Edited Successfully!')),
+        tap(data => console.log('shifts edited: ' + JSON.stringify(data))),
+        catchError(err => this.handleHttpError(err))
       );
   }
 
-  deleteShift(id: string): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/shifts/${id}`,
+  deleteShift(shift: ScheduledShift): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}/shifts/${shift.id}`,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         })
       }).pipe(
-      tap(_ => alert(`User: ${id}, Deleted SuccessFully!`))
+      tap(_ => alert(`Shift: ${shift.id}, Deleted SuccessFully!`)),
+      tap(data => console.log('delete shift: ' + JSON.stringify(data))),
+      catchError(async (err) => console.log(`an error occurred: ${err}`))
     );
+  }
+
+   handleHttpError(error: HttpErrorResponse): Observable<ShiftTrackerError> {
+    const dataError = new ShiftTrackerError();
+    dataError.errorNumber = 100;
+    dataError.message = error.statusText;
+    dataError.friendlyMessage = 'An error occurred retrieving data.';
+    return throwError(dataError);
   }
 }

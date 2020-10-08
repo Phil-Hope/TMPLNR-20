@@ -1,0 +1,51 @@
+<app-header [pageTitle]="['Calendar']"></app-header>
+
+<ion-content>
+  <app-header-banner></app-header-banner>
+  <ion-back-button></ion-back-button>
+<ng-template #loading>
+  <div class="text-center">
+    <ion-spinner></ion-spinner> <br />
+    Loading events...
+  </div>
+</ng-template>
+
+<div *ngIf="events$ | async; else loading; let events">
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view
+      *ngSwitchCase="'month'"
+      [viewDate]="viewDate"
+      [events]="events"
+      [activeDayIsOpen]="activeDayIsOpen"
+      (dayClicked)="changeDay($event.day.date)"
+      (eventClicked)="eventClicked($event.event)"
+    >
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+      *ngSwitchCase="'week'"
+      [viewDate]="viewDate"
+      [events]="events"
+      (dayHeaderClicked)="changeDay($event.day.date)"
+      [daysInWeek]="daysInWeek"
+      (eventClicked)="eventClicked($event.event)"
+    >
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view
+      *ngSwitchCase="'day'"
+      [viewDate]="viewDate"
+      [events]="events"
+      (eventClicked)="eventClicked($event.event)"
+    >
+    </mwl-calendar-day-view>
+  </div>
+  </div>
+
+</ion-content>
+<ion-footer>
+<app-calendar-toolbar-draft
+  [(view)]="view"
+  [(viewDate)]="viewDate"
+  (viewDateChange)="fetchEvents()"
+  (viewChange)="fetchEvents()"
+></app-calendar-toolbar-draft>
+</ion-footer>

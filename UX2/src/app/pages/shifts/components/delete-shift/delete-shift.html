@@ -1,5 +1,16 @@
 <app-header [pageTitle]="['Delete Shift']"></app-header>
 <ion-content>
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+  <div *ngIf="shift else loading">
 <ion-list>
   <ion-list-header>Delete Shift?</ion-list-header>
 </ion-list>
@@ -16,13 +27,28 @@
     <ion-col size="3">{{shift.ShiftStatus}}</ion-col>
   </ion-item-divider>
   <ion-item>
-    <form [formGroup]="form" (ngSubmit)="submitDeleteShift()">
+    <form [formGroup]="form" (ngSubmit)="onSubmitDeleteShift()">
 
     </form>
-    <ion-input type="hidden" value="{{shift.id}}" formControlName="id"></ion-input>
+    <ion-input type="hidden" [(ngModel)]="shift.id" formControlName="id"></ion-input>
     <ion-button color="danger" size="small" type="submit">
       DELETE
     </ion-button>
   </ion-item>
+  </div>
 </ion-content>
-<app-footer></app-footer>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-label>
+          Add Shift
+        </ion-label>
+        <ion-icon slot="start" name="calendar-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <h4>{{date | date: 'shortTime'}}</h4>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

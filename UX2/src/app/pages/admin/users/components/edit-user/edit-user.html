@@ -1,0 +1,111 @@
+<app-header [pageTitle]="['Edit User']"></app-header>
+
+<ion-content [scrollEvents]="true">
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+  <div *ngIf="user else loading">
+  <form [formGroup]="form" (ngSubmit)="editUser()">
+    <ion-item>
+      <ion-label>UUID:</ion-label>
+      <span style="font-size: 0.8rem;">{{user.id}}</span>
+    </ion-item>
+<ion-card style="padding-top: 1rem; padding-bottom: 1rem;">
+<ion-item>
+  <ion-row>
+  <ion-col style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" size="6">
+      <ion-label position="stacked">
+        <ion-icon slot="start" name="person-circle"></ion-icon>
+        First Name
+      </ion-label>
+      <ion-input formControlName="firstName" type="text" [(ngModel)]="user.firstName"></ion-input>
+  </ion-col>
+<ion-col size="6" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" >
+      <ion-label position="stacked">
+        <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+        Last Name
+      </ion-label>
+      <ion-input formControlName="lastName" type="text" [(ngModel)]="user.lastName"></ion-input>
+</ion-col>
+  </ion-row>
+</ion-item>
+
+    <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" >
+      <ion-label position="stacked">
+        <ion-icon  slot="start" name="call-outline"></ion-icon>
+        Contact Number
+      </ion-label>
+      <ion-input formControlName="contactNumber" type="text" [(ngModel)]="user.contactNumber"></ion-input>
+    </ion-item>
+
+    <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" >
+      <ion-label position="stacked">
+        <ion-icon slot="start" name="image-outline"></ion-icon>
+        Profile Picture URL
+      </ion-label>
+      <ion-input formControlName="profilePicture" type="url" [(ngModel)]="user.profilePicture"></ion-input>
+    </ion-item>
+
+  <ion-row>
+    <ion-col>
+    <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" >
+      <ion-label position="stacked">
+        <ion-icon slot="start" name="cash-outline"></ion-icon>
+        WagePerHour
+      </ion-label>
+      <ion-input formControlName="wagePerHour" [(ngModel)]="user.wagePerHour"></ion-input>
+    </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item  style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" >
+        <ion-label>
+          Roles
+        </ion-label>
+        <ion-select formControlName="roles" multiple="true" placeholder="select roles">
+          <ion-select-option value="ROLE_USER">Employee</ion-select-option>
+          <ion-select-option value="ROLE_ADMIN">Admin</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-input type="hidden" formControlName="id" [(ngModel)]="user.id" value="{{user.id}}"></ion-input>
+    <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" >
+      <ion-label position="stacked">
+        <ion-icon slot="start" name="mail-outline"></ion-icon>
+        email
+      </ion-label>
+      <ion-input formControlName="email" type="email" [(ngModel)]="user.email"></ion-input>
+    </ion-item>
+        <ion-button style="margin-top: 1rem;" color="warning" size="block" type="submit">Edit</ion-button>
+
+</ion-card>
+  </form>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"  color="primary" [routerLink]="['/users/add']">
+        <ion-icon slot="start" name="person-add"></ion-icon>
+        <ion-label>Add User</ion-label>
+      </ion-button>
+    </ion-buttons>
+    <ion-title size="small" color="dark">
+
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"  color="primary" [routerLink]="['/users']">
+        <ion-label>User List</ion-label>
+        <ion-icon slot="end" name="list-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

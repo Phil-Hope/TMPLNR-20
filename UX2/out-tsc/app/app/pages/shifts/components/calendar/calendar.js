@@ -120,9 +120,9 @@ var CalendarPage = /** @class */ (function () {
     CalendarPage = __decorate([
         Injectable(),
         Component({
-            selector: 'app-calendar',
-            templateUrl: './calendar.html',
-            styleUrls: ['./calendar.scss'],
+            selector: 'app-draft-calendar',
+            templateUrl: './draft-draft-calendar.html',
+            styleUrls: ['./draft-draft-calendar.scss'],
             changeDetection: ChangeDetectionStrategy.OnPush,
             providers: [
                 {
@@ -139,4 +139,4 @@ var CalendarPage = /** @class */ (function () {
     return CalendarPage;
 }());
 export { CalendarPage };
-//# sourceMappingURL=calendar.js.map
+//# sourceMappingURL=draft-calendar.js.map

@@ -37,7 +37,7 @@ class ShiftComments
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
-     * @Groups({"comment:read", "shift:read"})
+     * @Groups({"comments:read", "shift:read"})
      */
     private $id;
 
@@ -55,7 +55,7 @@ class ShiftComments
     private $dateOfComment;
 
     /**
-     * @ORM\Column(name="authored_by_id", nullable=false, type="string", length=36)
+     * @ORM\Column(name="authored_by_id", nullable=false, type="string")
      * @Groups({"comments:read", "comments:write"})
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
@@ -107,24 +107,24 @@ class ShiftComments
         return $this;
     }
 
-    public function getAuthoredBy(): ?User
+    public function getAuthoredBy()
     {
         return $this->authoredBy;
     }
 
-    public function setAuthoredBy(?User $authoredBy): self
+    public function setAuthoredBy($authoredBy)
     {
         $this->authoredBy = $authoredBy;
 
         return $this;
     }
 
-    public function getShift(): ?ScheduledShift
+    public function getShift()
     {
         return $this->shift;
     }
 
-    public function setShift(?ScheduledShift $shift): self
+    public function setShift($shift)
     {
         $this->shift = $shift;
 

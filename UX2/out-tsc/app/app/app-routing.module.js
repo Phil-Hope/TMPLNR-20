@@ -43,7 +43,7 @@ var routes = [
         canLoad: [AuthGuard]
     },
     {
-        path: 'shifts/calendar',
+        path: 'shifts/draft-calendar',
         loadChildren: function () { return import('./pages/shifts/components/calendar/calendar.module').then(function (m) { return m.CalendarPageModule; }); },
         canLoad: [AuthGuard]
     },

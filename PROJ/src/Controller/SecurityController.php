@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -50,8 +51,38 @@ class SecurityController extends AbstractController
       ]);
     }
 
-    public function register() {
+  /**
+   * @param UserPasswordEncoderInterface $encoder
+   * @param Request $request
+   * @return Response
+   * @Route("/register", name="api_register", methods={"POST"})
+   */
+    public function register(UserPasswordEncoderInterface $encoder, Request $request) {
+      $em = $this->getDoctrine()->getManager();
+      $email = $request->request->get('email');
+      $password = $request->request->get('password');
+      $firstName = $request->request->get('firstName');
+      $lastName = $request->request->get('lastName');
+      $contactNumber = $request->request->get('contactNumber');
+      $profilePicture = $request->request->get('profilePicture');
+      $wagePerHour = $request->request->get('wagePerHour');
+      $roles = $request->request->get('roles');
 
+      $user = new User();
+
+      $user->setEmail($email);
+      $user->setFirstName($firstName);
+      $user->setLastName($lastName);
+      $user->setContactNumber($contactNumber);
+      $user->setProfilePicture($profilePicture);
+      $user->setWagePerHour($wagePerHour);
+      $user->setRoles($roles);
+      $user->setPassword($encoder->encodePassword($user, $password));
+
+      $em->persist($user);
+      $em->flush();
+
+      return new Response(sprintf('User %s successfully registered', $user->getUsername()));
     }
 
     /**

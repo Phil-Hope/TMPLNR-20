@@ -1,0 +1,61 @@
+<ion-toolbar color="primary">
+<ion-buttons slot="start">
+        <ion-button
+          mwlCalendarPreviousView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="viewDateChange.next(viewDate)"
+        >
+          <ion-icon name="caret-back-outline"></ion-icon>
+        </ion-button>
+</ion-buttons>
+  <ion-buttons slot="secondary">
+        <ion-button
+          style="font-family: Quicksand, sans-serif; font-size: 0.8rem;"
+          mwlCalendarToday
+          [(viewDate)]="viewDate"
+          (viewDateChange)="viewDateChange.next(viewDate)"
+        >
+          <ion-icon slot="start" name="today-outline"></ion-icon>
+          <ion-label>Today</ion-label>
+        </ion-button>
+  </ion-buttons>
+  <ion-buttons slot="end">
+      <ion-button
+          size="small"
+          mwlCalendarNextView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="viewDateChange.next(viewDate)"
+        >
+          <ion-icon name="caret-forward-outline"></ion-icon>
+        </ion-button>
+  </ion-buttons>
+  <ion-buttons slot="primary">
+        <ion-button
+          fill="outline"
+          style="font-size: 0.7rem; font-family: Quicksand, sans-serif"
+          (click)="viewChange.emit(CalendarView.Month)"
+          [class.active]="view === CalendarView.Month"
+        ><ion-label>Month View</ion-label>
+        </ion-button>
+  </ion-buttons>
+  <ion-buttons slot="primary">
+        <ion-button
+          fill="outline"
+          style="font-size: 0.7rem; font-family: Quicksand, sans-serif"
+          (click)="viewChange.emit(CalendarView.Week)"
+          [class.active]="view === CalendarView.Week"
+        ><ion-label>Week View</ion-label>
+        </ion-button>
+  </ion-buttons>
+  <ion-buttons slot="primary">
+        <ion-button
+          fill="outline"
+          style="font-size: 0.7rem; font-family: Quicksand, sans-serif"
+          (click)="viewChange.emit(CalendarView.Day)"
+          [class.active]="view === CalendarView.Day"
+        ><ion-label>Day View</ion-label>
+        </ion-button>
+  </ion-buttons>
+</ion-toolbar>

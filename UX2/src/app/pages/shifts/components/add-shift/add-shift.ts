@@ -3,10 +3,11 @@ import {ScheduledShift} from '../../../../interfaces/shifts.interface';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../../interfaces/user.interface';
 import {Observable} from 'rxjs';
-import {map, tap} from "rxjs/operators";
+import {map} from "rxjs/operators";
 import {ShiftsService} from "../../services/shifts.service";
-import {UsersService} from "../../../users/services/users.service";
+import {UsersService} from "../../../admin/users/services/users.service";
 import {Router} from "@angular/router";
+import {UserTrackerError} from "../../../admin/users/services/user-errors.interface";
 
 @Component({
   selector: 'app-add-shift',
@@ -20,8 +21,9 @@ export class AddShiftPage implements OnInit {
   loading = false;
   shift: ScheduledShift;
   user: Observable<User>;
-  users: User[];
+  users: User[] | UserTrackerError;
   form: FormGroup;
+  date = new Date();
 
   constructor(
       private fb: FormBuilder,
@@ -41,28 +43,28 @@ export class AddShiftPage implements OnInit {
       ShiftStatus: ['', Validators.required],
       isApproved: [false, Validators.required]
     });
-
+    setInterval(() => {
+      this.date = new Date();
+    }, 1000);
   }
 
   get f() { return this.form.controls; }
 
   addShift() {
     this.submitted = true;
-    if (this.form.invalid) {
-      return;
-    }
+    if (this.form.valid) {
+      if (this.form.dirty) {
+        const f = {...this.shift, ...this.form.value};
 
-    this.loading = true;
-    this.shiftsService.addShift(
-        this.f.start.value,
-        this.f.end.value,
-        this.f.onDuty.value,
-        this.f.ShiftStatus.value,
-        this.f.isApproved.value,
-    )
+        this.loading = true;
+        this.shiftsService.addShift(f)
         .pipe(
-      map((res: ScheduledShift) => { this.router.navigateByUrl(`/shifts/${res.id}/details`); })
+          map((res: ScheduledShift) => {
+            this.router.navigateByUrl(`/shifts/${res.id}/details`);
+          })
         )
-    .subscribe(data => console.log(data));
+        .subscribe(data => console.log(data));
+      }
+    }
   }
 }

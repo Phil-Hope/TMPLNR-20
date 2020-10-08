@@ -4,13 +4,28 @@ import {Observable} from 'rxjs';
 import {AuthenticationService} from "../services/authentication.service";
 import {map, take} from "rxjs/operators";
 import {AlertController} from "@ionic/angular";
+import {Storage} from "@ionic/storage";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private authService: AuthenticationService, private router: Router, private alertCtrl: AlertController) {
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router,
+    private alertCtrl: AlertController,
+    private storage: Storage
+  ) {
+  }
+
+  async getStorage(): Promise<any> {
+    try {
+      const result = await this.storage.get('roles');
+      console.log(result);
+      return result;
+    }
+    catch (e) { console.log(e); }
   }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {

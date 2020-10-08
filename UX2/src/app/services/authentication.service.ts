@@ -1,11 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {tap} from 'rxjs/operators';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {catchError, tap} from 'rxjs/operators';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {AlertController, Platform} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {environment} from "../../environments/environment";
 import {Storage} from "@ionic/storage";
+import {User} from "../interfaces/user.interface";
+import {UserTrackerError} from "../pages/admin/users/services/user-errors.interface";
 
 export interface TokenResponse {
     token: string;
@@ -38,16 +40,16 @@ export class AuthenticationService {
   ) {
   }
 
-  login(email: string, password: string): Observable<TokenResponse> {
+  login(email: string, password: string): Observable<TokenResponse | UserTrackerError> {
     return this.http.post(`${environment.apiUrl}/login`,
       {email, password}).pipe(
         tap(async (res: TokenResponse) => {
           if (res) {
             await this.storage.set(TOKEN_KEY, res.token);
-            await this.storage.set(ID, res.data.id);
+            await this.storage.set(ID, JSON.stringify(res.data.id));
             await this.storage.set(USER_ROLES, res.data.roles);
             this.isAuthenticated.next(true);
-            this.router.navigateByUrl(`/users/${res.data.id}/profile`);
+            this.router.navigateByUrl('/users/profile');
           } else {
             const alert = await this.alertCtrl.create({
               header: 'Login Failed',
@@ -56,22 +58,14 @@ export class AuthenticationService {
             });
             await alert.present();
           }
-        })
+        }),
+      catchError(err => this.handleHttpError(err))
     );
   }
 
-  register(
-    firstName: string,
-    lastName: string,
-    email: string,
-    contactNumber: string,
-    profilePicture: string,
-    wagePerHour: string,
-    roles: string,
-    password: string
-  ): Observable<TokenResponse> {
+  register(user: User): Observable<TokenResponse | User | UserTrackerError> {
     return this.http.post<TokenResponse>(`${environment.apiUrl}/users`,
-      {firstName, lastName, email, contactNumber, profilePicture, wagePerHour, roles, password},
+      {user},
       {headers: new HttpHeaders({
           'Content-Type': 'application/json'
         }), withCredentials: true
@@ -92,7 +86,8 @@ export class AuthenticationService {
         });
         await alert.present();
       }
-    })
+    }),
+        catchError(err => this.handleHttpError(err))
   );
   }
 
@@ -107,4 +102,12 @@ export class AuthenticationService {
      this.userData.next(null);
      }
 
+
+  handleHttpError(error: HttpErrorResponse): Observable<UserTrackerError> {
+    const dataError = new UserTrackerError();
+    dataError.errorNumber = 100;
+    dataError.message = error.statusText;
+    dataError.friendlyMessage = 'An error occurred retrieving data.';
+    return throwError(dataError);
+  }
 }

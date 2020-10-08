@@ -1,4 +1,4 @@
-export interface ScheduledShift {
+export class ScheduledShift {
   id: string;
   start: string;
   end: string;

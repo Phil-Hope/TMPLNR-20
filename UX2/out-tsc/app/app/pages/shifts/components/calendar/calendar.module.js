@@ -34,4 +34,4 @@ var CalendarPageModule = /** @class */ (function () {
     return CalendarPageModule;
 }());
 export { CalendarPageModule };
-//# sourceMappingURL=calendar.module.js.map
+//# sourceMappingURL=draft-calendar.module.js.map

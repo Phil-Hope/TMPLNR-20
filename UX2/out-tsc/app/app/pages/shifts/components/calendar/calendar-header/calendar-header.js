@@ -25,12 +25,12 @@ var CalendarHeaderComponent = /** @class */ (function () {
     ], CalendarHeaderComponent.prototype, "viewDateChange", void 0);
     CalendarHeaderComponent = __decorate([
         Component({
-            selector: 'app-calendar-toolbar',
-            styleUrls: ['./calendar-toolbar.scss'],
-            templateUrl: './calendar-toolbar.html'
+            selector: 'app-draft-calendar-toolbar',
+            styleUrls: ['./draft-calendar-toolbar.scss'],
+            templateUrl: './draft-calendar-toolbar.html'
         })
     ], CalendarHeaderComponent);
     return CalendarHeaderComponent;
 }());
 export { CalendarHeaderComponent };
-//# sourceMappingURL=calendar-toolbar.js.map
+//# sourceMappingURL=draft-calendar-toolbar.js.map

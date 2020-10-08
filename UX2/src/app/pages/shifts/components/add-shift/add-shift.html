@@ -1,11 +1,11 @@
 <app-header [pageTitle]="['Add Shift']"></app-header>
 
 <ion-content>
-<ion-card style="margin-bottom: 5rem;">
-  <ion-card-header>
-    <ion-card-title class="ion-text-center" style="font-family: Quicksand, sans-serif">Add New Shift</ion-card-title>
-  </ion-card-header>
-  <form [formGroup]="form">
+  <app-header-banner></app-header-banner>
+
+  <form [formGroup]="form" (ngSubmit)="addShift()">
+<ion-list style="margin-top: 2rem;">
+    <h4 style="font-family: Quicksand, sans-serif; text-align: center; margin-bottom: 2rem">Add New Shift</h4>
     <ion-item-group>
       <ion-item>
         <ion-label position="floating" class="ion-text-center" color="secondary"><span>Select Start Time</span></ion-label>
@@ -31,9 +31,7 @@
     </ion-item>
     </ion-item-group>
 
-    <ion-item-group>
-    <ion-row>
-      <ion-col size="6">
+<ion-item-group>
 <ion-item>
         <ion-label position="floating" color="secondary">On Duty</ion-label>
          <ion-select formControlName="onDuty" placeholder="Select User">
@@ -47,51 +45,45 @@
            </div>
          </ion-select>
 </ion-item>
-      </ion-col>
-      <ion-col size="6">
-        <ion-item>
+  <ion-item>
         <ion-label position="floating" color="secondary">Shift Status</ion-label>
         <ion-select formControlName="ShiftStatus" placeholder="Select Status">
           <ion-select-option value="secondary">Secondary</ion-select-option>
           <ion-select-option value="primary">Primary</ion-select-option>
         </ion-select>
         </ion-item>
-      </ion-col>
-    </ion-row>
     </ion-item-group>
  <ion-col size="12">
-   <ion-item>
-      <ion-button type="submit" (click)="addShift()">Save Shift</ion-button>
+   <ion-item style="margin-top: 2rem;">
+     <ion-col size="12">
+      <ion-button type="submit" size="full" color="success">Save Shift</ion-button>
+     </ion-col>
    </ion-item>
  </ion-col>
     <ion-input formControlName="isApproved" type="hidden" value="false"></ion-input>
-  </form>
-</ion-card>
 
+</ion-list>
+  </form>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
+
     <ion-buttons slot="start">
-      <ion-button slot="start">
-        <ion-icon size="large" color="primary" name="add-circle-outline"></ion-icon>
-        <ion-label color="primary" style="font-size: 0.8rem; font-family: Quicksand, sans-serif">Add Shift</ion-label>
+      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif"  [routerLink]="['/shifts/draft-calendar']">
+        <ion-icon slot="start" name="calendar-outline"></ion-icon>
+        <ion-label>Calendar</ion-label>
       </ion-button>
     </ion-buttons>
-
-    <ion-buttons slot="secondary">
-      <ion-button [routerLink]="['/shifts/calendar']">
-        <ion-icon size="small"  name="calendar-outline"></ion-icon>
-        <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif">Calendar</ion-label>
+    <ion-title>
+      <h4>{{date | date: 'shortTime'}}</h4>
+    </ion-title>
+<ion-buttons slot="end">
+      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif" [routerLink]="['/shifts']">
+        <ion-icon slot="end" routerLinkActive="active"  name="search-circle-outline"></ion-icon>
+        <ion-label>Shifts List</ion-label>
       </ion-button>
-    </ion-buttons>
-
-    <ion-buttons slot="end">
-      <ion-button [routerLink]="['/shifts']">
-        <ion-icon size="small" routerLinkActive="active"  name="search-circle-outline"></ion-icon>
-        <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif">View All</ion-label>
-      </ion-button>
-    </ion-buttons>
+</ion-buttons>
   </ion-toolbar>
 </ion-footer>
 

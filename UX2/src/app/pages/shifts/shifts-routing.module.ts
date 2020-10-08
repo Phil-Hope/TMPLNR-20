@@ -1,13 +1,13 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
-import {ListShiftsPage} from "./components/list-shifts/list-shifts";
+import {ListShiftsPage} from "./components/list-shifts/list-upcoming-shifts/list-shifts";
 
 
 const routes: Routes = [
   {
     path: '',
     component: ListShiftsPage,
-  }
+  },
 ];
 
 @NgModule({

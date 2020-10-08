@@ -10,11 +10,8 @@
   </ng-template>
 
   <ion-card style="margin-top: 2rem;" *ngIf="shift else loading">
-    <ion-card-header>
-      <ion-card-title class="ion-text-center" style="font-family: Quicksand, sans-serif">Edit Shift</ion-card-title>
-    </ion-card-header>
     <form [formGroup]="form" (ngSubmit)="editShift()" >
-      <ion-item-divider>
+
 
         <ion-item>
           <ion-label position="floating" class="ion-text-center" style="font-size: 0.8rem;" color="secondary"><span>Select Start Time</span></ion-label>
@@ -24,7 +21,7 @@
             formControlName="start"
             display-format="DD MMM YY h:mm A"
             minuteValues="00,15,30,45"
-            value="{{shift.start}}"
+            [(ngModel)]="shift.start"
           >
           </ion-datetime>
         </ion-item>
@@ -37,41 +34,32 @@
             formControlName="end"
             display-format="DD MMM YY h:mm A"
             minuteValues="00,15,30,45"
-            value="{{shift.end}}"
+            [(ngModel)]="shift.end"
           >
           </ion-datetime>
         </ion-item>
 
-      </ion-item-divider>
-      <ion-item-group>
-          <ion-item-divider>
             <ion-item>
               <ion-label position="floating" color="secondary">On Duty</ion-label>
-              <ion-select formControlName="onDuty" placeholder="Select User">
-                <ng-template #loadUsers>
-                  <ion-select-option>Error.. No users found</ion-select-option>
-                </ng-template>
-                <div *ngIf="users else loadUsers" >
-                  <ion-select-option *ngFor="let user of users | async" value="/users/{{this.user.id}}}">
+              <ion-select [ngModel]="shift.onDuty" formControlName="onDuty" placeholder="{{shift.onDuty.firstName}} {{shift.onDuty.lastName}}">
+
+                  <div  *ngFor="let user of users" >
+                  <ion-select-option  value="/users/{{this.user.id}}}">
                     {{this.user.firstName}} {{this.user.lastName}}
                   </ion-select-option>
-                </div>
+                  </div>
+
               </ion-select>
             </ion-item>
 
             <ion-item>
               <ion-label position="floating" color="secondary">Call Level</ion-label>
-              <ion-select formControlName="ShiftStatus" placeholder="Select Status">
+              <ion-select [(ngModel)]="shift.ShiftStatus" formControlName="ShiftStatus" placeholder="Select Status">
                 <ion-select-option value="secondary">Secondary</ion-select-option>
                 <ion-select-option value="primary">Primary</ion-select-option>
               </ion-select>
             </ion-item>
-          </ion-item-divider>
-            <ion-item>
-              <ion-checkbox slot="start" value="true"></ion-checkbox>
-              <ion-label color="secondary">Shift Approved</ion-label>
-            </ion-item>
-      </ion-item-group>
+
       <ion-col size="12">
         <ion-item>
           <ion-button type="submit">Edit Shift</ion-button>
@@ -81,27 +69,36 @@
   </ion-card>
 
 </ion-content>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button
+        style="font-size: 0.8rem;
+        font-family: Quicksand, sans-serif;"
+        [routerLink]="['/shifts/draft-calendar']">
+        <ion-icon slot="start" name="calendar-outline"></ion-icon>
+        <ion-label>Draft<br />Calendar</ion-label>
+      </ion-button>
+    </ion-buttons>
 
-<ion-tabs>
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button class="ion-activatable ripple-parent">
-      <ion-icon size="large" color="primary" name="add-circle-outline"></ion-icon>
-      <ion-label>Add Shift</ion-label>
-    </ion-tab-button>
+    <ion-title>
+      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" [routerLink]="['/shifts']">
+        <ion-label>Shift List</ion-label>
+        <ion-icon slot="start" name="reader-outline"></ion-icon>
+      </ion-button>
+    </ion-title>
 
-    <ion-tab-button [routerLink]="['../calendar']" class="ion-activatable ripple-parent">
-      <ion-icon size="small"  name="calendar-outline"></ion-icon>
-      <ion-label>Calendar</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button [routerLink]="['../../shifts']" class="ion-activatable ripple-parent">
-      <ion-icon size="small" name="search-circle-outline"></ion-icon>
-      <ion-label>View All</ion-label>
-    </ion-tab-button>
-
-  </ion-tab-bar>
-</ion-tabs>
-
+    <ion-buttons slot="end">
+      <ion-button
+        style="font-size: 0.8rem;
+        font-family: Quicksand, sans-serif;"
+        size="small" [routerLink]="['/shifts/approved-calendar']">
+        <ion-icon slot="end" name="calendar"></ion-icon>
+        Approved<br /> Calendar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
 
 
 

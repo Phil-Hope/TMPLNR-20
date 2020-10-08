@@ -26,9 +26,18 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  * User
  * @ApiResource(
  *     normalizationContext={"groups"={"user:read"}, "swagger_definition_name"="Read"},
- *     denormalizationContext={"groups"={"user:write"}, "swagger_definition_name"="Write"}
+ *     denormalizationContext={"groups"={"user:write"}, "swagger_definition_name"="Write"},
+ *   attributes={"security"="is_granted('ROLE_USER')"},
+ *   collectionOperations={
+ *   "get", "post",
+ *   },
+ *   itemOperations={
+ *   "get",
+ *   "put"={"security"="is_granted('ROLE_ADMIN') or object.owner == user"},
+ *   "delete"={"security"="is_granted('ROLE_ADMIN')"}
+ *   },
  * )
- * @ApiFilter(OrderFilter::class, properties={"shifts": "ASC"})
+ * @ApiFilter(OrderFilter::class, properties={"lastName", "firstName"}, arguments={"orderParameterName"="order"})
  * @Type(name="Users")
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C74", columns={"email"})})
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")

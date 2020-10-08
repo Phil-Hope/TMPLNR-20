@@ -1,0 +1,120 @@
+<app-header [pageTitle]="pageTitle"></app-header>
+<ion-content [scrollEvents]="true">
+  <ion-card>
+  <ion-list>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <ion-list lines="inset">
+          <ion-row>
+            <ion-col>
+              <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+                <ion-label position="stacked">
+                  First Name
+                </ion-label>
+                <ion-input type="text" required="true" autocomplete="given-name" formControlName="firstName"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+                <ion-label position="stacked">
+                  Last Name
+                </ion-label>
+                <ion-input type="text" required="true"  autocomplete="family-name" formControlName="lastName"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+              <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+                <ion-label position="stacked">
+                  <ion-icon name="call-outline"></ion-icon>
+                  Contact Number
+                </ion-label>
+                <ion-input type="text" required="true"  formControlName="contactNumber"></ion-input>
+              </ion-item>
+          <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+            <ion-label position="stacked">
+              <ion-icon name="image-outline"></ion-icon>
+              Profile Picture URL
+            </ion-label>
+            <ion-input type="text" formControlName="profilePicture"></ion-input>
+          </ion-item>
+          <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+            <ion-label position="stacked">
+              Wage Per Hour
+            </ion-label>
+            <ion-input type="text" required="true"  formControlName="wagePerHour"></ion-input>
+          </ion-item>
+          <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+              <ion-label position="stacked">Role</ion-label>
+              <ion-select required="true" multiple="true" formControlName="roles" placeholder="select role">
+              <ion-select-option value="ROLE_USER">Employee</ion-select-option>
+              <ion-select-option value="ROLE_ADMIN">Admin</ion-select-option>
+              </ion-select>
+          </ion-item>
+              <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+                <ion-label position="stacked">
+                  <ion-icon name="mail-outline"></ion-icon>
+                  email
+                </ion-label>
+                <ion-input type="text" required="true" autocomplete="email" formControlName="email"></ion-input>
+              </ion-item>
+
+          <ng-container *ngIf="submitted && f.password.errors">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+          </ng-container>
+
+          <ng-container *ngIf="submitted && f.confirmPassword.errors">
+            <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+            <div *ngIf="f.confirmPassword.errors.MustMatch">Password do not match</div>
+          </ng-container>
+
+              <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+                <ion-label position="stacked">
+                  <ion-icon slot="start" name="lock-closed"></ion-icon>
+                  password
+                </ion-label>
+                <ion-input type="password" required="true"  formControlName="password"></ion-input>
+              </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">
+              <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
+              <span> confirm password</span>
+            </ion-label>
+            <ion-input type="password" formControlName="confirmPassword"></ion-input>
+          </ion-item>
+
+
+          <ion-card-subtitle>
+            <ion-button type="submit">Create User</ion-button>
+          </ion-card-subtitle>
+
+        </ion-list>
+        </form>
+
+    <p>{{form.value | json}}</p>
+  </ion-list>
+  </ion-card>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+      <ion-label>
+        Back to List
+      </ion-label>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+<h4>{{date | date: 'shortTime'}}</h4>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-icon slot="end" name="exit-outline"></ion-icon>
+        <ion-label>
+          Logout
+        </ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

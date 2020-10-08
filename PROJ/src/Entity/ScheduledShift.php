@@ -31,10 +31,13 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  *     shortName="shifts",
  *   attributes={"security"="is_granted('ROLE_USER')"},
  *   collectionOperations={
- *   "get", "post"
+ *   "get", "post",
  *   },
  *   itemOperations={
- *   "get", "put"={"security"="is_granted('ROLE_ADMIN') or object.owner == user"}
+ *   "get",
+ *   "put"={"security"="is_granted('ROLE_ADMIN') or object.owner == user"},
+ *   "patch"={"security"="is_granted('ROLE_ADMIN') or object.owner == user"},
+ *   "delete"={"security"="is_granted('ROLE_ADMIN')"}
  *   },
  *     graphql={
  *         "item_query",
@@ -50,7 +53,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  * @ApiFilter(DateFilter::class, properties={"start", "end"})
  * @ApiFilter(BooleanFilter::class, properties={"isApproved"})
  * @ApiFilter(SearchFilter::class, properties={"id": "exact", "ShiftStatus": "exact"})
- * @ApiFilter(OrderFilter::class, properties={"start": "ASC"})
+ * @ApiFilter(OrderFilter::class, properties={"start", "end"}, arguments={"orderParameterName"="order"})
  * @Type(name="Shifts")
  * @ORM\Table(name="scheduled_shift", indexes={@ORM\Index(name="IDX_E776626E7CB2CD68", columns={"on_duty_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\ScheduledShiftRepository")

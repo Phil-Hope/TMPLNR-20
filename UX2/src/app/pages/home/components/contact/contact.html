@@ -1,4 +1,4 @@
-<app-header [pageTitle]="pageTitle"></app-header>
+<app-header [pageTitle]="['Contact']"></app-header>
 <ion-content>
   <img loading="eager" src="https://media.publit.io/file/organised.png" alt="header" width="100%" loading="lazy" />
 <ion-card>
@@ -19,4 +19,11 @@
 </ion-card>
 
 </ion-content>
-<app-footer></app-footer>
+<ion-footer [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-back-button defaultHref="/">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

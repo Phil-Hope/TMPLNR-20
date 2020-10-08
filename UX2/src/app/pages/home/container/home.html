@@ -1,32 +1,59 @@
 
 <app-header
-  [pageTitle]="pageTitle"
+  [pageTitle]="['Home']"
 ></app-header>
 <ion-content>
+  <app-header-banner></app-header-banner>
   <ion-card>
     <ion-card-title class="welcome-title">Hi there!</ion-card-title>
     <ion-card-content>
-      <ion-row>
+      <ion-list lines="none">
+<ion-item>
         <ion-col>
           Already a User?
         </ion-col>
-        <ion-col>
-          First visit?
-        </ion-col>
-      </ion-row>
-      <ion-row>
+</ion-item>
+      <ion-item>
         <ion-col>
           <ion-button  size="full" color="secondary" shape="round" routerLink="/login">LOGIN</ion-button>
         </ion-col>
+</ion-item>
+      <ion-item>
+        <ion-col>
+          First visit?
+        </ion-col>
+      </ion-item>
+      <ion-item>
         <ion-col>
           <ion-button shape="round" color="success" size="full" [routerLink]="['/register']">REGISTER</ion-button>
         </ion-col>
-      </ion-row>
+      </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
-<img src="https://media.publit.io/file/organised.png" width="100%" alt="always feel organised" />
-
 </ion-content>
-  <app-footer></app-footer>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-icon slot="start" name="call-outline"></ion-icon>
+        <ion-label>Contact</ion-label>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      <h4 style="font-family: Quicksand, sans-serif; font-size: 1rem;">{{date | date: 'shortTime'}}</h4>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"
+      >
+        <ion-icon slot="end" name="calendar-outline"></ion-icon>
+        <ion-label>
+          {{date | date: 'dd MMM'}}
+        </ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
 
 

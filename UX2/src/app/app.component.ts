@@ -9,7 +9,6 @@ import {AuthenticationService} from "./services/authentication.service";
 import {filter, map, take} from "rxjs/operators";
 import {Storage} from "@ionic/storage";
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../environments/environment";
 import {User} from "./interfaces/user.interface";
 
 const TOKEN_KEY = 'token';
@@ -24,7 +23,6 @@ export class AppComponent {
 
   isAuthenticated: boolean;
   dark = false;
-  id: Observable<any>;
   userData = BehaviorSubject;
   user: User;
 
@@ -63,7 +61,22 @@ export class AppComponent {
         .then(() => this.swUpdate.activateUpdate())
         .then(() => window.location.reload());
     });
-    this.getCurrentUser();
+
+    const prefersColor = window.matchMedia('(prefers-color-scheme: dark)');
+    this.dark = prefersColor.matches;
+    this.updateDarkMode();
+
+    prefersColor.addEventListener(
+      'change',
+      mediaQuery => {
+        this.dark = mediaQuery.matches;
+        this.updateDarkMode();
+      }
+    );
+  }
+
+  updateDarkMode() {
+  document.body.classList.toggle('dark', this.dark);
   }
 
   initializeApp() {
@@ -85,11 +98,6 @@ export class AppComponent {
         }
       })
     );
-  }
-
- async getCurrentUser() {
-      const id = await this.storage.get('id');
-      this.http.get<User>(`${environment.apiUrl}/users/${id}.json`).subscribe(data => this.user = data);
   }
 
  async logout() {

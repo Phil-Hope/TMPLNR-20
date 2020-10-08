@@ -1,0 +1,43 @@
+<app-header></app-header>
+
+<ion-content>
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+  <div  *ngIf="user else loading">
+  <ion-list>
+    <ion-list-header>Delete User?</ion-list-header>
+    <ion-item-divider>
+      <ion-col size="4">
+        Name
+      </ion-col>
+      <ion-col size="4">
+        Email
+      </ion-col>
+      <ion-col size="4">
+        Contact Number
+      </ion-col>
+    </ion-item-divider>
+    <ion-item-divider>
+      <ion-col>{{user.firstName}} {{user.lastName}}</ion-col>
+      <ion-col>{{user.email}}</ion-col>
+      <ion-col>{{user.contactNumber}}</ion-col>
+    </ion-item-divider>
+    <ion-item>
+      <form [formGroup]="form" (ngSubmit)="deleteUser()">
+        <ion-input type="hidden" value="{{user.id}}" formControlName="id"></ion-input>
+        <ion-button type="submit" color="danger" size="small">DELETE</ion-button>
+      </form>
+    </ion-item>
+  </ion-list>
+  </div>
+</ion-content>
+
+<app-footer></app-footer>

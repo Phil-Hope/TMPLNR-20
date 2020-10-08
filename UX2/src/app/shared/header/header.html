@@ -1,22 +1,15 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-buttons slot="secondary">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>
-      <ion-row>
-        <ion-col class="title">
-          {{pageTitle}}
-        </ion-col>
-        <ion-col>
-          <ion-img class="logo" [src]='logoUrl'></ion-img>
-        </ion-col>
-      </ion-row>
+    <ion-title color="light" style="font-family: Quicksand, sans-serif">
+      {{pageTitle}}
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-img class="logo" src="/assets/icons/icon-128x128.png"></ion-img>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-img class="header-img" [src]="headerBanner"></ion-img>
+
 

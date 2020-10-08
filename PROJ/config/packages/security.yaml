@@ -16,6 +16,10 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        register:
+           pattern: ^/register
+           stateless: true
+           anonymous: true
 
         main:
             anonymous: true

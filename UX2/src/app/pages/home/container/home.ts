@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -8,14 +7,15 @@ import {Observable} from 'rxjs';
 })
 export class HomePage implements OnInit {
 
-
-  pageTitle = 'Home';
+  date = new Date();
 
   constructor() {
   }
 
   ngOnInit() {
-
+    setInterval(() => {
+      this.date = new Date();
+    }, 1000);
   }
 
 }

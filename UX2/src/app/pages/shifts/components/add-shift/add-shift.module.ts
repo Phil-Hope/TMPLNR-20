@@ -10,7 +10,7 @@ import { AddShiftRoutingModule } from "./add-shift-routing.module";
 import {AuthenticationService} from "../../../../services/authentication.service";
 import {ShiftsService} from "../../services/shifts.service";
 import {HttpConfigInterceptor} from "../../../../services/http.interceptor";
-import {UsersService} from "../../../users/services/users.service";
+import {UsersService} from "../../../admin/users/services/users.service";
 
 @NgModule({
   imports: [
