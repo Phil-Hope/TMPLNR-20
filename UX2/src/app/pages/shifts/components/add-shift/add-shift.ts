@@ -48,8 +48,6 @@ export class AddShiftPage implements OnInit {
     }, 1000);
   }
 
-  get f() { return this.form.controls; }
-
   addShift() {
     this.submitted = true;
     if (this.form.valid) {

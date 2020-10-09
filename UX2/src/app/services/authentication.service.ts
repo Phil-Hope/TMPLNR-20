@@ -42,7 +42,12 @@ export class AuthenticationService {
 
   login(email: string, password: string): Observable<TokenResponse | UserTrackerError> {
     return this.http.post(`${environment.apiUrl}/login`,
-      {email, password}).pipe(
+      {email, password},
+      {headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }), withCredentials: true
+      }).pipe(
         tap(async (res: TokenResponse) => {
           if (res) {
             await this.storage.set(TOKEN_KEY, res.token);

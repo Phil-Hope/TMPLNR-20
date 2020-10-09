@@ -1,10 +1,10 @@
 <app-header [pageTitle]="['Add Shift']"></app-header>
 
 <ion-content>
-  <app-header-banner></app-header-banner>
 
+  <ion-card style="margin-top: 1rem;">
   <form [formGroup]="form" (ngSubmit)="addShift()">
-<ion-list style="margin-top: 2rem;">
+<ion-list>
     <h4 style="font-family: Quicksand, sans-serif; text-align: center; margin-bottom: 2rem">Add New Shift</h4>
     <ion-item-group>
       <ion-item>
@@ -64,24 +64,23 @@
 
 </ion-list>
   </form>
+  </ion-card>
 </ion-content>
 
-<ion-footer>
+<ion-footer [translucent]="true">
   <ion-toolbar color="primary">
 
     <ion-buttons slot="start">
-      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif"  [routerLink]="['/shifts/draft-calendar']">
-        <ion-icon slot="start" name="calendar-outline"></ion-icon>
-        <ion-label>Calendar</ion-label>
+      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif"  [routerLink]="['/users/profile']">
+        <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+        <ion-label>Profile</ion-label>
       </ion-button>
     </ion-buttons>
-    <ion-title>
-      <h4>{{date | date: 'shortTime'}}</h4>
-    </ion-title>
+
 <ion-buttons slot="end">
       <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif" [routerLink]="['/shifts']">
-        <ion-icon slot="end" routerLinkActive="active"  name="search-circle-outline"></ion-icon>
-        <ion-label>Shifts List</ion-label>
+        <ion-icon slot="end" name="grid-outline"></ion-icon>
+        <ion-label>Shifts Dashboard</ion-label>
       </ion-button>
 </ion-buttons>
   </ion-toolbar>

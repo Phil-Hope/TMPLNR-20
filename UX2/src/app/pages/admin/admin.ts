@@ -5,7 +5,7 @@ import {ScheduledShift} from "../../interfaces/shifts.interface";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {tap} from "rxjs/operators";
 import {Router} from "@angular/router";
-import {ShiftTrackerError} from "../shifts/services/shifts-errors.interface";
+import {ShiftTrackerError} from "../shifts/services/shifts-errors.provider";
 
 @Component({
   selector: 'app-admin',

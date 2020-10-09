@@ -1,0 +1,101 @@
+<app-header [pageTitle]="['Add Comment']"></app-header>
+
+<ion-content>
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+<div *ngIf="shift else loading">
+<ion-card>
+  <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+    <ion-label>Date</ion-label>
+    <ion-label>Start</ion-label>
+    <ion-label>End</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{shift.start | date: 'd/MMM'}}</ion-label>
+  <ion-label>{{shift.start | date: 'shortTime'}}</ion-label>
+    <ion-label>{{shift.end | date: 'shortTime'}}</ion-label>
+  </ion-item>
+  <ion-item-divider></ion-item-divider>
+  <ion-card-header>Enter Comment Below</ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <form [formGroup]="form" (ngSubmit)="addCommentToShift()">
+      <ion-item class="input-class">
+        <ion-label>Comment</ion-label>
+        <ion-icon slot="start" name="chatbox-outline"></ion-icon>
+        <ion-textarea formControlName="comment"></ion-textarea>
+      </ion-item>
+        <ion-input
+          type="hidden"
+          formControlName="authoredBy"
+          [(ngModel)]="user.id"
+          value="/users/{{user.id}}"
+        ></ion-input>
+
+        <ion-input
+          formControlName="dateOfComment"
+          type="hidden"
+          value="{{date}}"
+          [(ngModel)]="date"
+        ></ion-input>
+
+        <ion-input
+          formControlName="shift"
+          value="/shifts/{{shift.id}}"
+          type="hidden"
+          [(ngModel)]="shift.id"
+        >
+        </ion-input>
+
+        <ion-item>
+          <ion-button type="submit">
+            <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+            <ion-label>Add Comment</ion-label>
+          </ion-button>
+        </ion-item>
+      </form>
+    </ion-list>
+    <div *ngIf="comments">
+      <ion-item-divider color="none" style="margin-top: 1rem;">Other Comments</ion-item-divider>
+      <ion-list *ngFor="let comment of comments">
+        <ion-item-divider>
+          <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">{{comment.authoredBy.firstName}} {{comment.authoredBy.lastName}}</ion-label>
+        </ion-item-divider>
+        <ion-item><ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">{{comment.dateOfComment | date: 'short'}}</ion-label></ion-item>
+      <ion-item>
+        <ion-text style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">{{comment.comment}}</ion-text>
+      </ion-item>
+      </ion-list>
+    </div>
+  </ion-card-content>
+  </ion-card>
+</div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="primary">
+<ion-buttons slot="start">
+  <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/shifts']">
+    <ion-icon slot="start" name="list-circle-outline"></ion-icon>
+    <ion-label>
+      Shift-Dashboard
+    </ion-label>
+  </ion-button>
+</ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/users/profile']">
+        <ion-icon slot="end" name="person-circle-outline"></ion-icon>
+        <ion-label>
+          Your Profile
+        </ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
