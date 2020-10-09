@@ -4,8 +4,8 @@ nelmio_cors:
         origin_regex: true
         allow_origin: ['^http://localhost:[0-9]+']
         allow_methods: ['GET', 'OPTIONS', 'POST', 'PUT', 'PATCH', 'DELETE']
-        allow_headers: ['Content-Type', 'Authorization']
-        expose_headers: ['Link', 'Location', 'Set-Cookie']
+        allow_headers: ['Content-Type', 'Authorization', 'Content-Encoding']
+        expose_headers: ['Link', 'Location', 'Set-Cookie', 'Content-Encoding']
         max_age: 3600
     paths:
         '^/': ~

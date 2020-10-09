@@ -6,7 +6,7 @@ import {User} from "../../../../interfaces/user.interface";
 import {UsersService} from "../../../admin/users/services/users.service";
 import {ShiftsService} from "../../services/shifts.service";
 import {map, tap} from "rxjs/operators";
-import {ShiftTrackerError} from "../../services/shifts-errors.interface";
+import {ShiftTrackerError} from "../../services/shifts-errors.provider";
 import {UserTrackerError} from "../../../admin/users/services/user-errors.interface";
 
 @Component({

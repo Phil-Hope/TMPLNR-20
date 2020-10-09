@@ -35,7 +35,7 @@ import {
 } from 'date-fns';
 import {Router} from "@angular/router";
 import {ApprovedCustomDateFormatProvider} from "./custom-date-format.provider";
-import {ShiftTrackerError} from "../../services/shifts-errors.interface";
+import {ShiftTrackerError} from "../../services/shifts-errors.provider";
 import {DOCUMENT} from "@angular/common";
 
 @Injectable()

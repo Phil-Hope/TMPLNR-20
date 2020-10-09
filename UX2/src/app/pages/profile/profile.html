@@ -28,7 +28,7 @@
             <ion-col>END</ion-col>
             </ion-item>
             <div *ngFor="let shift of shifts">
-            <ion-item [routerLink]="['/shifts/', shift.id, 'details']" style="font-size: 0.8rem; text-align: center; font-family: Quicksand, sans-serif;" detail="false">
+            <ion-item (click)="presentActionSheet(shift.id)" style="font-size: 0.8rem; text-align: center; font-family: Quicksand, sans-serif;" detail="false">
             <ion-label>{{shift.start | date: 'shortDate'}}</ion-label>
             <ion-label>{{shift.start | date: 'shortTime'}}</ion-label>
             <ion-label>{{shift.end | date: 'shortTime'}}</ion-label>
@@ -47,14 +47,14 @@
 <ion-footer [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button [routerLink]="['/users/profile/', user.id, 'shifts']" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+      <ion-button routerLink="/users/profile/{{user.id}}/shifts" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
         <ion-icon slot="start" name="calendar-outline"></ion-icon>
-        <ion-label>{{user.firstName}}'s Shifts</ion-label>
+        <ion-label size="small">{{user.firstName}}'s Shifts</ion-label>
       </ion-button>
     </ion-buttons>
-<ion-title><h6>Hi {{user.firstName}}!</h6></ion-title>
+
     <ion-buttons slot="end">
-      <ion-button [routerLink]="['/users/profile/', user.id, 'user']" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+      <ion-button routerLink="/users/profile/{{user.id}}}/user" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
         <ion-icon slot="end" name="create-outline"></ion-icon>
         <ion-label>
           Edit Details

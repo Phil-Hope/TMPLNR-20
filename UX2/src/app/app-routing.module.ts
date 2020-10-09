@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
   {
@@ -10,17 +10,20 @@ const routes: Routes = [
   {
     path: 'welcome',
     loadChildren: () => import('./pages/welcome/welcome.module')
-      .then(m => m.WelcomeModule)
+      .then(m => m.WelcomeModule),
+    data: { preload: true }
   },
   {
     path: 'home',
     loadChildren: () => import ('./pages/home/home.module')
-      .then(m => m.HomePageModule)
+      .then(m => m.HomePageModule),
+    data: { preload: true }
   },
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module')
       .then(m => m.LoginModule),
+    data: { preload: true }
   },
   {
     path: 'admin',
@@ -40,28 +43,38 @@ const routes: Routes = [
   {
     path: 'contact',
     loadChildren: () => import('./pages/home/components/contact/contact.module')
-      .then(m => m.ContactModule)
+      .then(m => m.ContactModule),
+    data: { preload: true }
   },
   {
     path: 'shifts',
-    loadChildren: () => import('./pages/shifts/container/shifts-container.module').then(m => m.ContainerPageModule)
+    loadChildren: () => import('./pages/shifts/container/shifts-container.module')
+      .then(m => m.ContainerPageModule)
   },
   {
     path: 'shifts/:id/details',
     loadChildren: () => import('./pages/shifts/components/shift-details/shift-details.module')
       .then(m => m.ShiftDetailsModule),
-
   },
   {
     path: 'shifts/:id/edit',
     loadChildren: () => import('./pages/shifts/components/edit-shift/edit-shift.module')
       .then(m => m.EditShiftPageModule),
-
   },
   {
     path: 'shifts/:id/delete',
     loadChildren: () => import('./pages/shifts/components/delete-shift/delete-shift.module')
       .then(m => m.DeleteShiftPageModule),
+  },
+  {
+    path: 'shifts/:id/view-comments',
+    loadChildren: () => import('./pages/shifts/comments/shift-comments/shift-comments.module')
+      .then( m => m.ShiftCommentsPageModule)
+  },
+  {
+    path: 'shifts/:id/add-comment',
+    loadChildren: () => import('./pages/shifts/comments/add-comment/add-comment.module')
+      .then( m => m.AddCommentPageModule)
   },
   {
     path: 'shifts/add',
@@ -72,7 +85,6 @@ const routes: Routes = [
     path: 'shifts/list/upcoming',
     loadChildren: () => import('./pages/shifts/components/list-shifts/list-upcoming-shifts/list-shifts.module')
       .then(m => m.ListShiftsModule),
-
   },
   {
     path: 'shifts/list/pending',
@@ -120,6 +132,26 @@ const routes: Routes = [
       .then(m => m.ApprovedCalendarPageModule)
   },
   {
+    path: 'comments',
+    loadChildren: () => import('./pages/shifts/comments/list-comments/list-comments.module')
+      .then( m => m.ListCommentsPageModule)
+  },
+  {
+    path: 'comments/:id/view',
+    loadChildren: () => import('./pages/shifts/comments/view-comment/view-comment.module')
+      .then( m => m.ViewCommentPageModule)
+  },
+  {
+    path: 'comments/:id/edit',
+    loadChildren: () => import('./pages/shifts/comments/edit-comment/edit-comment.module')
+      .then( m => m.EditCommentPageModule)
+  },
+  {
+    path: 'comments/:id/delete',
+    loadChildren: () => import('./pages/shifts/comments/delete-comment/delete-comment.module')
+      .then( m => m.DeleteCommentPageModule)
+  },
+  {
     path: 'users',
     loadChildren: () => import('./pages/admin/users/components/list-users/list-users.module')
       .then(m => m.ListUsersModule),
@@ -150,6 +182,11 @@ const routes: Routes = [
       .then(m => m.DeleteUserPageModule),
   },
   {
+    path: 'users/:id/comments',
+    loadChildren: () => import('./pages/shifts/comments/user-comments/user-comments.module')
+      .then( m => m.UserCommentsPageModule)
+  },
+  {
     path: 'users/profile',
     loadChildren: () => import('./pages/profile/profile.module')
       .then(m => m.ProfileModule),
@@ -173,7 +210,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 

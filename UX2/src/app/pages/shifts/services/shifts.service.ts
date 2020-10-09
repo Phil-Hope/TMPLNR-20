@@ -5,7 +5,7 @@ import {Observable, throwError} from "rxjs";
 import {environment} from "../../../../environments/environment";
 import {catchError, tap} from "rxjs/operators";
 import {format} from "date-fns";
-import {ShiftTrackerError} from "./shifts-errors.interface";
+import {ShiftTrackerError} from "./shifts-errors.provider";
 
 @Injectable()
 export class ShiftsService {
@@ -24,7 +24,7 @@ export class ShiftsService {
       {
         params, headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log('Shifts Fetched Successfully!')),
       catchError(err => this.handleHttpError(err))
@@ -40,7 +40,7 @@ export class ShiftsService {
         {
           params, headers: new HttpHeaders({
             'Content-Type': 'application/json',
-          })
+          }), withCredentials: true
         }).pipe(
         tap(_ => console.log('Fetched Upcoming Shifts Successfully!')),
       catchError(err => this.handleHttpError(err))
@@ -56,7 +56,7 @@ export class ShiftsService {
       {
         params, headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log('Fetched Upcoming Shifts Successfully!')),
       catchError(err => this.handleHttpError(err))
@@ -73,7 +73,7 @@ export class ShiftsService {
       {
         params, headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!')),
       catchError(err => this.handleHttpError(err))
@@ -90,7 +90,7 @@ export class ShiftsService {
       {
         params, headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!')),
       catchError(err => this.handleHttpError(err))
@@ -107,7 +107,7 @@ export class ShiftsService {
       {
         params, headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!')),
       catchError(err => this.handleHttpError(err))
@@ -124,7 +124,7 @@ export class ShiftsService {
       {
         params, headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!')),
       catchError(err => this.handleHttpError(err))
@@ -142,7 +142,7 @@ export class ShiftsService {
       {
         params, headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!')),
       catchError(err => this.handleHttpError(err))
@@ -160,7 +160,7 @@ export class ShiftsService {
       {
         params, headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!')),
       catchError(err => this.handleHttpError(err))
@@ -178,7 +178,7 @@ export class ShiftsService {
       {
         params, headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!')),
       catchError(err => this.handleHttpError(err))
@@ -196,7 +196,7 @@ export class ShiftsService {
       {
         params, headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log('Fetched Awaiting Approval Shifts Successfully!')),
       catchError(err => this.handleHttpError(err))
@@ -209,7 +209,7 @@ export class ShiftsService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log('Shift Fetched Successfully')),
       catchError(err => this.handleHttpError(err))
@@ -226,7 +226,7 @@ export class ShiftsService {
       },
       {headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        })
+        }), withCredentials: true
       }).pipe(
         tap(_ => alert(`Shift ${shift.id} has been approved!`)),
         tap(data => console.log('approve shift: ' + JSON.stringify(data))),
@@ -245,7 +245,7 @@ export class ShiftsService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => alert('Shift Created Successfully!')),
       tap(data => console.log('create shift: ' + JSON.stringify(data)),
@@ -265,7 +265,7 @@ export class ShiftsService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        })
+        }), withCredentials: true
       })
       .pipe(
         tap(_ => alert('Shift Edited Successfully!')),
@@ -279,7 +279,7 @@ export class ShiftsService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => alert(`Shift: ${shift.id}, Deleted SuccessFully!`)),
       tap(data => console.log('delete shift: ' + JSON.stringify(data))),
@@ -289,9 +289,9 @@ export class ShiftsService {
 
    handleHttpError(error: HttpErrorResponse): Observable<ShiftTrackerError> {
     const dataError = new ShiftTrackerError();
-    dataError.errorNumber = 100;
+    dataError.errorNumber = error.status;
     dataError.message = error.statusText;
-    dataError.friendlyMessage = 'An error occurred retrieving data.';
+    dataError.friendlyMessage = 'Oops! an error occurred while trying to retrieve shift data.';
     return throwError(dataError);
   }
 }

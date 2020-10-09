@@ -255,9 +255,9 @@ export class UsersService {
 
   handleHttpError(error: HttpErrorResponse): Observable<UserTrackerError> {
     const dataError = new UserTrackerError();
-    dataError.errorNumber = 100;
+    dataError.errorNumber = error.status;
     dataError.message = error.statusText;
-    dataError.friendlyMessage = 'An error occurred retrieving data.';
+    dataError.friendlyMessage = 'Oops! an error occurred while trying to retrieve users data.';
     return throwError(dataError);
   }
 }

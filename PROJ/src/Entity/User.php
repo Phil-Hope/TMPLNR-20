@@ -112,9 +112,17 @@ class User implements UserInterface
      */
     private $shifts;
 
+    /**
+     * @ApiSubresource()
+     * @Groups({"user:read"})
+     * @ORM\OneToMany(targetEntity=ShiftComments::class, mappedBy="authoredBy")
+     */
+    private $comments;
+
     public function __construct()
     {
       $this->shifts = new ArrayCollection();
+      $this->comments = new ArrayCollection();
     }
 
     /**
@@ -327,6 +335,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($shift->getOnDuty() === $this) {
                 $shift->setOnDuty(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ShiftComments[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(ShiftComments $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setAuthoredBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(ShiftComments $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getAuthoredBy() === $this) {
+                $comment->setAuthoredBy(null);
             }
         }
 

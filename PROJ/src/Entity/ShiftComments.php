@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,6 +10,7 @@ use Ramsey\Uuid\Doctrine\UuidBinaryType;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 /**
  * ShiftComments
  * @ApiResource(
@@ -25,6 +27,7 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
  *   "delete"={"security"="is_granted('ROLE_ADMIN') or object.owner == user"},
  *   }
  * )
+ * @ApiFilter(OrderFilter::class, properties={"dateOfComment"}, arguments={"orderParameterName"="order"})
  * @ORM\Table(name="shift_comments", indexes={@ORM\Index(name="IDX_762A0E8E22BF0A45", columns={"authored_by_id"}), @ORM\Index(name="IDX_762A0E8EBB70BC0E", columns={"shift_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\ShiftCommentsRepository")
  */
@@ -55,9 +58,9 @@ class ShiftComments
     private $dateOfComment;
 
     /**
-     * @ORM\Column(name="authored_by_id", nullable=false, type="string")
+     *
      * @Groups({"comments:read", "comments:write"})
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="authored_by_id", referencedColumnName="id")
      * })

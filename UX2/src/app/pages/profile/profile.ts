@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../../interfaces/user.interface';
-import {Observable} from 'rxjs';
 import {ActivatedRoute} from "@angular/router";
 import {Router} from "@angular/router";
 import {UsersService} from "../admin/users/services/users.service";
 import {ScheduledShift} from "../../interfaces/shifts.interface";
 import {UserTrackerError} from "../admin/users/services/user-errors.interface";
 import {Storage} from "@ionic/storage";
+import {ActionSheetController} from "@ionic/angular";
 
 
 @Component({
@@ -19,11 +19,15 @@ export class ProfilePage implements OnInit {
   user: User | UserTrackerError;
   users: User[];
   shifts: ScheduledShift[] | UserTrackerError;
+  shift: ScheduledShift;
+  date = new Date();
+
   constructor(
     private userService: UsersService,
     private route: ActivatedRoute,
+    private storage: Storage,
     private router: Router,
-    private storage: Storage
+    private actionSheetController: ActionSheetController
   ) {
   }
 
@@ -32,22 +36,63 @@ export class ProfilePage implements OnInit {
       const result = await this.storage.get('id');
       console.log(result);
       return result;
+    } catch (e) {
+      console.log(e);
     }
-    catch (e) { console.log(e); }
   }
 
   async ngOnInit() {
-      const value = await this.getStorage();
-      this.getUserFromStorage(JSON.parse(value));
-      this.getUsersShiftsFromStorage(JSON.parse(value));
+    const value = await this.getStorage();
+    this.getUserFromStorage(JSON.parse(value));
+    this.getUsersShiftsFromStorage(JSON.parse(value));
+  }
+
+  async presentActionSheet(id: string) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Actions',
+      buttons: [{
+        text: 'view',
+        icon: 'search-circle-outline',
+        handler: () => {
+          this.router.navigateByUrl(`/shifts/${id}/details`);
+        }
+      }, {
+        text: 'edit',
+        icon: 'create-outline',
+        handler: () => {
+          this.router.navigateByUrl(`/shifts/${id}/edit`);
+        }
+      },
+        {
+          text: 'comment',
+          icon: 'chatbubble-outline',
+          handler: () => {
+            this.router.navigateByUrl(`/shifts/${id}/add-comment`);
+          }
+        },
+        {
+          text: 'delete',
+          icon: 'trash-bin-outline',
+          handler: () => {
+            this.router.navigateByUrl(`/shifts/${id}/delete`);
+          }
+        },
+        {
+          text: 'cancel',
+          icon: 'close',
+          role: "cancel"
+        }
+      ]
+    });
+    await actionSheet.present();
   }
 
   async getUserFromStorage(id: string) {
-     this.userService.getUserById(id).subscribe((data: User) => this.user = data);
+    this.userService.getUserById(id).subscribe((data: User) => this.user = data);
   }
 
   async getUsersShiftsFromStorage(id: string) {
-     this.userService.loadAllUsersShifts(id).subscribe((data: ScheduledShift[]) => this.shifts = data);
+    this.userService.loadAllUsersShifts(id).subscribe((data: ScheduledShift[]) => this.shifts = data);
   }
 
   viewShiftDetails(): void {

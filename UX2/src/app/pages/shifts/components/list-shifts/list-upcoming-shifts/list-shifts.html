@@ -34,8 +34,14 @@
       <ion-col size="2.5"><strong>Approved</strong></ion-col>
     </ion-item>
     <div *ngFor="let shift of shifts">
-    <ion-item [routerLink]="['/shifts/', shift.id, 'details']" class="shifts ion-text-center" style="font-family: Quicksand, sans-serif; font-size: 0.7rem;">
-    <ion-avatar slot="start"><img src="{{shift.onDuty.profilePicture}}" style="width: 3rem; height: 3rem;" /></ion-avatar>
+    <ion-item (click)="presentActionSheet(shift.id)" class="shifts ion-text-center" style="font-family: Quicksand, sans-serif; font-size: 0.7rem;">
+      <div *ngIf="shift.onDuty.profilePicture else spinner">
+        <ion-avatar slot="start"> <ion-img src="{{shift.onDuty.profilePicture}}" style="width: 3rem; height: 3rem;"></ion-img> </ion-avatar>
+      </div>
+        <ng-template #spinner>
+        <ion-spinner></ion-spinner>
+        </ng-template>
+
       <ion-col>{{shift.start | date: 'shortDate'}}</ion-col>
       <ion-col>{{shift.start | date: 'shortTime' }}</ion-col>
       <ion-col>{{shift.end | date: 'shortTime'}}</ion-col>
@@ -43,19 +49,19 @@
         <span *ngIf="shift.ShiftStatus === 'secondary'"><ion-icon color="secondary" size="large" name="person-circle-outline"></ion-icon></span>
         <span *ngIf="shift.ShiftStatus === 'primary'"><ion-icon color="success"  size="large" name="person-circle-outline"></ion-icon></span></ion-col>
       <ion-col>
-        <span *ngIf="shift.isApproved === false">
+        <div *ngIf="shift.isApproved === false">
           <ion-icon size="large" color="danger" name="close-circle-outline"></ion-icon>
-        </span>
-        <span *ngIf="shift.isApproved === true">
+        </div>
+        <div *ngIf="shift.isApproved === true">
           <ion-icon size="large" color="success" name="checkmark-circle-outline"></ion-icon>
-        </span>
+        </div>
       </ion-col>
     </ion-item>
       </div>
 </ion-list>
   </div>
 </ion-content>
-<ion-footer>
+<ion-footer [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button slot="start" [routerLink]="['/shifts/add']" >

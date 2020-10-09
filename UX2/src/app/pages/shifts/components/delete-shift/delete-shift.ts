@@ -3,7 +3,7 @@ import {ScheduledShift} from '../../../../interfaces/shifts.interface';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ShiftsService} from "../../services/shifts.service";
-import {ShiftTrackerError} from "../../services/shifts-errors.interface";
+import {ShiftTrackerError} from "../../services/shifts-errors.provider";
 import {tap, map} from 'rxjs/operators';
 import {Observable} from "rxjs";
 @Component({

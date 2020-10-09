@@ -35,7 +35,7 @@
     </ion-item>
     <ion-item>
       <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">Select Call Level</ion-label>
-    <ion-select placeholder="{{shift.ShiftStatus}}" formControlName="ShiftStatus" [ngModel]="shift.status">
+    <ion-select formControlName="ShiftStatus" [ngModel]="shift.ShiftStatus">
       <ion-select-option value="secondary">Secondary</ion-select-option>
       <ion-select-option value="primary">Primary</ion-select-option>
     </ion-select>
@@ -51,7 +51,7 @@
     </ion-item>
     <ion-item>
       <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">Approve Shift?</ion-label>
-      <ion-checkbox checked="false" formControlName="isApproved" value="true"></ion-checkbox>
+      <ion-checkbox formControlName="isApproved" value=true></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-col size="12">
@@ -59,9 +59,10 @@
         Submit
       </ion-button>
       </ion-col>
+
     </ion-item>
+    {{form.value | json}}
   </form>
-  {{form.value | json}}
 </ion-list>
   </div>
 </ion-content>

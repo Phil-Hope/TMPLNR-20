@@ -11,8 +11,7 @@
 
   <ion-card style="margin-top: 2rem;" *ngIf="shift else loading">
     <form [formGroup]="form" (ngSubmit)="editShift()" >
-
-
+<ion-list>
         <ion-item>
           <ion-label position="floating" class="ion-text-center" style="font-size: 0.8rem;" color="secondary"><span>Select Start Time</span></ion-label>
           <ion-datetime
@@ -59,12 +58,24 @@
                 <ion-select-option value="primary">Primary</ion-select-option>
               </ion-select>
             </ion-item>
-
-      <ion-col size="12">
-        <ion-item>
-          <ion-button type="submit">Edit Shift</ion-button>
-        </ion-item>
-      </ion-col>
+  <ion-item
+    #approved
+    color="warning"
+    style="font-family: Quicksand, sans-serif;
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    text-align: center">
+    <ion-label>Shift has been approved!<br />Editing is now disabled.</ion-label>
+  </ion-item>
+  <div *ngIf="shift.isApproved == false else approved">
+          <ion-button
+            type="submit"
+            style="margin-top: 1rem;"
+            size="block"><ion-label>
+            Edit Shift</ion-label>
+          </ion-button>
+  </div>
+</ion-list>
     </form>
   </ion-card>
 

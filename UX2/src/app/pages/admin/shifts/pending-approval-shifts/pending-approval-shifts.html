@@ -1,5 +1,15 @@
 <app-header [pageTitle]="['Shifts Pending Approval']"></app-header>
 <ion-content>
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
   <ion-list>
     <ion-item-divider>
       <ion-row style="font-family: Quicksand, sans-serif;" class="ion-text-center">
@@ -17,33 +27,59 @@
   </ion-list>
   <ion-list>
     <ion-list-header>Shifts Pending Approval</ion-list-header>
-    <ion-row style="font-size: 0.7rem; background: #cdd2dd; text-align: center;">
-      <ion-col size="2.5">OnDuty</ion-col>
-      <ion-col size="2">Date</ion-col>
-      <ion-col size="2">Start</ion-col>
-      <ion-col size="2">End</ion-col>
-      <ion-col size="1.5">Call Level</ion-col>
-      <ion-col size="2">Approve Shift</ion-col>
-    </ion-row>
-    <div  *ngIf="shifts">
+    <ion-grid>
 
-      <ion-row *ngFor="let shift of shifts" style="font-size: 0.8rem;">
-
-        <ion-col size="2.5">{{shift.onDuty.firstName}} {{shift.onDuty.lastName}}</ion-col>
-        <ion-col size="2">{{shift.start | date: 'shortDate'}}</ion-col>
-        <ion-col size="2">{{shift.start | date: 'shortTime'}}</ion-col>
-        <ion-col size="2">{{shift.end | date: 'shortTime'}}</ion-col>
-        <ion-col size="1.5">
-          <span *ngIf="shift.ShiftStatus === 'secondary'"><ion-icon color="secondary" size="large" name="person-circle-outline"></ion-icon></span>
-          <span *ngIf="shift.ShiftStatus === 'primary'"><ion-icon color="success"  size="large" name="person-circle-outline"></ion-icon></span>
-        </ion-col>
-        <ion-col size="2">
-            <ion-button  [routerLink]="['/admin/approve-shift/', shift.id]" fill="outline" size="small">
-              <ion-icon color="success" size="small" name="checkmark-circle-outline"></ion-icon>
-            </ion-button>
+      <ion-row style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" class="ion-align-items-center">
+      <ion-col>
+        <ion-label>OnDuty</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label>Date</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label>Start</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label>End</ion-label>
+      </ion-col>
+        <ion-col>
+          <ion-label>Call Level</ion-label>
         </ion-col>
       </ion-row>
+
+    <div  *ngIf="shifts else loading">
+      <div *ngFor="let shift of shifts">
+  <ion-row
+    style="
+    font-size: 0.8rem;
+    font-family: Quicksand, sans-serif;"
+    class="ion-align-items-center"
+    (click)="presentActionSheet(shift.id)"
+  >
+        <ion-col>
+          <ion-label>{{shift.onDuty.firstName}}<br />{{shift.onDuty.lastName}}</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>{{shift.start | date: 'shortDate'}}</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>{{shift.start | date: 'shortTime'}}</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>{{shift.end | date: 'shortTime'}}</ion-label>
+        </ion-col>
+        <ion-col>
+          <div *ngIf="shift.ShiftStatus === 'secondary'">
+            <ion-icon color="secondary" size="large" name="person-circle-outline"></ion-icon>
+          </div>
+          <div *ngIf="shift.ShiftStatus === 'primary'">
+            <ion-icon color="success"  size="large" name="person-circle-outline"></ion-icon>
+          </div>
+        </ion-col>
+  </ion-row>
+      </div>
     </div>
+    </ion-grid>
   </ion-list>
 
 </ion-content>

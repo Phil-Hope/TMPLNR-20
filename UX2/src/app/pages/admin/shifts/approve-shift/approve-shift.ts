@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ScheduledShift} from "../../../../interfaces/shifts.interface";
-import {ShiftTrackerError} from "../../../shifts/services/shifts-errors.interface";
+import {ShiftTrackerError} from "../../../shifts/services/shifts-errors.provider";
 import {ShiftsService} from "../../../shifts/services/shifts.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Observable} from "rxjs";
