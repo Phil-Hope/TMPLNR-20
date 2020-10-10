@@ -1,0 +1,68 @@
+<app-header [pageTitle]="['Edit Your Details']"></app-header>
+
+<ion-content>
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading Profile...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+  <div  *ngIf="user else loading">
+<ion-card style="padding-top: 1rem; padding-bottom: 1rem;">
+  <form [formGroup]="form" (ngSubmit)="editUserDetails()">
+  <ion-list>
+    <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+      <ion-label position="stacked">First Name</ion-label>
+      <ion-input formControlName="firstName" [(ngModel)]="user.firstName"></ion-input>
+    </ion-item>
+    <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+      <ion-label position="stacked">Last Name</ion-label>
+      <ion-input formControlName="lastName" [(ngModel)]="user.lastName"></ion-input>
+    </ion-item>
+    <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+      <ion-label position="stacked">Contact Number</ion-label>
+      <ion-input formControlName="contactNumber" [(ngModel)]="user.contactNumber"></ion-input>
+    </ion-item>
+    <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+      <ion-label position="stacked">Profile Picture URL</ion-label>
+      <ion-input formControlName="profilePicture" [(ngModel)]="user.profilePicture"></ion-input>
+    </ion-item>
+    <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input formControlName="email" [(ngModel)]="user.email"></ion-input>
+    </ion-item>
+  </ion-list>
+    <ion-button style="margin-top: 1rem;" size="block" type="submit">EDIT DETAILS</ion-button>
+  </form>
+</ion-card>
+  </div>
+</ion-content>
+<div  *ngIf="user else loading">
+<ion-footer [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" [routerLink]="['/users/profile']">
+        <ion-icon slot="start" name="arrow-back-circle-outline"></ion-icon>
+        <ion-label>
+          Back To Profile
+        </ion-label>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerDirection]="['/users/profile/', user.id , 'shifts']">
+        <ion-icon slot="end" name="search-circle-outline"></ion-icon>
+        <ion-label>
+          Your Shifts
+        </ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+</div>

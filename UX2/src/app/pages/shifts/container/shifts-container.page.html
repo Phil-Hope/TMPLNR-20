@@ -1,0 +1,102 @@
+<app-header [pageTitle]="['Shift Dashboard']"></app-header>
+
+<ion-content>
+<ion-card>
+  <ion-list>
+
+    <ion-item-divider class="list-header">All Shifts</ion-item-divider>
+
+    <ion-item [routerLink]="['/shifts/list/upcoming']">
+      <ion-icon slot="start" name="play-forward-outline"></ion-icon>
+        <ion-label class="list-label">
+          Upcoming
+        </ion-label>
+    </ion-item>
+
+    <ion-item [routerLink]="['/shifts/list/past']">
+      <ion-icon slot="start" name="play-back-outline"></ion-icon>
+        <ion-label class="list-label">
+          Past
+        </ion-label>
+    </ion-item>
+<ion-item-divider class="list-header">Calendars</ion-item-divider>
+    <ion-item [routerLink]="['/shifts/calendar/draft']">
+      <ion-icon color="warning" slot="start" name="calendar-outline"></ion-icon>
+      <ion-label class="list-label">Pending Approval</ion-label>
+    </ion-item>
+    <ion-item [routerLink]="['/shifts/calendar/approved']">
+      <ion-icon color="success" slot="start" name="calendar-outline"></ion-icon>
+      <ion-label class="list-label">Approved</ion-label>
+    </ion-item>
+    <ion-item-divider class="list-header">Upcoming Approved Shifts</ion-item-divider>
+
+    <ion-item [routerLink]="['/shifts/list/approved']">
+      <ion-icon color="medium" slot="start" name="search-circle-outline"></ion-icon>
+        <ion-label class="list-label">
+          View All
+        </ion-label>
+    </ion-item>
+
+    <ion-item [routerLink]="['/shifts/list/approved/primary']">
+      <ion-icon color="success" slot="start" name="search-circle-outline"></ion-icon>
+        <ion-label class="list-label">
+          View Primary
+        </ion-label>
+    </ion-item>
+
+    <ion-item [routerLink]="['/shifts/list/approved/secondary']">
+      <ion-icon color="secondary" slot="start" name="search-circle-outline"></ion-icon>
+        <ion-label class="list-label">
+          View Secondary
+        </ion-label>
+    </ion-item>
+
+    <ion-item-divider class="list-header">Upcoming Pending Shifts</ion-item-divider>
+    <ion-item [routerLink]="['/shifts/list/pending']">
+      <ion-icon color="medium" slot="start" name="search-circle-outline"></ion-icon>
+        <ion-label class="list-label">
+          View All
+        </ion-label>
+    </ion-item>
+
+    <ion-item [routerLink]="['/shifts/list/pending/primary']">
+      <ion-icon color="success" slot="start" name="search-circle-outline"></ion-icon>
+        <ion-label class="list-label">
+          View Primary
+        </ion-label>
+    </ion-item>
+
+    <ion-item [routerLink]="['/shifts/list/pending/secondary']">
+      <ion-icon color="secondary" slot="start" name="search-circle-outline"></ion-icon>
+        <ion-label class="list-label">
+          View Secondary
+        </ion-label>
+    </ion-item>
+    <ion-item-divider class="list-header"></ion-item-divider>
+    <ion-item [routerLink]="['/shifts/add']">
+      <ion-icon color="primary" slot="start" name="add-circle-outline"></ion-icon>
+      <ion-label class="list-label">
+        Add New Shift
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+</ion-card>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button class="list-label" [routerLink]="['/shifts/add']">
+        <ion-icon slot="start" name="home-outline"></ion-icon>
+        <ion-label>Home</ion-label>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" class="list-label" [routerLink]="['/']">
+        <ion-icon slot="end" name="log-out-outline"></ion-icon>
+        <ion-label>Logout</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,85 @@
+<app-header [pageTitle]="['Approved Secondary']"></app-header>
+<ion-content>
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+  <div *ngIf="shifts else loading">
+    <ion-list>
+      <ion-item-divider>
+        <ion-row style="font-family: Quicksand, sans-serif;" class="ion-text-center">
+          <ion-col style="font-size: 0.8rem;" size="3"><strong>Call Levels</strong></ion-col>
+          <ion-col size="3"><span style="font-size: 0.7rem;">Secondary</span></ion-col>
+          <ion-col size="1.5"><ion-icon color="secondary" style="font-size: 2rem;" name="person-circle-outline"></ion-icon>
+          </ion-col>
+          <ion-col size="3">
+            <span style="font-size: 0.7rem;">Primary</span></ion-col>
+          <ion-col size="1.5">
+            <ion-icon color="success" style="font-size: 2rem;" name="person-circle-outline"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-item-divider>
+      <ion-item style="font-size: 0.7rem; font-family: Quicksand, sans-serif;" class="ion-text-center">
+        <ion-col size="2"><strong>On Duty</strong></ion-col>
+        <ion-col size="2"><strong>Date</strong></ion-col>
+        <ion-col size="2"><strong>Start</strong></ion-col>
+        <ion-col size="2"><strong>Finish</strong></ion-col>
+        <ion-col size="1.5"><strong>Level</strong></ion-col>
+        <ion-col size="2.5"><strong>Approved</strong></ion-col>
+      </ion-item>
+      <div *ngFor="let shift of shifts">
+        <ion-item (click)="presentActionSheet(shift.id)" class="shifts ion-text-center" style="font-family: Quicksand, sans-serif; font-size: 0.7rem;">
+          <ion-avatar slot="start"><img src="{{shift.onDuty.profilePicture}}" style="width: 3rem; height: 3rem;" /></ion-avatar>
+          <ion-col>{{shift.start | date: 'shortDate'}}</ion-col>
+          <ion-col>{{shift.start | date: 'shortTime' }}</ion-col>
+          <ion-col>{{shift.end | date: 'shortTime'}}</ion-col>
+          <ion-col>
+            <span *ngIf="shift.ShiftStatus === 'secondary'"><ion-icon color="secondary" size="large" name="person-circle-outline"></ion-icon></span>
+            <span *ngIf="shift.ShiftStatus === 'primary'"><ion-icon color="success"  size="large" name="person-circle-outline"></ion-icon></span></ion-col>
+          <ion-col>
+        <span *ngIf="shift.isApproved === false">
+          <ion-icon size="large" color="danger" name="close-circle-outline"></ion-icon>
+        </span>
+            <span *ngIf="shift.isApproved === true">
+          <ion-icon size="large" color="success" name="checkmark-circle-outline"></ion-icon>
+        </span>
+          </ion-col>
+        </ion-item>
+      </div>
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button slot="start" [routerLink]="['/shifts/add']" >
+        <ion-icon size="small" name="add-circle-outline"></ion-icon>
+        <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif">Add Shift</ion-label>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      <ion-buttons>
+        <ion-button>
+          <ion-label>
+            Shift Dashboard
+          </ion-label>
+        </ion-button>
+      </ion-buttons>
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/shifts/draft-calendar']">
+        <ion-icon size="small"  name="calendar-outline"></ion-icon>
+        <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif">Calendar</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+
