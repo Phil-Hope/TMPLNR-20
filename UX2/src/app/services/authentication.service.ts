@@ -17,7 +17,6 @@ export interface TokenResponse {
     };
 }
 
-const TOKEN_KEY = 'token';
 const ID = 'id';
 const USER_ROLES = 'roles';
 
@@ -45,12 +44,10 @@ export class AuthenticationService {
       {email, password},
       {headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
         }), withCredentials: true
       }).pipe(
         tap(async (res: TokenResponse) => {
           if (res) {
-            await this.storage.set(TOKEN_KEY, res.token);
             await this.storage.set(ID, JSON.stringify(res.data.id));
             await this.storage.set(USER_ROLES, res.data.roles);
             this.isAuthenticated.next(true);
@@ -78,7 +75,6 @@ export class AuthenticationService {
       .pipe(
         tap(async (res: TokenResponse) => {
       if (res) {
-        await this.storage.set(TOKEN_KEY, res.token);
         await this.storage.set(ID, res.data.id);
         await this.storage.set(USER_ROLES, res.data.roles);
         this.isAuthenticated.next(true);

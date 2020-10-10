@@ -40,6 +40,10 @@ add a .env file with the following configuration:
      JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
      JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
      JWT_PASSPHRASE= "MAKE_A_RANDOM_PASSPHRASE"
+     
+To generate a new app secret and a jwt passphrase you may use:
+
+`php -r 'echo base64_encode(random_bytes(32)), PHP_EOL;'`
 
 open config/packages/nelmio_cors.yaml and ensure the following configuration is set:
 

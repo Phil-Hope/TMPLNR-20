@@ -5,8 +5,6 @@ import {UsersShiftsRoutingModule} from "./users-shifts-routing.module";
 import {UsersShiftsPage} from "./users-shifts";
 import {ComponentsModule} from "../../../../../shared/components.module";
 import {AuthenticationService} from "../../../../../services/authentication.service";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {HttpConfigInterceptor} from "../../../../../services/http.interceptor";
 import {ShiftsService} from "../../../../shifts/services/shifts.service";
 import {UsersService} from "../../services/users.service";
 
@@ -22,7 +20,6 @@ import {UsersService} from "../../services/users.service";
     AuthenticationService,
     ShiftsService,
     UsersService,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
 export class UsersShiftsModule { }

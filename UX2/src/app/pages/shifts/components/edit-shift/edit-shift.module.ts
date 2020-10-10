@@ -2,13 +2,12 @@ import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {IonicModule} from "@ionic/angular";
 import {EditShiftPage} from "./edit-shift";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 import {EditShiftPageRoutingModule} from "./edit-shift-routing.module";
 import {ComponentsModule} from "../../../../shared/components.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {AuthenticationService} from "../../../../services/authentication.service";
 import {ShiftsService} from "../../services/shifts.service";
-import {HttpConfigInterceptor} from "../../../../services/http.interceptor";
 import {ReactiveTypedFormsModule} from "@rxweb/reactive-form-validators";
 import {UsersService} from "../../../admin/users/services/users.service";
 
@@ -29,7 +28,6 @@ import {UsersService} from "../../../admin/users/services/users.service";
     AuthenticationService,
     ShiftsService,
       UsersService,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
 export class EditShiftPageModule {

@@ -9,7 +9,6 @@ import {IonicModule} from '@ionic/angular';
 import {DragAndDropModule} from "angular-draggable-droppable";
 import {ShiftsService} from "../../services/shifts.service";
 import {AuthenticationService} from "../../../../services/authentication.service";
-import {HttpConfigInterceptor} from "../../../../services/http.interceptor";
 import {ApprovedCalendarPageRoutingModule} from './approved-calendar-routing.module';
 import {CalendarToolbarApprovedComponent} from "./calendar-toolbar/calendar-toolbar";
 import {ApprovedCalendarPage} from './approved-calendar.page';
@@ -32,7 +31,6 @@ import {ApprovedCalendarPage} from './approved-calendar.page';
   providers: [
     ShiftsService,
     AuthenticationService,
-    {provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true}
   ]
 })
 export class ApprovedCalendarPageModule {

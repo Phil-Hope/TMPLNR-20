@@ -6,7 +6,6 @@ import { DeleteUserPageRoutingModule } from "./delete-user-routing.module";
 import {ComponentsModule} from "../../../../../shared/components.module";
 import {AuthenticationService} from "../../../../../services/authentication.service";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {HttpConfigInterceptor} from "../../../../../services/http.interceptor";
 import {UsersService} from "../../services/users.service";
 import {ReactiveFormsModule} from "@angular/forms";
 
@@ -25,7 +24,6 @@ import {ReactiveFormsModule} from "@angular/forms";
   providers: [
     AuthenticationService,
     UsersService,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
 export class DeleteUserPageModule { }

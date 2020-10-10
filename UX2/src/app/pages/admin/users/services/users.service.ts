@@ -26,7 +26,7 @@ export class UsersService {
         params,
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log('Users Retrieved Successfully!')),
       catchError(err => this.handleHttpError(err))
@@ -38,7 +38,7 @@ export class UsersService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log(`User with UUID: ${id} Fetched Successfully!`)),
       catchError(err => this.handleHttpError(err))
@@ -51,7 +51,7 @@ export class UsersService {
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        })
+        }), withCredentials: true
       }).pipe(
         tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
         catchError(err => this.handleHttpError(err))
@@ -65,7 +65,7 @@ export class UsersService {
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
       catchError(err => this.handleHttpError(err))
@@ -79,7 +79,7 @@ export class UsersService {
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
       catchError(err => this.handleHttpError(err))
@@ -93,7 +93,7 @@ export class UsersService {
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
       catchError(err => this.handleHttpError(err))
@@ -107,7 +107,7 @@ export class UsersService {
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
       catchError(err => this.handleHttpError(err))
@@ -122,7 +122,7 @@ export class UsersService {
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
       catchError(err => this.handleHttpError(err))
@@ -137,7 +137,7 @@ export class UsersService {
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
       catchError(err => this.handleHttpError(err))
@@ -152,7 +152,7 @@ export class UsersService {
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
       catchError(err => this.handleHttpError(err))
@@ -167,7 +167,7 @@ export class UsersService {
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
       catchError(err => this.handleHttpError(err))
@@ -190,7 +190,7 @@ export class UsersService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        })
+        }), withCredentials: true
       }).pipe(
         tap(_ => alert(`User ${user.firstName} ${user.lastName} was Successfully Updated!`)),
         tap(data => console.log('edit user: ' + JSON.stringify(data))),
@@ -201,7 +201,7 @@ export class UsersService {
     return this.http.delete(`${environment.apiUrl}/users/${id}`,
       {headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        })
+        }), withCredentials: true
       }).pipe(
         tap(_ => alert('User Successfully Deleted!')),
         tap(data => console.log('delete user: ' + JSON.stringify(data))),
@@ -224,7 +224,7 @@ export class UsersService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => alert(`User ${user.firstName} ${user.lastName} Created Successfully!`)),
       tap(data => console.log('register: ' + JSON.stringify(data))),
@@ -245,7 +245,7 @@ export class UsersService {
       },
       {headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        })
+        }), withCredentials: true
       }).pipe(
       tap(_ => alert(`User ${user.firstName} ${user.lastName} Created Successfully!`)),
       tap(data => console.log('add user: ' + JSON.stringify(data))),

@@ -7,7 +7,6 @@ import {AddUserPageRoutingModule} from "./add-user-routing.module";
 import {ComponentsModule} from "../../../../../shared/components.module";
 import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {AuthenticationService} from "../../../../../services/authentication.service";
-import {HttpConfigInterceptor} from "../../../../../services/http.interceptor";
 import {UsersService} from "../../services/users.service";
 
 @NgModule({
@@ -24,7 +23,6 @@ import {UsersService} from "../../services/users.service";
   providers: [
     AuthenticationService,
     UsersService,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
 export class AddUserModule { }

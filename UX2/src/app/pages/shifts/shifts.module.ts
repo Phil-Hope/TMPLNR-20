@@ -5,8 +5,6 @@ import { ShiftsRoutingModule } from "./shifts-routing.module";
 import {ComponentsModule} from "../../shared/components.module";
 import {ShiftsService} from "./services/shifts.service";
 import {IonicStorageModule} from "@ionic/storage";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {HttpConfigInterceptor} from "../../services/http.interceptor";
 import {AuthenticationService} from "../../services/authentication.service";
 import {UsersService} from "../admin/users/services/users.service";
 
@@ -19,7 +17,6 @@ import {UsersService} from "../admin/users/services/users.service";
     IonicStorageModule
   ],
   providers: [ShiftsService, AuthenticationService, UsersService,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ],
 })
 export class ShiftsModule { }

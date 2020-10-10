@@ -6,8 +6,6 @@ import {UsersService} from "../../users/services/users.service";
 import {PendingApprovalShiftsPage} from "./pending-approval-shifts";
 import {PendingApprovalShiftsRoutingModule} from "./pending-approval-shifts-routing.module";
 import {AuthenticationService} from "../../../../services/authentication.service";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {HttpConfigInterceptor} from "../../../../services/http.interceptor";
 import {ComponentsModule} from "../../../../shared/components.module";
 import {ReactiveFormsModule} from "@angular/forms";
 
@@ -26,7 +24,6 @@ import {ReactiveFormsModule} from "@angular/forms";
     ShiftsService,
   UsersService,
   AuthenticationService,
-    {provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true}
   ]
 })
 export class PendingApprovalShiftsModule { }
