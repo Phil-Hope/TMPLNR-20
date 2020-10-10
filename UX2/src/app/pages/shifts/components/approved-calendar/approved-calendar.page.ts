@@ -141,7 +141,7 @@ export class ApprovedCalendarPage implements OnInit, OnDestroy {
     this.events$ = this.http.get(`${environment.apiUrl}/shifts.json`, {
       params, headers: new HttpHeaders({
         'Content-Type': 'application/json'
-      })
+      }), withCredentials: true
     }).pipe(
       map((results: ScheduledShift[]) => {
         return results.map((shift: ScheduledShift) => {

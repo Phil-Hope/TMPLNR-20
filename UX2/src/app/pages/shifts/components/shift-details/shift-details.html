@@ -178,10 +178,7 @@
     </ion-buttons>
 
     <ion-title>
-      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"  [routerLink]="['/shifts']">
-        <ion-label>Shift List</ion-label>
-        <ion-icon slot="start" name="reader-outline"></ion-icon>
-      </ion-button>
+      <h4>{{date | date: 'shortTime'}}</h4>
     </ion-title>
 
     <ion-buttons slot="end">

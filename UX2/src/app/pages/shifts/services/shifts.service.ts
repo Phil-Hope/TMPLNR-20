@@ -31,6 +31,20 @@ export class ShiftsService {
     );
   }
 
+  loadLiveShifts(): Observable<ScheduledShift[] | ShiftTrackerError> {
+    const params = new HttpParams()
+      .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
+      .set('end[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'));
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }), withCredentials: true
+      }).pipe(
+        tap(_ => console.log('Fetched live shifts')),
+      catchError(err => this.handleHttpError(err))
+    );
+  }
+
    loadAllUpcomingShifts(): Observable<ScheduledShift[] | ShiftTrackerError> {
     const params = new HttpParams()
       .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss')

@@ -58,17 +58,20 @@
 <ion-footer>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button slot="start" [routerLink]="['/shifts/add']" >
-        <ion-icon size="small" name="add-circle-outline"></ion-icon>
-        <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif">Add Shift</ion-label>
+      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif" slot="start" [routerLink]="['/shifts/calendar/approved']" >
+        <ion-icon name="calendar"></ion-icon>
+        <ion-label >Approved<br />Calendar</ion-label>
       </ion-button>
     </ion-buttons>
 
+    <ion-title>
+      <h4>{{date | date: 'shortTime'}}</h4>
+    </ion-title>
 
     <ion-buttons slot="end">
-      <ion-button [routerLink]="['/shifts/draft-calendar']">
+      <ion-button  style="font-size: 0.8rem; font-family: Quicksand, sans-serif" [routerLink]="['/shifts/calendar/draft']">
         <ion-icon size="small"  name="calendar-outline"></ion-icon>
-        <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif">Calendar</ion-label>
+        <ion-label >Draft<br />Calendar</ion-label>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

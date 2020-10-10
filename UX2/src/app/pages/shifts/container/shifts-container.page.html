@@ -1,6 +1,30 @@
 <app-header [pageTitle]="['Shift Dashboard']"></app-header>
 
 <ion-content>
+
+  <ion-card *ngIf="shifts">
+    <ion-list>
+      <ion-item>
+        <ion-label>On Duty</ion-label>
+        <ion-label>Start</ion-label>
+        <ion-label>Finish</ion-label>
+        <ion-label>Call Level</ion-label>
+        <ion-label>Approved</ion-label>
+      </ion-item>
+      <ion-item *ngFor="let shift of shifts">
+        <ion-avatar>
+          <ion-img [hidden]="isLoading" (ionImgDidLoad)="isLoading = false" src="{{shift.onDuty.profilePicture}}"></ion-img>
+        </ion-avatar>
+        <ion-label [hidden]="!isLoading"><ion-spinner></ion-spinner></ion-label>
+        <ion-label>{{shift.start | date: 'shortTime'}}</ion-label>
+        <ion-label>{{shift.end | date: 'shortTime'}}</ion-label>
+        <ion-label *ngIf="shift.ShiftStatus === 'primary'"></ion-label>
+      </ion-item>
+
+    </ion-list>
+  </ion-card>
+
+
 <ion-card>
   <ion-list>
 

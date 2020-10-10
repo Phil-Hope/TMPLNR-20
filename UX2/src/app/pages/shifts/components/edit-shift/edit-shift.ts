@@ -19,6 +19,7 @@ export class EditShiftPage implements OnInit {
   users: User[] | UserTrackerError;
   shifts: ScheduledShift[];
   shift: ScheduledShift | ShiftTrackerError;
+  date = new Date();
 
   form: FormGroup;
   submitted = false;
@@ -46,6 +47,10 @@ export class EditShiftPage implements OnInit {
       ShiftStatus: [''],
       isApproved: [false]
     });
+
+    setInterval(() => {
+      this.date = new Date();
+    }, 1000);
   }
 
   get f() { return this.form.controls; }

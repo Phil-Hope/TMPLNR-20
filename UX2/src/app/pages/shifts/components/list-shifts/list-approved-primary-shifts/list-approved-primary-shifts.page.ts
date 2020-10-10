@@ -4,7 +4,7 @@ import {ScheduledShift} from "../../../../../interfaces/shifts.interface";
 import {ActionSheetController, AlertController} from "@ionic/angular";
 import {Observable} from "rxjs";
 import {ShiftTrackerError} from "../../../services/shifts-errors.provider";
-import {map, tap} from "rxjs/operators";
+import {tap} from "rxjs/operators";
 import {Router} from "@angular/router";
 
 @Component({
@@ -15,6 +15,7 @@ import {Router} from "@angular/router";
 export class ListApprovedPrimaryShiftsPage implements OnInit {
 
   shifts: ScheduledShift[];
+  date = new Date();
 
   constructor(
     private shiftsService: ShiftsService,
@@ -53,8 +54,11 @@ export class ListApprovedPrimaryShiftsPage implements OnInit {
 
 
   ngOnInit() {
-
       this.loadShifts().subscribe((data: ScheduledShift[]) => this.shifts = data);
+
+      setInterval(() => {
+      this.date = new Date();
+    }, 1000);
   }
 
 loadShifts(): Observable<ScheduledShift[] | ShiftTrackerError> {

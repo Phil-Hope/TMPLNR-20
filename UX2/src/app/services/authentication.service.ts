@@ -44,7 +44,7 @@ export class AuthenticationService {
       {email, password},
       {headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        }), withCredentials: true
+        })
       }).pipe(
         tap(async (res: TokenResponse) => {
           if (res) {
@@ -70,7 +70,7 @@ export class AuthenticationService {
       {user},
       {headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        }), withCredentials: true
+        })
       })
       .pipe(
         tap(async (res: TokenResponse) => {

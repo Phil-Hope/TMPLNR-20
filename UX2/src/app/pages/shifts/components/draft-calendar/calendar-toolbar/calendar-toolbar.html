@@ -37,7 +37,7 @@
           style="font-size: 0.7rem; font-family: Quicksand, sans-serif"
           (click)="viewChange.emit(CalendarView.Month)"
           [class.active]="view === CalendarView.Month"
-        ><ion-label>Month View</ion-label>
+        ><ion-label>Month<br />View</ion-label>
         </ion-button>
   </ion-buttons>
   <ion-buttons slot="primary">
@@ -46,7 +46,7 @@
           style="font-size: 0.7rem; font-family: Quicksand, sans-serif"
           (click)="viewChange.emit(CalendarView.Week)"
           [class.active]="view === CalendarView.Week"
-        ><ion-label>Week View</ion-label>
+        ><ion-label>Week<br />View</ion-label>
         </ion-button>
   </ion-buttons>
   <ion-buttons slot="primary">
@@ -55,7 +55,7 @@
           style="font-size: 0.7rem; font-family: Quicksand, sans-serif"
           (click)="viewChange.emit(CalendarView.Day)"
           [class.active]="view === CalendarView.Day"
-        ><ion-label>Day View</ion-label>
+        ><ion-label>Day<br />View</ion-label>
         </ion-button>
   </ion-buttons>
 </ion-toolbar>

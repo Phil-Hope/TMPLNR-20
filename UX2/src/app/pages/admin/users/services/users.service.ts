@@ -184,7 +184,6 @@ export class UsersService {
         contactNumber: user.contactNumber,
         profilePicture: user.profilePicture,
         roles: user.roles,
-        password: user.password,
         email: user.email,
         wagePerHour: user.wagePerHour},
       {
