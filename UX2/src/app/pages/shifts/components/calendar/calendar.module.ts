@@ -9,9 +9,9 @@ import {IonicModule} from '@ionic/angular';
 import {DragAndDropModule} from "angular-draggable-droppable";
 import {ShiftsService} from "../../services/shifts.service";
 import {AuthenticationService} from "../../../../services/authentication.service";
-import {ApprovedCalendarPageRoutingModule} from './approved-calendar-routing.module';
+import {ApprovedCalendarPageRoutingModule} from './calendar-routing.module';
 import {CalendarToolbarApprovedComponent} from "./calendar-toolbar/calendar-toolbar";
-import {ApprovedCalendarPage} from './approved-calendar.page';
+import {CalendarPage} from './calendar.page';
 import {HttpConfigInterceptor} from "../../../../services/http.interceptor";
 
 @NgModule({
@@ -26,7 +26,7 @@ import {HttpConfigInterceptor} from "../../../../services/http.interceptor";
     ApprovedCalendarPageRoutingModule
   ],
   declarations: [
-    ApprovedCalendarPage,
+    CalendarPage,
     CalendarToolbarApprovedComponent
   ],
   providers: [

@@ -120,10 +120,16 @@ class User implements UserInterface
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ShiftComments::class, mappedBy="recipient")
+     */
+    private $receivedComments;
+
     public function __construct()
     {
       $this->shifts = new ArrayCollection();
       $this->comments = new ArrayCollection();
+      $this->receivedComments = new ArrayCollection();
     }
 
     /**
@@ -367,6 +373,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($comment->getAuthoredBy() === $this) {
                 $comment->setAuthoredBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ShiftComments[]
+     */
+    public function getReceivedComments(): Collection
+    {
+        return $this->receivedComments;
+    }
+
+    public function addReceivedComment(ShiftComments $receivedComment): self
+    {
+        if (!$this->receivedComments->contains($receivedComment)) {
+            $this->receivedComments[] = $receivedComment;
+            $receivedComment->setRecipient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReceivedComment(ShiftComments $receivedComment): self
+    {
+        if ($this->receivedComments->contains($receivedComment)) {
+            $this->receivedComments->removeElement($receivedComment);
+            // set the owning side to null (unless already changed)
+            if ($receivedComment->getRecipient() === $this) {
+                $receivedComment->setRecipient(null);
             }
         }
 

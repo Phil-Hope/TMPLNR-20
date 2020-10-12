@@ -19,7 +19,21 @@
         <ion-item><ion-label><ion-icon name="at-outline"></ion-icon><span style="font-size: 0.8rem">email:</span>  {{user.email}}</ion-label></ion-item>
         <ion-item><ion-label><span style="font-size: 0.8rem">wage:</span> ${{user.wagePerHour}}</ion-label></ion-item>
         <ion-item><ion-label><ion-icon name="call-outline"></ion-icon> {{user.contactNumber}}</ion-label></ion-item>
-        <ion-row><ion-col size="12" class="ion-text-center">Your Shifts</ion-col> </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-item size="block" [routerLink]="['/users/profile/', user.id, 'shifts']">
+              <ion-label>View Your Shifts</ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item size="block" [routerLink]="['/users/', user.id, 'comments']">
+              <ion-label>
+                View Your Comments
+              </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row><ion-col size="12" class="ion-text-center">Shifts Snapshot</ion-col> </ion-row>
         <div *ngIf="shifts else loading">
           <ion-list>
             <ion-item color="light" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
@@ -46,21 +60,9 @@
 <div *ngIf="user else loading">
 <ion-footer [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-button routerLink="/users/profile/{{user.id}}/shifts" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
-        <ion-icon slot="start" name="calendar-outline"></ion-icon>
-        <ion-label size="small">{{user.firstName}}'s Shifts</ion-label>
-      </ion-button>
-    </ion-buttons>
-
-    <ion-buttons slot="end">
-      <ion-button routerLink="/users/profile/{{user.id}}}/user" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
-        <ion-icon slot="end" name="create-outline"></ion-icon>
-        <ion-label>
-          Edit Details
-        </ion-label>
-      </ion-button>
-    </ion-buttons>
+<ion-title style="align-self: center">
+  {{date | date: 'shortTime'}}
+</ion-title>
   </ion-toolbar>
 </ion-footer>
 </div>

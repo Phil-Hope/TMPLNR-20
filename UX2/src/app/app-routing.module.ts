@@ -93,7 +93,7 @@ const routes: Routes = [
   },
   {
     path: 'shifts/calendar/approved',
-    loadChildren: () => import('./pages/shifts/components/approved-calendar/approved-calendar.module')
+    loadChildren: () => import('./pages/shifts/components/calendar/calendar.module')
       .then(m => m.ApprovedCalendarPageModule)
   },
   {

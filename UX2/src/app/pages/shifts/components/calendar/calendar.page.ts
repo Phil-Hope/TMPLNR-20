@@ -41,8 +41,8 @@ import {DOCUMENT} from "@angular/common";
 @Injectable()
 @Component({
   selector: 'app-approved-calendar',
-  templateUrl: './approved-calendar.page.html',
-  styleUrls: ['./approved-calendar.page.scss'],
+  templateUrl: './calendar.page.html',
+  styleUrls: ['./calendar.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
@@ -56,9 +56,7 @@ import {DOCUMENT} from "@angular/common";
   ],
   encapsulation: ViewEncapsulation.None,
 })
-export class ApprovedCalendarPage implements OnInit, OnDestroy {
-  private readonly darkThemeClass = 'dark-theme';
-
+export class CalendarPage implements OnInit, OnDestroy {
   view: CalendarView = CalendarView.Month;
   viewDate: Date = new Date();
   clickedDate: Date;
@@ -67,16 +65,18 @@ export class ApprovedCalendarPage implements OnInit, OnDestroy {
   daysInWeek = 7;
   id = '';
   events$: Observable<CalendarEvent<{ shift: ScheduledShift }>[]>;
-
   actions: CalendarEventAction[] = [];
+  private readonly darkThemeClass = 'dark-theme';
   private destroy$ = new Subject();
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private breakpointObserver: BreakpointObserver,
     private cd: ChangeDetectorRef,
     @Inject(DOCUMENT) private document
-  ) { }
+  ) {
+  }
 
   changeDay(date: Date) {
     this.viewDate = date;
@@ -136,8 +136,7 @@ export class ApprovedCalendarPage implements OnInit, OnDestroy {
       .set('start[after]', format(getStart(this.viewDate), 'yyyy-MM-dd HH:mm:ss')
       )
       .set('end[before]', format(getEnd(this.viewDate), 'yyyy-MM-dd HH:mm:ss')
-      )
-      .set('isApproved', 'true');
+      );
     this.events$ = this.http.get(`${environment.apiUrl}/shifts.json`, {
       params, headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -185,6 +184,7 @@ export class ApprovedCalendarPage implements OnInit, OnDestroy {
       }
     }
   }
+
   eventClicked(event: CalendarEvent<{ shift: ScheduledShift }>): void {
     const id = event.meta.shift.id;
     this.router.navigateByUrl(`/shifts/${id}/details`);

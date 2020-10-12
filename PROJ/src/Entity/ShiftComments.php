@@ -78,6 +78,12 @@ class ShiftComments
     private $shift;
 
     /**
+     * @Groups({"comments:read", "comments:write"})
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="receivedComments")
+     */
+    private $recipient;
+
+    /**
      *
      * @ApiProperty(identifier=true)
      * @return LazyUuidFromString|UuidInterface
@@ -131,6 +137,18 @@ class ShiftComments
     public function setShift($shift)
     {
         $this->shift = $shift;
+
+        return $this;
+    }
+
+    public function getRecipient(): ?User
+    {
+        return $this->recipient;
+    }
+
+    public function setRecipient(?User $recipient): self
+    {
+        $this->recipient = $recipient;
 
         return $this;
     }

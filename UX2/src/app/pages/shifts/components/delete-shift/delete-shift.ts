@@ -6,6 +6,7 @@ import {ShiftsService} from "../../services/shifts.service";
 import {ShiftTrackerError} from "../../services/shifts-errors.provider";
 import {tap, map} from 'rxjs/operators';
 import {Observable} from "rxjs";
+import {ToastController} from "@ionic/angular";
 @Component({
     selector: 'app-delete-shift',
     templateUrl: './delete-shift.html',
@@ -15,40 +16,41 @@ export class DeleteShiftPage implements OnInit {
 
     shift: ScheduledShift | ShiftTrackerError;
     form: FormGroup;
-    id: string;
     date = new Date();
+    submitted = false;
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private shiftService: ShiftsService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
     ) {
+      this.form = this.fb.group({
+        id: ['']
+      });
     }
 
     ngOnInit() {
+      const id = this.route.snapshot.paramMap.get('id');
+      this.shiftService.getShiftById(id).subscribe((data: ScheduledShift) => this.shift = data);
 
-        setInterval(() => {
+      setInterval(() => {
         this.date = new Date();
       }, 1000);
     }
 
-    getShiftToDisplay(): Observable<any> {
-    this.route.paramMap.subscribe(
-      params => {
-        this.id = params.get('id');
-      });
-    return this.shiftService.getShiftById(this.id);
-    }
+  get f() { return this.form.controls; }
 
-    onSubmitDeleteShift() {
-      if (this.form.valid){
-        const f = { ...this.shift, ...this.form.value };
-        this.shiftService.deleteShift(f)
-          .pipe(
-           tap(_ => this.router.navigateByUrl('/shifts'))
-      ).subscribe(data => console.log(data));
-      }
-    }
+      onSubmitDeleteShift() {
+        this.submitted = true;
+        if (this.form.valid) {
+           const f = {...this.shift, ...this.form.value};
+           this.shiftService.deleteShift(f)
+             .pipe(
+               map(_ => { this.router.navigateByUrl('/shifts'); }),
+               tap(_ => console.log('shift deleted'))
+             ).subscribe(data => console.log(JSON.stringify(data)));
+         }
+       }
 
 }

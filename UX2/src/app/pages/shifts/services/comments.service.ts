@@ -86,7 +86,8 @@ export class CommentsService {
         comment: comment.comment,
         authoredBy: `/users/${comment.authoredBy}`,
         dateOfComment: comment.dateOfComment,
-        shift: `/shifts/${comment.shift}`
+        shift: `/shifts/${comment.shift}`,
+        recipient: comment.recipient
       }, {headers: new HttpHeaders({
           'Content-Type': 'application/json'
         }), withCredentials: true
@@ -102,7 +103,8 @@ export class CommentsService {
         comment: comment.comment,
         authoredBy: comment.authoredBy,
         dateOfComment: comment.dateOfComment,
-        shift: comment.shift
+        shift: comment.shift,
+        recipient: comment.recipient
       }, {headers: new HttpHeaders({
           'Content-Type': 'application/json'
         }), withCredentials: true

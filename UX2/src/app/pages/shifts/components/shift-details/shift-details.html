@@ -137,26 +137,32 @@
         {{shift.end | date: 'shortTime'}}
       </ion-col>
     </ion-item>
-      <ion-item>
-        <ion-col size="12">
-          <ng-template #locked>
-            <ion-label
-              color="warning"
-              style="font-family: Quicksand, sans-serif;
+      <ng-template #locked>
+        <ion-item>
+        <ion-label
+          color="warning"
+          style="font-family: Quicksand, sans-serif;
               font-size: 0.8rem;
               text-align: center;">
-              NOTE:<br />Editing is disabled <br /> for approved shifts. <br />
-              <span style="color: #0d0d0d;
+          NOTE:<br />Editing is disabled <br /> for approved shifts. <br />
+          <span style="color: #0d0d0d;
               font-size: 0.7rem;">
                 Please contact your manager<br /> if editing is required.</span>
+        </ion-label>
+        </ion-item>
+      </ng-template>
+      <ion-item *ngIf="shift.isApproved == false else locked">
+
+        <ion-col size="6">
+          <ion-button [routerLink]="['/shifts/', shift.id, 'edit']" color="warning" size="block">
+            <ion-label>EDIT</ion-label>
+          </ion-button>
+        </ion-col>
+          <ion-col size="6">
+          <ion-button size="block" color="danger" [routerLink]="['/shifts/', shift.id, 'delete']">
+            <ion-label>
+              DELETE
             </ion-label>
-          </ng-template>
-          <ion-button *ngIf="shift.isApproved == false else locked"
-                      routerLink="/shifts/{{shift.id}}/edit"
-                      color="warning"
-                      size="full"
-          >
-            EDIT SHIFT
           </ion-button>
         </ion-col>
       </ion-item>

@@ -4,18 +4,18 @@
 ></app-header>
 <ion-content>
   <app-header-banner></app-header-banner>
-  <ion-card>
-    <ion-card-title class="welcome-title">Hi there!</ion-card-title>
-    <ion-card-content>
+
       <ion-list lines="none">
+        <ion-item>
+          <ion-img src="assets/icons/icon-512x512.png"></ion-img>
+        </ion-item>
       <ion-item>
         <ion-col>
           <ion-button  size="full" color="secondary" shape="round" routerLink="/login">LOGIN</ion-button>
         </ion-col>
 </ion-item>
       </ion-list>
-    </ion-card-content>
-  </ion-card>
+
 </ion-content>
 <ion-footer [translucent]="true">
   <ion-toolbar color="primary">
@@ -25,10 +25,6 @@
         <ion-label>Contact</ion-label>
       </ion-button>
     </ion-buttons>
-
-    <ion-title>
-      <h4 style="font-family: Quicksand, sans-serif; font-size: 1rem;">{{date | date: 'shortTime'}}</h4>
-    </ion-title>
     <ion-buttons slot="end">
       <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"
       >

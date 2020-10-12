@@ -1,4 +1,4 @@
-<app-header [pageTitle]="['Upcoming Shifts']"></app-header>
+<app-header [pageTitle]="['Shifts List']"></app-header>
 <ion-content>
   <ng-template #loading>
     <ion-card style="padding: 2rem; margin-top: 3rem;">
@@ -13,7 +13,7 @@
   <div *ngIf="shifts else loading">
 <ion-list>
   <ion-item-divider>
-    <ion-item><ion-button (click)="toggleViewActionSheet()">FILTER SHIFTS</ion-button></ion-item>
+
   <ion-row style="font-family: Quicksand, sans-serif;" class="ion-text-center">
     <ion-col style="font-size: 0.8rem;" size="3"><strong>Call Levels</strong></ion-col>
     <ion-col size="3"><span style="font-size: 0.7rem;">Secondary</span></ion-col>
@@ -26,6 +26,11 @@
     </ion-col>
   </ion-row>
   </ion-item-divider>
+  <ion-item detail="false">
+    <ion-button fill="clear" (click)="toggleViewActionSheet()">
+      <ion-icon slot="start" name="funnel-outline"></ion-icon>
+      <ion-label>FILTER</ion-label></ion-button>
+  </ion-item>
     <ion-item style="font-size: 0.7rem; font-family: Quicksand, sans-serif;" class="ion-text-center">
       <ion-col size="2"><strong>On Duty</strong></ion-col>
       <ion-col size="2"><strong>Date</strong></ion-col>
@@ -43,7 +48,7 @@
         <ion-spinner></ion-spinner>
         </ng-template>
 
-      <ion-col>{{shift.start | date: 'shortDate'}}</ion-col>
+      <ion-col>{{shift.start | date: 'dd/MMM'}}</ion-col>
       <ion-col>{{shift.start | date: 'shortTime' }}</ion-col>
       <ion-col>{{shift.end | date: 'shortTime'}}</ion-col>
       <ion-col>
@@ -65,21 +70,7 @@
 <ion-footer [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button [routerLink]="['/shifts/calendar/approved']">
-        <ion-icon slot="start" size="small"  name="calendar"></ion-icon>
-        <ion-label  style="font-size: 0.8rem; font-family: Quicksand, sans-serif">Approved<br />Calendar</ion-label>
-      </ion-button>
-    </ion-buttons>
-
-    <ion-title>
-      <h4>{{date | date: 'shortTime'}}</h4>
-    </ion-title>
-
-    <ion-buttons slot="end">
-      <ion-button [routerLink]="['/shifts/calendar/draft']">
-        <ion-icon slot="end" size="small"  name="calendar-outline"></ion-icon>
-        <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif">Draft<br />Calendar</ion-label>
-      </ion-button>
+<ion-back-button defaultHref="/shifts" text="back"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

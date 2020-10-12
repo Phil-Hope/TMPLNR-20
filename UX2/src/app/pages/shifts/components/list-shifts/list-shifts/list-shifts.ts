@@ -7,7 +7,6 @@ import {ModalController} from "@ionic/angular";
 import {ShiftsService} from "../../../services/shifts.service";
 import {ShiftTrackerError} from "../../../services/shifts-errors.provider";
 import {tap} from "rxjs/operators";
-import * as moment from "moment";
 
 @Component({
     selector: 'app-list-shifts',
@@ -39,7 +38,7 @@ export class ListShiftsPage implements OnInit {
     }
 
     ngOnInit() {
-        this.loadUpcoming().subscribe(data => this.shifts = data);
+        this.loadAllShifts().subscribe(data => this.shifts = data);
 
         setInterval(() => {
             this.date = new Date();
@@ -49,6 +48,7 @@ export class ListShiftsPage implements OnInit {
     async presentActionSheet(id: string) {
         const actionSheet = await this.actionSheetController.create({
             header: 'Actions',
+            animated: true,
             buttons: [{
                 text: 'view',
                 icon: 'search-circle-outline',
@@ -90,12 +90,21 @@ export class ListShiftsPage implements OnInit {
     async toggleViewActionSheet() {
         const actionSheet = await this.actionSheetController.create({
             header: 'Actions',
+          cssClass: 'my-custom-class',
+          animated: true,
             buttons: [{
                 text: 'All Shifts',
                 handler: () => {
                     this.onLoadAllShifts();
                 }
-            }, {
+            },
+              {
+                text: 'Upcoming Shifts',
+                handler: () => {
+                  this.onLoadUpcoming();
+                }
+              },
+              {
                 text: 'Past Shifts',
                 handler: () => {
                     this.onLoadPastShifts();
@@ -144,9 +153,9 @@ export class ListShiftsPage implements OnInit {
                     }
                 },
                 {
-                    text: 'cancel',
+                    text: 'CLOSE',
                     icon: 'close',
-                    role: "cancel"
+                    role: "cancel",
                 }
             ]
         });
@@ -180,8 +189,8 @@ export class ListShiftsPage implements OnInit {
                 tap(async (res) => {
                     if (!(res instanceof ShiftTrackerError) && res.length === 0) {
                         const alert = await this.alertCtrl.create({
-                            header: 'None Found',
-                            message: 'No upcoming approved shifts were found in the database!',
+                            header: 'We Looked, But there are NONE!',
+                            message: 'No upcoming approved shifts were found in the database.',
                             buttons: ['OK']
                         });
                         await alert.present();
@@ -200,8 +209,8 @@ export class ListShiftsPage implements OnInit {
                 tap(async (res) => {
                     if (!(res instanceof ShiftTrackerError) && res.length === 0) {
                         const alert = await this.alertCtrl.create({
-                            header: 'None Found',
-                            message: 'No past shifts were found in the database!',
+                            header: 'We Looked, But there are NONE!',
+                            message: 'No past shifts were found in the database.',
                             buttons: ['OK']
                         });
                         await alert.present();
@@ -220,8 +229,8 @@ export class ListShiftsPage implements OnInit {
                 tap(async (res) => {
                     if (!(res instanceof ShiftTrackerError) && res.length === 0) {
                         const alert = await this.alertCtrl.create({
-                            header: 'None Found',
-                            message: 'No upcoming "approved" shifts were found in the database!',
+                            header: 'We Looked, But there are NONE!',
+                            message: 'No upcoming "approved" shifts were found in the database.',
                             buttons: ['OK']
                         });
                         await alert.present();
@@ -240,8 +249,8 @@ export class ListShiftsPage implements OnInit {
                 tap(async (res) => {
                     if (!(res instanceof ShiftTrackerError) && res.length === 0) {
                         const alert = await this.alertCtrl.create({
-                            header: 'None Found',
-                            message: 'No upcoming "pending approval" shifts were found in the database!',
+                            header: 'We Looked, But there are NONE!',
+                            message: 'No upcoming "pending approval" shifts were found in the database.',
                             buttons: ['OK']
                         });
                         await alert.present();
@@ -260,8 +269,8 @@ export class ListShiftsPage implements OnInit {
                 tap(async (res) => {
                     if (!(res instanceof ShiftTrackerError) && res.length === 0) {
                         const alert = await this.alertCtrl.create({
-                            header: 'None Found',
-                            message: 'No "live" shifts were found in the database!',
+                            header: 'We Looked, But there are NONE!',
+                            message: 'No "live" shifts were found in the database.',
                             buttons: ['OK']
                         });
                         await alert.present();
@@ -280,8 +289,8 @@ export class ListShiftsPage implements OnInit {
                 tap(async (res) => {
                     if (!(res instanceof ShiftTrackerError) && res.length === 0) {
                         const alert = await this.alertCtrl.create({
-                            header: 'None Found',
-                            message: 'No upcoming "pending primary" shifts were found in the database!',
+                            header: 'We Looked, But there are NONE!',
+                            message: 'No upcoming "pending primary" shifts were found in the database.',
                             buttons: ['OK']
                         });
                         await alert.present();
@@ -300,8 +309,8 @@ export class ListShiftsPage implements OnInit {
                 tap(async (res) => {
                     if (!(res instanceof ShiftTrackerError) && res.length === 0) {
                         const alert = await this.alertCtrl.create({
-                            header: 'None Found',
-                            message: 'No upcoming "pending secondary" shifts were found in the database!',
+                            header: 'We Looked, But there are NONE!',
+                            message: 'No upcoming "pending secondary" shifts were found in the database.',
                             buttons: ['OK']
                         });
                         await alert.present();
@@ -321,8 +330,8 @@ export class ListShiftsPage implements OnInit {
                 tap(async (res) => {
                     if (!(res instanceof ShiftTrackerError) && res.length === 0) {
                         const alert = await this.alertCtrl.create({
-                            header: 'None Found',
-                            message: 'No upcoming "approved primary" shifts were found in the database!',
+                            header: 'We Looked, But there are NONE!',
+                            message: 'No upcoming "approved primary" shifts were found in the database.',
                             buttons: ['OK']
                         });
                         await alert.present();
@@ -341,8 +350,8 @@ export class ListShiftsPage implements OnInit {
                 tap(async (res) => {
                     if (!(res instanceof ShiftTrackerError) && res.length === 0) {
                         const alert = await this.alertCtrl.create({
-                            header: 'None Found',
-                            message: 'No upcoming approved shifts were found in the database!',
+                            header: 'We Looked, But there are NONE!',
+                            message: 'No upcoming approved shifts were found in the database.',
                             buttons: ['OK']
                         });
                         await alert.present();

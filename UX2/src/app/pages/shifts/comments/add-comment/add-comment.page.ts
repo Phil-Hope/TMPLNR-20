@@ -20,6 +20,7 @@ export class AddCommentPage implements OnInit {
 
   form: FormGroup;
   user: User;
+  receivers: User[];
   shift: ScheduledShift;
   comment: ShiftComments;
   comments: ShiftComments[] | CommentsTrackerError;
@@ -65,6 +66,7 @@ export class AddCommentPage implements OnInit {
  async ngOnInit() {
     const value = await this.getStorage();
     await this.getUserFromStorage(JSON.parse(value));
+    this.userService.loadAllUsers().subscribe((data: User[]) => this.receivers = data);
 
     await this.getOtherComments();
     await this.getShiftForComment();
@@ -73,7 +75,8 @@ export class AddCommentPage implements OnInit {
       comment: ['', Validators.required],
       shift: ['', Validators.required],
       authoredBy: ['', Validators.required],
-      dateOfComment: ['', Validators.required]
+      dateOfComment: ['', Validators.required],
+      recipient: ['']
     });
   }
 

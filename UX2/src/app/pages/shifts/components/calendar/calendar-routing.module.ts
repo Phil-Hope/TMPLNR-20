@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ApprovedCalendarPage } from './approved-calendar.page';
+import { CalendarPage } from './calendar.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ApprovedCalendarPage
+    component: CalendarPage
   }
 ];
 
