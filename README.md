@@ -61,10 +61,7 @@ open config/packages/nelmio_cors.yaml and ensure the following configuration is 
 
 to create a database run: 
 - `symfony console make:doctrine:database`
-- `select 2, for postgresql`
-- `select the default, alpine.`
-- `run docker-compose up -d`
-- `to see the var env config, run: symfony var:export --multiline`
+- `symfony console doctrine:schema:update --force`
 
 to validate that the schema mapping is correct run:
 - `symfony console doctrine:schema:validate` 
