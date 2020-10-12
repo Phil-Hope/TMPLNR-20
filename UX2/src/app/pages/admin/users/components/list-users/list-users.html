@@ -36,16 +36,9 @@
         </ion-col>
       </ion-item>
       <ion-item>
-        <ion-col>
-          <ion-button routerLink="/users/{{user.id}}/edit" color="warning">EDIT
-            <ion-ripple-effect type="bounded"></ion-ripple-effect>
-          </ion-button>
-        </ion-col>
-        <ion-col>
-          <ion-button [routerLink]="['/users/', user.id, '/delete']" color="danger">DELETE
-            <ion-ripple-effect type="bounded"></ion-ripple-effect>
-          </ion-button>
-        </ion-col>
+        <ion-button (click)="presentActionSheet(user.id)" color="primary">
+          <ion-label>OPTIONS</ion-label>
+        </ion-button>
       </ion-item>
     </ion-list>
   </ion-card>

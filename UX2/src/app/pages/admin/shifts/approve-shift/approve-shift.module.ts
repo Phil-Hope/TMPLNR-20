@@ -9,6 +9,7 @@ import {ShiftsService} from "../../../shifts/services/shifts.service";
 import {UsersService} from "../../users/services/users.service";
 import {AuthenticationService} from "../../../../services/authentication.service";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HttpConfigInterceptor} from "../../../../services/http.interceptor";
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
   ],
   declarations: [ApproveShiftPage],
   providers: [ShiftsService, UsersService, AuthenticationService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
 export class ApproveShiftModule { }

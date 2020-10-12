@@ -11,6 +11,7 @@ import {RouteReuseStrategy} from "@angular/router";
 import {RouterLink} from "@angular/router";
 import {ShiftsService} from "../../../services/shifts.service";
 import {AuthenticationService} from "../../../../../services/authentication.service";
+import {HttpConfigInterceptor} from "../../../../../services/http.interceptor";
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import {AuthenticationService} from "../../../../../services/authentication.serv
     AuthenticationService,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
 export class ListShiftsModule { }

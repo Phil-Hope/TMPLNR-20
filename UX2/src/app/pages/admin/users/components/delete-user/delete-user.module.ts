@@ -8,6 +8,7 @@ import {AuthenticationService} from "../../../../../services/authentication.serv
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {UsersService} from "../../services/users.service";
 import {ReactiveFormsModule} from "@angular/forms";
+import {HttpConfigInterceptor} from "../../../../../services/http.interceptor";
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import {ReactiveFormsModule} from "@angular/forms";
   providers: [
     AuthenticationService,
     UsersService,
+      { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
 export class DeleteUserPageModule { }

@@ -28,6 +28,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  *     normalizationContext={"groups"={"user:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"user:write"}, "swagger_definition_name"="Write"},
  *   attributes={"security"="is_granted('ROLE_USER')"},
+ *     shortName="user",
  *   collectionOperations={
  *   "get", "post",
  *   },

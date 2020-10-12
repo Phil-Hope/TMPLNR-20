@@ -3,8 +3,8 @@
 
 Prerequisites 
 - Node 
-- MySQL or MariaDB
-- Composer 
+- Docker
+- MySQL 
 - Yarn or NPM
 - Ionic CLI & Angular CLI
 - openssl
@@ -60,9 +60,11 @@ open config/packages/nelmio_cors.yaml and ensure the following configuration is 
               '^/': ~`
 
 to create a database run: 
-- `symfony console make:migration`
-- `symfony console doctrine:database:create`
-- `symfony console doctrine:migrations:migrate`
+- `symfony console make:doctrine:database`
+- `select 2, for postgresql`
+- `select the default, alpine.`
+- `run docker-compose up -d`
+- `to see the var env config, run: symfony var:export --multiline`
 
 to validate that the schema mapping is correct run:
 - `symfony console doctrine:schema:validate` 
@@ -73,7 +75,7 @@ If there are any other mapping errors you may run: `symfony console doctrine:sch
 
 _This will display the query that is required to map the schema correctly_
 
-To configure the JWT tokens, in your terminal, run: `mkdir/ -p config/jwt` _if directory does not yet exist_
+To configure the JWT tokens, in your terminal, run: `mkdir -p config/jwt` _if directory does not yet exist_
 
 It will prompt you for a passphrase, which is the one created in the .env file. Copy paste the passphrase each time it is needed.
 
@@ -92,7 +94,7 @@ Now to start the symfony server, run:
  _this installs a self signed ssl certificate supplied by symfony_
  
  - `symfony serve`
- 
+
  This installs a ssl certificate and starts the local webserver at `https://localhost:8000` 
 
 ### User Interface "UX"
@@ -119,7 +121,5 @@ The only way to hack a user's session is to first gain access to the private and
 
 
 From here you may navigate to the shifts dashboard. Add some shifts! Check out the admin dashboard and calendars.
-
-
 
 

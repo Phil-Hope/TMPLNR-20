@@ -2,7 +2,7 @@ nelmio_cors:
     defaults:
         allow_credentials: true
         origin_regex: true
-        allow_origin: ['^https://localhost:[0-9]+']
+        allow_origin: ['*']
         allow_methods: ['GET', 'OPTIONS', 'POST', 'PUT', 'PATCH', 'DELETE']
         allow_headers: ['Content-Type', 'Authorization', 'Set-Cookie']
         expose_headers: ['Link', 'Location', 'Set-Cookie']

@@ -8,6 +8,7 @@ import {ComponentsModule} from "../../../../shared/components.module";
 import {ShiftsService} from "../../services/shifts.service";
 import {AuthenticationService} from "../../../../services/authentication.service";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HttpConfigInterceptor} from "../../../../services/http.interceptor";
 
 @NgModule({
     imports: [
@@ -24,6 +25,7 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
   providers: [
     ShiftsService,
     AuthenticationService,
+      { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
 export class DeleteShiftPageModule { }

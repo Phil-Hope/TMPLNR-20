@@ -5,6 +5,7 @@
         "php": ">=7.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-pdo": "*",
         "api-platform/admin-pack": "v1.0.0",
         "api-platform/api-pack": "v1.3.0",
         "api-platform/core": "^2.5",
@@ -12,9 +13,9 @@
         "composer/package-versions-deprecated": "^1.11",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.1",
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
-        "easycorp/easyadmin-bundle": "^3.1",
         "indragunawan/api-rate-limit-bundle": "^0.4.1",
         "lexik/jwt-authentication-bundle": "^2.8",
         "nelmio/cors-bundle": "^2.1",
@@ -52,8 +53,7 @@
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/html-extra": "^3.0",
         "twig/twig": "^2.12|^3.0",
-        "webonyx/graphql-php": "^0.13.5",
-      "ext-pdo": "*"
+        "webonyx/graphql-php": "^0.13.5"
     },
     "require-dev": {
         "symfony/browser-kit": "^5.1",

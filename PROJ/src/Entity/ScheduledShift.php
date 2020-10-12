@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidBinaryType;
+use Ramsey\Uuid\Lazy\LazyUuidFromString;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use TheCodingMachine\GraphQLite\Annotations\Field;
@@ -72,14 +73,14 @@ class ScheduledShift
     private $id;
 
     /**
-     * @var DateTime
+     * @var DateTimeInterface
      * @Groups({"shift:read", "shift:write", "user:read"})
      * @ORM\Column(name="start", type="datetime", nullable=false)
      */
     private $start;
 
     /**
-     * @var DateTime
+     * @var DateTimeInterface
      * @Groups({"shift:read", "shift:write", "user:read"})
      * @ORM\Column(name="end", type="datetime", nullable=false)
      */
@@ -121,11 +122,11 @@ class ScheduledShift
 
     /**
      * @Field(outputType="ID")
-     * @return UuidInterface
+     * @return LazyUuidFromString|UuidInterface
      * @var UuidBinaryType
      * @ApiProperty(identifier=true)
      */
-    public function getId(): UuidInterface
+    public function getId(): LazyUuidFromString
     {
         return $this->id;
     }
@@ -153,17 +154,17 @@ class ScheduledShift
     /**
      * @Field()
      */
-    public function getEnd(): ?\DateTimeInterface
+    public function getEnd(): ?DateTimeInterface
     {
         return $this->end;
     }
 
     /**
-     * @param \DateTimeInterface $end
+     * @param DateTimeInterface $end
      * @return $this
      * @Mutation()
      */
-    public function setEnd(\DateTimeInterface $end): self
+    public function setEnd(DateTimeInterface $end): self
     {
         $this->end = $end;
 

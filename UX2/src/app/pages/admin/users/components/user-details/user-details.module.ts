@@ -6,6 +6,8 @@ import { UserDetailsRoutingModule } from "./user-details-routing.module";
 import {ComponentsModule} from "../../../../../shared/components.module";
 import {AuthenticationService} from "../../../../../services/authentication.service";
 import {UsersService} from "../../services/users.service";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HttpConfigInterceptor} from "../../../../../services/http.interceptor";
 
 @NgModule({
   imports: [
@@ -20,6 +22,7 @@ import {UsersService} from "../../services/users.service";
   providers: [
     AuthenticationService,
     UsersService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
 export class UserDetailsModule { }

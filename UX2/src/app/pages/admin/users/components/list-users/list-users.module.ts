@@ -8,6 +8,7 @@ import {ComponentsModule } from "../../../../../shared/components.module";
 import {AuthenticationService} from "../../../../../services/authentication.service";
 import {UsersService} from "../../services/users.service";
 import {FormsModule} from "@angular/forms";
+import {HttpConfigInterceptor} from "../../../../../services/http.interceptor";
 
 @NgModule({
     imports: [
@@ -24,6 +25,7 @@ import {FormsModule} from "@angular/forms";
   providers: [
     AuthenticationService,
     UsersService,
+      { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
 

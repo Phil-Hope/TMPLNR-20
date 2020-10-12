@@ -2,13 +2,14 @@ import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {IonicModule} from "@ionic/angular";
 import {ProfilePage} from "./profile";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ProfilePageRoutingModule} from "./profile-routing.module";
 import {ComponentsModule} from "../../shared/components.module";
 import {AuthenticationService} from "../../services/authentication.service";
 
 import {UsersService} from "../admin/users/services/users.service";
 import {FormsModule} from "@angular/forms";
+import {HttpConfigInterceptor} from "../../services/http.interceptor";
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import {FormsModule} from "@angular/forms";
   providers: [
     AuthenticationService,
     UsersService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
 export class ProfileModule { }

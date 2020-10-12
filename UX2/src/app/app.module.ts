@@ -16,6 +16,7 @@ import {AuthenticationService} from "./services/authentication.service";
 import {IonicStorageModule, Storage} from "@ionic/storage";
 import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
 import {ShiftsService} from "./pages/shifts/services/shifts.service";
+import {HttpConfigInterceptor} from "./services/http.interceptor";
 
 export function jwtOptionsFactory(storage) {
   return {
@@ -56,6 +57,7 @@ export function jwtOptionsFactory(storage) {
     ShiftsService,
     AuthenticationService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ],
 
 })

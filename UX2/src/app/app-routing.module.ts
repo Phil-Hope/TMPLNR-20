@@ -52,6 +52,16 @@ const routes: Routes = [
       .then(m => m.ContainerPageModule)
   },
   {
+    path: 'shifts/add',
+    loadChildren: () => import('./pages/shifts/components/add-shift/add-shift.module')
+        .then(m => m.AddShiftModule),
+  },
+  {
+    path: 'shifts/list',
+    loadChildren: () => import('./pages/shifts/components/list-shifts/list-shifts/list-shifts.module')
+        .then(m => m.ListShiftsModule),
+  },
+  {
     path: 'shifts/:id/details',
     loadChildren: () => import('./pages/shifts/components/shift-details/shift-details.module')
       .then(m => m.ShiftDetailsModule),
@@ -75,51 +85,6 @@ const routes: Routes = [
     path: 'shifts/:id/add-comment',
     loadChildren: () => import('./pages/shifts/comments/add-comment/add-comment.module')
       .then( m => m.AddCommentPageModule)
-  },
-  {
-    path: 'shifts/add',
-    loadChildren: () => import('./pages/shifts/components/add-shift/add-shift.module')
-      .then(m => m.AddShiftModule),
-  },
-  {
-    path: 'shifts/list/upcoming',
-    loadChildren: () => import('./pages/shifts/components/list-shifts/list-upcoming-shifts/list-shifts.module')
-      .then(m => m.ListShiftsModule),
-  },
-  {
-    path: 'shifts/list/pending',
-    loadChildren: () => import('./pages/shifts/components/list-shifts/list-pending-shifts/list-pending-shifts.module')
-      .then( m => m.ListPendingShiftsPageModule)
-  },
-  {
-    path: 'shifts/list/approved',
-    loadChildren: () => import('./pages/shifts/components/list-shifts/list-approved-shifts/list-approved-shifts.module')
-      .then( m => m.ListApprovedShiftsPageModule)
-  },
-  {
-    path: 'shifts/list/past',
-    loadChildren: () => import('./pages/shifts/components/list-shifts/list-past-shifts/list-past-shifts.module')
-      .then( m => m.ListPastShiftsPageModule)
-  },
-  {
-    path: 'shifts/list/approved/primary',
-    loadChildren: () => import('./pages/shifts/components/list-shifts/list-approved-primary-shifts/list-approved-primary-shifts.module')
-      .then( m => m.ListApprovedPrimaryShiftsPageModule)
-  },
-  {
-    path: 'shifts/list/approved/secondary',
-    loadChildren: () => import('./pages/shifts/components/list-shifts/list-approved-secondary-shifts/list-approved-secondary-shifts.module')
-      .then( m => m.ListApprovedSecondaryShiftsPageModule)
-  },
-  {
-    path: 'shifts/list/pending/secondary',
-    loadChildren: () => import('./pages/shifts/components/list-shifts/list-pending-secondary-shifts/list-pending-secondary-shifts.module')
-      .then( m => m.ListPendingSecondaryShiftsPageModule)
-  },
-  {
-    path: 'shifts/list/pending/primary',
-    loadChildren: () => import('./pages/shifts/components/list-shifts/list-pending-primary-shifts/list-pending-primary-shifts.module')
-      .then( m => m.ListPendingPrimaryShiftsPageModule)
   },
   {
     path: 'shifts/calendar/draft',

@@ -8,6 +8,8 @@ import {ComponentsModule} from "../../../shared/components.module";
 import {UsersService} from "../../admin/users/services/users.service";
 import {ShiftsService} from "../../shifts/services/shifts.service";
 import {AuthenticationService} from "../../../services/authentication.service";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HttpConfigInterceptor} from "../../../services/http.interceptor";
 
 @NgModule({
   imports: [
@@ -20,6 +22,7 @@ import {AuthenticationService} from "../../../services/authentication.service";
   ],
   declarations: [ProfileUserPage],
   providers: [UsersService, ShiftsService, AuthenticationService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
 export class ProfileUserPageModule {

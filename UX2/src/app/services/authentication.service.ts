@@ -19,6 +19,7 @@ export interface TokenResponse {
 
 const ID = 'id';
 const USER_ROLES = 'roles';
+const TOKEN_KEY = 'token';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +51,7 @@ export class AuthenticationService {
           if (res) {
             await this.storage.set(ID, JSON.stringify(res.data.id));
             await this.storage.set(USER_ROLES, res.data.roles);
+            await this.storage.set(TOKEN_KEY, res.token);
             this.isAuthenticated.next(true);
             this.router.navigateByUrl('/users/profile');
           } else {
@@ -77,6 +79,7 @@ export class AuthenticationService {
       if (res) {
         await this.storage.set(ID, res.data.id);
         await this.storage.set(USER_ROLES, res.data.roles);
+        await this.storage.set(TOKEN_KEY, res.token);
         this.isAuthenticated.next(true);
         this.router.navigateByUrl(`/users/${res.data.id}/profile`);
       } else {

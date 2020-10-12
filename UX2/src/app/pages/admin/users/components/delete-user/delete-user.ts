@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {UsersService} from "../../services/users.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {User} from "../../../../../interfaces/user.interface";
-import {Observable} from "rxjs";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserTrackerError} from "../../services/user-errors.interface";
 import {tap} from "rxjs/operators";

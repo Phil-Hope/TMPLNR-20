@@ -8,6 +8,7 @@ import {ComponentsModule} from "../../../../../shared/components.module";
 import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {AuthenticationService} from "../../../../../services/authentication.service";
 import {UsersService} from "../../services/users.service";
+import {HttpConfigInterceptor} from "../../../../../services/http.interceptor";
 
 @NgModule({
     imports: [
@@ -23,6 +24,7 @@ import {UsersService} from "../../services/users.service";
   providers: [
     AuthenticationService,
     UsersService,
+      { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
 export class AddUserModule { }

@@ -6,7 +6,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Doctrine\UuidBinaryType;
+use Ramsey\Uuid\Lazy\LazyUuidFromString;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
@@ -20,6 +20,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  *   attributes={"securtiy"="is_granted('ROLE_USER')"},
  *   collectionOperations={
  *   "get", "post"
+ *
  *   },
  *   itemOperations={
  *   "get",
@@ -28,7 +29,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  *   }
  * )
  * @ApiFilter(OrderFilter::class, properties={"dateOfComment"}, arguments={"orderParameterName"="order"})
- * @ORM\Table(name="shift_comments", indexes={@ORM\Index(name="IDX_762A0E8E22BF0A45", columns={"authored_by_id"}), @ORM\Index(name="IDX_762A0E8EBB70BC0E", columns={"shift_id"})})
+ * @ORM\Table(name="shift_comments")
  * @ORM\Entity(repositoryClass="App\Repository\ShiftCommentsRepository")
  */
 class ShiftComments
@@ -77,11 +78,11 @@ class ShiftComments
     private $shift;
 
     /**
-     * @return UuidInterface|null
-     * @var UuidBinaryType
+     *
      * @ApiProperty(identifier=true)
+     * @return LazyUuidFromString|UuidInterface
      */
-    public function getId(): ?UuidInterface
+    public function getId(): ?LazyUuidFromString
     {
         return $this->id;
     }

@@ -38,8 +38,8 @@
            <ng-template #loadUsers>
              <ion-select-option>Error.. No users found</ion-select-option>
            </ng-template>
-           <div *ngIf="users else loadUsers" >
-           <ion-select-option *ngFor="let user of users" value="/users/{{this.user.id}}}">
+           <div *ngIf="users else loadUsers">
+           <ion-select-option *ngFor="let user of users" value="/users/{{user.id}}">
              {{this.user.firstName}} {{this.user.lastName}}
            </ion-select-option>
            </div>

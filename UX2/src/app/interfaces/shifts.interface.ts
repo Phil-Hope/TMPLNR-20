@@ -1,7 +1,7 @@
 export class ScheduledShift {
   id: string;
-  start: string;
-  end: string;
+  start: Date;
+  end: Date;
    onDuty: {
      id: string;
      firstName: string;

@@ -12,6 +12,7 @@ import {AuthenticationService} from "../../../../services/authentication.service
 import {ApprovedCalendarPageRoutingModule} from './approved-calendar-routing.module';
 import {CalendarToolbarApprovedComponent} from "./calendar-toolbar/calendar-toolbar";
 import {ApprovedCalendarPage} from './approved-calendar.page';
+import {HttpConfigInterceptor} from "../../../../services/http.interceptor";
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import {ApprovedCalendarPage} from './approved-calendar.page';
   providers: [
     ShiftsService,
     AuthenticationService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
 export class ApprovedCalendarPageModule {

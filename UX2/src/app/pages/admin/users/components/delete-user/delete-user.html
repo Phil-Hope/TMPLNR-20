@@ -12,32 +12,49 @@
     </ion-card>
   </ng-template>
   <div  *ngIf="user else loading">
-  <ion-list>
-    <ion-list-header>Delete User?</ion-list-header>
-    <ion-item-divider>
-      <ion-col size="4">
-        Name
-      </ion-col>
-      <ion-col size="4">
-        Email
-      </ion-col>
-      <ion-col size="4">
-        Contact Number
-      </ion-col>
-    </ion-item-divider>
-    <ion-item-divider>
-      <ion-col>{{user.firstName}} {{user.lastName}}</ion-col>
-      <ion-col>{{user.email}}</ion-col>
-      <ion-col>{{user.contactNumber}}</ion-col>
-    </ion-item-divider>
+  <ion-list style="margin-top: 1.5rem;">
+    <ion-item color="light"><ion-label color="danger" style="text-align: center;">Are you sure <br /> you want to <br /> Delete User?</ion-label></ion-item>
+    <ion-item-divider></ion-item-divider>
+      <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-label>First Name:</ion-label>
+        <ion-label>{{user.firstName}}</ion-label>
+      </ion-item>
+      <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-label>Last Name:</ion-label>
+        <ion-label>{{user.lastName}}</ion-label>
+      </ion-item>
+    <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-label>Email</ion-label>
+      <ion-label>{{user.email}}</ion-label>
+      </ion-item>
+      <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-label>Contact Number:</ion-label>
+        <ion-label>{{user.contactNumber}}</ion-label>
+      </ion-item>
     <ion-item>
+      <ion-col size="12">
       <form [formGroup]="form" (ngSubmit)="deleteUser()">
         <ion-input type="hidden" value="{{user.id}}" formControlName="id"></ion-input>
-        <ion-button type="submit" color="danger" size="small">DELETE</ion-button>
+        <ion-button type="submit" color="danger" size="block">DELETE</ion-button>
       </form>
+      </ion-col>
     </ion-item>
   </ion-list>
   </div>
 </ion-content>
-
-<app-footer></app-footer>
+<ion-footer [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/users']" style="font-size: 0.8rem; font-family: Quicksand, sans-serif">
+        <ion-label>
+          User List
+        </ion-label>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/shifts/list']">
+        <ion-label>Shift List</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
