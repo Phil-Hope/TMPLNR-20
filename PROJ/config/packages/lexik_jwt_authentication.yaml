@@ -15,7 +15,7 @@ lexik_jwt_authentication:
             prefix: Bearer
             name: Authorization
         cookie:
-            enabled: true
+            enabled: false
             name: BEARER
 
         query_parameter:

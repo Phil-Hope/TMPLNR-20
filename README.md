@@ -80,10 +80,7 @@ It will prompt you for a passphrase, which is the one created in the .env file. 
 - `openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout`
 
 To load some dummy users and the Default admin user: 
-
-- In the root of the PROJ folder directory, you will find a file named "DB-data.php".
-- Open this folder and add the database settings required for a connection.
-- then in the PROJ root directory, run: `php DB-data.php`
+- `symfony console doctrine:fixtures:load`
 
 
 Now to start the symfony server, run:

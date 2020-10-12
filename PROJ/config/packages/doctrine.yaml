@@ -1,14 +1,6 @@
 doctrine:
     dbal:
-        dbname: TMPLNR-20
-        host: localhost
-        port: 3306
-        user: root
-        password: Paradigm88!
-        driver: pdo_mysql
-        server_version: '8.0'
-        charset: UTF8
-        url: mysql://root:Paradigm88!@127.0.0.1:3306/TMPLNR-20
+        url: '%env(resolve:DATABASE_URL)%'
         types:
             uuid_binary: Ramsey\Uuid\Doctrine\UuidType
         mapping_types:
