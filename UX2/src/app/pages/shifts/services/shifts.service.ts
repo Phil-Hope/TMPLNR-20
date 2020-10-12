@@ -3,10 +3,10 @@ import {HttpClient, HttpParams, HttpHeaders, HttpErrorResponse} from "@angular/c
 import {ScheduledShift} from "../../../interfaces/shifts.interface";
 import {Observable, throwError} from "rxjs";
 import {environment} from "../../../../environments/environment";
-import {catchError, tap} from "rxjs/operators";
+import {catchError, map, tap} from "rxjs/operators";
 import {format} from "date-fns";
 import {ShiftTrackerError} from "./shifts-errors.provider";
-import moment from "moment";
+import * as moment from "moment";
 
 
 @Injectable()
@@ -253,8 +253,8 @@ export class ShiftsService {
   addShift(shift: ScheduledShift): Observable<ScheduledShift | ShiftTrackerError> {
     return this.http.post<ScheduledShift>(`${environment.apiUrl}/shifts`,
       {
-        start: shift.start,
-        end:  shift.end,
+        start: moment(shift.start).toDate(),
+        end:  moment(shift.end).toDate(),
         onDuty: shift.onDuty,
         ShiftStatus: shift.ShiftStatus,
         isApproved: shift.isApproved},
@@ -272,8 +272,8 @@ export class ShiftsService {
   editShift(shift: ScheduledShift): Observable<ScheduledShift | ShiftTrackerError> {
     return this.http.put<ScheduledShift>(`${environment.apiUrl}/shifts/${shift.id}`,
       {
-        start: shift.start,
-        end: shift.end,
+        start: moment(shift.start).toDate(),
+        end:  moment(shift.end).toDate(),
         onDuty: shift.onDuty,
         ShiftStatus: shift.ShiftStatus,
         isApproved: shift.isApproved

@@ -7,7 +7,7 @@ import {ModalController} from "@ionic/angular";
 import {ShiftsService} from "../../../services/shifts.service";
 import {ShiftTrackerError} from "../../../services/shifts-errors.provider";
 import {tap} from "rxjs/operators";
-
+import * as moment from "moment";
 
 @Component({
     selector: 'app-list-shifts',
