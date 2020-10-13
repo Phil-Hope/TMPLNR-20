@@ -34,6 +34,8 @@
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/ecodev/graphql-upload" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/egulias/email-validator" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/fig/link-util" />
+      <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/fzaninotto/faker" />
+      <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/hautelook/alice-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/indragunawan/api-rate-limit-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/laminas/laminas-code" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/laminas/laminas-diactoros" />
@@ -43,7 +45,9 @@
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/lexik/jwt-authentication-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/monolog/monolog" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/mouf/classname-mapper" />
+      <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/myclabs/deep-copy" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/namshi/jose" />
+      <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/nelmio/alice" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/nelmio/cors-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/nyholm/psr7" />
@@ -66,6 +70,10 @@
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/ramsey/collection" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/ramsey/uuid" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/ramsey/uuid-doctrine" />
+      <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/sebastian/comparator" />
+      <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/sebastian/diff" />
+      <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/sebastian/exporter" />
+      <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/sebastian/recursion-context" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/sensio/framework-extra-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/symfony/asset" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/symfony/browser-kit" />
@@ -143,6 +151,7 @@
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/thecodingmachine/graphqlite" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/thecodingmachine/graphqlite-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/thecodingmachine/graphqlite-symfony-validator-bridge" />
+      <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/theofidry/alice-data-fixtures" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/twig/extra-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/twig/html-extra" />
       <excludeFolder url="file://$MODULE_DIR$/PROJ/vendor/twig/twig" />

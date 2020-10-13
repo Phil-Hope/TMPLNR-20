@@ -146,6 +146,15 @@
       <path value="$PROJECT_DIR$/PROJ/vendor/lexik/jwt-authentication-bundle" />
       <path value="$PROJECT_DIR$/PROJ/vendor/brick/math" />
       <path value="$PROJECT_DIR$/PROJ/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/PROJ/vendor/nelmio/alice" />
+      <path value="$PROJECT_DIR$/PROJ/vendor/theofidry/alice-data-fixtures" />
+      <path value="$PROJECT_DIR$/PROJ/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/PROJ/vendor/fzaninotto/faker" />
+      <path value="$PROJECT_DIR$/PROJ/vendor/hautelook/alice-bundle" />
+      <path value="$PROJECT_DIR$/PROJ/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/PROJ/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/PROJ/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/PROJ/vendor/sebastian/comparator" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

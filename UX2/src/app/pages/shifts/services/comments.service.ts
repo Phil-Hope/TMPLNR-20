@@ -25,7 +25,7 @@ export class CommentsService {
     return this.http.get<ShiftComments[]>(`${environment.apiUrl}/comments.json`,
       {headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        }), withCredentials: true
+        })
       }).pipe(
         tap(_ => console.log('Comments Retrieved Successfully')),
       catchError(err => this.handleHttpError(err))
@@ -38,20 +38,20 @@ export class CommentsService {
     return this.http.get<ShiftComments[]>(`${environment.apiUrl}/comments.json`,
       {params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        }), withCredentials: true
+        })
       }).pipe(
       tap(_ => console.log('Comments Retrieved Successfully')),
       catchError(err => this.handleHttpError(err))
     );
   }
 
-  getCommentById(comment: ShiftComments): Observable<ShiftComments | CommentsTrackerError> {
-    return this.http.get<ShiftComments>(`${environment.apiUrl}/comments/${comment.id}.json`,
+  getCommentById(id: string): Observable<ShiftComments | CommentsTrackerError> {
+    return this.http.get<ShiftComments>(`${environment.apiUrl}/comments/${id}.json`,
       {headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        }), withCredentials: true
+        })
       }).pipe(
-      tap(_ => console.log(`Shift: ${comment.id} Retrieved Successfully!`)),
+      tap(_ => console.log(`Shift: ${id} Retrieved Successfully!`)),
       catchError(err => this.handleHttpError(err))
     );
   }
@@ -62,7 +62,7 @@ export class CommentsService {
     return this.http.get<ShiftComments[]>(`${environment.apiUrl}/shifts/${id}/comments.json`,
       {params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        }), withCredentials: true
+        })
       }).pipe(
         tap(_ => console.log('Shift comments loaded!')),
       catchError(err => this.handleHttpError(err))
@@ -73,7 +73,7 @@ export class CommentsService {
     return this.http.get<ShiftComments[]>(`${environment.apiUrl}/users/${id}/comments`,
       {headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        }), withCredentials: true
+        })
       }).pipe(
         tap(_ => console.log(`Shifts for user: ${id} Retrieved successfully!`)),
       catchError(err => this.handleHttpError(err))
@@ -90,7 +90,7 @@ export class CommentsService {
         recipient: comment.recipient
       }, {headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        }), withCredentials: true
+        })
       }).pipe(
       tap(_ => console.log('Comment Edited Successfully!')),
       catchError(err => this.handleHttpError(err))
@@ -107,7 +107,7 @@ export class CommentsService {
         recipient: comment.recipient
       }, {headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        }), withCredentials: true
+        })
     }).pipe(
       tap(_ => console.log('Comment Edited Successfully!')),
       catchError(err => this.handleHttpError(err))
@@ -118,7 +118,7 @@ export class CommentsService {
      return this.http.delete<ShiftComments>(`${environment.apiUrl}/comments/${comment.id}`,
        {headers: new HttpHeaders({
            'Content-Type': 'application/json'
-         }), withCredentials: true
+         })
        }).pipe(
          tap(_ => console.log('Comment Delete Successfully!')),
        catchError(err => this.handleHttpError(err))

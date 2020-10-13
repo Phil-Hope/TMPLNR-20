@@ -50,7 +50,7 @@ export class AppComponent {
           buttons: [
             {
               role: 'cancel',
-              text: 'Reoload'
+              text: 'Reload'
             }
           ]
         });

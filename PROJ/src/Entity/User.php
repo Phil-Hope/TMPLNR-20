@@ -57,7 +57,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @Assert\NotBlank()
+     *
      * @Groups({"user:read", "user:write"})
      * @ORM\Column(name="email", type="string", length=180, nullable=false)
      */
@@ -70,6 +70,8 @@ class User implements UserInterface
     private $roles;
 
     /**
+     * @Assert\NotBlank(message="Password field can not be blank")
+     *@Assert\Length(min="6", minMessage="Password must be at least 6 characters long")
      * @SerializedName("password")
      * @Groups({"user:write"})
      * @ORM\Column(name="password", type="string", length=255, nullable=false)
@@ -77,18 +79,23 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @Assert\NotBlank(message="FirstName field can not be blank")
+     * @Assert\Length(max="50", maxMessage="Max 50 characters for FirstName")
      * @Groups({"user:read", "user:write", "shift:read", "comments:read"})
      * @ORM\Column(name="first_name", type="string", length=50, nullable=false)
      */
     private $firstName;
 
     /**
+     * @Assert\NotBlank(message="LastName field can not be blank")
+     * @Assert\Length(max="50", maxMessage="Max length of 50 for LastName")
      * @Groups({"user:read", "user:write", "shift:read", "comments:read"})
      * @ORM\Column(name="last_name", type="string", length=50, nullable=false)
      */
     private $lastName;
 
     /**
+     * @Assert\Url(message="Profile picture must be a valid url")
      * @Groups({"user:read", "user:write", "shift:read"})
      * @ORM\Column(name="profile_picture", type="string", length=255, nullable=true)
      */
@@ -96,12 +103,14 @@ class User implements UserInterface
 
     /**
      * @Groups({"user:read", "user:write"})
+     * @Assert\Length(max="5", maxMessage="Maximum length is 5 characters")
      * @ORM\Column(name="wage_per_hour", type="decimal", precision=5, scale=2, nullable=true)
      */
     private $wagePerHour;
 
     /**
      * @Groups({"user:read", "user:write"})
+     * @Assert\NotBlank(message="Contact Number field can not be blank")
      * @ORM\Column(name="contact_number", type="string", length=15, nullable=false)
      */
     private $contactNumber;
