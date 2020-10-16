@@ -202,7 +202,7 @@ class ApitTest extends  ApiTestCase
    * Probably overkill, but a single test for
    * POST to create a new user at '/users' endpoint.
    */
-    public function testPostUser()
+    public function testAddUser()
     {
       $client = self::createClient();
       try {
@@ -230,12 +230,17 @@ class ApitTest extends  ApiTestCase
    * This is POST request to add a new shift
    * to using the '/shifts' endpoint.
    */
-    public function testCreateShift()
+    public function testAddShift()
     {
       $client = self::createClient();
-      $user = $this->findIriBy(User::class, [
-        'email' => 'admin@example.com'
-      ]);
+      $user = $this->createUser(
+        'anotherUser@example.com',
+        'foo',
+        '042515183',
+        '80.00',
+        'https://imapictureofnothing.com',
+        'testme',
+        'now', ['ROLE_USER', 'ROLE_ADMIN']);
       try {
         $client->request('POST', '/shifts', [
           'headers' => [
@@ -244,7 +249,7 @@ class ApitTest extends  ApiTestCase
           'json' => [
             'start' => '2020-12-12 10:00:00',
             'end' => '2020-12-12 18:00:00',
-            'onDuty' => $user,
+            'onDuty' => '/users/'.$user->getId(),
             'ShiftStatus' => 'primary',
             'isApproved' => false
           ]
@@ -254,33 +259,6 @@ class ApitTest extends  ApiTestCase
       $this->assertResponseStatusCodeSame(201);
     }
 
-  /**
-   * This is a POST request for a collection of shiftComments
-   * from '/comments' endpoint.
-   */
-    public function testPostComment() {
-      $date = date('Y-m-d H:i:s');
-      $client = self::createClient();
-      $user = $this->findIriBy(User::class, [
-        'email' => 'admin@example.com'
-      ]);
-      try {
-        $client->request('POST', '/comments', [
-          'headers' => [
-            'Content-Type' => 'application/json',
-          ],
-          'json' => [
-            'comment' => 'TEST COMMENT FOR COMMENT TEST! TESTING 1, 2, 3',
-            'authoredBy' => $user,
-            'dateOfComment' => $date,
-            'recipient' => null,
-            'shift' => null
-          ]
-        ]);
-      } catch (TransportExceptionInterface $e) {
-      }
-      $this->assertResponseStatusCodeSame(201);
-    }
 
   /**
    * Tests the PUT method to edit a shift using the PUT method at '/shifts/:uuid' endpoint.
@@ -317,6 +295,13 @@ class ApitTest extends  ApiTestCase
         'ShiftStatus' => 'secondary',
         'isApproved' => false]
       ]);
+      $this->assertResponseStatusCodeSame(200);
+    }
+
+    public function testGetComments()
+    {
+      $client = self::createClient();
+      $client->request('GET', '/comments');
       $this->assertResponseStatusCodeSame(200);
     }
 
@@ -484,15 +469,6 @@ class ApitTest extends  ApiTestCase
     $shift->setShiftStatus('primary');
     $em = $this->getEntityManager();
     $em->persist($shift);
-    $em->flush();
-
-    $comment = new ShiftComments();
-    $comment->setAuthoredBy($user);
-    $comment->setShift($shift);
-    $comment->setComment('I am another comment, Blah Blah Blah!');
-    $comment->setDateOfComment($date);
-    $em = $this->getEntityManager();
-    $em->persist($comment);
     $em->flush();
     $client->request('DELETE', '/shifts/'.$shift->getId());
     $this->assertResponseStatusCodeSame(204);
