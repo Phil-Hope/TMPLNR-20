@@ -6,7 +6,6 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
-use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,9 +14,6 @@ use Ramsey\Uuid\Doctrine\UuidBinaryType;
 use Ramsey\Uuid\Lazy\LazyUuidFromString;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use TheCodingMachine\GraphQLite\Annotations\Field;
-use TheCodingMachine\GraphQLite\Annotations\Mutation;
-use TheCodingMachine\GraphQLite\Annotations\Query;
 use TheCodingMachine\GraphQLite\Annotations\Type;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
@@ -29,27 +25,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  * @ApiResource(
  *     normalizationContext={"groups"={"shift:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"shift:write"}, "swagger_definition_name"="Write"},
- *     shortName="shifts",
- *   attributes={"security"="is_granted('ROLE_USER')"},
- *   collectionOperations={
- *   "get", "post",
- *   },
- *   itemOperations={
- *   "get",
- *   "put"={"security"="is_granted('ROLE_ADMIN') or object.owner == user"},
- *   "patch"={"security"="is_granted('ROLE_ADMIN') or object.owner == user"},
- *   "delete"={"security"="is_granted('ROLE_ADMIN')"}
- *   },
- *     graphql={
- *         "item_query",
- *         "collection_query"={
- *     {"pagination_enabled"=true},
- *              "filters"={"start.date_filter"}
- *          },
- *          "delete",
- *          "update",
- *          "create"
- *     }
+ *     shortName="shifts"
  * )
  * @ApiFilter(DateFilter::class, properties={"start", "end"})
  * @ApiFilter(BooleanFilter::class, properties={"isApproved"})
@@ -121,7 +97,6 @@ class ScheduledShift
     }
 
     /**
-     * @Field(outputType="ID")
      * @return LazyUuidFromString|UuidInterface
      * @var UuidBinaryType
      * @ApiProperty(identifier=true)
@@ -131,9 +106,6 @@ class ScheduledShift
         return $this->id;
     }
 
-    /**
-     * @Field(outputType="String")
-     */
     public function getStart(): ?DateTimeInterface
     {
         return $this->start;
@@ -141,7 +113,6 @@ class ScheduledShift
 
     /**
      * @param DateTimeInterface $start
-     * @Mutation()
      * @return ScheduledShift
      */
     public function setStart(DateTimeInterface $start): self
@@ -151,9 +122,6 @@ class ScheduledShift
         return $this;
     }
 
-    /**
-     * @Field()
-     */
     public function getEnd(): ?DateTimeInterface
     {
         return $this->end;
@@ -162,7 +130,6 @@ class ScheduledShift
     /**
      * @param DateTimeInterface $end
      * @return $this
-     * @Mutation()
      */
     public function setEnd(DateTimeInterface $end): self
     {
@@ -172,7 +139,6 @@ class ScheduledShift
     }
 
     /**
-     * @Query
      * @return User
      */
     public function getOnDuty(): ?User
@@ -183,7 +149,6 @@ class ScheduledShift
     /**
      * @param User|null $onDuty
      * @return $this
-     * @Mutation()
      */
     public function setOnDuty(?User $onDuty): self
     {
@@ -193,7 +158,6 @@ class ScheduledShift
     }
 
     /**
-     * @Query()
      * @return Collection|ShiftComments[]
      */
     public function getComments(): Collection
@@ -204,7 +168,6 @@ class ScheduledShift
     /**
      * @param ShiftComments $comment
      * @return $this
-     * @Mutation()
      */
     public function addComment(ShiftComments $comment): self
     {
@@ -219,7 +182,6 @@ class ScheduledShift
     /**
      * @param ShiftComments $comment
      * @return $this
-     * @Mutation()
      */
     public function removeComment(ShiftComments $comment): self
     {
@@ -234,17 +196,11 @@ class ScheduledShift
         return $this;
     }
 
-    /**
-     * @Field()
-     */
     public function getShiftStatus()
     {
       return $this->ShiftStatus;
     }
 
-    /**
-     * @Mutation()
-     */
     public function setShiftStatus($ShiftStatus)
     {
         $this->ShiftStatus = $ShiftStatus;

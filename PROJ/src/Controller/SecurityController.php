@@ -19,19 +19,32 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+  private UserRepository $repository;
+
+  public function __construct(UserRepository $repository)
+  {
+    $this->repository = $repository;
+  }
+
+
   /**
    * @Route("/login", name="api_login", methods={"POST"})
    * @param Request $request
    * @param IriConverterInterface $iriConverter
    * @param JWTTokenManagerInterface $JWTManager
-   * @param UserRepository $repository
    * @param UserPasswordEncoderInterface $encoder
+   * @param UserRepository $repository
    * @return JsonResponse|Response
    */
-    public function loginAPI( Request $request,
-        IriConverterInterface  $iriConverter, JWTTokenManagerInterface $JWTManager, UserRepository $repository, UserPasswordEncoderInterface $encoder)
+    public function loginAPI(
+      Request $request,
+      IriConverterInterface  $iriConverter,
+      JWTTokenManagerInterface $JWTManager,
+      UserPasswordEncoderInterface $encoder,
+      UserRepository $repository
+)
     {
-      $user = $this->$repository->findOneBy(['email' => $request->getUser()]);
+      $user = $repository->findOneBy(['email' => $request->getUser()]);
 
       if (!$user) {
         throw $this->createNotFoundException();
@@ -45,7 +58,7 @@ class SecurityController extends AbstractController
         'email' => $user->getUsername(),
         'exp' => time() + 3600 // 1HR
       ]);
-      return new Response($user->getUser->getId(), 200, [
+      return new Response($user->getId(), 200, [
         'token' => $token,
         'Location' => $iriConverter->getIriFromItem($this->getUser()->getId())
       ]);

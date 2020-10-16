@@ -27,16 +27,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  * @ApiResource(
  *     normalizationContext={"groups"={"user:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"user:write"}, "swagger_definition_name"="Write"},
- *   attributes={"security"="is_granted('ROLE_USER')"},
- *     shortName="user",
- *   collectionOperations={
- *   "get", "post",
- *   },
- *   itemOperations={
- *   "get",
- *   "put"={"security"="is_granted('ROLE_ADMIN') or object.owner == user"},
- *   "delete"={"security"="is_granted('ROLE_ADMIN')"}
- *   },
+ *
+ *     shortName="user"
  * )
  * @ApiFilter(OrderFilter::class, properties={"lastName", "firstName"}, arguments={"orderParameterName"="order"})
  * @Type(name="Users")

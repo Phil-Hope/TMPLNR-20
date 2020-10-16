@@ -16,17 +16,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  * @ApiResource(
  *     normalizationContext={"groups"={"comments:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"comments:write"}, "swagger_definition_name"="Write"},
- *   shortName="comments",
- *   attributes={"securtiy"="is_granted('ROLE_USER')"},
- *   collectionOperations={
- *   "get", "post"
- *
- *   },
- *   itemOperations={
- *   "get",
- *   "put"={"security"="is_granted('ROLE_ADMIN') or object.owner == user"},
- *   "delete"={"security"="is_granted('ROLE_ADMIN') or object.owner == user"},
- *   }
+ *   shortName="comments"
  * )
  * @ApiFilter(OrderFilter::class, properties={"dateOfComment"}, arguments={"orderParameterName"="order"})
  * @ORM\Table(name="shift_comments")
