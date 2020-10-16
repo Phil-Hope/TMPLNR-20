@@ -148,6 +148,7 @@ The local webserver will now be available at `https://localhost:8000`
       These functions test seperate test entities that are found in src/App/ApiPlatform/Test.
       There are 16 tests that are performed in total.
       
+      
       - create user (POST) - 201 CREATED
       - edit user (PUT) - 200 OK
       - delete user (DELETE) - 204 NO CONTENT
@@ -167,7 +168,14 @@ The local webserver will now be available at `https://localhost:8000`
       - get comment (GET) - 200 OK
       - get comments (GET) - 200 OK
       
+      If a bin/.phpunit already exists. Delete this folder as it may cause errors.
+      
       To run these tests, run:
+      
+      composer req alice
+      composer req  logger
+      composer req test
+      
       php bin/phpunit
       
       In the terminal you will see the test and the results.
