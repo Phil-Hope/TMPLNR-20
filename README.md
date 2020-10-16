@@ -79,12 +79,12 @@ open config/packages/nelmio_cors.yaml and ensure the following configuration is 
               expose_headers: ['Link', 'Location', 'Set-Cookie']
               max_age: 1000
           paths:
-              '^/': ~`
+              '^/': ~
 
 * #### Create and Configure MySQL Database 
 _Ensure your database details are configured in the .env file._
 
-1) `symfony console make:doctrine:database`
+1) `symfony console doctrine:database:create`
 2) `symfony console doctrine:schema:update --force`
 
 to validate that the schema mapping is correct run:
