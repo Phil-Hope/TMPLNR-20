@@ -29,7 +29,7 @@
     <ion-list-header>Shifts Pending Approval</ion-list-header>
     <ion-grid>
 
-      <ion-row style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" class="ion-align-items-center">
+      <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" class="ion-align-items-center">
       <ion-col>
         <ion-label>OnDuty</ion-label>
       </ion-col>
@@ -45,16 +45,17 @@
         <ion-col>
           <ion-label>Call Level</ion-label>
         </ion-col>
-      </ion-row>
+      </ion-item>
 
     <div  *ngIf="shifts else loading">
       <div *ngFor="let shift of shifts">
-  <ion-row
+  <ion-item
     style="
     font-size: 0.8rem;
     font-family: Quicksand, sans-serif;"
     class="ion-align-items-center"
     (click)="presentActionSheet(shift.id)"
+    detail="true"
   >
         <ion-col>
           <ion-label>{{shift.onDuty.firstName}}<br />{{shift.onDuty.lastName}}</ion-label>
@@ -76,7 +77,7 @@
             <ion-icon color="success"  size="large" name="person-circle-outline"></ion-icon>
           </div>
         </ion-col>
-  </ion-row>
+  </ion-item>
       </div>
     </div>
     </ion-grid>
@@ -97,7 +98,7 @@
     </ion-title>
 
     <ion-buttons slot="end">
-      <ion-button  style="font-family: Quicksand, sans-serif; font-size: 0.8rem;"  [routerLink]="['/shifts']">
+      <ion-button  style="font-family: Quicksand, sans-serif; font-size: 0.8rem;"  [routerLink]="['/shifts/list']">
         <ion-icon slot="end" name="calendar-outline"></ion-icon>
         <ion-label>
           All Shifts

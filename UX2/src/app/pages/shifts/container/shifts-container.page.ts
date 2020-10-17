@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ShiftsService} from "../services/shifts.service";
 import {ScheduledShift} from "../../../interfaces/shifts.interface";
-import {ShiftTrackerError} from "../services/shifts-errors.provider";
 
 @Component({
   selector: 'app-container',
@@ -10,7 +9,7 @@ import {ShiftTrackerError} from "../services/shifts-errors.provider";
 })
 export class ContainerPage implements OnInit {
 
-  shifts: ScheduledShift[] | ShiftTrackerError;
+  shifts: ScheduledShift[];
   isLoading = true;
 
   constructor(private shiftsService: ShiftsService) { }

@@ -1,13 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {ScheduledShift} from '../../../../interfaces/shifts.interface';
 import {ActivatedRoute, Router} from '@angular/router';
 import {User} from "../../../../interfaces/user.interface";
 import {UsersService} from "../../../admin/users/services/users.service";
 import {ShiftsService} from "../../services/shifts.service";
 import {map, tap} from "rxjs/operators";
-import {ShiftTrackerError} from "../../services/shifts-errors.provider";
-import {UserTrackerError} from "../../../admin/users/services/user-errors.interface";
 
 @Component({
   selector: 'app-edit-shift',
@@ -16,9 +14,9 @@ import {UserTrackerError} from "../../../admin/users/services/user-errors.interf
 })
 export class EditShiftPage implements OnInit {
 
-  users: User[] | UserTrackerError;
+  users: User[];
   shifts: ScheduledShift[];
-  shift: ScheduledShift | ShiftTrackerError;
+  shift: ScheduledShift;
   date = new Date();
 
   form: FormGroup;

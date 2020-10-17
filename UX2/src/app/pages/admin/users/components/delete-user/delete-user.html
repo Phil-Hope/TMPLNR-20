@@ -33,10 +33,7 @@
       </ion-item>
     <ion-item>
       <ion-col size="12">
-      <form [formGroup]="form" (ngSubmit)="deleteUser()">
-        <ion-input type="hidden" value="{{user.id}}" formControlName="id"></ion-input>
-        <ion-button type="submit" color="danger" size="block">DELETE</ion-button>
-      </form>
+        <ion-button type="submit" color="danger" (click)="deleteUser(user.id)" size="block">DELETE</ion-button>
       </ion-col>
     </ion-item>
   </ion-list>

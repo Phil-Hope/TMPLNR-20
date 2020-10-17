@@ -2,16 +2,18 @@
 
 <ion-content>
   <app-header-banner></app-header-banner>
-  <ion-card style="padding-top: 3rem; padding-bottom: 3rem;">
+
+  <ion-card style="padding-top: 1.5rem; padding-bottom: 1rem;">
     <form (ngSubmit)="login()" [formGroup]="credentials">
-    <ion-card-header [translucent]="true">
-      <ion-card-title color="medium"><ion-text style="font-family: Fredoka One, sans-serif">Please Login</ion-text></ion-card-title>
-    </ion-card-header>
+    <ion-item color="light" lines="none">
+      <ion-label style="font-family: Quicksand, sans-serif; text-align: center; font-size: 1.5rem;">Please Login</ion-label>
+    </ion-item>
     <ion-card-content>
       <ion-list>
 
-        <ion-item>
-          <ion-label position="floating"><ion-icon name="mail-outline"></ion-icon><span> email</span></ion-label>
+        <ion-item lines="inset">
+          <ion-label position="floating" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+            <ion-icon name="mail-outline" slot="start"></ion-icon> email</ion-label>
           <ion-input id="email" type="text" formControlName="email"></ion-input>
         </ion-item>
 
@@ -20,8 +22,9 @@
           <span *ngIf="email.errors?.email">Email is invalid</span>
         </div>
 
-        <ion-item>
-          <ion-label position="floating"><ion-icon name="lock-closed-outline"></ion-icon> <span>password</span></ion-label>
+        <ion-item lines="inset">
+          <ion-label position="floating" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+            <ion-icon name="lock-closed-outline" slot="start"></ion-icon> password</ion-label>
           <ion-input id="password" type="password"  formControlName="password"></ion-input>
         </ion-item>
 
@@ -31,10 +34,11 @@
         </div>
 
         <ion-card-subtitle>
-          <ion-row><ion-col size="12">
-          <ion-button class="ion-activatable  ripple-parent" size="block" [disabled]="!credentials.valid" color="success" type="submit">
-            <ion-icon name="log-in-outline"></ion-icon> <span>login</span></ion-button> </ion-col>
-          </ion-row>
+            <ion-col>
+              <ion-button  size="full" color="secondary" shape="round" routerLink="/login">
+                <ion-img src="assets/icon8/icons8-login.svg"></ion-img>
+                <ion-label>LOGIN</ion-label></ion-button>
+            </ion-col>
         </ion-card-subtitle>
       </ion-list>
     </ion-card-content>

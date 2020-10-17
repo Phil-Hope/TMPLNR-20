@@ -14,76 +14,64 @@
         <ion-list lines="none">
           <div>
           <ion-menu-toggle autoHide="false" >
-            <ion-item detail="false">
-              <ion-button fill="clear" [routerLink]="['login']" routerDirection="root">
+            <ion-item detail="false" [routerLink]="['login']" routerDirection="root">
                 <ion-ripple-effect type="bounded"></ion-ripple-effect>
               <ion-icon slot="start" name="log-in-outline"></ion-icon>
               <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
                 Login
               </ion-label>
-              </ion-button>
             </ion-item>
           </ion-menu-toggle>
 
           <ion-menu-toggle autoHide="false">
-            <ion-item detail="false">
-              <ion-button fill="clear" [routerLink]="['contact']" routerDirection="root">
+            <ion-item detail="false" [routerLink]="['contact']" routerDirection="root">
                 <ion-ripple-effect type="bounded"></ion-ripple-effect>
               <ion-icon slot="start" name="call-outline"></ion-icon>
               <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
                 Contact
               </ion-label>
-              </ion-button>
             </ion-item>
           </ion-menu-toggle>
           </div>
           <div>
 
             <ion-menu-toggle autoHide="false">
-              <ion-item color="light" detail="false">
-                <ion-button fill="clear" routerLink="shifts" routerDirection="root">
+              <ion-item color="light" detail="false" [routerLink]="['/shifts']" routerDirection="root">
                   <ion-ripple-effect type="bounded"></ion-ripple-effect>
                 <ion-icon slot="start" name="calendar-outline"></ion-icon>
                 <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
                  Shifts Dashboard
                 </ion-label>
-                </ion-button>
               </ion-item>
             </ion-menu-toggle>
 
           <ion-menu-toggle autoHide="false">
             <ion-item color="light"  [routerLink]="['/users/profile']"  routerDirection="root" detail="false">
-              <ion-button fill="clear">
                 <ion-ripple-effect type="bounded"></ion-ripple-effect>
               <ion-icon slot="start" name="person-circle-outline"></ion-icon>
               <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
                 User Profile
               </ion-label>
-              </ion-button>
             </ion-item>
           </ion-menu-toggle>
 
           <ion-menu-toggle autoHide="false">
             <ion-item routerLink="admin" routerLinkActive="active" routerDirection="root" detail="false">
-              <ion-button fill="clear">
                 <ion-ripple-effect type="bounded"></ion-ripple-effect>
               <ion-icon slot="start" name="options-outline"></ion-icon>
               <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
                 Admin Dashboard
               </ion-label>
-              </ion-button>
             </ion-item>
           </ion-menu-toggle>
 
           <ion-menu-toggle>
-            <ion-item color="light" detail="false">
-              <ion-button fill="clear" (click)="logout()">
+            <ion-item color="light" detail="false" (click)="logout()">
               <ion-ripple-effect type="bounded"></ion-ripple-effect>
               <ion-icon slot="start" name="log-out-outline"></ion-icon>
               <ion-label  style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
                 Logout
               </ion-label>
-              </ion-button>
             </ion-item>
           </ion-menu-toggle>
             <ion-item>

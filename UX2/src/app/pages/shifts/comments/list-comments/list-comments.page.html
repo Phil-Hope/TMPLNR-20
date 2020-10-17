@@ -3,6 +3,14 @@
 <ion-content>
 <ion-list>
   <div *ngFor="let comment of comments">
+
+      <ion-card [hidden]="comments.length > 0">
+        <ion-item>
+          <ion-label>No Comments Found</ion-label>
+        </ion-item>
+      </ion-card>
+
+    <div [hidden]="comments.length == 0">
     <ion-card>
   <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" color="light">
     <ion-label><strong>Comment Date:</strong></ion-label>
@@ -27,6 +35,7 @@
         </ion-col>
       </ion-item>
     </ion-card>
+    </div>
   </div>
 </ion-list>
 </ion-content>

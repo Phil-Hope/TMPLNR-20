@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {User} from '../../../../../interfaces/user.interface';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UsersService} from "../../services/users.service";
-import {map, tap} from "rxjs/operators";
-import {UserTrackerError} from "../../services/user-errors.interface";
+import {tap} from "rxjs/operators";
 import {AlertController} from "@ionic/angular";
 import {Router} from "@angular/router";
 
@@ -17,7 +16,7 @@ export class AddUserPage implements OnInit {
   pageTitle = 'Add Employee';
   submitted = false;
   loading = false;
-  user: User | UserTrackerError;
+  user: User;
   form: FormGroup;
   date = new Date();
 

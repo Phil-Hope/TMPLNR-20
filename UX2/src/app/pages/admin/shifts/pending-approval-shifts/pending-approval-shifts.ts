@@ -1,6 +1,5 @@
 import {Component, OnInit} from "@angular/core";
 import {ScheduledShift} from "../../../../interfaces/shifts.interface";
-import {ShiftTrackerError} from "../../../shifts/services/shifts-errors.provider";
 import {ShiftsService} from "../../../shifts/services/shifts.service";
 import {Observable} from "rxjs";
 import {tap} from "rxjs/operators";
@@ -13,7 +12,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./pending-approval-shifts.scss']
 })
 export class PendingApprovalShiftsPage implements OnInit {
-  shifts: ScheduledShift[] | ShiftTrackerError;
+  shifts: ScheduledShift[];
   shift: ScheduledShift;
   date = new Date();
 
@@ -81,11 +80,11 @@ async ngOnInit() {
     }, 2000);
   }
 
-  loadShifts(): Observable<ScheduledShift[] | ShiftTrackerError> {
+  loadShifts(): Observable<ScheduledShift[]> {
     return this.shiftsService.loadAwaitingApprovalShifts()
       .pipe(
         tap(async (res) => {
-          if (!(res instanceof ShiftTrackerError) && res.length === 0) {
+          if (!(res.length === 0)) {
             const alert = await this.alertCtrl.create({
               header: 'No Shifts Found!',
               message: 'No pending shifts were found in the database.',

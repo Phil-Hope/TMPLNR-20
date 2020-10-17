@@ -27,15 +27,8 @@
     <ion-col size="3">{{shift.ShiftStatus}}</ion-col>
   </ion-item-divider>
   <ion-item>
-    <form [formGroup]="form" (ngSubmit)="onSubmitDeleteShift()">
-      <ion-input
-        type="hidden"
-        [(ngModel)]="shift.id"
-        formControlName="id"
-        value="{{shift.id}}"></ion-input>
-    </form>
-    <ion-button color="danger" size="small" type="submit">
-      DELETE
+    <ion-button color="danger" size="small" (click)="onSubmitDeleteShift(shift.id)" type="submit">
+      <ion-label>DELETE</ion-label>
     </ion-button>
   </ion-item>
   </div>

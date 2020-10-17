@@ -1,12 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ScheduledShift} from '../../../../interfaces/shifts.interface';
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {ShiftsService} from "../../services/shifts.service";
-import {ShiftTrackerError} from "../../services/shifts-errors.provider";
 import {tap, map} from 'rxjs/operators';
-import {Observable} from "rxjs";
-import {ToastController} from "@ionic/angular";
 @Component({
     selector: 'app-delete-shift',
     templateUrl: './delete-shift.html',
@@ -14,10 +11,11 @@ import {ToastController} from "@ionic/angular";
 })
 export class DeleteShiftPage implements OnInit {
 
-    shift: ScheduledShift | ShiftTrackerError;
+    shift: ScheduledShift;
     form: FormGroup;
     date = new Date();
     submitted = false;
+    id: string;
 
     constructor(
         private route: ActivatedRoute,
@@ -39,18 +37,12 @@ export class DeleteShiftPage implements OnInit {
       }, 1000);
     }
 
-  get f() { return this.form.controls; }
-
-      onSubmitDeleteShift() {
+      onSubmitDeleteShift(id: string) {
         this.submitted = true;
-        if (this.form.valid) {
-           const f = {...this.shift, ...this.form.value};
-           this.shiftService.deleteShift(f)
+        this.shiftService.deleteShift(id)
              .pipe(
                map(_ => { this.router.navigateByUrl('/shifts'); }),
                tap(_ => console.log('shift deleted'))
-             ).subscribe(data => console.log(JSON.stringify(data)));
-         }
+             ).subscribe(data => data);
        }
-
 }

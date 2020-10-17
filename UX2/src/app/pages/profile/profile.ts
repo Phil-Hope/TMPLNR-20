@@ -4,7 +4,6 @@ import {ActivatedRoute} from "@angular/router";
 import {Router} from "@angular/router";
 import {UsersService} from "../admin/users/services/users.service";
 import {ScheduledShift} from "../../interfaces/shifts.interface";
-import {UserTrackerError} from "../admin/users/services/user-errors.interface";
 import {Storage} from "@ionic/storage";
 import {ActionSheetController} from "@ionic/angular";
 
@@ -16,9 +15,9 @@ import {ActionSheetController} from "@ionic/angular";
 })
 export class ProfilePage implements OnInit {
 
-  user: User | UserTrackerError;
+  user: User;
   users: User[];
-  shifts: ScheduledShift[] | UserTrackerError;
+  shifts: ScheduledShift[];
   shift: ScheduledShift;
   date = new Date();
 

@@ -3,9 +3,8 @@ import {UsersService} from "../../services/users.service";
 import {Storage} from "@ionic/storage";
 import {Router, ActivatedRoute} from "@angular/router";
 import {User} from "../../../../../interfaces/user.interface";
-import {Observable, Subscription} from "rxjs";
+import {Observable} from "rxjs";
 import {ScheduledShift} from "../../../../../interfaces/shifts.interface";
-import {UserTrackerError} from "../../services/user-errors.interface";
 
 @Component({
   selector: 'app-users-shifts',
@@ -19,7 +18,7 @@ export class UsersShiftsPage implements OnInit {
   userShifts: ScheduledShift[];
 
   user$: Observable<User>;
-  user: User | UserTrackerError;
+  user: User;
 
   constructor(
     private userService: UsersService,
@@ -35,11 +34,11 @@ export class UsersShiftsPage implements OnInit {
      this.loadUser(id).subscribe((data: User) => this.user = data);
   }
 
-  loadUser(id: string): Observable<User | UserTrackerError> {
+  loadUser(id: string): Observable<User> {
     return this.userService.getUserById(id);
   }
 
-   loadUserShifts(id: string): Observable<ScheduledShift[] | UserTrackerError> {
+   loadUserShifts(id: string): Observable<ScheduledShift[]> {
     return this.userService.loadAllUsersShifts(id);
   }
 }

@@ -9,7 +9,6 @@ import {UsersService} from "../../../admin/users/services/users.service";
 import {ScheduledShift} from "../../../../interfaces/shifts.interface";
 import {ShiftComments} from "../../../../interfaces/shift-comments.interface";
 import {map} from "rxjs/operators";
-import {CommentsTrackerError} from "../../services/comments-errors.provider";
 
 @Component({
   selector: 'app-add-comment',
@@ -23,7 +22,7 @@ export class AddCommentPage implements OnInit {
   receivers: User[];
   shift: ScheduledShift;
   comment: ShiftComments;
-  comments: ShiftComments[] | CommentsTrackerError;
+  comments: ShiftComments[];
   date = new Date();
   submitted = false;
   loading = false;

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Observable, throwError} from "rxjs";
+import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
-import {catchError, tap} from "rxjs/operators";
+import {tap} from "rxjs/operators";
 import {format} from "date-fns";
-import {CommentsTrackerError} from "./comments-errors.provider";
-import {HttpClient, HttpParams, HttpHeaders, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpParams, HttpHeaders} from "@angular/common/http";
 import {ScheduledShift} from "../../../interfaces/shifts.interface";
 import {ShiftComments} from "../../../interfaces/shift-comments.interface";
 
@@ -21,18 +20,17 @@ export class CommentsService {
 
   constructor(private http: HttpClient) { }
 
-  loadAllComments(): Observable<ShiftComments[] | CommentsTrackerError> {
+  loadAllComments(): Observable<ShiftComments[]> {
     return this.http.get<ShiftComments[]>(`${environment.apiUrl}/comments.json`,
       {headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
-        tap(_ => console.log('Comments Retrieved Successfully')),
-      catchError(err => this.handleHttpError(err))
+        tap(_ => console.log('Comments Retrieved Successfully'))
     );
   }
 
-  loadCommentsForUpcomingShifts(): Observable<ShiftComments[] | CommentsTrackerError> {
+  loadCommentsForUpcomingShifts(): Observable<ShiftComments[]> {
     const params = new HttpParams()
       .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'));
     return this.http.get<ShiftComments[]>(`${environment.apiUrl}/comments.json`,
@@ -40,23 +38,21 @@ export class CommentsService {
           'Content-Type': 'application/json'
         })
       }).pipe(
-      tap(_ => console.log('Comments Retrieved Successfully')),
-      catchError(err => this.handleHttpError(err))
+      tap(_ => console.log('Comments Retrieved Successfully'))
     );
   }
 
-  getCommentById(id: string): Observable<ShiftComments | CommentsTrackerError> {
+  getCommentById(id: string): Observable<ShiftComments> {
     return this.http.get<ShiftComments>(`${environment.apiUrl}/comments/${id}.json`,
       {headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
-      tap(_ => console.log(`Shift: ${id} Retrieved Successfully!`)),
-      catchError(err => this.handleHttpError(err))
+      tap(_ => console.log(`Shift: ${id} Retrieved Successfully!`))
     );
   }
 
-  getCommentsForShift(id: string): Observable<ShiftComments[] | CommentsTrackerError> {
+  getCommentsForShift(id: string): Observable<ShiftComments[]> {
     const params = new HttpParams()
       .set('dateOfComment', 'desc');
     return this.http.get<ShiftComments[]>(`${environment.apiUrl}/shifts/${id}/comments.json`,
@@ -64,23 +60,21 @@ export class CommentsService {
           'Content-Type': 'application/json'
         })
       }).pipe(
-        tap(_ => console.log('Shift comments loaded!')),
-      catchError(err => this.handleHttpError(err))
+        tap(_ => console.log('Shift comments loaded!'))
     );
   }
 
-  getUsersComments(id: string): Observable<ShiftComments[] | CommentsTrackerError> {
+  getUsersComments(id: string): Observable<ShiftComments[]> {
     return this.http.get<ShiftComments[]>(`${environment.apiUrl}/users/${id}/comments`,
       {headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
-        tap(_ => console.log(`Shifts for user: ${id} Retrieved successfully!`)),
-      catchError(err => this.handleHttpError(err))
+        tap(_ => console.log(`Shifts for user: ${id} Retrieved successfully!`))
     );
   }
 
-  addComment(comment: ShiftComments): Observable<ShiftComments | CommentsTrackerError> {
+  addComment(comment: ShiftComments): Observable<ShiftComments> {
     return this.http.post<ShiftComments>(`${environment.apiUrl}/comments`,
       {
         comment: comment.comment,
@@ -92,12 +86,11 @@ export class CommentsService {
           'Content-Type': 'application/json'
         })
       }).pipe(
-      tap(_ => console.log('Comment Edited Successfully!')),
-      catchError(err => this.handleHttpError(err))
+      tap(_ => console.log('Comment Edited Successfully!'))
     );
   }
 
-  editComment(comment: ShiftComments): Observable<ShiftComments | CommentsTrackerError> {
+  editComment(comment: ShiftComments): Observable<ShiftComments> {
     return this.http.put<ShiftComments>(`${environment.apiUrl}/comments/${comment.id}`,
       {
         comment: comment.comment,
@@ -109,27 +102,17 @@ export class CommentsService {
           'Content-Type': 'application/json'
         })
     }).pipe(
-      tap(_ => console.log('Comment Edited Successfully!')),
-      catchError(err => this.handleHttpError(err))
+      tap(_ => console.log(`Comment: ${comment.id} Edited Successfully!`))
     );
   }
 
-  deleteComment(comment: ShiftComments): Observable<ShiftComments | CommentsTrackerError> {
-     return this.http.delete<ShiftComments>(`${environment.apiUrl}/comments/${comment.id}`,
+  deleteComment(id: string): Observable<ShiftComments> {
+     return this.http.delete<ShiftComments>(`${environment.apiUrl}/comments/${id}`,
        {headers: new HttpHeaders({
            'Content-Type': 'application/json'
          })
        }).pipe(
-         tap(_ => console.log('Comment Delete Successfully!')),
-       catchError(err => this.handleHttpError(err))
+         tap(_ => console.log(`Comment: ${id} Delete Successfully!`))
      );
-  }
-
-  handleHttpError(error: HttpErrorResponse): Observable<CommentsTrackerError> {
-    const dataError = new CommentsTrackerError();
-    dataError.errorNumber = error.status;
-    dataError.message = error.statusText;
-    dataError.friendlyMessage = 'Oops! an error occurred while trying to retrieve shift comments data.';
-    return throwError(dataError);
   }
 }

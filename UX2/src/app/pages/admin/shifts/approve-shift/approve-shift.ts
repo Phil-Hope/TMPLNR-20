@@ -1,12 +1,10 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ScheduledShift} from "../../../../interfaces/shifts.interface";
-import {ShiftTrackerError} from "../../../shifts/services/shifts-errors.provider";
 import {ShiftsService} from "../../../shifts/services/shifts.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Observable} from "rxjs";
 import {User} from "../../../../interfaces/user.interface";
-import {UserTrackerError} from "../../users/services/user-errors.interface";
 import {UsersService} from "../../users/services/users.service";
 import {AlertController} from "@ionic/angular";
 
@@ -17,9 +15,9 @@ import {AlertController} from "@ionic/angular";
 })
 export class ApproveShiftPage implements OnInit {
 
-  shift: ScheduledShift | ShiftTrackerError;
+  shift: ScheduledShift;
   form: FormGroup;
-  users: User[] | UserTrackerError;
+  users: User[];
   date = new Date();
   id: string;
   isSubmitted: boolean;
@@ -52,7 +50,7 @@ export class ApproveShiftPage implements OnInit {
     }, 1000);
   }
 
-  getUsersToSelect(): Observable<User[] | UserTrackerError> {
+  getUsersToSelect(): Observable<User[]> {
     return this.userService.loadAllUsers();
   }
 

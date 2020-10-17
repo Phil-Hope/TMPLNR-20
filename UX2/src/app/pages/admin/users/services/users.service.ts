@@ -1,11 +1,10 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpParams, HttpHeaders, HttpErrorResponse} from "@angular/common/http";
-import {Observable, throwError} from "rxjs";
+import {HttpClient, HttpParams, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs";
 import {environment} from "../../../../../environments/environment";
-import {catchError, tap} from "rxjs/operators";
+import {tap} from "rxjs/operators";
 import {User} from "../../../../interfaces/user.interface";
 import {ScheduledShift} from "../../../../interfaces/shifts.interface";
-import {UserTrackerError} from "./user-errors.interface";
 import {format} from "date-fns";
 
 
@@ -18,7 +17,7 @@ export class UsersService {
   constructor(private http: HttpClient) {
   }
 
-  loadAllUsers(): Observable<User[] | UserTrackerError> {
+  loadAllUsers(): Observable<User[]> {
     const params = new HttpParams()
       .set('order[firstName]', 'asc');
     return this.http.get<User[]>(`${environment.apiUrl}/users.json`,
@@ -28,24 +27,22 @@ export class UsersService {
           'Content-Type': 'application/json'
         })
       }).pipe(
-      tap(_ => console.log('Users Retrieved Successfully!')),
-      catchError(err => this.handleHttpError(err))
+      tap(_ => console.log('Users Retrieved Successfully!'))
     );
   }
 
-  getUserById(id: string): Observable<User | UserTrackerError> {
+  getUserById(id: string): Observable<User> {
     return this.http.get<User>(`${environment.apiUrl}/users/${id}.json`,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
-      tap(_ => console.log(`User with UUID: ${id} Fetched Successfully!`)),
-      catchError(err => this.handleHttpError(err))
+      tap(_ => console.log(`User with UUID: ${id} Fetched Successfully!`))
     );
   }
 
-  loadAllUsersShifts(id: string): Observable<ScheduledShift[] | UserTrackerError> {
+  loadAllUsersShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('order[shifts]', 'ASC');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
@@ -53,12 +50,11 @@ export class UsersService {
           'Content-Type': 'application/json'
         })
       }).pipe(
-        tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
-        catchError(err => this.handleHttpError(err))
+        tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
     );
   }
 
-  loadUsersUpcomingShifts(id: string): Observable<ScheduledShift[] | UserTrackerError> {
+  loadUsersUpcomingShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('order[shifts]', 'ASC')
       .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'));
@@ -67,12 +63,11 @@ export class UsersService {
           'Content-Type': 'application/json'
         })
       }).pipe(
-      tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
-      catchError(err => this.handleHttpError(err))
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
     );
   }
 
-  loadUsersPastShifts(id: string): Observable<ScheduledShift[] | UserTrackerError> {
+  loadUsersPastShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('order[shifts]', 'ASC')
       .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'));
@@ -81,12 +76,11 @@ export class UsersService {
           'Content-Type': 'application/json'
         })
       }).pipe(
-      tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
-      catchError(err => this.handleHttpError(err))
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
     );
   }
 
-  loadUsersPendingShifts(id: string): Observable<ScheduledShift[] | UserTrackerError> {
+  loadUsersPendingShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('order[shifts]', 'ASC')
       .set('isApproved', 'false');
@@ -95,12 +89,11 @@ export class UsersService {
           'Content-Type': 'application/json'
         })
       }).pipe(
-      tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
-      catchError(err => this.handleHttpError(err))
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
     );
   }
 
-  loadUsersApprovedShifts(id: string): Observable<ScheduledShift[] | UserTrackerError> {
+  loadUsersApprovedShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('order[shifts]', 'ASC')
       .set('isApproved', 'true');
@@ -109,12 +102,11 @@ export class UsersService {
           'Content-Type': 'application/json'
         })
       }).pipe(
-      tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
-      catchError(err => this.handleHttpError(err))
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
     );
   }
 
-  loadUsersPendingPrimaryShifts(id: string): Observable<ScheduledShift[] | UserTrackerError> {
+  loadUsersPendingPrimaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('order[shifts]', 'ASC')
       .set('isApproved', 'false')
@@ -124,12 +116,11 @@ export class UsersService {
           'Content-Type': 'application/json'
         })
       }).pipe(
-      tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
-      catchError(err => this.handleHttpError(err))
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
     );
   }
 
-  loadUsersPendingSecondaryShifts(id: string): Observable<ScheduledShift[] | UserTrackerError> {
+  loadUsersPendingSecondaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('order[shifts]', 'ASC')
       .set('isApproved', 'false')
@@ -139,12 +130,11 @@ export class UsersService {
           'Content-Type': 'application/json'
         })
       }).pipe(
-      tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
-      catchError(err => this.handleHttpError(err))
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
     );
   }
 
-  loadUsersApprovedPrimaryShifts(id: string): Observable<ScheduledShift[] | UserTrackerError> {
+  loadUsersApprovedPrimaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('order[shifts]', 'ASC')
       .set('isApproved', 'true')
@@ -154,12 +144,11 @@ export class UsersService {
           'Content-Type': 'application/json'
         })
       }).pipe(
-      tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
-      catchError(err => this.handleHttpError(err))
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
     );
   }
 
-  loadUsersApprovedSecondaryShifts(id: string): Observable<ScheduledShift[] | UserTrackerError> {
+  loadUsersApprovedSecondaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('order[shifts]', 'ASC')
       .set('isApproved', 'true')
@@ -169,13 +158,12 @@ export class UsersService {
           'Content-Type': 'application/json'
         })
       }).pipe(
-      tap(_ => console.log(`Shifts Retrieved For User: ${id} `)),
-      catchError(err => this.handleHttpError(err))
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
     );
   }
 
 
-  editUser(user: User): Observable<User | UserTrackerError> {
+  editUser(user: User): Observable<User> {
     return this.http.put<User>(`${environment.apiUrl}/users/${user.id}`,
       {
         id: user.id,
@@ -192,8 +180,7 @@ export class UsersService {
         })
       }).pipe(
         tap(_ => alert(`User ${user.firstName} ${user.lastName} was Successfully Updated!`)),
-        tap(data => console.log('edit user: ' + JSON.stringify(data))),
-        catchError(err => this.handleHttpError(err))
+        tap(data => console.log('edit user: ' + JSON.stringify(data)))
     );
   }
     deleteUser(id: string) {
@@ -203,12 +190,11 @@ export class UsersService {
         })
       }).pipe(
         tap(_ => alert('User Successfully Deleted!')),
-        tap(data => console.log('delete user: ' + JSON.stringify(data))),
-        catchError(err => this.handleHttpError(err))
+        tap(data => console.log('delete user: ' + JSON.stringify(data)))
     );
   }
 
-  registerUser(user: User): Observable<User | UserTrackerError> {
+  registerUser(user: User): Observable<User> {
     return this.http.post<User>(`${environment.apiUrl}/register`,
       {
         id: user.id,
@@ -226,12 +212,11 @@ export class UsersService {
         })
       }).pipe(
       tap(_ => alert(`User ${user.firstName} ${user.lastName} Created Successfully!`)),
-      tap(data => console.log('register: ' + JSON.stringify(data))),
-      catchError(err => this.handleHttpError(err))
+      tap(data => console.log('register: ' + JSON.stringify(data)))
     );
   }
 
-  addUser(user: User): Observable<User | UserTrackerError> {
+  addUser(user: User): Observable<User> {
     return this.http.post<User>(`${environment.apiUrl}/users`,
       {
         firstName: user.firstName,
@@ -243,21 +228,13 @@ export class UsersService {
         profilePicture: user.profilePicture,
         wagePerHour: user.wagePerHour
       },
-      {headers: new HttpHeaders({
+      {
+        headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
       tap(_ => alert(`User ${user.firstName} ${user.lastName} Created Successfully!`)),
-      tap(data => console.log('add user: ' + JSON.stringify(data))),
-      catchError(err => this.handleHttpError(err))
+      tap(data => console.log('add user: ' + JSON.stringify(data)))
     );
-  }
-
-  handleHttpError(error: HttpErrorResponse): Observable<UserTrackerError> {
-    const dataError = new UserTrackerError();
-    dataError.errorNumber = error.status;
-    dataError.message = error.statusText;
-    dataError.friendlyMessage = 'Oops! an error occurred while trying to retrieve users data.';
-    return throwError(dataError);
   }
 }

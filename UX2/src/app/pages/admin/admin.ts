@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ShiftsService} from "../shifts/services/shifts.service";
-import {Observable} from "rxjs";
 import {ScheduledShift} from "../../interfaces/shifts.interface";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {tap} from "rxjs/operators";
 import {Router} from "@angular/router";
-import {ShiftTrackerError} from "../shifts/services/shifts-errors.provider";
+
 
 @Component({
   selector: 'app-admin',
@@ -15,8 +13,8 @@ import {ShiftTrackerError} from "../shifts/services/shifts-errors.provider";
 
 export class AdminPage implements OnInit {
 
-  shifts: ScheduledShift[] | ShiftTrackerError;
-  shift: ScheduledShift | ShiftTrackerError;
+  shifts: ScheduledShift[];
+  shift: ScheduledShift;
   form: FormGroup;
   id: string;
   isApproved: boolean;

@@ -1,9 +1,47 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>delete-comment</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [pageTitle]="['Delete Comment?']"></app-header>
 
 <ion-content>
-
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+  <div *ngIf="comment else loading">
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Are you sure you want to delete comment?</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-item>
+      <ion-label>Recipient</ion-label>
+      <ion-label>Date Of Comment</ion-label>
+      <ion-label>Shift</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{comment.recipient.firstName}} {{comment.recipient.lastName}}</ion-label>
+      <ion-label>{{comment.dateOfComment | date: 'medium'}}</ion-label>
+      <ion-label>{{comment.shift.id}}</ion-label>
+    </ion-item>
+  </ion-card-content>
+</ion-card>
+  </div>
 </ion-content>
+<ion-footer [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/shifts/list" text="Back"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/shifts/add']">
+        <ion-label>
+          Add Shift
+        </ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

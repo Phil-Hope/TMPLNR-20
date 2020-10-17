@@ -151,18 +151,31 @@
         </ion-label>
         </ion-item>
       </ng-template>
+      <ion-item>
+        <ion-col size="6">
+          <ion-button color="success" fill="clear" [routerLink]="['/shifts/', shift.id, 'add-comment']">
+            <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+            <ion-label size="small">Comment</ion-label>
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button fill="clear" [routerLink]="['/shifts/', shift.id, 'view-comments']">
+            <ion-icon name="list"></ion-icon>
+            <ion-label>Comments</ion-label>
+          </ion-button>
+        </ion-col>
+      </ion-item>
       <ion-item *ngIf="shift.isApproved == false else locked">
 
         <ion-col size="6">
-          <ion-button [routerLink]="['/shifts/', shift.id, 'edit']" color="warning" size="block">
+          <ion-button shape="round" fill="outline" [routerLink]="['/shifts/', shift.id, 'edit']" color="warning" size="block">
+            <ion-icon slot="start" name="pencil"></ion-icon>
             <ion-label>EDIT</ion-label>
           </ion-button>
         </ion-col>
           <ion-col size="6">
-          <ion-button size="block" color="danger" [routerLink]="['/shifts/', shift.id, 'delete']">
-            <ion-label>
-              DELETE
-            </ion-label>
+          <ion-button shape="round" fill="outline" size="block" color="danger" [routerLink]="['/shifts/', shift.id, 'delete']">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
           </ion-button>
         </ion-col>
       </ion-item>
@@ -171,16 +184,11 @@
 </ion-card>
   </div>
 </ion-content>
-<ion-footer>
+<ion-footer [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button
-        style="font-size: 0.8rem;
-        font-family: Quicksand, sans-serif;"
-        [routerLink]="['/shifts/calendar/draft']">
-        <ion-icon slot="start" name="calendar-outline"></ion-icon>
-        <ion-label>Draft<br />Calendar</ion-label>
-      </ion-button>
+      <ion-back-button defaultHref="/shifts/list" text="Back">
+      </ion-back-button>
     </ion-buttons>
 
     <ion-title>
@@ -188,12 +196,9 @@
     </ion-title>
 
     <ion-buttons slot="end">
-      <ion-button
-        style="font-size: 0.8rem;
-        font-family: Quicksand, sans-serif;"
-        size="small" [routerLink]="['/shifts/calendar/approved']">
-        <ion-icon slot="end" name="calendar"></ion-icon>
-        Approved<br /> Calendar
+      <ion-button [routerLink]="['/users/profile']">
+        <ion-icon slot="end" name="person-outline"></ion-icon>
+<ion-label>Profile</ion-label>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

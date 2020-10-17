@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {ScheduledShift} from "../../../interfaces/shifts.interface";
+import {FormBuilder, FormGroup} from '@angular/forms';;
 import {ActivatedRoute, Router} from '@angular/router';
 import {UsersService} from "../../admin/users/services/users.service";
-import {ShiftsService} from "../../shifts/services/shifts.service";
-import {map, tap} from "rxjs/operators";
-import {ShiftTrackerError} from "../../shifts/services/shifts-errors.provider";
+import {tap} from "rxjs/operators";
 import {User} from "../../../interfaces/user.interface";
 
 

@@ -1,7 +1,7 @@
 <app-header [pageTitle]="['Shift Dashboard']"></app-header>
 
 <ion-content>
-
+<app-header-banner></app-header-banner>
       <ion-item *ngFor="let shift of shifts">
         <div *ngIf="shifts">
         <ion-avatar>
@@ -14,39 +14,38 @@
         </div>
       </ion-item>
 
-
-
 <ion-card>
   <ion-list>
 
 <ion-item-divider class="list-header">Calendars</ion-item-divider>
-    <ion-item [routerLink]="['/shifts/calendar/draft']">
+
+    <ion-item [routerLink]="['/shifts/calendar/draft']" detail="true" lines="indent">
+      <ion-avatar><ion-img src="assets/icon8/icons8-schedule.svg"></ion-img></ion-avatar>
       <ion-ripple-effect></ion-ripple-effect>
-      <ion-icon color="warning" slot="start" name="calendar-outline"></ion-icon>
       <ion-label class="list-label">Pending Approval</ion-label>
     </ion-item>
-    <ion-item [routerLink]="['/shifts/calendar/approved']">
+
+    <ion-item [routerLink]="['/shifts/calendar/approved']" detail="true" lines="indent">
+      <ion-avatar><ion-img src="assets/icon8/icons8-today.svg"></ion-img></ion-avatar>
       <ion-ripple-effect></ion-ripple-effect>
-      <ion-icon color="success" slot="start" name="calendar-outline"></ion-icon>
       <ion-label class="list-label">Approved</ion-label>
     </ion-item>
-    <ion-item-divider class="list-header"></ion-item-divider>
-
-    <ion-item [routerLink]="['/comments']">
+    <ion-item  class="list-label">Options</ion-item>
+    <ion-item [routerLink]="['/comments']" detail="true" lines="indent">
+      <ion-avatar><ion-img src="assets/icon8/icons8-calendar-document-150.png"></ion-img></ion-avatar>
       <ion-ripple-effect></ion-ripple-effect>
-      <ion-icon slot="start" name="document-text-outline"></ion-icon>
-      <ion-label class="list-label">View All Comments</ion-label>
+      <ion-label class="list-label">Shift Comments</ion-label>
     </ion-item>
 
-      <ion-item [routerLink]="['/shifts/list']">
+      <ion-item [routerLink]="['/shifts/list']" detail="true" lines="indent">
+        <ion-avatar><ion-img src="assets/icon8/icons8-calendar.svg"></ion-img></ion-avatar>
         <ion-ripple-effect></ion-ripple-effect>
-        <ion-icon slot="start" name="document-text-outline"></ion-icon>
           <ion-label class="list-label">Shifts List</ion-label>
       </ion-item>
 
-    <ion-item [routerLink]="['/shifts/add']">
+    <ion-item [routerLink]="['/shifts/add']" detail="true" lines="indent">
+      <ion-avatar><ion-img src="assets/icon8/icons8-add.svg"></ion-img></ion-avatar>
       <ion-ripple-effect></ion-ripple-effect>
-      <ion-icon color="primary" slot="start" name="add-circle-outline"></ion-icon>
       <ion-label class="list-label">
         Add New Shift
       </ion-label>

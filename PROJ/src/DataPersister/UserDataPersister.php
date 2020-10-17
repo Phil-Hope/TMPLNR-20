@@ -35,10 +35,12 @@ class UserDataPersister implements DataPersisterInterface
     public function persist($data)
     {
         if ($data->getPassword()) {
+          if ($this->userPasswordEncoder->needsRehash($data) == true) {
             $data->setPassword(
-                $this->userPasswordEncoder->encodePassword($data, $data->getPassword())
+              $this->userPasswordEncoder->encodePassword($data, $data->getPassword())
             );
             $data->eraseCredentials();
+          }
         }
         $this->entityManager->persist($data);
         $this->entityManager->flush();

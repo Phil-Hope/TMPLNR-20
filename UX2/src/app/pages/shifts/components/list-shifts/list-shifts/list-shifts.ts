@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
+import {Router} from '@angular/router';
 import {ScheduledShift} from '../../../../../interfaces/shifts.interface';
 import {Observable} from "rxjs";
 import {ActionSheetController, AlertController, NavController, NavParams} from "@ionic/angular";
 import {ModalController} from "@ionic/angular";
 import {ShiftsService} from "../../../services/shifts.service";
-import {ShiftTrackerError} from "../../../services/shifts-errors.provider";
 import {tap} from "rxjs/operators";
 
 @Component({
@@ -26,7 +25,7 @@ export class ListShiftsPage implements OnInit {
     ) {
     }
 
-    shifts: ScheduledShift[] | ShiftTrackerError;
+    shifts: ScheduledShift[];
     date = new Date();
     isLoading = true;
     selectedShift: ScheduledShift;
@@ -131,7 +130,7 @@ export class ListShiftsPage implements OnInit {
                 {
                     text: 'Approved - Secondary',
                     handler: () => {
-                        this.onLoadPendingShifts();
+                        this.onLoadApprovedSecondary();
                     }
                 },
                 {
@@ -162,11 +161,11 @@ export class ListShiftsPage implements OnInit {
         await actionSheet.present();
     }
 
-    loadAllShifts(): Observable<ScheduledShift[] | ShiftTrackerError> {
+    loadAllShifts(): Observable<ScheduledShift[]> {
         return this.shiftsService.loadAllShifts()
             .pipe(
                 tap(async (res) => {
-                        if (!(res instanceof ShiftTrackerError) && res.length === 0) {
+                        if (res.length === 0) {
                             const alert = await this.alertCtrl.create({
                                 header: 'No Shifts Found!',
                                 message: 'No shifts were found in the database.',
@@ -183,11 +182,11 @@ export class ListShiftsPage implements OnInit {
         this.loadAllShifts().subscribe((data: ScheduledShift[]) => this.shifts = data);
     }
 
-    loadUpcoming(): Observable<ScheduledShift[] | ShiftTrackerError> {
+    loadUpcoming(): Observable<ScheduledShift[]> {
         return this.shiftsService.loadAllUpcomingShifts()
             .pipe(
                 tap(async (res) => {
-                    if (!(res instanceof ShiftTrackerError) && res.length === 0) {
+                    if (res.length === 0) {
                         const alert = await this.alertCtrl.create({
                             header: 'We Looked, But there are NONE!',
                             message: 'No upcoming approved shifts were found in the database.',
@@ -203,11 +202,11 @@ export class ListShiftsPage implements OnInit {
         this.loadUpcoming().subscribe((data: ScheduledShift[]) => this.shifts = data);
     }
 
-    loadPastShifts(): Observable<ScheduledShift[] | ShiftTrackerError> {
+    loadPastShifts(): Observable<ScheduledShift[]> {
         return this.shiftsService.loadAllPastShifts()
             .pipe(
                 tap(async (res) => {
-                    if (!(res instanceof ShiftTrackerError) && res.length === 0) {
+                    if (res.length === 0) {
                         const alert = await this.alertCtrl.create({
                             header: 'We Looked, But there are NONE!',
                             message: 'No past shifts were found in the database.',
@@ -223,11 +222,11 @@ export class ListShiftsPage implements OnInit {
         this.loadPastShifts().subscribe((data: ScheduledShift []) => this.shifts = data);
     }
 
-    loadApprovedShifts(): Observable<ScheduledShift [] | ShiftTrackerError> {
+    loadApprovedShifts(): Observable<ScheduledShift []> {
         return this.shiftsService.loadAllUpcomingApprovedShifts()
             .pipe(
                 tap(async (res) => {
-                    if (!(res instanceof ShiftTrackerError) && res.length === 0) {
+                    if (res.length === 0) {
                         const alert = await this.alertCtrl.create({
                             header: 'We Looked, But there are NONE!',
                             message: 'No upcoming "approved" shifts were found in the database.',
@@ -243,11 +242,11 @@ export class ListShiftsPage implements OnInit {
         this.loadApprovedShifts().subscribe((data: ScheduledShift[]) => this.shifts = data);
     }
 
-    loadPendingShifts(): Observable<ScheduledShift [] | ShiftTrackerError> {
+    loadPendingShifts(): Observable<ScheduledShift []> {
         return this.shiftsService.loadAwaitingApprovalShifts()
             .pipe(
                 tap(async (res) => {
-                    if (!(res instanceof ShiftTrackerError) && res.length === 0) {
+                    if (res.length === 0) {
                         const alert = await this.alertCtrl.create({
                             header: 'We Looked, But there are NONE!',
                             message: 'No upcoming "pending approval" shifts were found in the database.',
@@ -263,11 +262,11 @@ export class ListShiftsPage implements OnInit {
         this.loadPendingShifts().subscribe((data: ScheduledShift[]) => this.shifts = data);
     }
 
-    loadLiveShifts(): Observable<ScheduledShift [] | ShiftTrackerError> {
+    loadLiveShifts(): Observable<ScheduledShift []> {
         return this.shiftsService.loadLiveShifts()
             .pipe(
                 tap(async (res) => {
-                    if (!(res instanceof ShiftTrackerError) && res.length === 0) {
+                    if (res.length === 0) {
                         const alert = await this.alertCtrl.create({
                             header: 'We Looked, But there are NONE!',
                             message: 'No "live" shifts were found in the database.',
@@ -283,11 +282,11 @@ export class ListShiftsPage implements OnInit {
         this.loadLiveShifts().subscribe((data: ScheduledShift[]) => this.shifts = data);
     }
 
-    loadPendingPrimary(): Observable<ScheduledShift [] | ShiftTrackerError> {
+    loadPendingPrimary(): Observable<ScheduledShift []> {
         return this.shiftsService.loadUpcomingPendingPrimaryShifts()
             .pipe(
                 tap(async (res) => {
-                    if (!(res instanceof ShiftTrackerError) && res.length === 0) {
+                    if (res.length === 0) {
                         const alert = await this.alertCtrl.create({
                             header: 'We Looked, But there are NONE!',
                             message: 'No upcoming "pending primary" shifts were found in the database.',
@@ -303,11 +302,11 @@ export class ListShiftsPage implements OnInit {
         this.loadPendingPrimary().subscribe((data: ScheduledShift[]) => this.shifts = data);
     }
 
-    loadPendingSecondary(): Observable<ScheduledShift [] | ShiftTrackerError> {
+    loadPendingSecondary(): Observable<ScheduledShift []> {
         return this.shiftsService.loadUpcomingPendingSecondaryShifts()
             .pipe(
                 tap(async (res) => {
-                    if (!(res instanceof ShiftTrackerError) && res.length === 0) {
+                    if (res.length === 0) {
                         const alert = await this.alertCtrl.create({
                             header: 'We Looked, But there are NONE!',
                             message: 'No upcoming "pending secondary" shifts were found in the database.',
@@ -324,11 +323,11 @@ export class ListShiftsPage implements OnInit {
     }
 
 
-    loadApprovedPrimary(): Observable<ScheduledShift[] | ShiftTrackerError> {
+    loadApprovedPrimary(): Observable<ScheduledShift[]> {
         return this.shiftsService.loadUpcomingApprovedPrimaryShifts()
             .pipe(
                 tap(async (res) => {
-                    if (!(res instanceof ShiftTrackerError) && res.length === 0) {
+                    if (res.length === 0) {
                         const alert = await this.alertCtrl.create({
                             header: 'We Looked, But there are NONE!',
                             message: 'No upcoming "approved primary" shifts were found in the database.',
@@ -344,11 +343,11 @@ export class ListShiftsPage implements OnInit {
         this.loadApprovedPrimary().subscribe((data: ScheduledShift[]) => this.shifts = data);
     }
 
-    loadApprovedSecondary(): Observable<ScheduledShift[] | ShiftTrackerError> {
+    loadApprovedSecondary(): Observable<ScheduledShift[]> {
         return this.shiftsService.loadUpcomingApprovedSecondaryShifts()
             .pipe(
                 tap(async (res) => {
-                    if (!(res instanceof ShiftTrackerError) && res.length === 0) {
+                    if (res.length === 0) {
                         const alert = await this.alertCtrl.create({
                             header: 'We Looked, But there are NONE!',
                             message: 'No upcoming approved shifts were found in the database.',
