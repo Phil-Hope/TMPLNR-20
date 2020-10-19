@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Hautelook\AliceBundle\PhpUnit\ReloadDatabaseTrait;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
-class ApitTest extends  ApiTestCase
+class ApiTest extends  ApiTestCase
 {
   use ReloadDatabaseTrait;
 
@@ -286,8 +286,6 @@ class ApitTest extends  ApiTestCase
       $em = $this->getEntityManager();
       $em->persist($shift);
       $em->flush();
-
-      $this->login($client, 'anotherUser@example.com', 'foo');
       $client->request('PUT', '/shifts/'.$shift->getId(), [
         'json' => [
         'start' => '2021-12-12 10:00:00',
