@@ -28,7 +28,12 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin.module')
-      .then(m => m.AdminPageModule),
+      .then(m => m.AdminPageModule)
+  },
+  {
+    path: 'admin/comments',
+    loadChildren: () => import('./pages/admin/comments/comments.module')
+      .then( m => m.CommentsPageModule)
   },
   {
     path: 'admin/pending-shifts',
@@ -43,8 +48,7 @@ const routes: Routes = [
   {
     path: 'contact',
     loadChildren: () => import('./pages/home/components/contact/contact.module')
-      .then(m => m.ContactModule),
-    data: { preload: true }
+      .then(m => m.ContactModule)
   },
   {
     path: 'shifts',
@@ -54,27 +58,27 @@ const routes: Routes = [
   {
     path: 'shifts/add',
     loadChildren: () => import('./pages/shifts/components/add-shift/add-shift.module')
-        .then(m => m.AddShiftModule),
+        .then(m => m.AddShiftModule)
   },
   {
     path: 'shifts/list',
     loadChildren: () => import('./pages/shifts/components/list-shifts/list-shifts/list-shifts.module')
-        .then(m => m.ListShiftsModule),
+        .then(m => m.ListShiftsModule)
   },
   {
     path: 'shifts/:id/details',
     loadChildren: () => import('./pages/shifts/components/shift-details/shift-details.module')
-      .then(m => m.ShiftDetailsModule),
+      .then(m => m.ShiftDetailsModule)
   },
   {
     path: 'shifts/:id/edit',
     loadChildren: () => import('./pages/shifts/components/edit-shift/edit-shift.module')
-      .then(m => m.EditShiftPageModule),
+      .then(m => m.EditShiftPageModule)
   },
   {
     path: 'shifts/:id/delete',
     loadChildren: () => import('./pages/shifts/components/delete-shift/delete-shift.module')
-      .then(m => m.DeleteShiftPageModule),
+      .then(m => m.DeleteShiftPageModule)
   },
   {
     path: 'shifts/:id/view-comments',
@@ -89,12 +93,37 @@ const routes: Routes = [
   {
     path: 'shifts/calendar/draft',
     loadChildren: () => import('./pages/shifts/components/draft-calendar/draft-calendar.module')
-      .then(m => m.CalendarPageModule),
+      .then(m => m.CalendarPageModule)
   },
   {
     path: 'shifts/calendar/approved',
     loadChildren: () => import('./pages/shifts/components/calendar/calendar.module')
       .then(m => m.ApprovedCalendarPageModule)
+  },
+  {
+    path: 'messaging',
+    loadChildren: () => import('./pages/messaging/messaging.module')
+      .then( m => m.MessagingPageModule)
+  },
+  {
+    path: 'messaging/send',
+    loadChildren: () => import('./pages/messaging/send/send.module')
+      .then( m => m.SendPageModule)
+  },
+  {
+    path: 'messaging/inbox',
+    loadChildren: () => import('./pages/messaging/inbox/inbox.module')
+      .then( m => m.InboxPageModule)
+  },
+  {
+    path: 'messaging/:id/reply',
+    loadChildren: () => import('./pages/messaging/reply/reply.module')
+      .then( m => m.ReplyPageModule)
+  },
+  {
+    path: 'messaging/:id/read',
+    loadChildren: () => import('./pages/messaging/read/read.module')
+      .then( m => m.ReadPageModule)
   },
   {
     path: 'comments',
@@ -119,32 +148,32 @@ const routes: Routes = [
   {
     path: 'users',
     loadChildren: () => import('./pages/admin/users/components/list-users/list-users.module')
-      .then(m => m.ListUsersModule),
+      .then(m => m.ListUsersModule)
   },
   {
     path: 'users/add',
     loadChildren: () => import('./pages/admin/users/components/add-user/add-user.module')
-      .then(m => m.AddUserModule),
+      .then(m => m.AddUserModule)
   },
   {
     path: 'users/:id/shifts',
     loadChildren: () => import('./pages/admin/users/components/users-shifts/users-shifts.module')
-      .then(m => m.UsersShiftsModule),
+      .then(m => m.UsersShiftsModule)
   },
   {
     path: 'users/:id/details',
     loadChildren: () => import('./pages/admin/users/components/user-details/user-details.module')
-      .then(m => m.UserDetailsModule),
+      .then(m => m.UserDetailsModule)
   },
   {
     path: 'users/:id/edit',
     loadChildren: () => import('./pages/admin/users/components/edit-user/edit-user.module')
-      .then(m => m.EditUserPageModule),
+      .then(m => m.EditUserPageModule)
   },
   {
     path: 'users/:id/delete',
     loadChildren: () => import('./pages/admin/users/components/delete-user/delete-user.module')
-      .then(m => m.DeleteUserPageModule),
+      .then(m => m.DeleteUserPageModule)
   },
   {
     path: 'users/:id/comments',
@@ -154,7 +183,7 @@ const routes: Routes = [
   {
     path: 'users/profile',
     loadChildren: () => import('./pages/profile/profile.module')
-      .then(m => m.ProfileModule),
+      .then(m => m.ProfileModule)
   },
   {
     path: 'users/profile/:id/shifts',
@@ -170,7 +199,7 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./pages/page-not-found/page-not-found.module')
       .then(m => m.PageNotFoundModule)
-  }
+  },
 
 ];
 

@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { LoginPage } from "./login";
-import { LoginPageRoutingModule } from "./login-routing.module";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
+import {LoginPage} from "./login";
+import {LoginPageRoutingModule} from "./login-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {ComponentsModule} from "../../shared/components.module";
 import {RouteReuseStrategy} from "@angular/router";
@@ -22,8 +22,9 @@ import {RouteReuseStrategy} from "@angular/router";
     LoginPage
   ],
   providers: [
-    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
   ],
   bootstrap: [LoginPage]
 })
-export class LoginModule { }
+export class LoginModule {
+}

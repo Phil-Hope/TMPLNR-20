@@ -40,8 +40,6 @@ security:
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
-                    - App\Security\LoginAuthenticator
-                entry_point: lexik_jwt_authentication.jwt_token_authenticator
                 # where to redirect after logout
                 # target: app_any_route
 

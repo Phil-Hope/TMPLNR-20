@@ -55,6 +55,16 @@
             </ion-item>
           </ion-menu-toggle>
 
+            <ion-menu-toggle autoHide="false">
+              <ion-item color="light"  [routerLink]="['/messaging']"  routerDirection="root" detail="false">
+                <ion-ripple-effect type="bounded"></ion-ripple-effect>
+                <ion-icon slot="start" name="chatbubbles-outline"></ion-icon>
+                <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+                  Messages
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
           <ion-menu-toggle autoHide="false">
             <ion-item routerLink="admin" routerLinkActive="active" routerDirection="root" detail="false">
                 <ion-ripple-effect type="bounded"></ion-ripple-effect>

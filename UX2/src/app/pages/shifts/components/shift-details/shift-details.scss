@@ -1,0 +1,92 @@
+.top-card{
+  padding: 2rem;
+  margin-top: 3rem;
+}
+.spinner{
+  position: absolute;
+  left: 45%;
+  right: 45%
+}
+.top-card-title{
+  font-family: Quicksand, sans-serif;
+  text-align: center;
+}
+.top-card-subtitle{
+  font-size: 0.7rem;
+  font-family: Quicksand, sans-serif;
+  text-align: center;
+}
+.pending-approval{
+  color: #c79b2e;
+  text-align: center;
+  font-family: Quicksand, sans-serif;
+}
+.approved{
+  color: #00bb00;
+  text-align: center;
+  font-family: Quicksand, sans-serif;
+}
+.call-level-title{
+  font-size: 0.8rem;
+  text-align: right;
+  font-family: Quicksand, sans-serif;
+}
+.primary{
+  font-size: 0.8rem;
+  text-align: left;
+  font-family: Quicksand, sans-serif;
+}
+.secondary{
+  font-size: 0.8rem;
+  text-align: left;
+  font-family: Quicksand, sans-serif;
+}
+.name{
+  font-size: 0.8rem;
+  text-align: left;
+  font-family: Quicksand, sans-serif;
+}
+.on-duty{
+  font-size: 0.8rem;
+  text-align: right;
+  font-family: Quicksand, sans-serif;
+}
+.date{
+  font-size: 0.8rem;
+  font-family: Quicksand, sans-serif;
+  text-align: left;
+}
+.date-title{
+  font-size: 0.8rem;
+  font-family: Quicksand, sans-serif;
+  text-align: right;
+}
+.start-title{
+  font-size: 0.8rem;
+  font-family: Quicksand, sans-serif;
+  text-align: right;
+}
+.start-time{
+  font-size: 0.8rem;
+  font-family: Quicksand, sans-serif;
+  text-align: left;
+}
+.finish-title{
+  font-size: 0.8rem;
+  font-family: Quicksand, sans-serif;
+  text-align: right;
+}
+.finish-time{
+  font-size: 0.8rem;
+  font-family: Quicksand, sans-serif;
+  text-align: left;
+}
+.locked-text{
+  font-family: Quicksand, sans-serif;
+  font-size: 0.8rem;
+  text-align: center;
+}
+.locked-span{
+  color: #0d0d0d;
+  font-size: 0.7rem;
+}

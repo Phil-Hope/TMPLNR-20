@@ -5,7 +5,7 @@ import {ProfilePage} from "./profile";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ProfilePageRoutingModule} from "./profile-routing.module";
 import {ComponentsModule} from "../../shared/components.module";
-import {AuthenticationService} from "../../services/authentication.service";
+import {AuthenticationService} from "../../authentication/authentication.service";
 
 import {UsersService} from "../admin/users/services/users.service";
 import {FormsModule} from "@angular/forms";

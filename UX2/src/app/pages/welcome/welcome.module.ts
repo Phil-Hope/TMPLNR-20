@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {IonicModule} from '@ionic/angular';
 import {IonicStorageModule} from "@ionic/storage";
-
 import {WelcomePage} from "./welcome";
-import { WelcomeRoutingModule } from "./welcome-routing.module";
+import {WelcomeRoutingModule} from "./welcome-routing.module";
+
 
 @NgModule({
   imports: [
@@ -16,4 +16,5 @@ import { WelcomeRoutingModule } from "./welcome-routing.module";
   declarations: [WelcomePage],
   entryComponents: [WelcomePage],
 })
-export class WelcomeModule { }
+export class WelcomeModule {
+}

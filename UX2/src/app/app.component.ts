@@ -5,7 +5,7 @@ import {SwUpdate} from '@angular/service-worker';
 import {Router} from '@angular/router';
 import {MenuController, Platform, ToastController} from '@ionic/angular';
 import {BehaviorSubject, Observable} from "rxjs";
-import {AuthenticationService} from "./services/authentication.service";
+import {AuthenticationService} from "./authentication/authentication.service";
 import {filter, map, take} from "rxjs/operators";
 import {Storage} from "@ionic/storage";
 import {HttpClient} from "@angular/common/http";

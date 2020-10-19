@@ -26,7 +26,6 @@ class SecurityController extends AbstractController
     $this->repository = $repository;
   }
 
-
   /**
    * @Route("/login", name="api_login", methods={"POST"})
    * @param Request $request
@@ -56,65 +55,12 @@ class SecurityController extends AbstractController
       }
       $token = $this->get($JWTManager)->encode([
         'email' => $user->getUsername(),
-        'exp' => time() + 3600 // 1HR
+        'exp' => time() + 360000 // 1HR
       ]);
       return new Response($user->getId(), 200, [
         'token' => $token,
         'Location' => $iriConverter->getIriFromItem($this->getUser()->getId())
       ]);
-    }
-
-  /**
-   * @param UserPasswordEncoderInterface $encoder
-   * @param Request $request
-   * @return Response
-   * @Route("/register", name="api_register", methods={"POST"})
-   */
-    public function register(UserPasswordEncoderInterface $encoder, Request $request) {
-      $em = $this->getDoctrine()->getManager();
-      $email = $request->request->get('email');
-      $password = $request->request->get('password');
-      $firstName = $request->request->get('firstName');
-      $lastName = $request->request->get('lastName');
-      $contactNumber = $request->request->get('contactNumber');
-      $profilePicture = $request->request->get('profilePicture');
-      $wagePerHour = $request->request->get('wagePerHour');
-      $roles = $request->request->get('roles');
-
-      $user = new User();
-
-      $user->setEmail($email);
-      $user->setFirstName($firstName);
-      $user->setLastName($lastName);
-      $user->setContactNumber($contactNumber);
-      $user->setProfilePicture($profilePicture);
-      $user->setWagePerHour($wagePerHour);
-      $user->setRoles($roles);
-      $user->setPassword($encoder->encodePassword($user, $password));
-
-      $em->persist($user);
-      $em->flush();
-
-      return new Response(sprintf('User %s successfully registered', $user->getUsername()));
-    }
-
-    /**
-     * @Route("/", name="app_login")
-     * @param AuthenticationUtils $authenticationUtils
-     * @return Response
-     */
-    public function login(AuthenticationUtils $authenticationUtils): Response
-    {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     /**

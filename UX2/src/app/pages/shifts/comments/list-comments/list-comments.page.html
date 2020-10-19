@@ -1,16 +1,18 @@
 <app-header [pageTitle]="['All Comments']"></app-header>
 
 <ion-content>
-<ion-list>
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading Profile...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+<ion-list *ngIf="comments else loading">
   <div *ngFor="let comment of comments">
-
-      <ion-card [hidden]="comments.length > 0">
-        <ion-item>
-          <ion-label>No Comments Found</ion-label>
-        </ion-item>
-      </ion-card>
-
-    <div [hidden]="comments.length == 0">
     <ion-card>
   <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" color="light">
     <ion-label><strong>Comment Date:</strong></ion-label>
@@ -36,13 +38,12 @@
       </ion-item>
     </ion-card>
     </div>
-  </div>
 </ion-list>
 </ion-content>
 <ion-footer [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button text="back"></ion-back-button>
+      <ion-back-button text="back" defaultHref="/shifts/list"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

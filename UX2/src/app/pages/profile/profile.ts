@@ -91,7 +91,7 @@ export class ProfilePage implements OnInit {
   }
 
   async getUsersShiftsFromStorage(id: string) {
-    this.userService.loadAllUsersShifts(id).subscribe((data: ScheduledShift[]) => this.shifts = data);
+    this.userService.loadUsersApprovedShifts(id).subscribe((data: ScheduledShift[]) => this.shifts = data);
   }
 
   viewShiftDetails(): void {

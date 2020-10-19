@@ -1,9 +1,35 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>user-comments</ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<app-header [pageTitle]="['Your Comments']"></app-header>
 <ion-content>
+<app-header-banner></app-header-banner>
+<ion-list>
+  <ion-item>
+    <ion-label>Date</ion-label>
+    <ion-label>Time</ion-label>
+    <ion-label>Sent To</ion-label>
+  </ion-item>
+  <ion-item [routerLink]="['/comments/', comment.id, 'view']" *ngFor="let comment of comments" detail="true">
+    <ion-label>{{comment.dateOfComment | date: 'dd MMM'}}</ion-label>
+    <ion-label>{{comment.dateOfComment | date: 'shortTime'}}</ion-label>
+    <ion-label *ngIf="comment.recipient else none">{{comment.recipient.firstName}} {{comment.recipient.lastName}}</ion-label>
+    <ng-template #none><ion-label>No Recipient</ion-label></ng-template>
+  </ion-item>
+</ion-list>
 
 </ion-content>
+<ion-footer [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/users/profile']">
+        <ion-icon slot="start" name="accessibility-outline"></ion-icon>
+        <ion-label>Profile</ion-label>
+      </ion-button>
+
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/messaging']">
+        <ion-icon slot="end" name="chatbubbles-outline"></ion-icon>
+        <ion-label>Messages</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

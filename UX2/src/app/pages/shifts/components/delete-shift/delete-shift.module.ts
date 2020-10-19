@@ -6,7 +6,7 @@ import { DeleteShiftPageRoutingModule } from "./delete-shift-routing.module";
 import { DeleteShiftPage } from "./delete-shift";
 import {ComponentsModule} from "../../../../shared/components.module";
 import {ShiftsService} from "../../services/shifts.service";
-import {AuthenticationService} from "../../../../services/authentication.service";
+import {AuthenticationService} from "../../../../authentication/authentication.service";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {HttpConfigInterceptor} from "../../../../services/http.interceptor";
 

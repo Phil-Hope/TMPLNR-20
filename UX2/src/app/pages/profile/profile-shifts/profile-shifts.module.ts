@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { ProfileShiftsPageRoutingModule } from './profile-shifts-routing.module';
 import { ProfileShiftsPage } from './profile-shifts.page';
 import {ShiftsService} from "../../shifts/services/shifts.service";
-import {AuthenticationService} from "../../../services/authentication.service";
+import {AuthenticationService} from "../../../authentication/authentication.service";
 import {UsersService} from "../../admin/users/services/users.service";
 import {ComponentsModule} from "../../../shared/components.module";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";

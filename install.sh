@@ -4,6 +4,8 @@ cd PROJ || exit
 
 FRONT='http://localhost:4200'
 
+PASS= php
+
 echo "Hello, $USER. lets set up your environment."
 
 echo -p "Enter you database username and press [ENTER]: "
@@ -29,10 +31,6 @@ symfony console doctrine:schema:create --env=test
 yes | symfony console doctrine:fixtures:load
 
 symfony console cache:clear
-
-composer req alice
-
-composer req logger
 
 composer req test
 

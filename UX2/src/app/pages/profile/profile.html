@@ -16,37 +16,42 @@
     <ion-card-content>
       <div style="position: relative; left: 41%"><h5>{{user.firstName}} {{user.lastName}}</h5> <ion-img src="{{user.profilePicture}}" style="width: 4rem; height: 4rem;"></ion-img></div>
       <ion-list>
-        <ion-item><ion-label><ion-icon name="at-outline"></ion-icon><span style="font-size: 0.8rem">email:</span>  {{user.email}}</ion-label></ion-item>
-        <ion-item><ion-label><span style="font-size: 0.8rem">wage:</span> ${{user.wagePerHour}}</ion-label></ion-item>
-        <ion-item><ion-label><ion-icon name="call-outline"></ion-icon> {{user.contactNumber}}</ion-label></ion-item>
-        <ion-row>
-          <ion-col size="6">
-            <ion-item size="block" [routerLink]="['/users/profile/', user.id, 'shifts']">
-              <ion-label>View Your Shifts</ion-label>
+        <ion-item>
+          <ion-icon slot="start" src="assets/icon8/icons8-email2.svg"></ion-icon>
+          <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">{{user.email}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon slot="start" src="assets/icon8/icons8-money.svg"></ion-icon>
+          <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">${{user.wagePerHour}}/ph</ion-label>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-icon slot="start" src="assets/icon8/icons8-phone.svg"></ion-icon>
+          <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">{{user.contactNumber}}</ion-label>
+        </ion-item>
+
+            <ion-item lines="full" color="light" [routerLink]="['/users/profile/', user.id, 'shifts']" detail="true">
+              <ion-icon slot="start" src="assets/icon8/icons8-calendar1.svg"></ion-icon>
+              <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">View Your Shifts</ion-label>
             </ion-item>
-          </ion-col>
-          <ion-col size="6">
-            <ion-item size="block" [routerLink]="['/users/', user.id, 'comments']">
-              <ion-label>
+            <ion-item lines="full" color="light" [routerLink]="['/users/', user.id, 'comments']" detail="true">
+             <ion-icon slot="start" src="assets/icon8/comments.svg"></ion-icon>
+              <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
                 View Your Comments
               </ion-label>
             </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row><ion-col size="12" class="ion-text-center">Shifts Snapshot</ion-col> </ion-row>
         <div *ngIf="shifts else loading">
           <ion-list>
-            <ion-item color="light" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
-            <ion-col>DATE</ion-col>
-            <ion-col>START</ion-col>
-            <ion-col>END</ion-col>
+            <ion-item class="ion-text-center"><ion-label>Approved Upcoming Shifts</ion-label></ion-item>
+            <ion-item color="medium" style="font-size: 0.8rem; text-align: center; font-family: Quicksand, sans-serif;">
+              <ion-label>DATE</ion-label>
+              <ion-label>START</ion-label>
+              <ion-label>END</ion-label>
             </ion-item>
             <div *ngFor="let shift of shifts">
-            <ion-item (click)="presentActionSheet(shift.id)" style="font-size: 0.8rem; text-align: center; font-family: Quicksand, sans-serif;" detail="false">
-            <ion-label>{{shift.start | date: 'shortDate'}}</ion-label>
+            <ion-item color="light" (click)="presentActionSheet(shift.id)" style="font-size: 0.8rem; text-align: center; font-family: Quicksand, sans-serif;" detail="true">
+            <ion-label>{{shift.start | date: 'dd/MMM'}}</ion-label>
             <ion-label>{{shift.start | date: 'shortTime'}}</ion-label>
             <ion-label>{{shift.end | date: 'shortTime'}}</ion-label>
-              <ion-icon size="small" slot="end" name="search-circle-outline"></ion-icon>
           </ion-item>
             </div>
           </ion-list>
@@ -60,9 +65,18 @@
 <div *ngIf="user else loading">
 <ion-footer [translucent]="true">
   <ion-toolbar color="primary">
-<ion-title style="align-self: center">
-  {{date | date: 'shortTime'}}
-</ion-title>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/shifts/add']">
+        <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+        <ion-label>Add Shift</ion-label>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/shifts/list']">
+        <ion-label>Shift List</ion-label>
+        <ion-icon slot="end" name="document-text-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-footer>
 </div>

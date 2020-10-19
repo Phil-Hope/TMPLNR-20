@@ -76,6 +76,7 @@
       true,
       "as-needed"
     ],
+    "prefer-const": false,
     "semicolon": {
       "options": [
         "always"

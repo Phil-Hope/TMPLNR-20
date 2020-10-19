@@ -1,4 +1,4 @@
-import {AuthenticationService} from '../../services/authentication.service';
+import {AuthenticationService} from '../../authentication/authentication.service';
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {tap} from "rxjs/operators";
@@ -44,11 +44,11 @@ export class LoginPage implements OnInit {
       ).subscribe(data => data);
   }
 
-  get email() {
+  getemail() {
     return this.credentials.get('email');
   }
 
-  get password() {
+  getpassword() {
     return this.credentials.get('password');
   }
 

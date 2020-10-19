@@ -6,7 +6,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {EditShiftPageRoutingModule} from "./edit-shift-routing.module";
 import {ComponentsModule} from "../../../../shared/components.module";
 import {ReactiveFormsModule} from "@angular/forms";
-import {AuthenticationService} from "../../../../services/authentication.service";
+import {AuthenticationService} from "../../../../authentication/authentication.service";
 import {ShiftsService} from "../../services/shifts.service";
 import {ReactiveTypedFormsModule} from "@rxweb/reactive-form-validators";
 import {UsersService} from "../../../admin/users/services/users.service";

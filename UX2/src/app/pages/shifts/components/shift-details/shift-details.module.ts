@@ -6,7 +6,7 @@ import { ShiftDetailsRoutingModule } from "./shift-details-routing.module";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ComponentsModule} from "../../../../shared/components.module";
 import {ShiftsService} from "../../services/shifts.service";
-import {AuthenticationService} from "../../../../services/authentication.service";
+import {AuthenticationService} from "../../../../authentication/authentication.service";
 import {HttpConfigInterceptor} from "../../../../services/http.interceptor";
 
 @NgModule({

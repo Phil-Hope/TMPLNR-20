@@ -12,7 +12,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from "./app-routing.module";
 import {RouteReuseStrategy} from "@angular/router";
-import {AuthenticationService} from "./services/authentication.service";
+import {AuthenticationService} from "./authentication/authentication.service";
 import {IonicStorageModule, Storage} from "@ionic/storage";
 import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
 import {ShiftsService} from "./pages/shifts/services/shifts.service";

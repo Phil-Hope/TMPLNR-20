@@ -5,7 +5,7 @@ import {ShiftsService} from "../../../shifts/services/shifts.service";
 import {UsersService} from "../../users/services/users.service";
 import {PendingApprovalShiftsPage} from "./pending-approval-shifts";
 import {PendingApprovalShiftsRoutingModule} from "./pending-approval-shifts-routing.module";
-import {AuthenticationService} from "../../../../services/authentication.service";
+import {AuthenticationService} from "../../../../authentication/authentication.service";
 import {ComponentsModule} from "../../../../shared/components.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";

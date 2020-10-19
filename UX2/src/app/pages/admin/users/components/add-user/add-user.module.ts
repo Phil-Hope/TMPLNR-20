@@ -6,7 +6,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AddUserPageRoutingModule} from "./add-user-routing.module";
 import {ComponentsModule} from "../../../../../shared/components.module";
 import {ReactiveFormsModule, FormsModule} from "@angular/forms";
-import {AuthenticationService} from "../../../../../services/authentication.service";
+import {AuthenticationService} from "../../../../../authentication/authentication.service";
 import {UsersService} from "../../services/users.service";
 import {HttpConfigInterceptor} from "../../../../../services/http.interceptor";
 

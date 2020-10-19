@@ -4,7 +4,7 @@ import {IonicModule} from "@ionic/angular";
 import {EditUserPage} from "./edit-user";
 import {EditUserPageRoutingModule} from "./edit-user-routing.module";
 import {ComponentsModule} from "../../../../../shared/components.module";
-import {AuthenticationService} from "../../../../../services/authentication.service";
+import {AuthenticationService} from "../../../../../authentication/authentication.service";
 import {UsersService} from "../../services/users.service";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";

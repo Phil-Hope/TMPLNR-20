@@ -11,7 +11,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import {CalendarToolbarComponent} from "./calendar-toolbar/calendar-toolbar";
 import {DragAndDropModule} from "angular-draggable-droppable";
 import {ShiftsService} from "../../services/shifts.service";
-import {AuthenticationService} from "../../../../services/authentication.service";
+import {AuthenticationService} from "../../../../authentication/authentication.service";
 import {HttpConfigInterceptor} from "../../../../services/http.interceptor";
 
 @NgModule({

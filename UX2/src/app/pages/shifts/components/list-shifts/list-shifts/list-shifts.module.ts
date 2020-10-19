@@ -10,7 +10,7 @@ import {SplashScreen} from "@ionic-native/splash-screen/ngx";
 import {RouteReuseStrategy} from "@angular/router";
 import {RouterLink} from "@angular/router";
 import {ShiftsService} from "../../../services/shifts.service";
-import {AuthenticationService} from "../../../../../services/authentication.service";
+import {AuthenticationService} from "../../../../../authentication/authentication.service";
 import {HttpConfigInterceptor} from "../../../../../services/http.interceptor";
 
 @NgModule({

@@ -1,7 +1,10 @@
 export interface ShiftComments {
   id: string;
+  subject?: string;
   comment: string;
   dateOfComment: Date;
+  markedAsRead?: boolean;
+  isPrivate?: boolean;
   authoredBy: {
     id: string;
     firstName: string;
@@ -9,12 +12,12 @@ export interface ShiftComments {
   };
   shift: {
     id: string;
-    onDuty: {
+    onDuty?: {
       firstName: string;
       lastName: string;
     };
   };
-  recipient: {
+  recipient?: {
     firstName: string;
     lastName: string;
   };
