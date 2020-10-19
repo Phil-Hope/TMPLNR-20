@@ -44,11 +44,11 @@ export class LoginPage implements OnInit {
       ).subscribe(data => data);
   }
 
-  getemail() {
+  get email() {
     return this.credentials.get('email');
   }
 
-  getpassword() {
+  get password() {
     return this.credentials.get('password');
   }
 
