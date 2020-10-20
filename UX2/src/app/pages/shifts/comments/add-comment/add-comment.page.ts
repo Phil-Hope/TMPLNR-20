@@ -8,7 +8,7 @@ import {User} from "../../../../interfaces/user.interface";
 import {UsersService} from "../../../admin/users/services/users.service";
 import {ScheduledShift} from "../../../../interfaces/shifts.interface";
 import {ShiftComments} from "../../../../interfaces/shift-comments.interface";
-import {map} from "rxjs/operators";
+import {map, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-add-comment',
@@ -89,6 +89,7 @@ export class AddCommentPage implements OnInit {
         this.loading = true;
         this.commentsService.addComment(f)
           .pipe(
+            tap(_ => alert('Comment Sent!')),
             map((res: ShiftComments) => {
               this.router.navigateByUrl(`/shifts/${this.shift.id}/view-comments`);
           })

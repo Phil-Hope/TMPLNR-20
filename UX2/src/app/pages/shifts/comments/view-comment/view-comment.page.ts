@@ -12,7 +12,9 @@ export class ViewCommentPage implements OnInit {
 
   comment: ShiftComments;
 
-  constructor(private route: ActivatedRoute, private commentService: CommentsService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private commentService: CommentsService) { }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');

@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { ReplyPage } from './reply.page';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {ReplyPage} from './reply.page';
 
 const routes: Routes = [
   {
@@ -14,4 +13,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ReplyPageRoutingModule {}
+export class ReplyPageRoutingModule {
+}

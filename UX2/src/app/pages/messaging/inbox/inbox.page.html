@@ -1,9 +1,38 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>inbox</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [pageTitle]="['Archived Messages']"></app-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-list-header><ion-label>All Messages</ion-label></ion-list-header>
+    <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+      <ion-label>Private</ion-label>
+      <ion-label>Subject</ion-label>
+      <ion-label>Sender</ion-label>
+      <ion-label>Received At</ion-label>
+    </ion-item>
+    <div *ngIf="comments">
+      <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem" (click)="presentActionSheet(comment.id)" *ngFor="let comment of comments" detail="true">
+        <ion-col><ion-label><ion-icon *ngIf="comment.isPrivate == true" src="assets/icon8/icons8-private-message.svg"></ion-icon>
+          <ion-icon *ngIf="comment.isPrivate == false" src="assets/icon8/icons8-conference-foreground-selected.svg"></ion-icon>
+        </ion-label></ion-col>
+        <ion-col>
+          <ion-label *ngIf="!comment.subject"><p>NONE</p></ion-label>
+          <ion-label *ngIf="comment.subject">{{comment.subject}}</ion-label></ion-col>
+        <ion-col><ion-label>{{comment.authoredBy.firstName}}<br />{{comment.authoredBy.lastName}}</ion-label></ion-col>
+        <ion-col><ion-label>{{comment.dateOfComment | date: 'shortTime'}}<br />{{comment.dateOfComment | date: 'dd/MMM'}}</ion-label></ion-col>
+      </ion-item>
+    </div>
+  </ion-list>
 </ion-content>
+<ion-footer [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-back-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" defaultHref="/messaging" text="Back"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/messaging/send']">
+        <ion-icon slot="end" name="paper-plane-outline"></ion-icon>
+        <ion-label>New Message</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

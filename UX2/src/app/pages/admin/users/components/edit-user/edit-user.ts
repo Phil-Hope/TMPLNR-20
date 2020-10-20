@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {User} from "../../../../../interfaces/user.interface";
 import {UsersService} from "../../services/users.service";
 import {UserTrackerError} from "../../services/user-errors.interface";
+import {tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-edit-user',
@@ -21,7 +22,8 @@ export class EditUserPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private userService: UsersService
+    private userService: UsersService,
+    private router: Router
   ) {
     this.form = this.fb.group({
         id: ['', Validators.required],
@@ -55,6 +57,9 @@ export class EditUserPage implements OnInit {
       if (this.form.dirty) {
         const f = {...this.user, ...this.form.value};
         this.userService.editUser(f)
+          .pipe(
+            tap(_ => this.router.navigateByUrl(`/users/${_.id}/details`))
+          )
           .subscribe(data => console.log('user edit: ' + JSON.stringify(data)));
       }
     } else {

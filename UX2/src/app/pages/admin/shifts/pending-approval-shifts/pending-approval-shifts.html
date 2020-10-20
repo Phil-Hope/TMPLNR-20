@@ -86,14 +86,11 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar color="primary">
-    <ion-buttons style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/users']" slot="start">
-      <ion-icon slot="start" name="people-outline"></ion-icon>
-      <ion-label>
-        Users
-      </ion-label>
+    <ion-buttons slot="start">
+      <ion-back-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" text="Back" defaultHref="/admin"></ion-back-button>
     </ion-buttons>
 
-    <ion-title>
+    <ion-title style="text-align: center;">
       <h4>{{date | date: 'shortTime'}}</h4>
     </ion-title>
 

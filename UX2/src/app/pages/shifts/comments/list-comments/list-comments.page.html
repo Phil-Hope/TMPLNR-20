@@ -18,23 +18,19 @@
     <ion-label><strong>Comment Date:</strong></ion-label>
     <ion-label>{{comment.dateOfComment | date: 'dd/MMM hh:M a'}}</ion-label>
   </ion-item>
-    <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+    <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" detail="true" [routerLink]="['/shifts/', comment.authoredBy.id, 'on-duty']">
       <ion-label><strong>Comment By:</strong></ion-label>
       <ion-label>{{comment.authoredBy.firstName}} {{comment.authoredBy.lastName}}</ion-label>
     </ion-item>
-      <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+      <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" detail="true" [routerLink]="['/shifts/', comment.shift.onDuty.id, 'on-duty']">
         <ion-label><strong>On Duty:</strong></ion-label>
         <ion-label>{{comment.shift.onDuty.firstName}} {{comment.shift.onDuty.lastName}}</ion-label>
       </ion-item>
     <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
       <ion-label><strong>comment:</strong> {{comment.comment}}</ion-label>
     </ion-item>
-      <ion-item>
-        <ion-col size="12">
-      <ion-button color="medium" size="block" fill="outline" [routerLink]="['/shifts/', comment.shift.id, 'details']">
-        <ion-label>View Related Shift</ion-label>
-      </ion-button>
-        </ion-col>
+      <ion-item color="light" detail="true" [routerLink]="['/shifts/', comment.shift.id, 'details']">
+        <ion-label color="secondary" style="font-family: Quicksand, sans-serif; font-size: 0.9rem; text-align: center;">Related Shift</ion-label>
       </ion-item>
     </ion-card>
     </div>

@@ -20,7 +20,7 @@ export class ShiftsService {
 
   loadAllShifts(): Observable<ScheduledShift[]> {
     const params = new HttpParams()
-      .set('order[start]', 'asc');
+      .set('order[start]', 'desc');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/shifts.json`,
       {
         params, headers: new HttpHeaders({
@@ -63,7 +63,7 @@ export class ShiftsService {
     const params = new HttpParams()
       .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss')
       )
-      .set('order[start]', 'asc');
+      .set('order[start]', 'desc');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/shifts.json`,
       {
         params, headers: new HttpHeaders({
@@ -224,7 +224,7 @@ export class ShiftsService {
         end:  moment(shift.end).toDate(),
         onDuty: shift.onDuty,
         ShiftStatus: shift.ShiftStatus,
-        isApproved: shift.isApproved
+        isApproved: true
       },
       {headers: new HttpHeaders({
           'Content-Type': 'application/json'
@@ -242,7 +242,8 @@ export class ShiftsService {
         end:  moment(shift.end).toDate(),
         onDuty: shift.onDuty,
         ShiftStatus: shift.ShiftStatus,
-        isApproved: shift.isApproved},
+        isApproved: false
+      },
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',

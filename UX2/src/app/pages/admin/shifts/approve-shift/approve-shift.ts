@@ -40,7 +40,7 @@ export class ApproveShiftPage implements OnInit {
       end: ['', Validators.required],
       onDuty: ['', Validators.required],
       ShiftStatus: ['', Validators.required],
-      isApproved: ['', Validators.required]
+      isApproved: [true]
     });
     this.getShiftToDisplay().subscribe(data => this.shift = data);
     this.getUsersToSelect().subscribe(data => this.users = data);

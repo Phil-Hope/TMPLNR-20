@@ -15,7 +15,7 @@
   <ion-card-content>
 
 <ion-list>
-      <ion-item [routerLink]="['/shifts']" detail="true">
+      <ion-item [routerLink]="['/shifts/list']" detail="true">
         <ion-avatar><ion-img src="assets/icon8/icons8-calendar.svg"></ion-img></ion-avatar>
         <ion-label style="font-size: 0.9rem; font-family: Quicksand, sans-serif;">Shifts - List</ion-label>
       </ion-item>
@@ -53,15 +53,17 @@
 </ion-content>
 <ion-footer [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-buttons style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/']" slot="start">
+    <ion-buttons slot="start">
+      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/']" >
       <ion-ripple-effect type="bounded"></ion-ripple-effect>
       <ion-icon slot="start" name="home-outline"></ion-icon>
       <ion-label>
         Home
       </ion-label>
+      </ion-button>
     </ion-buttons>
 
-    <ion-title>
+    <ion-title style="text-align: center;">
       <h4>{{date | date: 'shortTime'}}</h4>
     </ion-title>
 

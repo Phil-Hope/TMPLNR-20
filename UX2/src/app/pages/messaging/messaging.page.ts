@@ -50,17 +50,10 @@ export class MessagingPage implements OnInit {
         animated: true,
         buttons: [
           {
-            text: 'view',
+            text: 'open',
             icon: 'mail-open-outline',
             handler: () => {
               this.router.navigateByUrl(`/messaging/${id}/read`);
-            }
-          },
-          {
-            text: 'reply',
-            icon: 'return-down-back-outline',
-            handler: () => {
-              this.router.navigateByUrl(`/messaging/${id}/reply`);
             }
           },
           {

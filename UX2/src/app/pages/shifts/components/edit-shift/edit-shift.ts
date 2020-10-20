@@ -57,9 +57,9 @@ export class EditShiftPage implements OnInit {
     this.submitted = true;
     if (this.form.valid) {
       if (this.form.dirty) {
-        const f = { ...this.shift, ...this.form.value };
+        const fd = { ...this.shift, ...this.form.value };
         this.loading = true;
-        this.shiftsService.editShift(f)
+        this.shiftsService.editShift(fd)
           .pipe(
           map((res: ScheduledShift) => { this.router.navigateByUrl(`shifts/${res.id}/details`); }),
           tap(_ => console.log('Shift edited successfully!'))

@@ -1,31 +1,41 @@
 <app-header [pageTitle]="['Send Message']"></app-header>
 <ion-content>
+  <app-header-banner></app-header-banner>
 <ion-card>
   <ion-list>
     <form [formGroup]="form" (ngSubmit)="onSendMessage()">
+
     <ion-item  style="font-size: 0.8em; font-family: Quicksand, sans-serif;"><ion-label>Subject:</ion-label>
     <ion-input formControlName="subject"></ion-input>
       <ion-input *ngIf="user" type="hidden" formControlName="authoredBy" [(ngModel)]="user.id" value="{{user.id}}"></ion-input>
     </ion-item>
+
       <ion-item  style="font-size: 0.8em; font-family: Quicksand, sans-serif;" *ngIf="users">
         <ion-label>Recipient:</ion-label>
         <ion-select formControlName="recipient">
           <ion-select-option  *ngFor="let user of users" value="{{user.id}}">{{user.firstName}} {{user.lastName}}</ion-select-option>
         </ion-select>
       </ion-item>
+
       <ion-item style="font-size: 0.8em; font-family: Quicksand, sans-serif;">
         <ion-label>Message:</ion-label>
-        <ion-textarea formControlName="comment"></ion-textarea>
+        <ion-textarea auto-grow="true" spellcheck="true" formControlName="comment"></ion-textarea>
       </ion-item>
+
       <ion-item  style="font-size: 0.8em; font-family: Quicksand, sans-serif;">
-        <ion-col><ion-button color="success" type="submit">
+        <ion-col>
+          <ion-button color="success" type="submit">
+          <ion-icon slot="start" name="paper-plane-outline"></ion-icon>
         <ion-label>SEND</ion-label>
-      </ion-button></ion-col></ion-item>
+      </ion-button>
+        </ion-col>
+      </ion-item>
+
     </form>
-    {{form.value | json}}
   </ion-list>
 </ion-card>
 </ion-content>
+
 <ion-footer [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">

@@ -51,6 +51,11 @@ const routes: Routes = [
       .then(m => m.ContactModule)
   },
   {
+    path: 'reset-password',
+    loadChildren: () => import('./pages/admin/reset-password/reset-password.module')
+      .then( m => m.ResetPasswordPageModule)
+  },
+  {
     path: 'shifts',
     loadChildren: () => import('./pages/shifts/container/shifts-container.module')
       .then(m => m.ContainerPageModule)
@@ -79,6 +84,11 @@ const routes: Routes = [
     path: 'shifts/:id/delete',
     loadChildren: () => import('./pages/shifts/components/delete-shift/delete-shift.module')
       .then(m => m.DeleteShiftPageModule)
+  },
+  {
+    path: 'shifts/:id/on-duty',
+    loadChildren: () => import('./pages/shifts/components/on-duty/on-duty.module')
+      .then( m => m.OnDutyPageModule)
   },
   {
     path: 'shifts/:id/view-comments',

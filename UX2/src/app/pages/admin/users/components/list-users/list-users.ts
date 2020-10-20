@@ -49,6 +49,13 @@ export class ListUsersPage implements OnInit {
         }
       },
         {
+          text: 'shifts',
+          icon: 'calendar-outline',
+          handler: () => {
+            this.router.navigateByUrl(`/users/${id}/shifts`);
+          }
+        },
+        {
           text: 'delete',
           icon: 'trash-bin-outline',
           handler: () => {

@@ -1,6 +1,7 @@
-<app-header></app-header>
+<app-header [pageTitle]="['User Details']"></app-header>
 
 <ion-content>
+  <app-header-banner></app-header-banner>
   <ng-template #loading>
     <ion-card style="padding: 2rem; margin-top: 3rem;">
       <ion-card-header>
@@ -12,84 +13,70 @@
     </ion-card>
   </ng-template>
 <ion-card *ngIf="user else loading">
-  <ion-card-header>
-    <ion-card-title style="font-family: Quicksand, sans-serif; text-align: center;">User Details</ion-card-title>
+
+  <ion-card-header color="medium">
+    <ion-item color="medium" style="font-family: Quicksand, sans-serif;">
+      <ion-thumbnail><ion-img src="{{user.profilePicture}}"></ion-img></ion-thumbnail>
+      <ion-col size="2"></ion-col>
+      <ion-col size="8" style="text-align: left;"><ion-label>{{user.firstName}} {{user.lastName}}</ion-label></ion-col>
+    </ion-item>
   </ion-card-header>
+
   <ion-list>
-    <ion-item class="my-label">
-      <ion-label>First Name</ion-label>
-      <ion-label>Last Name</ion-label>
-    </ion-item>
     <ion-item>
-      <ion-avatar><ion-img src="{{user.profilePicture}}"></ion-img></ion-avatar>
-      <ion-label class="my-label">{{user.firstName}}</ion-label>
-      <ion-label class="my-label">{{user.lastName}}</ion-label>
+      <ion-col size="3"><ion-label class="title">Email:</ion-label></ion-col>
+      <ion-col size="2"></ion-col>
+      <ion-col size="7"><ion-label class="my-label">{{user.email}}</ion-label></ion-col>
     </ion-item>
-    <ion-item-divider></ion-item-divider>
+
     <ion-item>
-      <ion-label class="my-label">
-        Email
-      </ion-label>
-      <ion-label class="my-label">{{user.email}}</ion-label>
+      <ion-col size="3"><ion-label class="title">Phone:</ion-label></ion-col>
+      <ion-col size="2"></ion-col>
+      <ion-col size="7"><ion-label class="my-label">{{user.contactNumber}}</ion-label></ion-col>
     </ion-item>
+
     <ion-item>
-      <ion-label class="my-label">
-        Contact Number:
-      </ion-label>
-      <ion-label class="my-label">
-        {{user.contactNumber}}
-      </ion-label>
+      <ion-col size="3"><ion-label class="title">Wage:</ion-label></ion-col>
+      <ion-col size="2"></ion-col>
+      <ion-col size="7"><ion-label class="my-label">${{user.wagePerHour}}</ion-label></ion-col>
     </ion-item>
+
     <ion-item>
-      <ion-label class="my-label">
-        Wage:
-      </ion-label>
-      <ion-label class="my-label">
-        ${{user.wagePerHour}}
-      </ion-label>
+      <ion-col size="3"><ion-label class="title">Role:</ion-label></ion-col>
+      <ion-col size="2"></ion-col>
+      <ion-col size="7"><ion-label class="my-label">{{user.roles}}</ion-label></ion-col>
     </ion-item>
+
+    <ion-item color="light" [routerLink]="['/users/', user.id, 'shifts']" detail="true">
+      <ion-ripple-effect></ion-ripple-effect>
+        <ion-label color="secondary" style="font-family: Quicksand, sans-serif; text-align: center">View User's Shifts</ion-label>
+    </ion-item>
+
     <ion-item>
-      <ion-label class="my-label">
-        Role:
-      </ion-label>
-      <ion-label class="my-label">
-        {{user.roles}}
-      </ion-label>
+      <ion-col>
+        <ion-button size="block" class="my-label" [routerLink]="['/users/', user.id, 'edit']" color="warning">
+          <ion-label>Edit</ion-label>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button size="block" [routerLink]="['/users/', user.id, 'delete']" class="my-label" color="danger">
+          <ion-label>Delete</ion-label>
+        </ion-button>
+      </ion-col>
     </ion-item>
-    <ion-item>
-      <ion-button class="my-label" [routerLink]="['/users/', user.id, 'edit']" color="warning">
-        <ion-label>
-          Edit
-        </ion-label>
-      </ion-button>
-      <ion-button [routerLink]="['/users/', user.id, 'delete']" class="my-label" color="danger">
-        <ion-label>
-          Delete
-        </ion-label>
-      </ion-button>
-      <ion-button class="my-label" [routerLink]="['/users/', user.id, 'shifts']" color="secondary">
-        <ion-label>
-          View Shifts
-        </ion-label>
-      </ion-button>
-    </ion-item>
+
   </ion-list>
 </ion-card>
 </ion-content>
 <ion-footer [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/users']">
-        <ion-label>
-          Users List
-        </ion-label>
-      </ion-button>
+      <ion-back-button defaultHref="/users" text="Back"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" [routerLink]="['/users/add']">
-        <ion-label>
-          Add User
-        </ion-label>
+        <ion-icon name="add-circle-outline" slot="end"></ion-icon>
+        <ion-label>Add User</ion-label>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

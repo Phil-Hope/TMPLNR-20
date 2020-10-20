@@ -6,7 +6,7 @@ import {format} from "date-fns";
 import {HttpClient, HttpParams, HttpHeaders} from "@angular/common/http";
 import {ScheduledShift} from "../../../interfaces/shifts.interface";
 import {ShiftComments} from "../../../interfaces/shift-comments.interface";
-
+import * as moment from "moment";
 @Injectable({
   providedIn: 'root'
 })
@@ -135,7 +135,9 @@ export class CommentsService {
         comment: comment.comment,
         subject: comment.subject,
         authoredBy: `/users/${comment.authoredBy}`,
-        dateOfComment: comment.dateOfComment,
+        dateOfComment: moment(comment.dateOfComment).toDate(),
+        markedAsRead: false,
+        isPrivate: false,
         shift: `/shifts/${comment.shift}`,
         recipient: comment.recipient
       }, {
@@ -152,10 +154,11 @@ export class CommentsService {
       {
         comment: comment.comment,
         subject: comment.subject,
-        isPrivate: comment.isPrivate,
-        authoredBy: comment.authoredBy,
-        dateOfComment: comment.dateOfComment,
-        recipient: comment.recipient
+        markedAsRead: false,
+        isPrivate: true,
+        authoredBy: `/users/${comment.authoredBy}`,
+        dateOfComment: moment(comment.dateOfComment).toDate(),
+        recipient: `/users/${comment.recipient}`
       }, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
@@ -170,7 +173,6 @@ export class CommentsService {
       {
         comment: comment.comment,
         authoredBy: comment.authoredBy,
-        dateOfComment: comment.dateOfComment,
         shift: comment.shift,
         recipient: comment.recipient
       }, {

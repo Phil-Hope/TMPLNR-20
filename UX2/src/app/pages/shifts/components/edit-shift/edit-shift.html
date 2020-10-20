@@ -26,6 +26,7 @@
           >
           </ion-datetime>
         </ion-item>
+  <ion-input type="hidden" formControlName="isApproved" value=false></ion-input>
 
         <ion-item>
           <ion-label position="floating" class="ion-text-center" style="font-size: 0.8rem;"  color="secondary"><span>Select Finish Time</span></ion-label>
@@ -45,7 +46,7 @@
               <ion-select [ngModel]="shift.onDuty" formControlName="onDuty" placeholder="{{shift.onDuty.firstName}} {{shift.onDuty.lastName}}">
 
                   <div  *ngFor="let user of users" >
-                  <ion-select-option  value="/users/{{this.user.id}}}">
+                  <ion-select-option  value="/users/{{this.user.id}}">
                     {{this.user.firstName}} {{this.user.lastName}}
                   </ion-select-option>
                   </div>

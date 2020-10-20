@@ -1,9 +1,60 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>reply</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [pageTitle]="['New Message']"></app-header>
 
 <ion-content>
+  <app-header-banner></app-header-banner>
+<ion-card *ngIf="recipient"><div *ngIf="user">
+  <ion-card-header></ion-card-header>
+  <ion-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmitForm()">
+      <ion-input type="hidden" formControlName="recipient" [(ngModel)]="recipient.id" value="{{recipient.id}}"></ion-input>
+      <ion-input type="hidden" formControlName="isPrivate" value=true></ion-input>
+      <ion-input type="hidden" formControlName="authoredBy" [(ngModel)]="user.id" value="{{user.id}}"></ion-input>
+      <ion-input type="hidden" formControlName="dateOfComment" [(ngModel)]="date" value="{{date}}"></ion-input>
 
+      <ion-item>
+          <ion-col style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+            <ion-label position="stacked">Subject:</ion-label>
+            <ion-input formControlName="subject"></ion-input>
+          </ion-col>
+          <ion-col style="text-align: center; font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+            <ion-label>Recipient:</ion-label>
+            <ion-label color="primary">{{recipient.firstName}} {{recipient.lastName}}</ion-label>
+          </ion-col>
+      </ion-item>
+
+      <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+        <ion-label position="stacked">Message:</ion-label>
+        <ion-textarea auto-grow="true" spellcheck="true" formControlName="comment"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-col>
+          <ion-button color="success" type="submit">
+            <ion-icon slot="start" name="paper-plane-outline"></ion-icon>
+            <ion-label>Send</ion-label>
+          </ion-button>
+        </ion-col>
+      </ion-item>
+
+    </form>
+    {{form.value | json}}
+  </ion-card-content></div>
+</ion-card>
 </ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar color="primary">
+
+    <ion-buttons>
+      <ion-back-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" text="Back" defaultHref="/messaging"></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/users/profile']" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-icon slot="end" name="person-circle-outline"></ion-icon>
+        <ion-label>Profile</ion-label>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-footer>

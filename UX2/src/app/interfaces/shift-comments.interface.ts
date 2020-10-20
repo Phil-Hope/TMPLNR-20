@@ -12,12 +12,16 @@ export interface ShiftComments {
   };
   shift: {
     id: string;
+    start: Date;
+    end: Date;
     onDuty?: {
+      id: string;
       firstName: string;
       lastName: string;
     };
   };
   recipient?: {
+    id: string;
     firstName: string;
     lastName: string;
   };

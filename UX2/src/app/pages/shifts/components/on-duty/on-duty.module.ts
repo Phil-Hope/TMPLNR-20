@@ -2,9 +2,9 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
-import {ViewCommentPageRoutingModule} from './view-comment-routing.module';
-import {ViewCommentPage} from './view-comment.page';
-import {CommentsService} from "../../services/comments.service";
+import {OnDutyPageRoutingModule} from './on-duty-routing.module';
+import {OnDutyPage} from './on-duty.page';
+import {UsersService} from "../../../admin/users/services/users.service";
 import {ComponentsModule} from "../../../../shared/components.module";
 
 @NgModule({
@@ -12,11 +12,11 @@ import {ComponentsModule} from "../../../../shared/components.module";
     CommonModule,
     FormsModule,
     IonicModule,
-    ViewCommentPageRoutingModule,
+    OnDutyPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [ViewCommentPage],
-  providers: [CommentsService]
+  declarations: [OnDutyPage],
+  providers: [UsersService]
 })
-export class ViewCommentPageModule {
+export class OnDutyPageModule {
 }

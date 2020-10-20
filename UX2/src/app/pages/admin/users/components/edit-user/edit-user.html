@@ -83,29 +83,18 @@
       </ion-label>
       <ion-input formControlName="email" type="email" [(ngModel)]="user.email"></ion-input>
     </ion-item>
-        <ion-button style="margin-top: 1rem;" color="warning" size="block" type="submit">Edit</ion-button>
-
+        <ion-button style="margin-top: 1rem;" color="success" size="block" type="submit">
+          <ion-icon slot="start" name="checkbox-outline"></ion-icon>
+          <ion-label>Update</ion-label></ion-button>
 </ion-card>
   </form>
   </div>
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar>
+<ion-footer [translucent]="true">
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"  color="primary" [routerLink]="['/users/add']">
-        <ion-icon slot="start" name="person-add"></ion-icon>
-        <ion-label>Add User</ion-label>
-      </ion-button>
-    </ion-buttons>
-    <ion-title size="small" color="dark">
-
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"  color="primary" [routerLink]="['/users']">
-        <ion-label>User List</ion-label>
-        <ion-icon slot="end" name="list-outline"></ion-icon>
-      </ion-button>
+      <ion-back-button text="Back" defaultHref="/users"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

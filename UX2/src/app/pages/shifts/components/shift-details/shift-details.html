@@ -29,6 +29,7 @@
 <ion-card>
   <ion-card-content>
     <ion-list lines="indent">
+
 <ion-item>
         <ion-col size="12">
           <ion-label *ngIf="shift.isApproved === false" class="pending-approval">
@@ -41,6 +42,7 @@
           </ion-label>
         </ion-col>
 </ion-item>
+
       <ion-item>
         <ion-col size="4">
         <ion-label class="call-level-title">
@@ -57,26 +59,31 @@
         </ion-label>
         </ion-col>
       </ion-item>
-      <ion-item>
+
+      <ion-item [routerLink]="['/shifts/', shift.onDuty.id, 'on-duty']" detail="true">
         <ion-col size="4"><ion-label class="on-duty">On Duty:</ion-label></ion-col>
         <ion-col size="1"></ion-col>
         <ion-col size="6"><ion-label class="name">{{ shift.onDuty.firstName }} {{ shift.onDuty.lastName }}</ion-label></ion-col>
       </ion-item>
+
       <ion-item>
         <ion-col size="4"><ion-label class="date-title">Shift Date:</ion-label></ion-col>
         <ion-col size="1"></ion-col>
         <ion-col size="7"><ion-label class="date">{{shift.start | date: 'dd MMMM yyyy'}}</ion-label></ion-col>
     </ion-item>
+
       <ion-item>
         <ion-col size="4"><ion-label class="start-title">Start Time:</ion-label></ion-col>
         <ion-col size="1"></ion-col>
         <ion-col size="7"><ion-label class="start-time">{{shift.start | date: 'shortTime'}}</ion-label></ion-col>
       </ion-item>
+
       <ion-item>
       <ion-col size="4"><ion-label class="finish-title">End Time:</ion-label></ion-col>
         <ion-col size="1"></ion-col>
         <ion-col size="7"><ion-label class="finish-time">{{shift.end | date: 'shortTime'}}</ion-label></ion-col>
     </ion-item>
+
       <ng-template #locked>
         <ion-item>
         <ion-label color="warning" class="locked-text">
@@ -86,6 +93,7 @@
         </ion-label>
         </ion-item>
       </ng-template>
+
       <ion-item>
         <ion-col size="6">
           <ion-button color="success" fill="clear" [routerLink]="['/shifts/', shift.id, 'add-comment']">
@@ -93,14 +101,18 @@
             <ion-label size="small">Comment</ion-label>
           </ion-button>
         </ion-col>
-        <ion-col size="6">
-          <ion-button fill="clear" [routerLink]="['/shifts/', shift.id, 'view-comments']">
-            <ion-icon name="list"></ion-icon>
-            <ion-label>Comments</ion-label>
-          </ion-button>
+      </ion-item>
+      <div *ngIf="comments">
+      <ion-item [routerLink]="['/comments/', comment.id, 'view']" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"  *ngFor="let comment of comments" detail="true">
+        <ion-col><ion-label>Subject:</ion-label><br />
+        <ion-label *ngIf="comment.subject">{{comment.subject}}</ion-label>
+        <ion-label *ngIf="!comment.subject">No Subject</ion-label></ion-col>
+        <ion-col><ion-label>From:</ion-label><br /><ion-label>{{comment.authoredBy.firstName}} {{comment.authoredBy.lastName}}</ion-label>
         </ion-col>
       </ion-item>
-      <ion-item *ngIf="shift.isApproved == false else locked">
+      </div>
+
+      <ion-item *ngIf="shift.isApproved == false else locked" lines="none">
         <ion-col size="6">
           <ion-button shape="round" fill="outline" [routerLink]="['/shifts/', shift.id, 'edit']" color="warning" size="block">
             <ion-icon slot="start" name="pencil"></ion-icon>
@@ -113,24 +125,27 @@
           </ion-button>
         </ion-col>
       </ion-item>
+
     </ion-list>
   </ion-card-content>
 </ion-card>
   </div>
+
 </ion-content>
+
 <ion-footer [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/shifts/list" text="Back">
+      <ion-back-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" defaultHref="/shifts/list" text="Back">
       </ion-back-button>
     </ion-buttons>
 
-    <ion-title>
-      <h4>{{date | date: 'shortTime'}}</h4>
+    <ion-title style="font-size: 0.8rem; font-family: Quicksand, sans-serif; text-align: center;">
+      <h5>{{date | date: 'shortTime'}}</h5>
     </ion-title>
 
     <ion-buttons slot="end">
-      <ion-button [routerLink]="['/users/profile']">
+      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" [routerLink]="['/users/profile']">
         <ion-icon slot="end" name="person-outline"></ion-icon>
 <ion-label>Profile</ion-label>
       </ion-button>

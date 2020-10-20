@@ -16,7 +16,7 @@ export class UsersShiftsPage implements OnInit {
 
   userShifts$: Observable<ScheduledShift[]>;
   userShifts: ScheduledShift[];
-
+  date = new Date();
   user$: Observable<User>;
   user: User;
 
@@ -32,6 +32,10 @@ export class UsersShiftsPage implements OnInit {
      const id = await this.route.snapshot.paramMap.get('id');
      this.loadUserShifts(id).subscribe((data: ScheduledShift[]) => this.userShifts = data);
      this.loadUser(id).subscribe((data: User) => this.user = data);
+
+     setInterval(() => {
+      this.date = new Date();
+    }, 1000);
   }
 
   loadUser(id: string): Observable<User> {

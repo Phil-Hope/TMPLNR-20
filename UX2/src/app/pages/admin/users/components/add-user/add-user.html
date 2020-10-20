@@ -82,30 +82,25 @@
             </ion-label>
             <ion-input type="password" formControlName="confirmPassword"></ion-input>
           </ion-item>
-
-
-          <ion-card-subtitle>
-            <ion-button type="submit">Create User</ion-button>
-          </ion-card-subtitle>
-
+          <ion-item>
+            <ion-col>
+            <ion-button color="success" size="block" type="submit" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+              <ion-icon slot="start" name="checkbox-outline"></ion-icon>
+              <ion-label>Submit</ion-label>
+            </ion-button>
+            </ion-col>
+          </ion-item>
         </ion-list>
         </form>
-
-    <p>{{form.value | json}}</p>
   </ion-list>
   </ion-card>
 </ion-content>
 <ion-footer>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
-        <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
-      <ion-label>
-        Back to List
-      </ion-label>
-      </ion-button>
+      <ion-back-button text="Back" defaultHref="/users"></ion-back-button>
     </ion-buttons>
-    <ion-title>
+    <ion-title style="text-align: center;">
 <h4>{{date | date: 'shortTime'}}</h4>
     </ion-title>
     <ion-buttons slot="end">
