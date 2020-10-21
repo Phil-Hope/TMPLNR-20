@@ -2,12 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {ScheduledShift} from '../../../../interfaces/shifts.interface';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../../interfaces/user.interface';
-import {Observable} from 'rxjs';
 import {map} from "rxjs/operators";
 import {ShiftsService} from "../../services/shifts.service";
 import {UsersService} from "../../../admin/users/services/users.service";
 import {Router} from "@angular/router";
-import {UserTrackerError} from "../../../admin/users/services/user-errors.interface";
+import {Storage} from "@ionic/storage";
 
 @Component({
   selector: 'app-add-shift',
@@ -20,8 +19,8 @@ export class AddShiftPage implements OnInit {
   submitted = false;
   loading = false;
   shift: ScheduledShift;
-  user: Observable<User>;
-  users: User[] | UserTrackerError;
+  user: User;
+  users: User[];
   form: FormGroup;
   date = new Date();
 
@@ -30,12 +29,8 @@ export class AddShiftPage implements OnInit {
       private shiftsService: ShiftsService,
       private usersService: UsersService,
       private router: Router,
+      private storage: Storage,
   ) {
-  }
-
-  ngOnInit() {
-    this.usersService.loadAllUsers().subscribe(data => this.users = data);
-
     this.form = this.fb.group({
       start: ['', Validators.required],
       end: ['', Validators.required],
@@ -43,9 +38,29 @@ export class AddShiftPage implements OnInit {
       ShiftStatus: ['', Validators.required],
       isApproved: [false, Validators.required]
     });
+  }
+
+  async getStorage(): Promise<any> {
+    try {
+      const result = await this.storage.get('id');
+      console.log(result);
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+ async ngOnInit() {
+    const value = await this.getStorage();
+    await this.getUserFromStorage(JSON.parse(value));
+
     setInterval(() => {
       this.date = new Date();
     }, 1000);
+  }
+
+  async getUserFromStorage(id: string) {
+    this.usersService.getUserById(id).subscribe((data: User) => this.user = data);
   }
 
   addShift() {

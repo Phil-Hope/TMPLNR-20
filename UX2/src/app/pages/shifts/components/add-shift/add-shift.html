@@ -32,19 +32,9 @@
     </ion-item-group>
 
 <ion-item-group>
-<ion-item>
-        <ion-label position="floating" color="secondary">On Duty</ion-label>
-         <ion-select formControlName="onDuty" placeholder="Select User">
-           <ng-template #loadUsers>
-             <ion-select-option>Error.. No users found</ion-select-option>
-           </ng-template>
-           <div *ngIf="users else loadUsers">
-           <ion-select-option *ngFor="let user of users" value="/users/{{user.id}}">
-             {{this.user.firstName}} {{this.user.lastName}}
-           </ion-select-option>
-           </div>
-         </ion-select>
-</ion-item>
+  <div *ngIf="user">
+<ion-input type="hidden" formControlName="onDuty" [(ngModel)]="user.id" value="{{user.id}}"></ion-input>
+  </div>
   <ion-item>
         <ion-label position="floating" color="secondary">Shift Status</ion-label>
         <ion-select formControlName="ShiftStatus" placeholder="Select Status">

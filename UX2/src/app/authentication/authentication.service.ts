@@ -25,6 +25,7 @@ const TOKEN_KEY = 'token';
 export class AuthenticationService {
 
   tokenResponse: Observable<TokenResponse>;
+  isAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
 
   public user: Observable<any>;
@@ -36,10 +37,6 @@ export class AuthenticationService {
     private alertCtrl: AlertController,
     private storage: Storage,
   ) {
-    this.loadStoredToken();
-  }
-
-  loadStoredToken() {
   }
 
   login(email: string, password: string): Observable<TokenResponse> {
@@ -55,6 +52,9 @@ export class AuthenticationService {
             await this.storage.set(USER_ROLES, res.data.roles);
             await this.storage.set(TOKEN_KEY, res.token);
             this.isAuthenticated.next(true);
+            if (res.data.roles.length === 2) {
+              this.isAdmin.next(true);
+            }
             this.router.navigateByUrl('/users/profile');
           } else {
             const alert = await this.alertCtrl.create({
@@ -75,7 +75,7 @@ export class AuthenticationService {
  async logout() {
      this.isAuthenticated.next(false);
      await this.storage.clear();
-     this.router.navigateByUrl('/');
+     await this.router.navigateByUrl('/');
      this.userData.next(null);
      }
 }

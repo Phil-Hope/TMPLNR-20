@@ -38,10 +38,16 @@ export class SentPage implements OnInit {
   async ngOnInit() {
     const value = await this.getStorage();
     await this.getUserFromStorage(JSON.parse(value));
+    await this.loadSentMessages(JSON.parse(value));
   }
 
   async getUserFromStorage(id: string) {
     this.userService.getUserById(id)
       .subscribe((data: User) => this.user = data);
+  }
+
+  loadSentMessages(id: string) {
+    this.commentService.getUsersComments(id)
+      .subscribe((data: ShiftComments[]) => this.comments = data);
   }
 }

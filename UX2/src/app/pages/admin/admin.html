@@ -3,7 +3,7 @@
 
 <ion-card>
   <ion-card-header>
-    <ion-item>
+    <ion-item lines="full">
     <ion-col>
       <ion-img src="assets/icon8/icons8-menu.svg"></ion-img>
       </ion-col>
@@ -15,37 +15,46 @@
   <ion-card-content>
 
 <ion-list>
-      <ion-item [routerLink]="['/shifts/list']" detail="true">
-        <ion-avatar><ion-img src="assets/icon8/icons8-calendar.svg"></ion-img></ion-avatar>
+  <ion-item-group>
+      <ion-item [routerLink]="['/shifts/list']" lines="inset" detail="true">
+        <ion-icon size="large" slot="start" src="assets/icon8/icons8-calendar.svg"></ion-icon>
         <ion-label style="font-size: 0.9rem; font-family: Quicksand, sans-serif;">Shifts - List</ion-label>
       </ion-item>
 
-      <ion-item [routerLink]="['/admin/pending-shifts']" detail="true">
-        <ion-avatar><ion-img src="assets/icon8/icons8-task.svg"></ion-img></ion-avatar>
-        <ion-label style="font-size: 0.9rem; font-family: Quicksand, sans-serif;">Shifts - Pending Approval</ion-label>
+      <ion-item [routerLink]="['/admin/shifts/add']" lines="inset" detail="true">
+        <ion-icon slot="start" size="large" src="assets/icon8/icons8-create.svg"></ion-icon>
+        <ion-label style="font-size: 0.9rem; font-family: Quicksand, sans-serif;">Shifts - Add New</ion-label>
       </ion-item>
 
-      <ion-item [routerLink]="['/shifts/calendar/approved']" detail="true">
-        <ion-avatar><ion-img src="assets/icon8/icons8-today.svg"></ion-img></ion-avatar>
+      <ion-item [routerLink]="['/admin/pending-shifts']" lines="full" detail="true">
+       <ion-icon size="large" slot="start" src="assets/icon8/icons8-task.svg"></ion-icon>
+        <ion-label style="font-size: 0.9rem; font-family: Quicksand, sans-serif;">Shifts - Pending Approval</ion-label>
+      </ion-item>
+  </ion-item-group>
+  <ion-item-group>
+      <ion-item [routerLink]="['/shifts/calendar/approved']" lines="inset" detail="true">
+        <ion-icon size="large" slot="start" src="assets/icon8/icons8-today.svg"></ion-icon>
         <ion-label style="font-size: 0.9rem; font-family: Quicksand, sans-serif;">Calendar - Approved Shifts</ion-label>
       </ion-item>
 
-      <ion-item [routerLink]="['/shifts/calendar/draft']" detail="true">
-        <ion-avatar><ion-img src="assets/icon8/icons8-schedule.svg"></ion-img></ion-avatar>
+      <ion-item [routerLink]="['/shifts/calendar/draft']" lines="full" detail="true">
+        <ion-icon size="large" slot="start" src="assets/icon8/icons8-schedule.svg"></ion-icon>
         <ion-label style="font-size: 0.9rem; font-family: Quicksand, sans-serif;">Calendar - Pending Approval</ion-label>
       </ion-item>
-
-      <ion-item [routerLink]="['/users']" detail="true">
-        <ion-avatar><ion-img src="assets/icon8/icons8-contacts.svg"></ion-img></ion-avatar>
+  </ion-item-group>
+  <ion-item-group>
+      <ion-item [routerLink]="['/users']" lines="inset" detail="true">
+        <ion-icon size="large" slot="start" src="assets/icon8/icons8-contacts.svg"></ion-icon>
         <ion-label style="font-size: 0.9rem; font-family: Quicksand, sans-serif;">Users - Current</ion-label>
       </ion-item>
 
-      <ion-item [routerLink]="['/users/add']" detail="true">
-        <ion-avatar><ion-img src="assets/icon8/icons8-add.svg"></ion-img></ion-avatar>
+      <ion-item [routerLink]="['/users/add']" lines="full" detail="true">
+      <ion-icon size="large" slot="start" src="assets/icon8/icons8-add.svg"></ion-icon>
         <ion-label style="font-size: 0.9rem; font-family: Quicksand, sans-serif;">
          Users - Add New
         </ion-label>
       </ion-item>
+  </ion-item-group>
 </ion-list>
   </ion-card-content>
 </ion-card>
@@ -53,28 +62,13 @@
 </ion-content>
 <ion-footer [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/']" >
-      <ion-ripple-effect type="bounded"></ion-ripple-effect>
-      <ion-icon slot="start" name="home-outline"></ion-icon>
-      <ion-label>
-        Home
-      </ion-label>
-      </ion-button>
+    <ion-buttons>
+      <ion-back-button text="Back"></ion-back-button>
     </ion-buttons>
 
     <ion-title style="text-align: center;">
       <h4>{{date | date: 'shortTime'}}</h4>
     </ion-title>
 
-    <ion-buttons slot="end">
-      <ion-button  style="font-family: Quicksand, sans-serif; font-size: 0.8rem;"  [routerLink]="['/logout']">
-        <ion-ripple-effect type="bounded"></ion-ripple-effect>
-      <ion-icon slot="end" name="log-out-outline"></ion-icon>
-      <ion-label>
-        Logout
-      </ion-label>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-footer>

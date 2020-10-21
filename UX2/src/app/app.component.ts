@@ -6,12 +6,14 @@ import {Router} from '@angular/router';
 import {MenuController, Platform, ToastController} from '@ionic/angular';
 import {BehaviorSubject, Observable} from "rxjs";
 import {AuthenticationService} from "./authentication/authentication.service";
-import {filter, map, take} from "rxjs/operators";
 import {Storage} from "@ionic/storage";
-import {HttpClient} from "@angular/common/http";
 import {User} from "./interfaces/user.interface";
+import {distinctUntilChanged} from "rxjs/operators";
 
-const TOKEN_KEY = 'token';
+export class LoggedIn {
+  isAuthenticated: boolean;
+  isAdmin: boolean;
+}
 
 @Component({
   selector: 'app-root',
@@ -19,9 +21,10 @@ const TOKEN_KEY = 'token';
   styleUrls: ['app.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   isAuthenticated: boolean;
+  isAdmin: boolean;
   dark = false;
   userData = BehaviorSubject;
   user: User;
@@ -36,12 +39,13 @@ export class AppComponent {
     private toastCtrl: ToastController,
     private authService: AuthenticationService,
     private storage: Storage,
-    private http: HttpClient,
   ) {
     this.initializeApp();
+    this.updateLoggedInStatus().catch(r => {this.isAuthenticated = true; });
+    this.updateAdminStatus().catch(r => {this.isAuthenticated = true; });
   }
 
-  async OnInit() {
+  async ngOnInit() {
     this.swUpdate.available.subscribe(async res => {
       const
         toast = await this.toastCtrl.create({
@@ -75,8 +79,42 @@ export class AppComponent {
     );
   }
 
+  async getUserLoggedIn(): Promise<any> {
+    try {
+      const result = await this.storage.get('id');
+      console.log(result);
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async getIsAdmin(): Promise<any> {
+    try {
+      const result = await this.storage.get('roles');
+      console.log(result);
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async updateAdminStatus(): Promise<boolean> {
+    const value = await this.getIsAdmin();
+    if (value.length === 2) {
+      return this.isAuthenticated = true;
+    }
+  }
+
+  async updateLoggedInStatus(): Promise<boolean> {
+    const user = await this.getUserLoggedIn();
+    if (user) {
+      return this.isAdmin = true;
+    }
+  }
+
   updateDarkMode() {
-  document.body.classList.toggle('dark', this.dark);
+    document.body.classList.toggle('dark', this.dark);
   }
 
   initializeApp() {
@@ -86,22 +124,9 @@ export class AppComponent {
     });
   }
 
-  updateLoggedInStatus(b: boolean): Observable<boolean> {
-    return this.authService.isAuthenticated.pipe(
-      filter(val => val !== null),
-      take(1),
-      map(isAuthenticated => {
-        if (isAuthenticated) {
-          return true;
-        } else {
-        return false;
-        }
-      })
-    );
-  }
-
- async logout() {
-    this.isAuthenticated = false;
+  async logout() {
+    this.isAuthenticated;
+    this.isAdmin = false;
     await this.storage.clear().then(() => {
       this.router.navigateByUrl('/');
       this.userData = null;

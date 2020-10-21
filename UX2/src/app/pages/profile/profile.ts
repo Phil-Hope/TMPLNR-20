@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import {UsersService} from "../admin/users/services/users.service";
 import {ScheduledShift} from "../../interfaces/shifts.interface";
 import {Storage} from "@ionic/storage";
-import {ActionSheetController, AlertController} from "@ionic/angular";
+import {ActionSheetController, AlertController, LoadingController} from "@ionic/angular";
 import {Observable} from "rxjs";
 import {tap} from "rxjs/operators";
 
@@ -29,7 +29,8 @@ export class ProfilePage implements OnInit {
     private storage: Storage,
     private router: Router,
     private alertCtrl: AlertController,
-    private actionSheetController: ActionSheetController
+    private actionSheetController: ActionSheetController,
+    private loadingCtrl: LoadingController
   ) {
   }
 
@@ -43,9 +44,21 @@ export class ProfilePage implements OnInit {
     }
   }
 
+  async presentLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading Profile Page',
+      duration: 1000
+    });
+    await loading.present();
+
+    const {role, data} = await loading.onDidDismiss();
+    console.log('Loading Dismissed');
+  }
+
   async ngOnInit() {
     const value = await this.getStorage();
     await this.getUserFromStorage(JSON.parse(value));
+    await this.presentLoading();
     await this.onLoadUpcomingApproved(JSON.parse(value));
   }
 
@@ -108,6 +121,7 @@ export class ProfilePage implements OnInit {
         })
       );
   }
+
   async onLoadUpcomingApproved(id: string) {
     this.userService.loadUsersUpcomingApprovedShifts(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);

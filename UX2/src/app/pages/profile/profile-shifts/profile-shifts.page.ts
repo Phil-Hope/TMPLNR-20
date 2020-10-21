@@ -78,7 +78,7 @@ export class ProfileShiftsPage implements OnInit {
   async toggleAllActionSheet(id: string) {
     const actionSheet = await this.actionSheetController.create({
       header: 'All Shifts',
-      cssClass: ['action-sheet-group'],
+      cssClass: 'my-custom-class',
       animated: true,
       buttons: [{
         text: 'View All',
@@ -135,7 +135,7 @@ export class ProfileShiftsPage implements OnInit {
   async toggleUpcomingActionSheet(id: string) {
     const actionSheet4 = await this.actionSheetController.create({
       header: 'Upcoming Shifts',
-      cssClass: ['action-sheet-group'],
+      cssClass: 'my-custom-class',
       animated: true,
       buttons: [        {
         text: 'View All',

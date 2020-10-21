@@ -84,16 +84,6 @@
         <ion-col size="7"><ion-label class="finish-time">{{shift.end | date: 'shortTime'}}</ion-label></ion-col>
     </ion-item>
 
-      <ng-template #locked>
-        <ion-item>
-        <ion-label color="warning" class="locked-text">
-          NOTE:<br />Editing is disabled <br /> for approved shifts. <br />
-          <span class="locked-span">
-                Please contact your manager<br /> if editing is required.</span>
-        </ion-label>
-        </ion-item>
-      </ng-template>
-
       <ion-item>
         <ion-col size="6">
           <ion-button color="success" fill="clear" [routerLink]="['/shifts/', shift.id, 'add-comment']">
@@ -112,7 +102,7 @@
       </ion-item>
       </div>
 
-      <ion-item *ngIf="shift.isApproved == false else locked" lines="none">
+      <ion-item lines="none">
         <ion-col size="6">
           <ion-button shape="round" fill="outline" [routerLink]="['/shifts/', shift.id, 'edit']" color="warning" size="block">
             <ion-icon slot="start" name="pencil"></ion-icon>

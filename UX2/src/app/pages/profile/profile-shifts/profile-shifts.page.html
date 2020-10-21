@@ -29,17 +29,17 @@
 <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" *ngIf="user else loading">
 <ion-icon slot="start" name="funnel-outline"></ion-icon>
   <ion-col>
-    <ion-button color="secondary" size="block" (click)="togglePreviousActionSheet(user.id)">
+    <ion-button fill="outline" color="secondary" size="block" (click)="togglePreviousActionSheet(user.id)">
       <ion-label>Previous</ion-label>
     </ion-button>
   </ion-col>
   <ion-col>
-    <ion-button color="success" size="block" (click)="toggleAllActionSheet(user.id)">
+    <ion-button fill="outline" color="success" size="block" (click)="toggleAllActionSheet(user.id)">
       <ion-label>All</ion-label>
     </ion-button>
   </ion-col>
   <ion-col>
-    <ion-button color="primary" size="block" (click)="toggleUpcomingActionSheet(user.id)">
+    <ion-button fill="outline" color="primary" size="block" (click)="toggleUpcomingActionSheet(user.id)">
       <ion-label>Upcoming</ion-label>
     </ion-button>
   </ion-col>
