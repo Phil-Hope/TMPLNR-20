@@ -11,6 +11,9 @@
   --ion-color-primary-shade: #3171e0;
   --ion-color-primary-tint: #4c8dff;
 
+  /** custom styles for action-sheet **/
+  --button-color-hover: #5260ff;
+
   /** secondary **/
   --ion-color-secondary: #3dc2ff;
   --ion-color-secondary-rgb: 61, 194, 255;
@@ -324,7 +327,9 @@
     --ion-card-background: #1e1e1e;
   }
 
-
+.action-sheet-group  {
+--ion-background-color: #d2d5d6;;
+}
 
 
 

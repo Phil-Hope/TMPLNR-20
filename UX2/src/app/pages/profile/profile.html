@@ -10,6 +10,16 @@
       </ion-card-content>
     </ion-card>
   </ng-template>
+  <ng-template #loadingshifts>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading Shifts...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
   <app-header-banner></app-header-banner>
   <div *ngIf="user else loading">
   <ion-card>
@@ -39,7 +49,7 @@
                 View Your Comments
               </ion-label>
             </ion-item>
-        <div *ngIf="shifts else loading">
+        <div *ngIf="shifts else loadingshifts">
           <ion-list>
             <ion-item class="ion-text-center"><ion-label>Approved Upcoming Shifts</ion-label></ion-item>
             <ion-item color="medium" style="font-size: 0.8rem; text-align: center; font-family: Quicksand, sans-serif;">

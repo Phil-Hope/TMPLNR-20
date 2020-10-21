@@ -86,3 +86,17 @@ ion-menu.ios ion-item.selected ion-icon {
   color: var(--ion-color-primary);
 }
 
+.my-custom-class{
+  --button-color-hover: #50c8ff;
+  --ion-font-family: Quicksand;
+  text-align: left;
+  --color: #000000;
+  --ion-text-color: #000000;
+}
+.action-sheet-button{
+  --button-color-hover: #50c8ff;
+  --ion-font-family: Quicksand;
+  text-align: left;
+  --color: #000000;
+  --ion-text-color: #000000;
+}

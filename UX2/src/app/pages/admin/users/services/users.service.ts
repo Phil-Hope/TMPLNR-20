@@ -6,7 +6,7 @@ import {tap} from "rxjs/operators";
 import {User} from "../../../../interfaces/user.interface";
 import {ScheduledShift} from "../../../../interfaces/shifts.interface";
 import {format} from "date-fns";
-
+import * as moment from "moment";
 
 @Injectable()
 export class UsersService {
@@ -69,7 +69,7 @@ export class UsersService {
 
   loadUsersPastShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
-      .set('order[shifts]', 'ASC')
+      .set('order[shifts]', 'desc')
       .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'));
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {params, headers: new HttpHeaders({
@@ -93,6 +93,34 @@ export class UsersService {
     );
   }
 
+  loadUsersUpcomingPendingShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
+      .set('order[shifts]', 'ASC')
+      .set('isApproved', 'false');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
+
+  loadUsersPastPendingShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
+      .set('order[shifts]', 'desc')
+      .set('isApproved', 'false');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
+
   loadUsersApprovedShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('order[shifts]', 'ASC')
@@ -106,9 +134,67 @@ export class UsersService {
     );
   }
 
+  loadUsersUpcomingApprovedShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
+      .set('order[shifts]', 'ASC')
+      .set('isApproved', 'true');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
+
+  loadUsersPastApprovedShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
+      .set('order[shifts]', 'desc')
+      .set('isApproved', 'true');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
+
   loadUsersPendingPrimaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('order[shifts]', 'ASC')
+      .set('isApproved', 'false')
+      .set('ShiftStatus', 'primary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
+
+  loadUsersUpcomingPendingPrimaryShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
+      .set('order[shifts]', 'ASC')
+      .set('isApproved', 'false')
+      .set('ShiftStatus', 'primary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
+
+  loadUsersPastPendingPrimaryShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
+      .set('order[shifts]', 'desc')
       .set('isApproved', 'false')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
@@ -134,9 +220,69 @@ export class UsersService {
     );
   }
 
+  loadUsersUpcomingPendingSecondaryShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
+      .set('order[shifts]', 'ASC')
+      .set('isApproved', 'false')
+      .set('ShiftStatus', 'secondary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
+
+  loadUsersPastPendingSecondaryShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
+      .set('order[shifts]', 'desc')
+      .set('isApproved', 'false')
+      .set('ShiftStatus', 'secondary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
+
   loadUsersApprovedPrimaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('order[shifts]', 'ASC')
+      .set('isApproved', 'true')
+      .set('ShiftStatus', 'primary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
+
+  loadUsersUpcomingApprovedPrimaryShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
+      .set('order[shifts]', 'ASC')
+      .set('isApproved', 'true')
+      .set('ShiftStatus', 'primary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
+
+  loadUsersPastApprovedPrimaryShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
+      .set('order[shifts]', 'desc')
       .set('isApproved', 'true')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
@@ -162,6 +308,116 @@ export class UsersService {
     );
   }
 
+  loadUsersUpcomingApprovedSecondaryShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
+      .set('order[shifts]', 'ASC')
+      .set('isApproved', 'true')
+      .set('ShiftStatus', 'secondary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
+
+  loadUsersPastApprovedSecondaryShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
+      .set('order[shifts]', 'desc')
+      .set('isApproved', 'true')
+      .set('ShiftStatus', 'secondary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
+
+  loadUsersUpcomingSecondaryShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
+      .set('order[shifts]', 'ASC')
+      .set('ShiftStatus', 'secondary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
+
+  loadUsersPastSecondaryShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
+      .set('order[shifts]', 'desc')
+      .set('ShiftStatus', 'secondary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
+
+  loadUsersSecondaryShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('order[shifts]', 'ASC')
+      .set('ShiftStatus', 'secondary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
+
+  loadUsersUpcomingPrimaryShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
+      .set('order[shifts]', 'ASC')
+      .set('ShiftStatus', 'primary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
+
+  loadUsersPastPrimaryShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
+      .set('order[shifts]', 'desc')
+      .set('ShiftStatus', 'primary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
+  loadUsersPrimaryShifts(id: string): Observable<ScheduledShift[]> {
+    const params = new HttpParams()
+      .set('order[shifts]', 'ASC')
+      .set('ShiftStatus', 'primary');
+    return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
+      {params, headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+    );
+  }
 
   editUser(user: User): Observable<User> {
     return this.http.put<User>(`${environment.apiUrl}/users/${user.id}`,

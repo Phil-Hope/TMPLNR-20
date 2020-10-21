@@ -34,13 +34,19 @@
   <ion-buttons slot="start">
     <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" [routerLink]="['/messaging/inbox']">
       <ion-icon slot="start" name="mail-open-outline"></ion-icon>
-      <ion-label>ARCHIVE</ion-label>
+      <ion-label>Inbox</ion-label>
     </ion-button>
   </ion-buttons>
-    <ion-buttons slot="end">
+    <ion-title>
       <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" [routerLink]="['/messaging/send']">
         <ion-icon slot="end" name="paper-plane-outline"></ion-icon>
-        <ion-label>SEND</ion-label>
+        <ion-label>New Message</ion-label>
+      </ion-button>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"  [routerLink]="['/messaging/sent']">
+        <ion-icon slot="end" name="send-outline"></ion-icon>
+        <ion-label>Outbox</ion-label>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

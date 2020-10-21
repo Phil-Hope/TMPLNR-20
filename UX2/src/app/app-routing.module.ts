@@ -121,6 +121,11 @@ const routes: Routes = [
       .then( m => m.SendPageModule)
   },
   {
+    path: 'messaging/sent',
+    loadChildren: () => import('./pages/messaging/sent/sent.module')
+      .then( m => m.SentPageModule)
+  },
+  {
     path: 'messaging/inbox',
     loadChildren: () => import('./pages/messaging/inbox/inbox.module')
       .then( m => m.InboxPageModule)

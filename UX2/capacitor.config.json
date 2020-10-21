@@ -4,6 +4,7 @@
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
+  "linuxAndroidStudioPath": "/var/lib/flatpak/app/com.google.AndroidStudio/x86_64/stable/eb616f65dc93d7a4843d3cad8c275b820adb5e56e0689e2b9cb3193f656b4e0a/files/extra/android-studio/bin/studio.sh",
   "windowsAndroidStudioPath": "C:\\Users\\phil_\\AppData\\Local\\JetBrains\\Toolbox\\apps\\AndroidStudio\\ch-0\\193.6626763\\bin\\studio64.exe",
   "plugins": {
     "SplashScreen": {

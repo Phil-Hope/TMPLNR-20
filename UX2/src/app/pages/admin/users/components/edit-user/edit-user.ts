@@ -4,7 +4,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {User} from "../../../../../interfaces/user.interface";
 import {UsersService} from "../../services/users.service";
-import {UserTrackerError} from "../../services/user-errors.interface";
 import {tap} from "rxjs/operators";
 
 @Component({
@@ -14,7 +13,7 @@ import {tap} from "rxjs/operators";
 })
 export class EditUserPage implements OnInit {
 
-  user: User | UserTrackerError;
+  user: User;
   form: FormGroup;
   submitted = false;
   id: string;

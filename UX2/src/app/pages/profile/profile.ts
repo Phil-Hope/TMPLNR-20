@@ -5,7 +5,9 @@ import {Router} from "@angular/router";
 import {UsersService} from "../admin/users/services/users.service";
 import {ScheduledShift} from "../../interfaces/shifts.interface";
 import {Storage} from "@ionic/storage";
-import {ActionSheetController} from "@ionic/angular";
+import {ActionSheetController, AlertController} from "@ionic/angular";
+import {Observable} from "rxjs";
+import {tap} from "rxjs/operators";
 
 
 @Component({
@@ -26,6 +28,7 @@ export class ProfilePage implements OnInit {
     private route: ActivatedRoute,
     private storage: Storage,
     private router: Router,
+    private alertCtrl: AlertController,
     private actionSheetController: ActionSheetController
   ) {
   }
@@ -42,8 +45,8 @@ export class ProfilePage implements OnInit {
 
   async ngOnInit() {
     const value = await this.getStorage();
-    this.getUserFromStorage(JSON.parse(value));
-    this.getUsersShiftsFromStorage(JSON.parse(value));
+    await this.getUserFromStorage(JSON.parse(value));
+    await this.onLoadUpcomingApproved(JSON.parse(value));
   }
 
   async presentActionSheet(id: string) {
@@ -90,8 +93,24 @@ export class ProfilePage implements OnInit {
     this.userService.getUserById(id).subscribe((data: User) => this.user = data);
   }
 
-  async getUsersShiftsFromStorage(id: string) {
-    this.userService.loadUsersApprovedShifts(id).subscribe((data: ScheduledShift[]) => this.shifts = data);
+  loadUpcomingApproved(id: string): Observable<ScheduledShift[]> {
+    return this.userService.loadUsersUpcomingApprovedShifts(id)
+      .pipe(
+        tap(async (res) => {
+          if (res.length === 0) {
+            const alert = await this.alertCtrl.create({
+              header: 'We Looked, But there are NONE!',
+              message: 'No upcoming approved shifts were found in the database.',
+              buttons: ['OK']
+            });
+            await alert.present();
+          }
+        })
+      );
+  }
+  async onLoadUpcomingApproved(id: string) {
+    this.userService.loadUsersUpcomingApprovedShifts(id)
+      .subscribe((data: ScheduledShift[]) => this.shifts = data);
   }
 
   viewShiftDetails(): void {
