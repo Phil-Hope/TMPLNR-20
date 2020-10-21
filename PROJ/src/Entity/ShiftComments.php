@@ -11,13 +11,23 @@ use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 /**
  * ShiftComments
  * @ApiResource(
  *     normalizationContext={"groups"={"comments:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"comments:write"}, "swagger_definition_name"="Write"},
+ *   attributes={"security"="is_granted('ROLE_USER')"},
+ *   collectionOperations={
+ *   "get",
+ *   "post"},
+ *   itemOperations={"get",
+ *   "put"={"security"="is_granted('ROLE_ADMIN') or object.getAuthoredBy() == user"},
+ *   "delete"={"security"="is_granted('ROLE_ADMIN') or object.getAuthoredBy() == user"}
+ *   },
  *   shortName="comments"
  * )
+ * @ApiFilter(BooleanFilter::class, properties={"markedAsRead"})
  * @ApiFilter(OrderFilter::class, properties={"dateOfComment"}, arguments={"orderParameterName"="order"})
  * @ORM\Table(name="shift_comments")
  * @ORM\Entity(repositoryClass="App\Repository\ShiftCommentsRepository")
@@ -72,6 +82,24 @@ class ShiftComments
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="receivedComments")
      */
     private $recipient;
+
+    /**
+     * @Groups({"comments:read", "comments:write"})
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $markedAsRead;
+
+    /**
+     * @Groups({"comments:read", "comments:write"})
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isPrivate;
+
+    /**
+     * @Groups({"comments:read", "comments:write"})
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $subject;
 
     /**
      *
@@ -139,6 +167,42 @@ class ShiftComments
     public function setRecipient(?User $recipient): self
     {
         $this->recipient = $recipient;
+
+        return $this;
+    }
+
+    public function getMarkedAsRead(): ?bool
+    {
+        return $this->markedAsRead;
+    }
+
+    public function setMarkedAsRead(?bool $markedAsRead): self
+    {
+        $this->markedAsRead = $markedAsRead;
+
+        return $this;
+    }
+
+    public function getIsPrivate(): ?bool
+    {
+        return $this->isPrivate;
+    }
+
+    public function setIsPrivate(?bool $isPrivate): self
+    {
+        $this->isPrivate = $isPrivate;
+
+        return $this;
+    }
+
+    public function getSubject(): ?string
+    {
+        return $this->subject;
+    }
+
+    public function setSubject(?string $subject): self
+    {
+        $this->subject = $subject;
 
         return $this;
     }

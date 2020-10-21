@@ -27,8 +27,15 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  * @ApiResource(
  *     normalizationContext={"groups"={"user:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"user:write"}, "swagger_definition_name"="Write"},
- *
- *     shortName="user"
+ *     shortName="user",
+ *   attributes={"security"="is_granted('ROLE_USER')"},
+ *   collectionOperations={
+ *   "get",
+ *   "post"},
+ *   itemOperations={"get",
+ *   "put"={"security"="is_granted('ROLE_ADMIN') or object == user"},
+ *   "delete"={"security"="is_granted('ROLE_ADMIN') or object == user"}
+ *   },
  * )
  * @ApiFilter(OrderFilter::class, properties={"lastName", "firstName"}, arguments={"orderParameterName"="order"})
  * @Type(name="Users")
@@ -44,7 +51,7 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @Groups({"user:read", "shift:read"})
+     * @Groups({"user:read", "shift:read", "comments:read"})
      */
     private $id;
 
@@ -109,19 +116,18 @@ class User implements UserInterface
 
     /**
      * @ApiSubresource()
-     * @Groups({"user:read"})
      * @ORM\OneToMany(targetEntity=ScheduledShift::class, mappedBy="onDuty")
      */
     private $shifts;
 
     /**
      * @ApiSubresource()
-     * @Groups({"user:read"})
-     * @ORM\OneToMany(targetEntity=ShiftComments::class, mappedBy="authoredBy")
+     * @ORM\OneToMany(targetEntity=ShiftComments::class, mappedBy="authoredBy", cascade={"persist", "remove"})
      */
     private $comments;
 
     /**
+     * @ApiSubresource()
      * @ORM\OneToMany(targetEntity=ShiftComments::class, mappedBy="recipient")
      */
     private $receivedComments;

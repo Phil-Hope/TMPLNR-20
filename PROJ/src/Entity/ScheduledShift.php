@@ -14,6 +14,7 @@ use Ramsey\Uuid\Doctrine\UuidBinaryType;
 use Ramsey\Uuid\Lazy\LazyUuidFromString;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 use TheCodingMachine\GraphQLite\Annotations\Type;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
@@ -25,7 +26,16 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  * @ApiResource(
  *     normalizationContext={"groups"={"shift:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"shift:write"}, "swagger_definition_name"="Write"},
- *     shortName="shifts"
+ *   attributes={"security"="is_granted('ROLE_USER')"},
+ *   collectionOperations={
+ *   "get",
+ *   "post"
+ * },
+ *   itemOperations={
+ *   "get",
+ *   "put"={"security"="is_granted('ROLE_ADMIN') or object.getOnDuty() == user"},
+ *   "delete"={"security"="is_granted('ROLE_ADMIN') or object.getOnDuty() == user"}},
+ *   shortName="shifts"
  * )
  * @ApiFilter(DateFilter::class, properties={"start", "end"})
  * @ApiFilter(BooleanFilter::class, properties={"isApproved"})
@@ -44,26 +54,28 @@ class ScheduledShift
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
-     * @Groups({"shift:read", "user:read", "comments:read"})
+     * @Groups({"shift:read", "comments:read"})
      */
     private $id;
 
     /**
      * @var DateTimeInterface
-     * @Groups({"shift:read", "shift:write", "user:read"})
+     * @Assert\NotBlank()
+     * @Groups({"shift:read", "shift:write", "comments:read"})
      * @ORM\Column(name="start", type="datetime", nullable=false)
      */
     private $start;
 
     /**
      * @var DateTimeInterface
-     * @Groups({"shift:read", "shift:write", "user:read"})
+     * @Assert\NotBlank()
+     * @Groups({"shift:read", "shift:write", "comments:read"})
      * @ORM\Column(name="end", type="datetime", nullable=false)
      */
     private $end;
 
     /**
-     *
+     * @Assert\NotBlank()
      * @Groups({"shift:read", "shift:write", "comments:read"})
      * @ORM\ManyToOne(targetEntity="User", inversedBy="shifts")
      * @ORM\JoinColumns({
@@ -75,18 +87,19 @@ class ScheduledShift
     /**
      * @ApiSubresource()
      * @Groups({"shift:read"})
-     * @ORM\OneToMany(targetEntity=ShiftComments::class, mappedBy="shift")
+     * @ORM\OneToMany(targetEntity=ShiftComments::class, mappedBy="shift", cascade={"persist", "remove"})
      */
     private $comments;
 
     /**
-     * @Groups({"shift:read", "shift:write", "user:read"})
+     * @Assert\NotBlank()
+     * @Groups({"shift:read", "shift:write"})
      * @ORM\Column(type="string", name="shift_status", nullable=false)
      */
     private $ShiftStatus;
 
     /**
-     * @Groups({"shift:read", "shift:write", "user:read"})
+     * @Groups({"shift:read", "shift:write"})
      * @ORM\Column(type="boolean", name="is_approved", nullable=false)
      */
     private $isApproved;
