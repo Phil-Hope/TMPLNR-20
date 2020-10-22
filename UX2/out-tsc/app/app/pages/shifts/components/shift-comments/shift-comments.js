@@ -5,12 +5,12 @@ var ShiftCommentsPage = /** @class */ (function () {
     }
     ShiftCommentsPage = __decorate([
         Component({
-            selector: 'app-shift-comments',
-            templateUrl: './shift-comments.html',
-            styleUrls: ['./shift-comments.scss']
+            selector: 'app-shift-shift-comments',
+            templateUrl: './shift-shift-comments.html',
+            styleUrls: ['./shift-shift-comments.scss']
         })
     ], ShiftCommentsPage);
     return ShiftCommentsPage;
 }());
 export { ShiftCommentsPage };
-//# sourceMappingURL=shift-comments.js.map
+//# sourceMappingURL=shift-shift-comments.js.map

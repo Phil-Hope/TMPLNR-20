@@ -1,9 +1,55 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>edit</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [pageTitle]="['Edit Shift']"></app-header>
 
 <ion-content>
+<ion-card>
+  <ion-list>
+    <form [formGroup]="form" (ngSubmit)="onEditShift()">
+    <ion-item>
+      <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">Start:</ion-label>
+      <ion-datetime
+        style="font-family: Quicksand, sans-serif; font-size: 0.8rem;"
+        picker-format="DD MMM YY h:mm A"
+        display-format="DD MMM YY h:mm A"
+        minuteValues="00,15,30,45"
+        formControlName="start" [ngModel]="shift.start">
+      </ion-datetime>
+    </ion-item>
 
+    <ion-item>
+      <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">End:</ion-label>
+      <ion-datetime
+        style="font-family: Quicksand, sans-serif; font-size: 0.8rem;"
+        picker-format="DD MMM YY h:mm A"
+        display-format="DD MMM YY h:mm A"
+        minuteValues="00,15,30,45"
+        formControlName="end" [ngModel]="shift.end">
+      </ion-datetime>
+    </ion-item>
+
+      <ion-item>
+        <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">Select Call Level</ion-label>
+        <ion-select style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" formControlName="ShiftStatus" [ngModel]="shift.ShiftStatus">
+          <ion-select-option value="secondary">Secondary</ion-select-option>
+          <ion-select-option value="primary">Primary</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+
+    </form>
+  </ion-list>
+</ion-card>
 </ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"
+                       text="Back" defaultHref="/admin/shifts/list"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-label></ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

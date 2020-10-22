@@ -4,16 +4,9 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {SwUpdate} from '@angular/service-worker';
 import {Router} from '@angular/router';
 import {MenuController, Platform, ToastController} from '@ionic/angular';
-import {BehaviorSubject, Observable} from "rxjs";
 import {AuthenticationService} from "./authentication/authentication.service";
 import {Storage} from "@ionic/storage";
 import {User} from "./interfaces/user.interface";
-import {distinctUntilChanged} from "rxjs/operators";
-
-export class LoggedIn {
-  isAuthenticated: boolean;
-  isAdmin: boolean;
-}
 
 @Component({
   selector: 'app-root',
@@ -23,10 +16,9 @@ export class LoggedIn {
 })
 export class AppComponent implements OnInit {
 
-  isAuthenticated: boolean;
-  isAdmin: boolean;
+  userIsAuthenticated: boolean;
+  userIsAdmin: boolean;
   dark = false;
-  userData = BehaviorSubject;
   user: User;
 
   constructor(
@@ -41,11 +33,59 @@ export class AppComponent implements OnInit {
     private storage: Storage,
   ) {
     this.initializeApp();
-    this.updateLoggedInStatus().catch(r => {this.isAuthenticated = true; });
-    this.updateAdminStatus().catch(r => {this.isAuthenticated = true; });
+    this.isLoggedIn();
+    this.isAdmin();
+    this.authService.isAuthenticated.asObservable()
+      .subscribe((data) => this.userIsAuthenticated = data);
+    this.authService.isAdmin.asObservable()
+      .subscribe((data) => this.userIsAdmin = data);
+  }
+
+  async getAuthStatus(): Promise<any> {
+    try {
+      const result = await this.storage.get('id');
+      console.log(result);
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async isLoggedIn() {
+    const value = await this.getAuthStatus();
+    if (value) {
+      this.userIsAuthenticated = true;
+    } else {
+      this.userIsAuthenticated = false;
+    }
+  }
+
+  async getAdminStatus(): Promise<any> {
+    try {
+      const result = await this.storage.get('roles');
+      console.log(result);
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async isAdmin() {
+    const value = await this.getAdminStatus();
+    if (value.length === 2) {
+      this.userIsAdmin = true;
+    } else {
+      this.userIsAdmin = false;
+    }
   }
 
   async ngOnInit() {
+
+    this.authService.isAuthenticated.asObservable()
+      .subscribe((data) => this.userIsAuthenticated = data);
+    this.authService.isAdmin.asObservable()
+      .subscribe((data) => this.userIsAdmin = data);
+
     this.swUpdate.available.subscribe(async res => {
       const
         toast = await this.toastCtrl.create({
@@ -79,40 +119,6 @@ export class AppComponent implements OnInit {
     );
   }
 
-  async getUserLoggedIn(): Promise<any> {
-    try {
-      const result = await this.storage.get('id');
-      console.log(result);
-      return result;
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async getIsAdmin(): Promise<any> {
-    try {
-      const result = await this.storage.get('roles');
-      console.log(result);
-      return result;
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async updateAdminStatus(): Promise<boolean> {
-    const value = await this.getIsAdmin();
-    if (value.length === 2) {
-      return this.isAuthenticated = true;
-    }
-  }
-
-  async updateLoggedInStatus(): Promise<boolean> {
-    const user = await this.getUserLoggedIn();
-    if (user) {
-      return this.isAdmin = true;
-    }
-  }
-
   updateDarkMode() {
     document.body.classList.toggle('dark', this.dark);
   }
@@ -125,14 +131,12 @@ export class AppComponent implements OnInit {
   }
 
   async logout() {
-    this.isAuthenticated;
-    this.isAdmin = false;
+    this.userIsAdmin = false;
+    this.userIsAuthenticated = false;
     await this.storage.clear().then(() => {
       this.router.navigateByUrl('/');
-      this.userData = null;
     });
   }
-
 
   openWelcome() {
     this.menu.enable(false);
@@ -140,3 +144,4 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl('/welcome');
   }
 }
+

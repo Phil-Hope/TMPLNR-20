@@ -299,12 +299,12 @@ class ApiTest extends  ApiTestCase
     public function testGetComments()
     {
       $client = self::createClient();
-      $client->request('GET', '/comments');
+      $client->request('GET', '/shift-comments');
       $this->assertResponseStatusCodeSame(200);
     }
 
   /**
-   * Tests POST to create comment at '/comments' endpoint.
+   * Tests POST to create comment at '/shift-comments' endpoint.
    *
    * @throws TransportExceptionInterface
    */
@@ -332,7 +332,7 @@ class ApiTest extends  ApiTestCase
       $em->persist($shift);
       $em->flush();
 
-      $client->request('POST', '/comments', [
+      $client->request('POST', '/shift-comments', [
         'headers' => [
           'Content-Type' => 'application/json'
         ],
@@ -350,7 +350,7 @@ class ApiTest extends  ApiTestCase
     }
 
   /**
-   * Tests the PUT method to edit a comment at '/comments/:uuid' endpoint.
+   * Tests the PUT method to edit a comment at '/shift-comments/:uuid' endpoint.
    *
    * @throws TransportExceptionInterface
    */
@@ -387,7 +387,7 @@ class ApiTest extends  ApiTestCase
       $em->persist($comment);
       $em->flush();
 
-      $client->request('PUT', '/comments/'.$comment->getId(), [
+      $client->request('PUT', '/shift-comments/'.$comment->getId(), [
         'headers' => [
           'Content-Type' => 'application/json'
         ],
@@ -401,7 +401,7 @@ class ApiTest extends  ApiTestCase
     }
 
   /**
-   * Tests DELETE to delete comment at '/comments/:uuid' endpoint.
+   * Tests DELETE to delete comment at '/shift-comments/:uuid' endpoint.
    *
    * @throws TransportExceptionInterface
    */
@@ -437,7 +437,7 @@ class ApiTest extends  ApiTestCase
     $em->persist($comment);
     $em->flush();
 
-    $client->request('DELETE', '/comments/'.$comment->getId());
+    $client->request('DELETE', '/shift-comments/'.$comment->getId());
     $this->assertResponseStatusCodeSame(204);
   }
 
@@ -523,7 +523,7 @@ class ApiTest extends  ApiTestCase
   }
 
   /**
-   * Tests GET method fetch a single instance of a comment at '/comments/:uuid' endpoint.
+   * Tests GET method fetch a single instance of a comment at '/shift-comments/:uuid' endpoint.
    * Receives a 200
    *
    * @throws TransportExceptionInterface
@@ -560,12 +560,12 @@ class ApiTest extends  ApiTestCase
     $em->persist($comment);
     $em->flush();
 
-    $client->request('GET', '/comments/'.$comment->getId());
+    $client->request('GET', '/shift-comments/'.$comment->getId());
     $this->assertResponseStatusCodeSame(200);
   }
 
   /**
-   * Tests GET to fetch to a single instance of a comment at '/comments/:uuid' endpoint.
+   * Tests GET to fetch to a single instance of a comment at '/shift-comments/:uuid' endpoint.
    * Receives a 200 OK
    *
    * @throws TransportExceptionInterface

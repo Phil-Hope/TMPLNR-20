@@ -2,9 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {CommentsService} from "../../shifts/services/comments.service";
 import {UsersService} from "../../admin/users/services/users.service";
 import {Storage} from "@ionic/storage";
-import {ActionSheetController, AlertController} from "@ionic/angular";
+import {AlertController} from "@ionic/angular";
 import {ShiftComments} from "../../../interfaces/shift-comments.interface";
 import {User} from "../../../interfaces/user.interface";
+import {tap} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-sent',
@@ -20,8 +22,7 @@ export class SentPage implements OnInit {
     private commentService: CommentsService,
     private userService: UsersService,
     private storage: Storage,
-    private actionSheet: ActionSheetController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
   ) {
   }
 
@@ -38,7 +39,7 @@ export class SentPage implements OnInit {
   async ngOnInit() {
     const value = await this.getStorage();
     await this.getUserFromStorage(JSON.parse(value));
-    await this.loadSentMessages(JSON.parse(value));
+    await this.onLoadSentMessages(JSON.parse(value));
   }
 
   async getUserFromStorage(id: string) {
@@ -46,8 +47,22 @@ export class SentPage implements OnInit {
       .subscribe((data: User) => this.user = data);
   }
 
-  loadSentMessages(id: string) {
-    this.commentService.getUsersComments(id)
+  loadSentMessages(id: string): Observable<ShiftComments[]> {
+    return this.commentService.getUsersSentMessages(id)
+      .pipe(
+        tap(async res => {
+          if (res.length === 0) {
+            const alert = await this.alertCtrl.create({
+              header: 'No Sent Messages Found',
+              buttons: ['OK']
+            });
+            await alert.present();
+          }
+        })
+      );
+  }
+ async onLoadSentMessages(id: string) {
+    return this.loadSentMessages(id)
       .subscribe((data: ShiftComments[]) => this.comments = data);
   }
 }

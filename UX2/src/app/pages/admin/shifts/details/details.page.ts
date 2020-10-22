@@ -12,8 +12,9 @@ import {CommentsService} from "../../../shifts/services/comments.service";
 })
 export class DetailsPage implements OnInit {
 
-  comment: ShiftComments[];
+  comments: ShiftComments[];
   shift: ScheduledShift;
+  date = new Date();
 
   constructor(
     private route: ActivatedRoute,
@@ -35,6 +36,6 @@ export class DetailsPage implements OnInit {
 
   getComments(id: string) {
     this.commentsService.getCommentsForShift(id)
-      .subscribe((data: ShiftComments[]) => this.comment = data);
+      .subscribe((data: ShiftComments[]) => this.comments = data);
   }
 }

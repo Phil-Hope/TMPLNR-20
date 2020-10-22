@@ -2,7 +2,7 @@
 <ion-content>
   <app-header-banner></app-header-banner>
 <ion-list>
-  <ion-list-header><ion-label>Unread Messages</ion-label></ion-list-header>
+  <ion-list-header><ion-icon slot="start" name="mail-unread-outline"></ion-icon><ion-label>Unread Messages</ion-label></ion-list-header>
 
   <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
     <ion-label>Subject</ion-label>
@@ -45,7 +45,7 @@
     </ion-title>
     <ion-buttons slot="end">
       <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"  [routerLink]="['/messaging/sent']">
-        <ion-icon slot="end" name="paper-plane-outline"></ion-icon>
+        <ion-icon slot="end" name="file-tray-full-outline"></ion-icon>
         <ion-label>Outbox</ion-label>
       </ion-button>
     </ion-buttons>

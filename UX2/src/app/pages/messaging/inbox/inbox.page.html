@@ -28,10 +28,16 @@
     <ion-buttons>
       <ion-back-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" defaultHref="/messaging" text="Back"></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/messaging/send']">
+    <ion-title>
+      <ion-button color="light" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/messaging/send']">
         <ion-icon slot="end" name="paper-plane-outline"></ion-icon>
         <ion-label>New Message</ion-label>
+      </ion-button>
+    </ion-title>
+    <ion-buttons *ngIf="user" slot="end">
+      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/messaging/sent']">
+        <ion-icon slot="end" name="file-tray-full-outline"></ion-icon>
+        <ion-label>Outbox</ion-label>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

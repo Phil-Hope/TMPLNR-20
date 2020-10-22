@@ -13,7 +13,7 @@
 
         <ion-list lines="none">
           <div>
-          <ion-menu-toggle  *ngIf="!isAuthenticated"  autoHide="false" >
+          <ion-menu-toggle  *ngIf="!userIsAuthenticated"  autoHide="false" >
             <ion-item detail="false" [routerLink]="['login']" routerDirection="root">
                 <ion-ripple-effect type="bounded"></ion-ripple-effect>
               <ion-icon slot="start" name="log-in-outline"></ion-icon>
@@ -23,7 +23,7 @@
             </ion-item>
           </ion-menu-toggle>
 
-          <ion-menu-toggle  *ngIf="!isAuthenticated"  autoHide="false">
+          <ion-menu-toggle  *ngIf="!userIsAuthenticated"  autoHide="false">
             <ion-item detail="false" [routerLink]="['contact']" routerDirection="root">
                 <ion-ripple-effect type="bounded"></ion-ripple-effect>
               <ion-icon slot="start" name="call-outline"></ion-icon>
@@ -35,7 +35,7 @@
           </div>
           <div>
 
-            <ion-menu-toggle  *ngIf="isAuthenticated"  autoHide="false">
+            <ion-menu-toggle  *ngIf="userIsAuthenticated"  autoHide="false">
               <ion-item color="light" detail="false" [routerLink]="['/shifts']" routerDirection="root">
                   <ion-ripple-effect type="bounded"></ion-ripple-effect>
                 <ion-icon slot="start" name="calendar-outline"></ion-icon>
@@ -45,7 +45,7 @@
               </ion-item>
             </ion-menu-toggle>
 
-          <ion-menu-toggle  *ngIf="isAuthenticated"  autoHide="false">
+          <ion-menu-toggle  *ngIf="userIsAuthenticated"  autoHide="false">
             <ion-item color="light"  [routerLink]="['/users/profile']"  routerDirection="root" detail="false">
                 <ion-ripple-effect type="bounded"></ion-ripple-effect>
               <ion-icon slot="start" name="person-circle-outline"></ion-icon>
@@ -55,7 +55,7 @@
             </ion-item>
           </ion-menu-toggle>
 
-            <ion-menu-toggle *ngIf="isAuthenticated"  autoHide="false">
+            <ion-menu-toggle *ngIf="userIsAuthenticated"  autoHide="false">
               <ion-item color="light"  [routerLink]="['/messaging']"  routerDirection="root" detail="false">
                 <ion-ripple-effect type="bounded"></ion-ripple-effect>
                 <ion-icon slot="start" name="chatbubbles-outline"></ion-icon>
@@ -65,7 +65,7 @@
               </ion-item>
             </ion-menu-toggle>
 
-          <ion-menu-toggle *ngIf="isAdmin" autoHide="false">
+          <ion-menu-toggle *ngIf="userIsAdmin" autoHide="false">
             <ion-item routerLink="admin" routerLinkActive="active" routerDirection="root" detail="false">
                 <ion-ripple-effect type="bounded"></ion-ripple-effect>
               <ion-icon slot="start" name="options-outline"></ion-icon>
@@ -75,7 +75,7 @@
             </ion-item>
           </ion-menu-toggle>
 
-          <ion-menu-toggle *ngIf="isAuthenticated">
+          <ion-menu-toggle *ngIf="userIsAuthenticated">
             <ion-item color="light" detail="false" (click)="logout()">
               <ion-ripple-effect type="bounded"></ion-ripple-effect>
               <ion-icon slot="start" name="log-out-outline"></ion-icon>

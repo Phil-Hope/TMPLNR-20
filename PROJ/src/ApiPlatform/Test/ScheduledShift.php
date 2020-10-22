@@ -44,7 +44,7 @@ class ScheduledShift
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
-     * @Groups({"shift:read", "user:read", "comments:read"})
+     * @Groups({"shift:read", "user:read", "shift-comments:read"})
      */
     private $id;
 
@@ -64,7 +64,7 @@ class ScheduledShift
 
     /**
      *
-     * @Groups({"shift:read", "shift:write", "comments:read"})
+     * @Groups({"shift:read", "shift:write", "shift-comments:read"})
      * @ORM\ManyToOne(targetEntity="User", inversedBy="shifts")
      * @ORM\JoinColumns({
      * @ORM\JoinColumn(name="on_duty_id", referencedColumnName="id")

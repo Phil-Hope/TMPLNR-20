@@ -2,17 +2,17 @@
 
 <ion-content>
   <ion-list>
-    <ion-list-header><ion-label>Sent Messages</ion-label></ion-list-header>
+    <ion-list-header><ion-label style="text-align: center; font-family: Quicksand, sans-serif;">Sent Messages</ion-label></ion-list-header>
 
     <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
       <ion-label>Subject</ion-label>
-      <ion-label>Sender</ion-label>
+      <ion-label>Recipient</ion-label>
       <ion-label>Received At</ion-label>
     </ion-item>
     <div *ngIf="comments">
       <div *ngFor="let comment of comments">
 
-        <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem" detail="true">
+        <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem" color="light" detail="true" [routerLink]="['/messaging/', comment.id, 'read']">
           <ion-col>
             <ion-label *ngIf="!comment.subject">NONE</ion-label>
             <ion-label *ngIf="comment.subject">{{comment.subject}}</ion-label></ion-col>
@@ -23,7 +23,7 @@
             <ion-label>{{comment.dateOfComment | date: 'shortTime'}}<br />{{comment.dateOfComment | date: 'dd/MMM'}}</ion-label>
           </ion-col>
         </ion-item>
-        <ion-item>{{comment.comment}}</ion-item>
+        <ion-item  style="font-family: Quicksand, sans-serif; font-size: 0.8rem"><ion-label color="medium">{{comment.comment}}</ion-label></ion-item>
       </div>
     </div>
   </ion-list>
@@ -33,10 +33,16 @@
     <ion-buttons slot="start">
       <ion-back-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" text="Back" defaultHref="/messaging"></ion-back-button>
     </ion-buttons>
+    <ion-title>
+      <ion-button color="light" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/messaging/send']">
+        <ion-icon slot="end" name="add-circle-outline"></ion-icon>
+        <ion-label>New Message</ion-label>
+      </ion-button>
+    </ion-title>
     <ion-buttons slot="end">
       <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" [routerLink]="['/messaging/send']">
-        <ion-label>Send Message</ion-label>
-        <ion-icon slot="end" name="document-text-outline"></ion-icon>
+        <ion-label>Inbox</ion-label>
+        <ion-icon slot="end" name="file-tray-full-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

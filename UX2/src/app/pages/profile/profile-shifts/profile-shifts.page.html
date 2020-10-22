@@ -75,11 +75,18 @@
 <ion-footer [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
+      <ion-back-button text="Back" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" defaultHref="/user/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-button  style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" color="light" [routerLink]="['/shifts/add']">
+        <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+        <ion-label>Add Shift</ion-label>
+      </ion-button>
+    </ion-title>
+    <ion-buttons slot="end">
       <ion-button [routerLink]="['/users/profile']" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
-        <ion-icon slot="start" name="chevron-back-circle-outline"></ion-icon>
-        <ion-label>
-          Back to Profile
-        </ion-label>
+        <ion-icon slot="end" name="person-circle-outline"></ion-icon>
+        <ion-label>Profile</ion-label>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

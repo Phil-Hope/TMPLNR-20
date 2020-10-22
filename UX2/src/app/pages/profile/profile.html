@@ -30,10 +30,6 @@
           <ion-icon slot="start" src="assets/icon8/icons8-email2.svg"></ion-icon>
           <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">{{user.email}}</ion-label>
         </ion-item>
-        <ion-item>
-          <ion-icon slot="start" src="assets/icon8/icons8-money.svg"></ion-icon>
-          <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">${{user.wagePerHour}}/ph</ion-label>
-        </ion-item>
         <ion-item lines="full">
           <ion-icon slot="start" src="assets/icon8/icons8-phone.svg"></ion-icon>
           <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">{{user.contactNumber}}</ion-label>
@@ -43,7 +39,7 @@
               <ion-icon slot="start" src="assets/icon8/icons8-calendar1.svg"></ion-icon>
               <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">View Your Shifts</ion-label>
             </ion-item>
-            <ion-item lines="full" color="light" [routerLink]="['/users/', user.id, 'comments']" detail="true">
+            <ion-item lines="full" color="light" [routerLink]="['/users/', user.id, 'shift-comments']" detail="true">
              <ion-icon slot="start" src="assets/icon8/comments.svg"></ion-icon>
               <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
                 View Your Comments

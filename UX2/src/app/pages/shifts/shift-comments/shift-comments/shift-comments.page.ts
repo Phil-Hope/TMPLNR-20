@@ -36,7 +36,7 @@ export class ShiftCommentsPage implements OnInit {
         tap(async (res) => {
           if (res.length === 0) {
           const alert = await this.alertCtrl.create({
-            header: 'No comments found!',
+            header: 'No shift-comments found!',
             buttons: ['Dismiss']
           });
           await alert.present();

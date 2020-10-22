@@ -1,10 +1,10 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {IonicModule} from "@ionic/angular";
+import {IonicModule, NavParams} from "@ionic/angular";
 import {ShiftsService} from "../../../shifts/services/shifts.service";
 import {UsersService} from "../../users/services/users.service";
-import {PendingApprovalShiftsPage} from "./pending-approval-shifts";
-import {PendingApprovalShiftsRoutingModule} from "./pending-approval-shifts-routing.module";
+import {AdminListShiftsPage} from "./list-shifts";
+import {ListShiftsRoutingModule} from "./list-shifts-routing.module";
 import {AuthenticationService} from "../../../../authentication/authentication.service";
 import {ComponentsModule} from "../../../../shared/components.module";
 import {ReactiveFormsModule} from "@angular/forms";
@@ -15,18 +15,19 @@ import {HttpConfigInterceptor} from "../../../../services/http.interceptor";
   imports: [
     CommonModule,
     IonicModule,
-    PendingApprovalShiftsRoutingModule,
+    ListShiftsRoutingModule,
     ComponentsModule,
     ReactiveFormsModule
   ],
   declarations: [
-    PendingApprovalShiftsPage
+    AdminListShiftsPage
   ],
   providers: [
     ShiftsService,
-  UsersService,
-  AuthenticationService,
+    UsersService,
+    AuthenticationService,
+    NavParams,
     { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
-export class PendingApprovalShiftsModule { }
+export class ListShiftsModule { }

@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
   credentials: FormGroup;
   pageTitle: 'Login';
   id = '';
-  isLoggedIn: boolean;
+  isLoggedIn = false;
 
   constructor(
     private fb: FormBuilder,
@@ -38,10 +38,14 @@ export class LoginPage implements OnInit {
   }
 
    login(){
-    return this.authService.login(this.email.value, this.password.value)
-      .pipe(
-        tap(_ => console.log('Logged In Successfully!'))
-      ).subscribe(data => data);
+    if (this.credentials.valid){
+      if (this.credentials.dirty) {
+        return this.authService.login(this.email.value, this.password.value)
+          .pipe(
+            tap(_ => console.log('Logged In Successfully!'))
+          ).subscribe(data => data);
+      }
+    }
   }
 
   get email() {

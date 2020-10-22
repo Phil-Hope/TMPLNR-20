@@ -1,0 +1,47 @@
+<app-header [pageTitle]="['Delete Shift']"></app-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>Are you sure you want to delete this Shift?</ion-card-header>
+    <ion-card-subtitle>{{shift.start | date}}</ion-card-subtitle>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Start:</ion-label>
+          <ion-label>{{shift.start | date: 'shortTime'}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>End:</ion-label>
+          <ion-label>{{shift.end | date: 'shortTime'}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label *ngIf="shift.ShiftStatus === 'primary'">Primary</ion-label>
+          <ion-label *ngIf="shift.ShiftStatus === 'secondary'">Secondary</ion-label>
+        </ion-item>
+        <ion-item *ngIf="shift.isApproved === false">
+          <ion-col size="12">
+            <ion-button type="submit" (click)="onDeleteShift(shift.id)"><ion-label>Delete</ion-label></ion-button>
+          </ion-col>
+        </ion-item>
+        <ion-item *ngIf="shift.isApproved === true">
+          <ion-label>Shift has been approved and can not be deleted. Please contact manager to have shift removed.</ion-label>
+        </ion-item>
+        <ion-item>{{shift.isApproved}}</ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+<ion-footer [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" text="Back" defaultHref="/users/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons>
+      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" [routerLink]="['/shifts/add']">
+        <ion-icon name="add-circle-outline" slot="end"></ion-icon>
+        <ion-label>Add Shift</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

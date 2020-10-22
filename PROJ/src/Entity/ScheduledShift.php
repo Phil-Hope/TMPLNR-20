@@ -54,14 +54,14 @@ class ScheduledShift
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
-     * @Groups({"shift:read", "comments:read"})
+     * @Groups({"shift:read", "shift-comments:read"})
      */
     private $id;
 
     /**
      * @var DateTimeInterface
      * @Assert\NotBlank()
-     * @Groups({"shift:read", "shift:write", "comments:read"})
+     * @Groups({"shift:read", "shift:write", "shift-comments:read"})
      * @ORM\Column(name="start", type="datetime", nullable=false)
      */
     private $start;
@@ -69,14 +69,14 @@ class ScheduledShift
     /**
      * @var DateTimeInterface
      * @Assert\NotBlank()
-     * @Groups({"shift:read", "shift:write", "comments:read"})
+     * @Groups({"shift:read", "shift:write", "shift-comments:read"})
      * @ORM\Column(name="end", type="datetime", nullable=false)
      */
     private $end;
 
     /**
      * @Assert\NotBlank()
-     * @Groups({"shift:read", "shift:write", "comments:read"})
+     * @Groups({"shift:read", "shift:write", "shift-comments:read"})
      * @ORM\ManyToOne(targetEntity="User", inversedBy="shifts")
      * @ORM\JoinColumns({
      * @ORM\JoinColumn(name="on_duty_id", referencedColumnName="id")

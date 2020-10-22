@@ -73,7 +73,7 @@ class User implements UserInterface
     /**
      * @Assert\NotBlank(message="FirstName field can not be blank")
      * @Assert\Length(max="50", maxMessage="Max 50 characters for FirstName")
-     * @Groups({"user:read", "user:write", "shift:read", "comments:read"})
+     * @Groups({"user:read", "user:write", "shift:read", "shift-comments:read"})
      * @ORM\Column(name="first_name", type="string", length=50, nullable=false)
      */
     private $firstName;
@@ -81,7 +81,7 @@ class User implements UserInterface
     /**
      * @Assert\NotBlank(message="LastName field can not be blank")
      * @Assert\Length(max="50", maxMessage="Max length of 50 for LastName")
-     * @Groups({"user:read", "user:write", "shift:read", "comments:read"})
+     * @Groups({"user:read", "user:write", "shift:read", "shift-comments:read"})
      * @ORM\Column(name="last_name", type="string", length=50, nullable=false)
      */
     private $lastName;

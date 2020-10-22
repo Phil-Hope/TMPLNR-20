@@ -53,7 +53,7 @@ export class DeleteCommentPage implements OnInit {
       this.commentService.deleteComment(id)
         .pipe(
           tap(_ => alert('Comment deleted:' + JSON.stringify(_))),
-          map(_ => this.router.navigateByUrl('/comments'))
+          map(_ => this.router.navigateByUrl('/shift-comments'))
         ).subscribe(data => data);
     }
 }

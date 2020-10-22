@@ -15,9 +15,9 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 /**
  * ShiftComments
  * @ApiResource(
- *     normalizationContext={"groups"={"comments:read"}, "swagger_definition_name"="Read"},
- *     denormalizationContext={"groups"={"comments:write"}, "swagger_definition_name"="Write"},
- *   shortName="comments"
+ *     normalizationContext={"groups"={"shift-comments:read"}, "swagger_definition_name"="Read"},
+ *     denormalizationContext={"groups"={"shift-comments:write"}, "swagger_definition_name"="Write"},
+ *   shortName="shift-comments"
  * )
  * @ApiFilter(OrderFilter::class, properties={"dateOfComment"}, arguments={"orderParameterName"="order"})
  * @ORM\Table(name="shift_comments")
@@ -32,12 +32,12 @@ class ShiftComments
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
-     * @Groups({"comments:read", "shift:read"})
+     * @Groups({"shift-comments:read", "shift:read"})
      */
     private $id;
 
     /**
-     * @Groups({"comments:read", "comments:write", "shift:read"})
+     * @Groups({"shift-comments:read", "shift-comments:write", "shift:read"})
      * @ORM\Column(name="comment", type="string", length=255, nullable=false)
      */
     private $comment;
@@ -45,14 +45,14 @@ class ShiftComments
     /**
      * @var DateTimeInterface
      * @ORM\Column(name="date_of_comment", type="datetime", nullable=false)
-     * @Groups({"comments:read", "comments:write"})
+     * @Groups({"shift-comments:read", "shift-comments:write"})
      * @ORM\Column(name="date_of_comment", type="datetime", nullable=false)
      */
     private $dateOfComment;
 
     /**
      *
-     * @Groups({"comments:read", "comments:write"})
+     * @Groups({"shift-comments:read", "shift-comments:write"})
      * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="authored_by_id", referencedColumnName="id")
@@ -61,7 +61,7 @@ class ShiftComments
     private $authoredBy;
 
     /**
-     * @Groups({"comments:read", "comments:write"})
+     * @Groups({"shift-comments:read", "shift-comments:write"})
      * @ORM\ManyToOne(targetEntity="ScheduledShift", inversedBy="comments")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="shift_id", referencedColumnName="id")
@@ -70,7 +70,7 @@ class ShiftComments
     private $shift;
 
     /**
-     * @Groups({"comments:read", "comments:write"})
+     * @Groups({"shift-comments:read", "shift-comments:write"})
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="receivedComments")
      */
     private $recipient;

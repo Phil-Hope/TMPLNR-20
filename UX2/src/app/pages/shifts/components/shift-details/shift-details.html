@@ -93,7 +93,7 @@
         </ion-col>
       </ion-item>
       <div *ngIf="comments">
-      <ion-item [routerLink]="['/comments/', comment.id, 'view']" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"  *ngFor="let comment of comments" detail="true">
+      <ion-item [routerLink]="['/shift-comments/', comment.id, 'view']" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"  *ngFor="let comment of comments" detail="true">
         <ion-col><ion-label>Subject:</ion-label><br />
         <ion-label *ngIf="comment.subject">{{comment.subject}}</ion-label>
         <ion-label *ngIf="!comment.subject">No Subject</ion-label></ion-col>
@@ -102,25 +102,10 @@
       </ion-item>
       </div>
 
-      <ion-item lines="none">
-        <ion-col size="6">
-          <ion-button shape="round" fill="outline" [routerLink]="['/shifts/', shift.id, 'edit']" color="warning" size="block">
-            <ion-icon slot="start" name="pencil"></ion-icon>
-            <ion-label>EDIT</ion-label>
-          </ion-button>
-        </ion-col>
-          <ion-col size="6">
-          <ion-button shape="round" fill="outline" size="block" color="danger" [routerLink]="['/shifts/', shift.id, 'delete']">
-            <ion-icon slot="icon-only" name="trash"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-item>
-
     </ion-list>
   </ion-card-content>
 </ion-card>
   </div>
-
 </ion-content>
 
 <ion-footer [translucent]="true">

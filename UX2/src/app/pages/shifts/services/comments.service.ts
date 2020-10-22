@@ -75,13 +75,26 @@ export class CommentsService {
           'Content-Type': 'application/json'
         })
       }).pipe(
-      tap(_ => console.log('Shift comments loaded!'))
+      tap(_ => console.log('Shift shift-comments loaded!'))
     );
   }
 
   getUsersComments(id: string): Observable<ShiftComments[]> {
-    return this.http.get<ShiftComments[]>(`${environment.apiUrl}/users/${id}/comments`,
+    return this.http.get<ShiftComments[]>(`${environment.apiUrl}/users/${id}/comments.json`,
       {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      }).pipe(
+      tap(_ => console.log(`Shifts for user: ${id} Retrieved successfully!`))
+    );
+  }
+
+  getUsersSentMessages(id: string): Observable<ShiftComments[]> {
+    return this.http.get<ShiftComments[]>(`${environment.apiUrl}/users/${id}/comments.json`,
+      {
+        params: new HttpParams()
+          .set('isPrivate', 'true'),
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })

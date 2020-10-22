@@ -1,9 +1,6 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, CanLoad, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {Observable} from 'rxjs';
+import {CanLoad, Router} from '@angular/router';
 import {AuthenticationService} from "../authentication/authentication.service";
-import {filter, map, take} from "rxjs/operators";
-import {AlertController} from "@ionic/angular";
 import {Storage} from "@ionic/storage";
 
 @Injectable({

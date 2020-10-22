@@ -20,4 +20,4 @@ var ShiftCommentsRoutingModule = /** @class */ (function () {
     return ShiftCommentsRoutingModule;
 }());
 export { ShiftCommentsRoutingModule };
-//# sourceMappingURL=shift-comments-routing.module.js.map
+//# sourceMappingURL=shift-shift-comments-routing.module.js.map

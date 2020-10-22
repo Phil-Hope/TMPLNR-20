@@ -13,19 +13,16 @@ const routes: Routes = [
     path: 'welcome',
     loadChildren: () => import('./pages/welcome/welcome.module')
       .then(m => m.WelcomeModule),
-    data: { preload: true }
   },
   {
     path: 'home',
     loadChildren: () => import ('./pages/home/home.module')
       .then(m => m.HomePageModule),
-    data: { preload: true }
   },
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module')
       .then(m => m.LoginModule),
-    data: { preload: true }
   },
   {
     path: 'admin',
@@ -34,7 +31,7 @@ const routes: Routes = [
     canLoad: [AdminGuardGuard]
   },
   {
-    path: 'admin/comments',
+    path: 'admin/shift-comments',
     loadChildren: () => import('./pages/admin/comments/comments.module')
       .then( m => m.CommentsPageModule),
     canLoad: [AdminGuardGuard]
@@ -46,13 +43,13 @@ const routes: Routes = [
     canLoad: [AdminGuardGuard]
   },
   {
-    path: 'admin/shifts/pending',
-    loadChildren: () => import('./pages/admin/shifts/pending-approval-shifts/pending-approval-shifts.module')
-      .then(m => m.PendingApprovalShiftsModule),
+    path: 'admin/shifts/list',
+    loadChildren: () => import('./pages/admin/shifts/shifts-list/list-shifts.module')
+      .then(m => m.ListShiftsModule),
     canLoad: [AdminGuardGuard]
   },
   {
-    path: 'admin/shift/approve/:id',
+    path: 'admin/shifts/approve/:id',
     loadChildren: () => import('./pages/admin/shifts/approve-shift/approve-shift.module')
       .then(m => m.ApproveShiftModule),
     canLoad: [AdminGuardGuard]
@@ -68,6 +65,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/admin/shifts/details/details.module')
       .then( m => m.DetailsPageModule),
     canLoad: [AdminGuardGuard]
+  },
+  {
+    path: 'admin/shifts/delete/:id',
+    loadChildren: () => import('./pages/admin/shifts/delete/delete.module')
+      .then( m => m.DeletePageModule)
   },
   {
     path: 'contact',
@@ -105,32 +107,20 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
-    path: 'shifts/:id/edit',
-    loadChildren: () => import('./pages/shifts/components/edit-shift/edit-shift.module')
-      .then(m => m.EditShiftPageModule),
-    canLoad: [AuthGuard]
-  },
-  {
-    path: 'shifts/:id/delete',
-    loadChildren: () => import('./pages/shifts/components/delete-shift/delete-shift.module')
-      .then(m => m.DeleteShiftPageModule),
-    canLoad: [AuthGuard]
-  },
-  {
     path: 'shifts/:id/on-duty',
     loadChildren: () => import('./pages/shifts/components/on-duty/on-duty.module')
       .then( m => m.OnDutyPageModule),
     canLoad: [AuthGuard]
   },
   {
-    path: 'shifts/:id/view-comments',
-    loadChildren: () => import('./pages/shifts/comments/shift-comments/shift-comments.module')
+    path: 'shifts/:id/view-shift-comments',
+    loadChildren: () => import('./pages/shifts/shift-comments/shift-comments/shift-comments.module')
       .then( m => m.ShiftCommentsPageModule),
     canLoad: [AuthGuard]
   },
   {
     path: 'shifts/:id/add-comment',
-    loadChildren: () => import('./pages/shifts/comments/add-comment/add-comment.module')
+    loadChildren: () => import('./pages/shifts/shift-comments/add-comment/add-comment.module')
       .then( m => m.AddCommentPageModule),
     canLoad: [AuthGuard]
   },
@@ -184,25 +174,25 @@ const routes: Routes = [
   },
   {
     path: 'comments',
-    loadChildren: () => import('./pages/shifts/comments/list-comments/list-comments.module')
+    loadChildren: () => import('./pages/shifts/shift-comments/list-comments/list-comments.module')
       .then( m => m.ListCommentsPageModule),
     canLoad: [AuthGuard]
   },
   {
-    path: 'comments/:id/view',
-    loadChildren: () => import('./pages/shifts/comments/view-comment/view-comment.module')
+    path: 'shift-comments/:id/view',
+    loadChildren: () => import('./pages/shifts/shift-comments/view-comment/view-comment.module')
       .then( m => m.ViewCommentPageModule),
     canLoad: [AuthGuard]
   },
   {
-    path: 'comments/:id/edit',
-    loadChildren: () => import('./pages/shifts/comments/edit-comment/edit-comment.module')
+    path: 'shift-comments/:id/edit',
+    loadChildren: () => import('./pages/shifts/shift-comments/edit-comment/edit-comment.module')
       .then( m => m.EditCommentPageModule),
     canLoad: [AuthGuard]
   },
   {
-    path: 'comments/:id/delete',
-    loadChildren: () => import('./pages/shifts/comments/delete-comment/delete-comment.module')
+    path: 'shift-comments/:id/delete',
+    loadChildren: () => import('./pages/shifts/shift-comments/delete-comment/delete-comment.module')
       .then( m => m.DeleteCommentPageModule),
     canLoad: [AuthGuard]
   },
@@ -243,8 +233,8 @@ const routes: Routes = [
     canLoad: [AdminGuardGuard]
   },
   {
-    path: 'users/:id/comments',
-    loadChildren: () => import('./pages/shifts/comments/user-comments/user-comments.module')
+    path: 'users/:id/shift-comments',
+    loadChildren: () => import('./pages/shifts/shift-comments/user-comments/user-comments.module')
       .then( m => m.UserCommentsPageModule),
     canLoad: [AdminGuardGuard]
   },
@@ -259,6 +249,16 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profile/profile-shifts/profile-shifts.module')
       .then( m => m.ProfileShiftsPageModule),
     canLoad: [AdminGuardGuard]
+  },
+  {
+    path: 'users/profile/shifts/:id/delete',
+    loadChildren: () => import('./pages/profile/profile-shifts/delete/delete.module')
+      .then( m => m.DeletePageModule)
+  },
+  {
+    path: 'users/profile/shifts/:id/edit',
+    loadChildren: () => import('./pages/profile/profile-shifts/edit/edit.module')
+      .then( m => m.EditPageModule)
   },
   {
     path: 'users/profile/:id/user',

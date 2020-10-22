@@ -7,6 +7,7 @@ import {Observable} from "rxjs";
 import {User} from "../../../../interfaces/user.interface";
 import {UsersService} from "../../users/services/users.service";
 import {AlertController} from "@ionic/angular";
+import {tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-approve-shift',
@@ -18,6 +19,7 @@ export class ApproveShiftPage implements OnInit {
   shift: ScheduledShift;
   form: FormGroup;
   users: User[];
+  loading: Observable<boolean>;
   date = new Date();
   id: string;
   isSubmitted: boolean;
@@ -30,9 +32,6 @@ export class ApproveShiftPage implements OnInit {
     private userService: UsersService,
     private alertCtrl: AlertController
   ) {
-  }
-
-  ngOnInit() {
 
     this.form = this.fb.group({
       id: ['', Validators.required],
@@ -42,9 +41,15 @@ export class ApproveShiftPage implements OnInit {
       ShiftStatus: ['', Validators.required],
       isApproved: [true]
     });
-    this.getShiftToDisplay().subscribe(data => this.shift = data);
-    this.getUsersToSelect().subscribe(data => this.users = data);
+  }
 
+  ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.getShiftToApprove(id)
+      .subscribe((data: ScheduledShift) => this.shift = data);
+
+    this.getUsersToSelect()
+      .subscribe((data: User[]) => this.users = data);
     setInterval(() => {
       this.date = new Date();
     }, 1000);
@@ -54,32 +59,19 @@ export class ApproveShiftPage implements OnInit {
     return this.userService.loadAllUsers();
   }
 
-  getShiftToDisplay(): Observable<any> {
-    this.route.paramMap.subscribe(
-      params => {
-        this.id = params.get('id');
-      });
-    return this.shiftService.getShiftById(this.id);
+  getShiftToApprove(id: string): Observable<ScheduledShift> {
+    return this.shiftService.getShiftById(id);
   }
 
   async approveShift() {
     if (this.form.valid) {
-      if (this.form.dirty) {
         this.isSubmitted = true;
         const s = {...this.shift, ...this.form.value};
         this.shiftService.approveShift(s)
+          .pipe(
+            tap(_ => this.router.navigateByUrl('/admin/shifts/details/' + this.shift.id))
+          )
           .subscribe(data => this.shift = data);
       }
-      if (this.isSubmitted === true) {
-        await this.router.navigateByUrl('/admin/pending-shifts');
-      }
-    } else {
-      const alert = await this.alertCtrl.create({
-        header: 'Error Submitting Form',
-        message: 'Form Failed To Submit',
-        buttons: ['OK']
-      });
-      await alert.present();
-    }
   }
 }

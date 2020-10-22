@@ -17,6 +17,7 @@
   <ion-list-header>
     Approve Shift
   </ion-list-header>
+
   <ion-item>
     <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">Start:</ion-label>
     <ion-datetime
@@ -24,8 +25,10 @@
       picker-format="DD MMM YY h:mm A"
       display-format="DD MMM YY h:mm A"
       minuteValues="00,15,30,45"
-      formControlName="start" [ngModel]="shift.start"></ion-datetime>
+      formControlName="start" [ngModel]="shift.start">
+    </ion-datetime>
   </ion-item>
+
     <ion-item>
       <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">End:</ion-label>
       <ion-datetime
@@ -33,17 +36,20 @@
         picker-format="DD MMM YY h:mm A"
         display-format="DD MMM YY h:mm A"
         minuteValues="00,15,30,45"
-        formControlName="end" [ngModel]="shift.end"></ion-datetime>
+        formControlName="end" [ngModel]="shift.end">
+      </ion-datetime>
     </ion-item>
+
     <ion-item>
       <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">Select Call Level</ion-label>
-
       <ion-select style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" formControlName="ShiftStatus" [ngModel]="shift.ShiftStatus">
       <ion-select-option value="secondary">Secondary</ion-select-option>
       <ion-select-option value="primary">Primary</ion-select-option>
     </ion-select>
     </ion-item>
+
     <ion-input type="hidden" formControlName="id" [ngModel]="shift.id" value="{{shift.id}}"></ion-input>
+
     <ion-item>
       <ion-col size="5">
         <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem; text-align: right">On Duty</ion-label>
@@ -53,17 +59,32 @@
         <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">{{shift.onDuty.firstName}} {{shift.onDuty.lastName}}</ion-label>
       </ion-col>
     </ion-item>
+
+    <ion-item>
+      <ion-col size="6">
+        <ion-button size="block" [routerLink]="['/messaging/', shift.onDuty.id, 'reply']">
+          <ion-icon slot="start" name="paper-plane-outline"></ion-icon>
+          <ion-label>Message User</ion-label>
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button color="warning" size="block" [routerLink]="['/admin/shifts/edit/', shift.id]">
+          <ion-label>Edit</ion-label>
+          <ion-icon slot="start" name="create-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-item>
+
     <ion-item>
       <ion-input type="hidden" formControlName="onDuty" [(ngModel)]="shift.onDuty.id" value="{{shift.onDuty.id}}"></ion-input>
       <ion-col size="12">
-      <ion-button size="full" type="submit" color="success">
-        <ion-icon slot="start" name="checkbox-outline"></ion-icon>
-        <ion-label>Approve</ion-label>
-      </ion-button>
+        <ion-button size="full" type="submit" color="success">
+          <ion-icon slot="start" name="checkbox-outline"></ion-icon>
+          <ion-label>Approve</ion-label>
+        </ion-button>
       </ion-col>
-
     </ion-item>
-    {{form.value | json}}
+
   </form>
 </ion-list>
   </div>

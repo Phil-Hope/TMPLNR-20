@@ -25,4 +25,4 @@ var ShiftCommentsPageModule = /** @class */ (function () {
     return ShiftCommentsPageModule;
 }());
 export { ShiftCommentsPageModule };
-//# sourceMappingURL=shift-comments.module.js.map
+//# sourceMappingURL=shift-shift-comments.module.js.map

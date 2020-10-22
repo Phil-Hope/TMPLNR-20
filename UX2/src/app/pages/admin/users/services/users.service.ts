@@ -6,15 +6,16 @@ import {tap} from "rxjs/operators";
 import {User} from "../../../../interfaces/user.interface";
 import {ScheduledShift} from "../../../../interfaces/shifts.interface";
 import {format} from "date-fns";
-import * as moment from "moment";
 
 @Injectable()
-export class UsersService {
+export class UsersService  {
+
   user: Observable<User>;
   users: Observable<User[]>;
   date = new Date();
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient) {
   }
 
   loadAllUsers(): Observable<User[]> {
@@ -34,6 +35,8 @@ export class UsersService {
   getUserById(id: string): Observable<User> {
     return this.http.get<User>(`${environment.apiUrl}/users/${id}.json`,
       {
+        params: new HttpParams()
+          .set('id', id),
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })

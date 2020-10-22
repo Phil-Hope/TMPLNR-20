@@ -25,7 +25,7 @@ export class ListCommentsPage implements OnInit {
             if (res.length === 0) {
               const alert = await this.alertCtrl.create({
                 header: 'No Comments Found!',
-                message: 'No comments were found in the database.',
+                message: 'No shift-comments were found in the database.',
                 buttons: ['OK']
               });
               await alert.present();

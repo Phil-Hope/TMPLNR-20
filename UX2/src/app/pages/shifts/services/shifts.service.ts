@@ -7,15 +7,15 @@ import {tap} from "rxjs/operators";
 import {format} from "date-fns";
 import * as moment from "moment";
 
-
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ShiftsService {
 
   shift: Observable<ScheduledShift>;
   shifts: Observable<ScheduledShift[]>;
   date = moment(new Date()).toDate();
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient) {
   }
 
   loadAllShifts(): Observable<ScheduledShift[]> {
@@ -222,7 +222,7 @@ export class ShiftsService {
       {
         start: moment(shift.start).toDate(),
         end:  moment(shift.end).toDate(),
-        onDuty: shift.onDuty,
+        onDuty: `/users/${shift.onDuty}`,
         ShiftStatus: shift.ShiftStatus,
         isApproved: true
       },

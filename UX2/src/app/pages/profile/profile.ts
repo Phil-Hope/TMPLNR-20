@@ -9,7 +9,6 @@ import {ActionSheetController, AlertController, LoadingController} from "@ionic/
 import {Observable} from "rxjs";
 import {tap} from "rxjs/operators";
 
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.html',

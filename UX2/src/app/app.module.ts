@@ -17,6 +17,9 @@ import {IonicStorageModule, Storage} from "@ionic/storage";
 import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
 import {ShiftsService} from "./pages/shifts/services/shifts.service";
 import {HttpConfigInterceptor} from "./services/http.interceptor";
+import {AuthGuard} from "./guards/auth.guard";
+import {AdminGuardGuard} from "./authentication/admin-guard.guard";
+
 
 export function jwtOptionsFactory(storage) {
   return {
@@ -44,7 +47,7 @@ export function jwtOptionsFactory(storage) {
     FormsModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [
     AppComponent
@@ -56,6 +59,7 @@ export function jwtOptionsFactory(storage) {
     SplashScreen,
     ShiftsService,
     AuthenticationService,
+    AuthGuard, AdminGuardGuard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ],
