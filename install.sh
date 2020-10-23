@@ -4,8 +4,6 @@ cd PROJ || exit
 
 FRONT='http://localhost:4200'
 
-PASS= php
-
 echo "Hello, $USER. lets set up your environment."
 
 echo -p "Enter you database username and press [ENTER]: "
