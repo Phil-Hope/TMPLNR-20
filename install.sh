@@ -11,7 +11,6 @@ read -s -r password
 echo -p "Enter database serverVersion example 8.0 and press [ENTER]: "
 read -r serverVersion
 
-
 cd UX2 || exit
 npm install
 npm start & cd ../PROJ || exit

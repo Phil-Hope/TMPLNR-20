@@ -35,8 +35,6 @@ export class UsersService  {
   getUserById(id: string): Observable<User> {
     return this.http.get<User>(`${environment.apiUrl}/users/${id}.json`,
       {
-        params: new HttpParams()
-          .set('id', id),
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
