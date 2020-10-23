@@ -3,6 +3,8 @@
 /UX2/node_modules/
 /UX2/www/
 /PROJ/var/
+/PROJ/.env
+/PROJ/.env.test
 
 /UX2/.idea/inspectionProfiles/
 /.idea/shelf/
