@@ -29,8 +29,7 @@ export class ListShiftsPage implements OnInit {
   date = new Date();
   isLoading = true;
   selectedShift: ScheduledShift;
-
-  load;
+  view = 'All Shifts';
 
   onSelect(shift: ScheduledShift): void {
     this.selectedShift = shift;
@@ -81,60 +80,70 @@ export class ListShiftsPage implements OnInit {
       buttons: [{
         text: 'All Shifts',
         handler: () => {
+          this.view = 'All Shifts';
           this.onLoadAllShifts();
         }
       },
         {
           text: 'Upcoming Shifts',
           handler: () => {
+            this.view = 'Upcoming Shifts';
             this.onLoadUpcoming();
           }
         },
         {
           text: 'Past Shifts',
           handler: () => {
+            this.view = 'Past Shifts';
             this.onLoadPastShifts();
           }
         },
         {
           text: 'All - Approved Shifts',
           handler: () => {
+            this.view = 'All - Approved Shifts';
             this.onLoadApprovedShifts();
           }
         },
         {
           text: 'All - Pending Shifts',
           handler: () => {
+            this.view = 'All - Pending Shifts';
             this.onLoadPendingShifts();
           }
         },
         {
           text: 'Approved - Primary Shifts',
           handler: () => {
+            this.view = 'Approved - Primary Shifts';
             this.onLoadApprovedPrimary();
           }
         },
         {
           text: 'Approved - Secondary',
           handler: () => {
+            this.view = 'Approved - Secondary Shifts';
             this.onLoadApprovedSecondary();
           }
         },
         {
           text: 'Pending Primary',
           handler: () => {
+            this.view = 'Pending - Primary Shifts';
             this.onLoadPendingPrimary();
           }
         },
         {
           text: 'Pending Secondary',
           handler: () => {
+            this.view = 'Pending - Secondary Shifts';
             this.onLoadPendingSecondary();
           }
         },
         {
           text: 'Live Shifts',
           handler: () => {
+            this.view = 'Live Shifts';
             this.onLoadLiveShifts();
           }
         },

@@ -19,6 +19,7 @@ export class ProfileShiftsPage implements OnInit {
   pendingShifts: [];
   user: User;
   shift: ScheduledShift;
+  view = 'All Shifts';
 
   constructor(
     private route: ActivatedRoute,
@@ -83,42 +84,49 @@ export class ProfileShiftsPage implements OnInit {
       buttons: [{
         text: 'View All',
         handler: () => {
+          this.view = 'All Shifts';
           this.onLoadAllShifts(id);
         }
       },
         {
           text: 'Primary(All)',
           handler: () => {
+            this.view = 'All - Primary(All)';
             this.onLoadPrimaryShifts(id);
           }
         },
         {
           text: 'Primary(Approved)',
           handler: () => {
+            this.view = 'All - Primary(Approved)';
             this.onLoadApprovedPrimary(id);
           }
         },
         {
           text: 'Primary(Pending)',
           handler: () => {
+            this.view = 'All - Primary(Pending)';
             this.onLoadPendingPrimary(id);
           }
         },
         {
           text: 'Secondary(All)',
           handler: () => {
+            this.view = 'All - Secondary(All)';
             this.onLoadSecondary(id);
           }
         },
         {
           text: 'Secondary(Approved)',
           handler: () => {
+            this.view = 'All - Secondary(Approved)';
             this.onLoadApprovedSecondary(id);
           }
         },
         {
           text: 'Secondary(Pending)',
           handler: () => {
+            this.view = 'All - Secondary(Pending)';
             this.onLoadPendingSecondary(id);
           }
         },
@@ -146,36 +154,42 @@ export class ProfileShiftsPage implements OnInit {
         {
           text: 'Primary(All)',
           handler: () => {
+            this.view = 'Upcoming - Primary(All)';
             this.onLoadUpcomingPrimary(id);
           }
         },
         {
           text: 'Primary(Approved)',
           handler: () => {
+            this.view = 'Upcoming - Primary(Approved)';
             this.onLoadUpcomingApprovedPrimary(id);
           }
         },
         {
           text: 'Primary(Pending)',
           handler: () => {
+            this.view = 'Upcoming - Primary(Pending)';
             this.onLoadUpcomingPendingPrimary(id);
           }
         },
         {
           text: 'Secondary(All)',
           handler: () => {
+            this.view = 'Upcoming - Secondary(All)';
             this.onLoadUpcomingSecondary(id);
           }
         },
         {
           text: 'Secondary(Approved)',
           handler: () => {
+            this.view = 'Upcoming - Secondary(Approved)';
             this.onLoadUpcomingApprovedSecondary(id);
           }
         },
         {
           text: 'Secondary(Pending)',
           handler: () => {
+            this.view = 'Upcoming - Secondary(Pending)';
             this.onLoadUpcomingPendingSecondary(id);
           }
         },
@@ -198,6 +212,7 @@ export class ProfileShiftsPage implements OnInit {
         text: 'View All',
         cssClass: 'action-sheet-group',
         handler: () => {
+          this.view = 'Past - All';
           this.onLoadPast(id);
         }
       },
@@ -205,6 +220,7 @@ export class ProfileShiftsPage implements OnInit {
           text: 'Primary(All)',
           cssClass: 'my-custom-class',
           handler: () => {
+            this.view = 'Past - Primary(All)';
             this.onLoadPastPrimary(id);
           }
         },
@@ -212,6 +228,7 @@ export class ProfileShiftsPage implements OnInit {
           text: 'Primary(Approved)',
           cssClass: 'my-custom-class',
           handler: () => {
+            this.view = 'Past - Primary(Approved)';
             this.onLoadPastApprovedPrimary(id);
           }
         },
@@ -219,6 +236,7 @@ export class ProfileShiftsPage implements OnInit {
           text: 'Primary(Pending)',
           cssClass: 'my-custom-class',
           handler: () => {
+            this.view = 'Past - Primary(Pending)';
             this.onLoadPastPendingPrimary(id);
           }
         },
@@ -226,6 +244,7 @@ export class ProfileShiftsPage implements OnInit {
           text: 'Secondary(All)',
           cssClass: 'my-custom-class',
           handler: () => {
+            this.view = 'Past - Secondary(All)';
             this.onLoadPastSecondary(id);
           }
         },
@@ -233,6 +252,7 @@ export class ProfileShiftsPage implements OnInit {
           text: 'Secondary(Approved)',
           cssClass: 'my-custom-class',
           handler: () => {
+            this.view = 'Past - Secondary(Approved)';
             this.onLoadPastApprovedSecondary(id);
           }
         },
@@ -240,6 +260,7 @@ export class ProfileShiftsPage implements OnInit {
           text: 'Secondary(Pending)',
           cssClass: 'my-custom-class',
           handler: () => {
+            this.view = 'Past - Secondary(Pending)';
             this.onLoadPastPendingSecondary(id);
           }
         },

@@ -1,0 +1,91 @@
+<app-header [pageTitle]="['Add Shift']"></app-header>
+
+<ion-content>
+
+  <ion-card style="margin-top: 1rem;">
+    <form [formGroup]="form" (ngSubmit)="addShift()">
+      <ion-list>
+        <h4 style="font-family: Quicksand, sans-serif; text-align: center; margin-bottom: 2rem">Add New Shift</h4>
+        <ion-item-group>
+          <ion-item>
+            <ion-label position="floating" class="ion-text-center" color="secondary"><span>Select Start Time</span></ion-label>
+            <ion-datetime
+              picker-format="DD MMM YY h:mm A"
+              formControlName="start"
+              display-format="DD MMM YY h:mm A"
+              minuteValues="00,15,30,45"
+            >
+            </ion-datetime>
+          </ion-item>
+        </ion-item-group>
+        <ion-item-group>
+          <ion-item>
+            <ion-label position="floating" class="ion-text-center" color="secondary"><span>Select Finish Time</span></ion-label>
+            <ion-datetime
+              picker-format="DD MMM YY h:mm A"
+              formControlName="end"
+              display-format="DD MMM YY h:mm A"
+              minuteValues="00,15,30,45"
+            >
+            </ion-datetime>
+          </ion-item>
+        </ion-item-group>
+
+        <ion-item-group>
+          <ion-item>
+            <ion-label position="floating" color="secondary">Shift Status</ion-label>
+            <ion-select formControlName="ShiftStatus" placeholder="Select Status">
+              <ion-select-option value="secondary">Secondary</ion-select-option>
+              <ion-select-option value="primary">Primary</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-item-group>
+        <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+        <ion-select placeholder="Approved Status" formControlName="isApproved">
+          <ion-select-option value=true>Approved</ion-select-option>
+          <ion-select-option value=false>Draft</ion-select-option>
+        </ion-select>
+        </ion-item>
+        <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" *ngIf="users">
+          <ion-label position="floating">On Duty</ion-label>
+          <ion-select formControlName="onDuty">
+            <div *ngFor="let user of users">
+            <ion-select-option value="{{user.id}}">{{user.firstName}} {{user.lastName}}</ion-select-option>
+            </div>
+          </ion-select>
+        </ion-item>
+        <ion-col size="12">
+          <ion-item style="margin-top: 2rem;">
+            <ion-col size="12">
+              <ion-button type="submit" size="full" shape="round" color="success">
+                <ion-img style="height: 3.5rem; width: 3.5rem;" slot="start" src="assets/icon8/icons8-save-close.svg"></ion-img>
+                <ion-label>Save Shift</ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-item>
+        </ion-col>
+      </ion-list>
+    </form>
+  </ion-card>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" defaultHref="/shifts" text="back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-label></ion-label>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/admin']">
+        <ion-label>Dashboard</ion-label>
+        <ion-icon slot="end" name="options-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+
+
+
+

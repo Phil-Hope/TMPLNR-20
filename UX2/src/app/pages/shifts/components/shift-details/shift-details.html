@@ -91,7 +91,14 @@
             <ion-label size="small">Comment</ion-label>
           </ion-button>
         </ion-col>
+        <ion-col size="6" *ngIf="userIsAdmin === true">
+          <ion-button color="warning" size="block" [routerLink]="['/admin/shifts/edit/', shift.id]">
+            <ion-label>Edit</ion-label>
+          </ion-button>
+        </ion-col>
       </ion-item>
+
+
       <div *ngIf="comments">
       <ion-item [routerLink]="['/shift-comments/', comment.id, 'view']" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"  *ngFor="let comment of comments" detail="true">
         <ion-col><ion-label>Subject:</ion-label><br />

@@ -12,6 +12,7 @@ use App\ApiPlatform\Test\User;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Hautelook\AliceBundle\PhpUnit\ReloadDatabaseTrait;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 class ApiTest extends  ApiTestCase
@@ -57,8 +58,8 @@ class ApiTest extends  ApiTestCase
     $encoded = self::$container->get('security.password_encoder')->encodePassword($user, $password);
     $user->setPassword($encoded);
 
-
     $em = self::$container->get('doctrine')->getManager();
+
     $em->persist($user);
     $em->flush();
 
@@ -84,18 +85,22 @@ class ApiTest extends  ApiTestCase
    * @param Client $client
    * @param string $email
    * @param string $password
+   * @param UserInterface $user
+   * @return Client
    * @throws TransportExceptionInterface
    */
-  protected function login(Client $client, string $email, string $password)
+  protected function login(Client $client, string $email, string $password, UserInterface $user)
   {
-    $client->request('POST', '/login', [
+
+   $client->request('POST', '/login', [
       'headers' => ['Content-Type' => 'application/json'],
       'json' => [
         'email' => $email,
         'password' => $password
-      ],
-    ]);
+      ]]);
+
     $this->assertResponseStatusCodeSame(200);
+    return $client;
   }
 
   /**
@@ -208,7 +213,7 @@ class ApiTest extends  ApiTestCase
       try {
         $client->request('POST', '/users', [
           'headers' => [
-            'Content-Type' => 'application/json',
+            'Content-Type' => 'application/json'
           ],
           'json' => [
             'firstName' => 'Random',
@@ -244,7 +249,7 @@ class ApiTest extends  ApiTestCase
       try {
         $client->request('POST', '/shifts', [
           'headers' => [
-            'Content-Type' => 'application/json',
+            'Content-Type' => 'application/json'
           ],
           'json' => [
             'start' => '2020-12-12 10:00:00',
@@ -287,6 +292,7 @@ class ApiTest extends  ApiTestCase
       $em->persist($shift);
       $em->flush();
       $client->request('PUT', '/shifts/'.$shift->getId(), [
+        'headers' => ['Content-Type' => 'application/json'],
         'json' => [
         'start' => '2021-12-12 10:00:00',
         'end' => '2021-12-12 20:00:00',
@@ -299,7 +305,7 @@ class ApiTest extends  ApiTestCase
     public function testGetComments()
     {
       $client = self::createClient();
-      $client->request('GET', '/shift-comments');
+      $client->request('GET', '/comments');
       $this->assertResponseStatusCodeSame(200);
     }
 
@@ -332,9 +338,9 @@ class ApiTest extends  ApiTestCase
       $em->persist($shift);
       $em->flush();
 
-      $client->request('POST', '/shift-comments', [
+      $client->request('POST', '/comments', [
         'headers' => [
-          'Content-Type' => 'application/json'
+          'Content-Type' => 'application/json',
         ],
         'json' => [
           'authoredBy' => '/users/'.$user->getId(),
@@ -350,7 +356,7 @@ class ApiTest extends  ApiTestCase
     }
 
   /**
-   * Tests the PUT method to edit a comment at '/shift-comments/:uuid' endpoint.
+   * Tests the PUT method to edit a comment at '/test-comments/:uuid' endpoint.
    *
    * @throws TransportExceptionInterface
    */
@@ -387,9 +393,9 @@ class ApiTest extends  ApiTestCase
       $em->persist($comment);
       $em->flush();
 
-      $client->request('PUT', '/shift-comments/'.$comment->getId(), [
+      $client->request('PUT', '/comments/'.$comment->getId(), [
         'headers' => [
-          'Content-Type' => 'application/json'
+          'Content-Type' => 'application/json',
         ],
         'json' => [
           'authoredBy' => '/users/'.$user->getId(),
@@ -437,7 +443,7 @@ class ApiTest extends  ApiTestCase
     $em->persist($comment);
     $em->flush();
 
-    $client->request('DELETE', '/shift-comments/'.$comment->getId());
+    $client->request('DELETE', '/comments/'.$comment->getId());
     $this->assertResponseStatusCodeSame(204);
   }
 
@@ -490,7 +496,7 @@ class ApiTest extends  ApiTestCase
       'now', ['ROLE_USER', 'ROLE_ADMIN']);
     $client->request('PUT', '/users/'.$user->getId(), [
       'headers' => [
-        'Content-Type' => 'application/json'
+        'Content-Type' => 'application/json',
       ], 'json' => [
         'firstName' => 'Im a new name!'
       ]
@@ -516,7 +522,7 @@ class ApiTest extends  ApiTestCase
       'now', ['ROLE_USER', 'ROLE_ADMIN']);
     $client->request('GET', '/users/'.$user->getId(), [
       'headers' => [
-        'Content-Type' => 'application/json'
+        'Content-Type' => 'application/json',
       ]
     ]);
     $this->assertResponseStatusCodeSame(200);
@@ -560,7 +566,7 @@ class ApiTest extends  ApiTestCase
     $em->persist($comment);
     $em->flush();
 
-    $client->request('GET', '/shift-comments/'.$comment->getId());
+    $client->request('GET', '/comments/'.$comment->getId());
     $this->assertResponseStatusCodeSame(200);
   }
 
@@ -615,7 +621,7 @@ class ApiTest extends  ApiTestCase
       'now', ['ROLE_USER', 'ROLE_ADMIN']);
     $client->request('DELETE', '/users/'.$user->getId(), [
       'headers' => [
-        'Content-Type' => 'application/json'
+        'Content-Type' => 'application/json',
       ]
     ]);
     $this->assertResponseStatusCodeSame(204);

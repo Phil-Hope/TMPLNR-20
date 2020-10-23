@@ -28,14 +28,6 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  *     normalizationContext={"groups"={"user:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"user:write"}, "swagger_definition_name"="Write"},
  *     shortName="user",
- *   attributes={"security"="is_granted('ROLE_USER')"},
- *   collectionOperations={
- *   "get",
- *   "post"},
- *   itemOperations={"get",
- *   "put"={"security"="is_granted('ROLE_ADMIN') or object == user"},
- *   "delete"={"security"="is_granted('ROLE_ADMIN') or object == user"}
- *   },
  * )
  * @ApiFilter(OrderFilter::class, properties={"lastName", "firstName"}, arguments={"orderParameterName"="order"})
  * @Type(name="Users")
@@ -43,6 +35,17 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
+
+// *   attributes={"security"="is_granted('ROLE_USER')"},
+// *   collectionOperations={
+// *   "get",
+// *   "post"},
+// *   itemOperations={"get",
+// *   "put"={"security"="is_granted('ROLE_ADMIN') or object == user"},
+// *   "delete"={"security"="is_granted('ROLE_ADMIN') or object == user"}
+// *   },
+
+
 class User implements UserInterface
 {
     /**

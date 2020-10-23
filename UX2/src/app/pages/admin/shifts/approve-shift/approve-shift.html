@@ -14,12 +14,14 @@
   <div *ngIf="shift else loading">
 <ion-list>
   <form [formGroup]="form" (ngSubmit)="approveShift()">
+
   <ion-list-header>
     Approve Shift
   </ion-list-header>
 
   <ion-item>
     <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">Start:</ion-label>
+
     <ion-datetime
       style="font-family: Quicksand, sans-serif; font-size: 0.8rem;"
       picker-format="DD MMM YY h:mm A"
@@ -27,6 +29,7 @@
       minuteValues="00,15,30,45"
       formControlName="start" [ngModel]="shift.start">
     </ion-datetime>
+
   </ion-item>
 
     <ion-item>
@@ -67,6 +70,7 @@
           <ion-label>Message User</ion-label>
         </ion-button>
       </ion-col>
+
       <ion-col size="6">
         <ion-button color="warning" size="block" [routerLink]="['/admin/shifts/edit/', shift.id]">
           <ion-label>Edit</ion-label>
@@ -98,7 +102,7 @@
       <h5 style="text-align: center;">{{date | date: 'shortTime'}}</h5>
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+      <ion-button [routerLink]="['/admin']" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
         <ion-icon slot="end" name="list-outline"></ion-icon>
         <ion-label>Dashboard</ion-label>
       </ion-button>

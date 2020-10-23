@@ -5,8 +5,9 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {IonicModule} from '@ionic/angular';
 import {EditPageRoutingModule} from './edit-routing.module';
 import {EditPage} from './edit.page';
-import {StoreModule} from "@ngrx/store";
 import {ComponentsModule} from "../../../../shared/components.module";
+import {UsersService} from "../../users/services/users.service";
+import {ShiftsService} from "../../../shifts/services/shifts.service";
 
 @NgModule({
     imports: [
@@ -14,11 +15,12 @@ import {ComponentsModule} from "../../../../shared/components.module";
         FormsModule,
         IonicModule,
         EditPageRoutingModule,
-        StoreModule.forFeature('shifts', {}),
         ReactiveFormsModule,
-        ComponentsModule
+        ComponentsModule,
     ],
-  declarations: [EditPage]
+  declarations: [EditPage],
+  providers: [UsersService, ShiftsService]
+
 })
 export class EditPageModule {
 }

@@ -46,7 +46,7 @@ export class ProfilePage implements OnInit {
   async presentLoading() {
     const loading = await this.loadingCtrl.create({
       message: 'Loading Profile Page',
-      duration: 1000
+      duration: 500
     });
     await loading.present();
 

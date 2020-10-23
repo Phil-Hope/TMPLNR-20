@@ -17,14 +17,6 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
  * @ApiResource(
  *     normalizationContext={"groups"={"shift-comments:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"shift-comments:write"}, "swagger_definition_name"="Write"},
- *   attributes={"security"="is_granted('ROLE_USER')"},
- *   collectionOperations={
- *   "get",
- *   "post"},
- *   itemOperations={"get",
- *   "put"={"security"="is_granted('ROLE_ADMIN') or object.getAuthoredBy() == user"},
- *   "delete"={"security"="is_granted('ROLE_ADMIN') or object.getAuthoredBy() == user"}
- *   },
  *   shortName="comments"
  * )
  * @ApiFilter(BooleanFilter::class, properties={"markedAsRead"})
@@ -33,6 +25,17 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
  * @ORM\Table(name="shift_comments")
  * @ORM\Entity(repositoryClass="App\Repository\ShiftCommentsRepository")
  */
+
+// *   attributes={"security"="is_granted('ROLE_USER')"},
+// *   collectionOperations={
+// *   "get",
+// *   "post"},
+// *   itemOperations={"get",
+// *   "put"={"security"="is_granted('ROLE_ADMIN') or object.getAuthoredBy() == user"},
+// *   "delete"={"security"="is_granted('ROLE_ADMIN') or object.getAuthoredBy() == user"}
+// *   },
+
+
 class ShiftComments
 {
     /**

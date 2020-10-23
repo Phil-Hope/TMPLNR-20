@@ -1,8 +1,10 @@
 <app-header [pageTitle]="['Edit Shift']"></app-header>
 
 <ion-content>
-<ion-card>
-  <ion-list>
+  <app-header-banner></app-header-banner>
+<ion-card style="margin-top: 2rem;">
+  <ion-item-divider></ion-item-divider>
+  <ion-list *ngIf="shift">
     <form [formGroup]="form" (ngSubmit)="onEditShift()">
     <ion-item>
       <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">Start:</ion-label>
@@ -33,10 +35,35 @@
           <ion-select-option value="primary">Primary</ion-select-option>
         </ion-select>
       </ion-item>
+<ion-input formControlName="id" [ngModel]="shift.id" type="hidden" value="{{shift.id}}"></ion-input>
+      <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" *ngIf="users">
+        <ion-label>On Duty</ion-label>
+        <ion-select formControlName="onDuty" placeholder="{{shift.onDuty.firstName}} {{shift.onDuty.lastName}}" [(ngModel)]="shift.onDuty">
+          <div *ngFor="let user of users">
+            <ion-select-option value="{{user.id}}">{{user.firstName}} {{user.lastName}}</ion-select-option>
+          </div>
+        </ion-select>
+      </ion-item>
 
+      <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+        <ion-label>Approved?</ion-label>
+        <ion-select formControlName="isApproved">
+          <ion-select-option value=true>Approve</ion-select-option>
+          <ion-select-option value=false>Draft</ion-select-option>
+        </ion-select>
+      </ion-item>
 
+      <ion-item lines="none">
+        <ion-col>
+          <ion-button size="block" color="warning" type="submit">
+            <ion-label style="font-family: Quicksand, sans-serif;">EDIT</ion-label>
+            <ion-icon slot="start" name="create-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-item>
     </form>
   </ion-list>
+  <ion-item-divider></ion-item-divider>
 </ion-card>
 </ion-content>
 
@@ -46,9 +73,16 @@
       <ion-back-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"
                        text="Back" defaultHref="/admin/shifts/list"></ion-back-button>
     </ion-buttons>
+    <ion-title>
+      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" color="light" [routerLink]="['/admin/shifts/add']">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        <ion-label>Add Shift</ion-label>
+      </ion-button>
+    </ion-title>
     <ion-buttons slot="end">
-      <ion-button>
-        <ion-label></ion-label>
+      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" [routerLink]="['/admin']">
+        <ion-icon slot="end" name="list-outline"></ion-icon>
+        <ion-label>Dashboard</ion-label>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

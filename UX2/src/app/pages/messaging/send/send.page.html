@@ -16,6 +16,7 @@
           <ion-select-option  *ngFor="let user of users" value="{{user.id}}">{{user.firstName}} {{user.lastName}}</ion-select-option>
         </ion-select>
       </ion-item>
+
 <ion-item-divider color="light"></ion-item-divider>
       <ion-item style="font-size: 0.9em; font-family: Quicksand, sans-serif;">
         <ion-textarea auto-grow="true"  style="height: 15rem;" spellcheck="true" placeholder="Message" formControlName="comment"></ion-textarea>

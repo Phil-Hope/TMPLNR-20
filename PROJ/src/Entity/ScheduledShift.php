@@ -26,17 +26,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  * @ApiResource(
  *     normalizationContext={"groups"={"shift:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"shift:write"}, "swagger_definition_name"="Write"},
- *   attributes={"security"="is_granted('ROLE_USER')"},
- *   collectionOperations={
- *   "get",
- *   "post"
- * },
- *   itemOperations={
- *   "get",
- *   "put"={"security"="is_granted('ROLE_ADMIN') or object.getOnDuty() == user"},
- *   "delete"={"security"="is_granted('ROLE_ADMIN') or object.getOnDuty() == user"}},
  *   shortName="shifts"
- * )
+ *   )
  * @ApiFilter(DateFilter::class, properties={"start", "end"})
  * @ApiFilter(BooleanFilter::class, properties={"isApproved"})
  * @ApiFilter(SearchFilter::class, properties={"id": "exact", "ShiftStatus": "exact"})
@@ -45,6 +36,21 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  * @ORM\Table(name="scheduled_shift", indexes={@ORM\Index(name="IDX_E776626E7CB2CD68", columns={"on_duty_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\ScheduledShiftRepository")
  */
+
+// *   attributes={"security"="is_granted('ROLE_USER')"},
+// *   collectionOperations={
+//  *   "get",
+// *   "post"
+//  * },
+// *   itemOperations={
+//  *   "get",
+// *   "put"={"security"="is_granted('ROLE_ADMIN') or object.getOnDuty() == user"},
+// *   "delete"={"security"="is_granted('ROLE_ADMIN') or object.getOnDuty() == user"}},
+// *   shortName="shifts"
+//  * )
+
+
+
 class ScheduledShift
 {
     /**

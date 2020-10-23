@@ -29,8 +29,7 @@ export class AdminListShiftsPage implements OnInit {
   date = new Date();
   isLoading = true;
   selectedShift: ScheduledShift;
-
-  load;
+  view = 'All Shifts';
 
   onSelect(shift: ScheduledShift): void {
     this.selectedShift = shift;
@@ -92,7 +91,6 @@ export class AdminListShiftsPage implements OnInit {
     await actionSheet.present();
   }
 
-
   async toggleViewActionSheet() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Actions',
@@ -101,60 +99,70 @@ export class AdminListShiftsPage implements OnInit {
       buttons: [{
         text: 'All Shifts',
         handler: () => {
+          this.view = 'All Shifts';
           this.onLoadAllShifts();
         }
       },
         {
           text: 'Upcoming Shifts',
           handler: () => {
+            this.view = 'Upcoming Shifts';
             this.onLoadUpcoming();
           }
         },
         {
           text: 'Past Shifts',
           handler: () => {
+            this.view = 'Past Shifts';
             this.onLoadPastShifts();
           }
         },
         {
           text: 'All - Approved Shifts',
           handler: () => {
+            this.view = 'Approved Shifts';
             this.onLoadApprovedShifts();
           }
         },
         {
           text: 'All - Pending Shifts',
           handler: () => {
+            this.view = 'Pending Shifts';
             this.onLoadPendingShifts();
           }
         },
         {
           text: 'Approved - Primary Shifts',
           handler: () => {
+            this.view = 'Approved - Primary Shifts';
             this.onLoadApprovedPrimary();
           }
         },
         {
           text: 'Approved - Secondary',
           handler: () => {
+            this.view = 'Approved - Secondary';
             this.onLoadApprovedSecondary();
           }
         },
         {
           text: 'Pending Primary',
           handler: () => {
+            this.view = 'Pending Primary';
             this.onLoadPendingPrimary();
           }
         },
         {
           text: 'Pending Secondary',
           handler: () => {
+            this.view = 'Pending Secondary';
             this.onLoadPendingSecondary();
           }
         },
         {
           text: 'Live Shifts',
           handler: () => {
+            this.view = 'Live Shifts';
             this.onLoadLiveShifts();
           }
         },

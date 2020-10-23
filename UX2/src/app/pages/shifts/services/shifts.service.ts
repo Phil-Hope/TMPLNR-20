@@ -259,7 +259,7 @@ export class ShiftsService {
       {
         start: moment(shift.start).toDate(),
         end:  moment(shift.end).toDate(),
-        onDuty: shift.onDuty,
+        onDuty: `/users/${shift.onDuty}`,
         ShiftStatus: shift.ShiftStatus,
         isApproved: shift.isApproved
       },

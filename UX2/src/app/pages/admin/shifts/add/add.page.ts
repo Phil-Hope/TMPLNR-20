@@ -1,58 +1,57 @@
 import {Component, OnInit} from '@angular/core';
+import {map} from "rxjs/operators";
 import {ScheduledShift} from "../../../../interfaces/shifts.interface";
-import {ShiftsService} from "../../../shifts/services/shifts.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
-import {tap} from "rxjs/operators";
-import {UsersService} from "../../users/services/users.service";
+import {ShiftsService} from "../../../shifts/services/shifts.service";
+import {Router} from "@angular/router";
 import {User} from "../../../../interfaces/user.interface";
+import {UsersService} from "../../users/services/users.service";
 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.page.html',
-  styleUrls: ['./edit.page.scss'],
+  selector: 'app-add',
+  templateUrl: './add.page.html',
+  styleUrls: ['./add.page.scss'],
 })
-export class EditPage implements OnInit {
+export class AddPage implements OnInit {
 
   shift: ScheduledShift;
-  form: FormGroup;
   users: User[];
+  form: FormGroup;
+  submitted = false;
 
   constructor(
-    private shiftsService: ShiftsService,
     private fb: FormBuilder,
-    private route: ActivatedRoute,
+    private shiftsService: ShiftsService,
+    private router: Router,
     private usersService: UsersService
   ) {
     this.form = this.fb.group({
-      id: ['', Validators.required],
       start: ['', Validators.required],
       end: ['', Validators.required],
       onDuty: ['', Validators.required],
       ShiftStatus: ['', Validators.required],
-      isApproved: [false, Validators.required]
+      isApproved: ['', Validators.required]
     });
   }
 
-
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.shiftsService.getShiftById(id)
-      .subscribe((data: ScheduledShift) => this.shift = data);
-
     this.usersService.loadAllUsers()
       .subscribe((data: User[]) => this.users = data);
   }
 
-  onEditShift() {
+  addShift() {
+    this.submitted = true;
     if (this.form.valid) {
       if (this.form.dirty) {
         const fd = {...this.shift, ...this.form.value};
 
-        this.shiftsService.editShift(fd)
+        this.shiftsService.addShift(fd)
           .pipe(
-            tap(_ => alert('Shift edited!'))
-          ).subscribe((data) => console.log(JSON.stringify(data)));
+            map((res: ScheduledShift) => {
+              this.router.navigateByUrl(`/admin/shifts/details/${res.id}`);
+            })
+          )
+          .subscribe(data => console.log(data));
       }
     }
   }

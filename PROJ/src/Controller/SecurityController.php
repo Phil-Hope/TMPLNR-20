@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
-use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -14,7 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
 class SecurityController extends AbstractController
@@ -61,6 +59,22 @@ class SecurityController extends AbstractController
         'token' => $token,
         'Location' => $iriConverter->getIriFromItem($this->getUser()->getId())
       ]);
+    }
+
+  /**
+   * @param UserPasswordEncoderInterface $encoder
+   * @param UserRepository $repository
+   * @param Request $request
+   * @Route("/test-login", name="test_login", methods={"POST"})
+   */
+    public function testLogin(UserPasswordEncoderInterface $encoder, UserRepository $repository, Request $request)
+    {
+      if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
+        return $this->json([
+          'error' => 'Invalid login request'
+        ], 400);
+      }
+      return new Response(null, 200);
     }
 
     /**

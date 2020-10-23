@@ -1,4 +1,4 @@
-<app-header [pageTitle]="pageTitle"></app-header>
+<app-header [pageTitle]="['Add New Employee']"></app-header>
 <ion-content [scrollEvents]="true">
   <ion-card>
   <ion-list>
@@ -82,7 +82,7 @@
             </ion-label>
             <ion-input type="password" formControlName="confirmPassword"></ion-input>
           </ion-item>
-          <ion-item>
+          <ion-item lines="none">
             <ion-col>
             <ion-button color="success" size="block" type="submit" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
               <ion-icon slot="start" name="checkbox-outline"></ion-icon>
@@ -95,13 +95,13 @@
   </ion-list>
   </ion-card>
 </ion-content>
-<ion-footer>
+<ion-footer [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button text="Back" defaultHref="/users"></ion-back-button>
+      <ion-back-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" text="Back" defaultHref="/users"></ion-back-button>
     </ion-buttons>
     <ion-title style="text-align: center;">
-<h4>{{date | date: 'shortTime'}}</h4>
+      <ion-label style="font-family: Quicksand, sans-serif;">{{date | date: 'shortTime'}}</ion-label>
     </ion-title>
     <ion-buttons slot="end">
       <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">

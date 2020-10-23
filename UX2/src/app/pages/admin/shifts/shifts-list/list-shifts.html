@@ -26,11 +26,18 @@
           </ion-col>
         </ion-row>
       </ion-item-divider>
+
       <ion-item detail="false">
         <ion-button fill="clear" (click)="toggleViewActionSheet()">
           <ion-icon slot="start" name="funnel-outline"></ion-icon>
-          <ion-label>FILTER</ion-label></ion-button>
+          <ion-label>FILTER</ion-label>
+        </ion-button>
+
+        <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif; text-align: center;">
+          <strong>{{view}}</strong>
+        </ion-label>
       </ion-item>
+
       <ion-item style="font-size: 0.7rem; font-family: Quicksand, sans-serif;" class="ion-text-center">
         <ion-col size="2"><strong>On Duty</strong></ion-col>
         <ion-col size="2"><strong>Date</strong></ion-col>
@@ -39,6 +46,7 @@
         <ion-col size="1.5"><strong>Level</strong></ion-col>
         <ion-col size="2.5"><strong>Approved</strong></ion-col>
       </ion-item>
+
       <div *ngFor="let shift of shifts">
         <ion-item (click)="presentActionSheet(shift.id)" class="shifts ion-text-center" style="font-family: Quicksand, sans-serif; font-size: 0.7rem;">
           <div *ngIf="shift.onDuty.profilePicture else spinner">
@@ -63,14 +71,28 @@
             </div>
           </ion-col>
         </ion-item>
+
       </div>
     </ion-list>
   </div>
 </ion-content>
+
 <ion-footer [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/shifts" style="font-family: Quicksand, sans-serif;" text="Back"></ion-back-button>
+      <ion-back-button defaultHref="/admin" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" text="Back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-button color="light" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" [routerLink]="['/admin/shifts/add']">
+        <ion-label>Add Shift</ion-label>
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+      </ion-button>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/admin']">
+        <ion-label>Dashboard</ion-label>
+        <ion-icon slot="end" name="list-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
