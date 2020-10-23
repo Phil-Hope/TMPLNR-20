@@ -22,7 +22,7 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 /**
- * ScheduledShift
+ * TestScheduledShift
  * @ApiResource(
  *     normalizationContext={"groups"={"shift:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"shift:write"}, "swagger_definition_name"="Write"},
@@ -60,14 +60,14 @@ class ScheduledShift
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
-     * @Groups({"shift:read", "shift-comments:read"})
+     * @Groups({"shift:read", "comments:read"})
      */
     private $id;
 
     /**
      * @var DateTimeInterface
      * @Assert\NotBlank()
-     * @Groups({"shift:read", "shift:write", "shift-comments:read"})
+     * @Groups({"shift:read", "shift:write", "comments:read"})
      * @ORM\Column(name="start", type="datetime", nullable=false)
      */
     private $start;
@@ -75,14 +75,14 @@ class ScheduledShift
     /**
      * @var DateTimeInterface
      * @Assert\NotBlank()
-     * @Groups({"shift:read", "shift:write", "shift-comments:read"})
+     * @Groups({"shift:read", "shift:write", "comments:read"})
      * @ORM\Column(name="end", type="datetime", nullable=false)
      */
     private $end;
 
     /**
      * @Assert\NotBlank()
-     * @Groups({"shift:read", "shift:write", "shift-comments:read"})
+     * @Groups({"shift:read", "shift:write", "comments:read"})
      * @ORM\ManyToOne(targetEntity="User", inversedBy="shifts")
      * @ORM\JoinColumns({
      * @ORM\JoinColumn(name="on_duty_id", referencedColumnName="id")

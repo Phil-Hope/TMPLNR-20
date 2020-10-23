@@ -21,7 +21,7 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 /**
- * ScheduledShift
+ * TestScheduledShift
  * @ApiResource(
  *     normalizationContext={"groups"={"shift:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"shift:write"}, "swagger_definition_name"="Write"},
@@ -33,9 +33,9 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  * @ApiFilter(OrderFilter::class, properties={"start", "end"}, arguments={"orderParameterName"="order"})
  * @Type(name="Shifts")
  * @ORM\Table(name="scheduled_shift", indexes={@ORM\Index(name="IDX_E776626E7CB2CD68", columns={"on_duty_id"})})
- * @ORM\Entity(repositoryClass="App\Repository\ScheduledShiftRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ScheduledShiftsRepository")
  */
-class ScheduledShift
+class TestScheduledShift
 {
     /**
      * @var UuidInterface
@@ -75,7 +75,7 @@ class ScheduledShift
     /**
      * @ApiSubresource()
      * @Groups({"shift:read"})
-     * @ORM\OneToMany(targetEntity=ShiftComments::class, mappedBy="shift")
+     * @ORM\OneToMany(targetEntity=TestShiftComments::class, mappedBy="shift")
      */
     private $comments;
 
@@ -113,7 +113,7 @@ class ScheduledShift
 
     /**
      * @param DateTimeInterface $start
-     * @return ScheduledShift
+     * @return TestScheduledShift
      */
     public function setStart(DateTimeInterface $start): self
     {
@@ -139,18 +139,18 @@ class ScheduledShift
     }
 
     /**
-     * @return User
+     * @return TestUser
      */
-    public function getOnDuty(): ?User
+    public function getOnDuty(): ?TestUser
     {
         return $this->onDuty;
     }
 
     /**
-     * @param User|null $onDuty
+     * @param TestUser|null $onDuty
      * @return $this
      */
-    public function setOnDuty(?User $onDuty): self
+    public function setOnDuty(?TestUser $onDuty): self
     {
         $this->onDuty = $onDuty;
 
@@ -158,7 +158,7 @@ class ScheduledShift
     }
 
     /**
-     * @return Collection|ShiftComments[]
+     * @return Collection|TestShiftComments[]
      */
     public function getComments(): Collection
     {
@@ -166,10 +166,10 @@ class ScheduledShift
     }
 
     /**
-     * @param ShiftComments $comment
+     * @param TestShiftComments $comment
      * @return $this
      */
-    public function addComment(ShiftComments $comment): self
+    public function addComment(TestShiftComments $comment): self
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
@@ -180,10 +180,10 @@ class ScheduledShift
     }
 
     /**
-     * @param ShiftComments $comment
+     * @param TestShiftComments $comment
      * @return $this
      */
-    public function removeComment(ShiftComments $comment): self
+    public function removeComment(TestShiftComments $comment): self
     {
         if ($this->comments->contains($comment)) {
             $this->comments->removeElement($comment);

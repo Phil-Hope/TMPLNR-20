@@ -6,9 +6,9 @@ namespace App\Tests;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\Client;
-use App\ApiPlatform\Test\ScheduledShift;
-use App\ApiPlatform\Test\ShiftComments;
-use App\ApiPlatform\Test\User;
+use App\Entity\ScheduledShift;
+use App\Entity\ShiftComments;
+use App\Entity\User;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Hautelook\AliceBundle\PhpUnit\ReloadDatabaseTrait;
@@ -338,6 +338,7 @@ class ApiTest extends  ApiTestCase
       $em->persist($shift);
       $em->flush();
 
+      $id = $user->getId();
       $client->request('POST', '/comments', [
         'headers' => [
           'Content-Type' => 'application/json',
@@ -346,6 +347,10 @@ class ApiTest extends  ApiTestCase
           'authoredBy' => '/users/'.$user->getId(),
           'shift' => '/shifts/'.$shift->getId(),
           'dateOfComment' => $d,
+          'recipient' => '/users/'.$id,
+          'markedAsRead' => true,
+          'isPrivate' => true,
+          'subject' => 'Chit Chat',
           'comment' => 'Lorem ipsum dolor sit amet,
           consectetur adipiscing elit, sed do eiusmod
           tempor incididunt ut labore et dolore magna aliqua.
@@ -389,9 +394,14 @@ class ApiTest extends  ApiTestCase
       $comment->setShift($shift);
       $comment->setComment('Blah Blah Blah!');
       $comment->setDateOfComment($date);
+      $comment->setRecipient($user);
+      $comment->setMarkedAsRead(true);
+      $comment->setSubject('Comment!');
+      $comment->setIsPrivate(true);
       $em = $this->getEntityManager();
       $em->persist($comment);
       $em->flush();
+      $id = $user->getId();
 
       $client->request('PUT', '/comments/'.$comment->getId(), [
         'headers' => [
@@ -402,6 +412,10 @@ class ApiTest extends  ApiTestCase
           'shift' => '/shifts/'.$shift->getId(),
           'dateOfComment' => $d,
           'comment' => 'I am a string of edited text! Hear me roar!',
+          'markedAsRead' => true,
+          'recipient' => '/users/'.$id,
+          'isPrivate' => false,
+          'subject' => 'General Chit Chat'
         ]]);
       $this->assertResponseStatusCodeSame(200);
     }
@@ -439,6 +453,10 @@ class ApiTest extends  ApiTestCase
     $comment->setShift($shift);
     $comment->setComment('I am another comment, Blah Blah Blah!');
     $comment->setDateOfComment($date);
+    $comment->setMarkedAsRead(true);
+    $comment->setIsPrivate(true);
+    $comment->setSubject('Comment!');
+    $comment->setRecipient($user);
     $em = $this->getEntityManager();
     $em->persist($comment);
     $em->flush();
@@ -562,6 +580,10 @@ class ApiTest extends  ApiTestCase
     $comment->setShift($shift);
     $comment->setComment('I am another comment, Blah Blah Blah!');
     $comment->setDateOfComment($date);
+    $comment->setRecipient($user);
+    $comment->setIsPrivate(true);
+    $comment->setSubject('Comment!');
+    $comment->setMarkedAsRead(false);
     $em = $this->getEntityManager();
     $em->persist($comment);
     $em->flush();

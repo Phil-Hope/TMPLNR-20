@@ -20,7 +20,7 @@ class ScheduledShiftRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return ScheduledShift[] Returns an array of ScheduledShift objects
+    //  * @return TestScheduledShift[] Returns an array of TestScheduledShift objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ScheduledShiftRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?ScheduledShift
+    public function findOneBySomeField($value): ?TestScheduledShift
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')

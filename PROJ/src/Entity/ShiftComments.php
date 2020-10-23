@@ -15,9 +15,9 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 /**
  * ShiftComments
  * @ApiResource(
- *     normalizationContext={"groups"={"shift-comments:read"}, "swagger_definition_name"="Read"},
- *     denormalizationContext={"groups"={"shift-comments:write"}, "swagger_definition_name"="Write"},
- *   shortName="comments"
+ *     normalizationContext={"groups"={"comments:read"}, "swagger_definition_name"="Read"},
+ *     denormalizationContext={"groups"={"comments:write"}, "swagger_definition_name"="Write"},
+ *     shortName="comments"
  * )
  * @ApiFilter(BooleanFilter::class, properties={"markedAsRead"})
  * @ApiFilter(BooleanFilter::class, properties={"isPrivate"})
@@ -45,26 +45,26 @@ class ShiftComments
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
-     * @Groups({"shift-comments:read", "shift:read"})
+     * @Groups({"comments:read", "shift:read"})
      */
     private $id;
 
     /**
-     * @Groups({"shift-comments:read", "shift-comments:write", "shift:read"})
+     * @Groups({"comments:read", "comments:write", "shift:read"})
      * @ORM\Column(name="comment", type="string", length=255, nullable=false)
      */
     private $comment;
 
     /**
      * @ORM\Column(name="date_of_comment", type="datetime", nullable=false)
-     * @Groups({"shift-comments:read", "shift-comments:write"})
+     * @Groups({"comments:read", "comments:write"})
      * @ORM\Column(name="date_of_comment", type="datetime", nullable=false)
      */
     private $dateOfComment;
 
     /**
      *
-     * @Groups({"shift-comments:read", "shift-comments:write"})
+     * @Groups({"comments:read", "comments:write"})
      * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="authored_by_id", referencedColumnName="id")
@@ -73,7 +73,7 @@ class ShiftComments
     private $authoredBy;
 
     /**
-     * @Groups({"shift-comments:read", "shift-comments:write"})
+     * @Groups({"comments:read", "comments:write"})
      * @ORM\ManyToOne(targetEntity="ScheduledShift", inversedBy="comments")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="shift_id", referencedColumnName="id")
@@ -82,26 +82,26 @@ class ShiftComments
     private $shift;
 
     /**
-     * @Groups({"shift-comments:read", "shift-comments:write"})
+     * @Groups({"comments:read", "comments:write"})
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="receivedComments")
      */
     private $recipient;
 
     /**
-     * @Groups({"shift-comments:read", "shift-comments:write"})
-     * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"comments:read", "comments:write"})
+     * @ORM\Column(type="boolean", nullable=true, name="marked_as_read")
      */
     private $markedAsRead;
 
     /**
-     * @Groups({"shift-comments:read", "shift-comments:write"})
-     * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"comments:read", "comments:write"})
+     * @ORM\Column(type="boolean", nullable=true, name="is_private")
      */
     private $isPrivate;
 
     /**
-     * @Groups({"shift-comments:read", "shift-comments:write"})
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups({"comments:read", "comments:write"})
+     * @ORM\Column(type="string", length=50, nullable=true, name="subject")
      */
     private $subject;
 

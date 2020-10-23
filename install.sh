@@ -1,9 +1,5 @@
 #!/bin/bash
 
-cd PROJ || exit
-
-FRONT='http://localhost:4200'
-
 echo "Hello, $USER. lets set up your environment."
 
 echo -p "Enter you database username and press [ENTER]: "
@@ -12,9 +8,17 @@ read -r username
 echo -p "Enter database password and press [ENTER]: "
 read -s -r password
 
-ENV='.env' && echo "DATABASE_URL=mysql://$username:$password@127.0.0.1:3306/tmp_db" >> $ENV;
+echo -p "Enter database serverVersion example 8.0 and press [ENTER]: "
+read -r serverVersion
 
-TEST='.env.test' && echo "DATABASE_URL=mysql://$username:$password@127.0.0.1:3306/test" >> $TEST;
+
+cd UX2 || exit
+npm install
+npm start & cd ../PROJ || exit
+
+ENV='.env' && echo "DATABASE_URL=mysql://$username:$password@127.0.0.1:3306/TMPLNR20?serverVersion=$serverVersion" >> $ENV;
+
+TEST='.env.test' && echo "DATABASE_URL=mysql://$username:$password@127.0.0.1:3306/test?serverVersion=$serverVersion" >> $TEST;
 
 composer install
 
@@ -34,12 +38,8 @@ composer req test
 
 symfony server:ca:install
 
-symfony serve
-
+symfony serve &
 php bin/phpunit
 
-cd ../UX2 || exit
-
-npm install
-
-npm start && google-chrome "${FRONT}"
+FRONT='http://localhost:4200'
+google-chrome "${FRONT}"
