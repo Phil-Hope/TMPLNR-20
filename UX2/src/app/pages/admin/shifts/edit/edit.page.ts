@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ScheduledShift} from "../../../../interfaces/shifts.interface";
 import {ShiftsService} from "../../../shifts/services/shifts.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {tap} from "rxjs/operators";
 import {UsersService} from "../../users/services/users.service";
 import {User} from "../../../../interfaces/user.interface";
@@ -22,7 +22,8 @@ export class EditPage implements OnInit {
     private shiftsService: ShiftsService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private router: Router
   ) {
     this.form = this.fb.group({
       id: ['', Validators.required],
@@ -51,7 +52,8 @@ export class EditPage implements OnInit {
 
         this.shiftsService.editShift(fd)
           .pipe(
-            tap(_ => alert('Shift edited!'))
+            tap(_ => alert('Shift edited!')),
+            tap(_ => this.router.navigateByUrl(`/admin/shifts/details/${_.id}`))
           ).subscribe((data) => console.log(JSON.stringify(data)));
       }
     }

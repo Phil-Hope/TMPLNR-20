@@ -1,5 +1,16 @@
 <app-header [pageTitle]="['Messages']"></app-header>
 <ion-content>
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+
   <app-header-banner></app-header-banner>
 <ion-list>
   <ion-list-header><ion-icon slot="start" name="mail-unread-outline"></ion-icon><ion-label>Unread Messages</ion-label></ion-list-header>
@@ -9,7 +20,7 @@
     <ion-label>Sender</ion-label>
     <ion-label>Received At</ion-label>
   </ion-item>
-  <div *ngIf="comments">
+  <div *ngIf="comments else loading">
     <div *ngFor="let comment of comments">
 
   <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem" (click)="presentActionSheet(comment.id)" detail="true">

@@ -8,7 +8,7 @@ import {ScheduledShift} from "../../../../interfaces/shifts.interface";
 import {format} from "date-fns";
 
 @Injectable()
-export class UsersService  {
+export class UsersService {
 
   user: Observable<User>;
   users: Observable<User[]>;
@@ -47,11 +47,12 @@ export class UsersService  {
     const params = new HttpParams()
       .set('order[shifts]', 'ASC');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
-        tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
+      tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
     );
   }
 
@@ -60,7 +61,8 @@ export class UsersService  {
       .set('order[shifts]', 'ASC')
       .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'));
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -73,7 +75,8 @@ export class UsersService  {
       .set('order[shifts]', 'desc')
       .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'));
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -86,7 +89,8 @@ export class UsersService  {
       .set('order[shifts]', 'ASC')
       .set('isApproved', 'false');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -100,7 +104,8 @@ export class UsersService  {
       .set('order[shifts]', 'ASC')
       .set('isApproved', 'false');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -114,7 +119,8 @@ export class UsersService  {
       .set('order[shifts]', 'desc')
       .set('isApproved', 'false');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -127,7 +133,8 @@ export class UsersService  {
       .set('order[shifts]', 'ASC')
       .set('isApproved', 'true');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -141,7 +148,8 @@ export class UsersService  {
       .set('order[shifts]', 'ASC')
       .set('isApproved', 'true');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -155,7 +163,8 @@ export class UsersService  {
       .set('order[shifts]', 'desc')
       .set('isApproved', 'true');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -169,7 +178,8 @@ export class UsersService  {
       .set('isApproved', 'false')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -184,7 +194,8 @@ export class UsersService  {
       .set('isApproved', 'false')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -199,7 +210,8 @@ export class UsersService  {
       .set('isApproved', 'false')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -213,7 +225,8 @@ export class UsersService  {
       .set('isApproved', 'false')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -228,7 +241,8 @@ export class UsersService  {
       .set('isApproved', 'false')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -243,7 +257,8 @@ export class UsersService  {
       .set('isApproved', 'false')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -257,7 +272,8 @@ export class UsersService  {
       .set('isApproved', 'true')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -272,7 +288,8 @@ export class UsersService  {
       .set('isApproved', 'true')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -287,7 +304,8 @@ export class UsersService  {
       .set('isApproved', 'true')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -301,7 +319,8 @@ export class UsersService  {
       .set('isApproved', 'true')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -316,7 +335,8 @@ export class UsersService  {
       .set('isApproved', 'true')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -331,7 +351,8 @@ export class UsersService  {
       .set('isApproved', 'true')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -345,7 +366,8 @@ export class UsersService  {
       .set('order[shifts]', 'ASC')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -359,7 +381,8 @@ export class UsersService  {
       .set('order[shifts]', 'desc')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -372,7 +395,8 @@ export class UsersService  {
       .set('order[shifts]', 'ASC')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -386,7 +410,8 @@ export class UsersService  {
       .set('order[shifts]', 'ASC')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -400,19 +425,22 @@ export class UsersService  {
       .set('order[shifts]', 'desc')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
       tap(_ => console.log(`Shifts Retrieved For User: ${id} `))
     );
   }
+
   loadUsersPrimaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('order[shifts]', 'ASC')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
-      {params, headers: new HttpHeaders({
+      {
+        params, headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
@@ -430,25 +458,39 @@ export class UsersService  {
         profilePicture: user.profilePicture,
         roles: user.roles,
         email: user.email,
-        wagePerHour: user.wagePerHour},
+        wagePerHour: user.wagePerHour
+      },
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
-        tap(_ => alert(`User ${user.firstName} ${user.lastName} was Successfully Updated!`)),
-        tap(data => console.log('edit user: ' + JSON.stringify(data)))
+      tap(_ => alert(`User ${user.firstName} ${user.lastName} was Successfully Updated!`)),
+      tap(data => console.log('edit user: ' + JSON.stringify(data)))
     );
   }
-    deleteUser(id: string) {
+
+  deleteUser(id: string) {
     return this.http.delete(`${environment.apiUrl}/users/${id}`,
-      {headers: new HttpHeaders({
+      {
+        headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       }).pipe(
-        tap(_ => alert('User Successfully Deleted!')),
-        tap(data => console.log('delete user: ' + JSON.stringify(data)))
+      tap(_ => alert('User Successfully Deleted!')),
+      tap(data => console.log('delete user: ' + JSON.stringify(data)))
     );
+  }
+
+  resetPassword(id: string, password: string): Observable<User> {
+    return this.http.put<User>(`${environment.apiUrl}/users/${id}`,
+      {password},
+      {
+        headers: new HttpHeaders(
+          {
+            'Content-Type': 'application/json'
+          })
+      });
   }
 
   registerUser(user: User): Observable<User> {

@@ -91,7 +91,7 @@ export class AddCommentPage implements OnInit {
           .pipe(
             tap(_ => alert('Comment Sent!')),
             map((res: ShiftComments) => {
-              this.router.navigateByUrl(`/shifts/${this.shift.id}/view-comments`);
+              this.router.navigateByUrl(`/shifts/${this.shift.id}/view-shift-comments`);
           })
           )
           .subscribe(data => console.log(JSON.stringify(data)));

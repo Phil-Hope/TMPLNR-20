@@ -19,7 +19,7 @@ export class ReplyPage implements OnInit {
   user: User;
   form: FormGroup;
   date = new Date();
-  recipient: User;
+  commentReplyingTo: ShiftComments;
 
   constructor(
     private commentsService: CommentsService,
@@ -51,14 +51,14 @@ export class ReplyPage implements OnInit {
 
   async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.loadUserToSendTo(id);
+    this.loadCommentToReplyTo(id);
     const value = await this.getStorage();
     this.getUserFromStorage(JSON.parse(value));
   }
 
-  loadUserToSendTo(id: string) {
-    this.userService.getUserById(id)
-      .subscribe((data: User) => this.recipient = data);
+  loadCommentToReplyTo(id: string) {
+    this.commentsService.getCommentById(id)
+      .subscribe((data: ShiftComments) => this.commentReplyingTo = data);
   }
 
   async getUserFromStorage(id: string) {

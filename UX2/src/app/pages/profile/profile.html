@@ -26,10 +26,12 @@
     <ion-card-content>
       <div style="position: relative; left: 41%"><h5>{{user.firstName}} {{user.lastName}}</h5> <ion-img src="{{user.profilePicture}}" style="width: 4rem; height: 4rem;"></ion-img></div>
       <ion-list>
+
         <ion-item>
           <ion-icon slot="start" src="assets/icon8/icons8-email2.svg"></ion-icon>
           <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">{{user.email}}</ion-label>
         </ion-item>
+
         <ion-item lines="full">
           <ion-icon slot="start" src="assets/icon8/icons8-phone.svg"></ion-icon>
           <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">{{user.contactNumber}}</ion-label>
@@ -37,28 +39,41 @@
 
             <ion-item lines="full" color="light" [routerLink]="['/users/profile/', user.id, 'shifts']" detail="true">
               <ion-icon slot="start" src="assets/icon8/icons8-calendar1.svg"></ion-icon>
-              <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">View Your Shifts</ion-label>
+              <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">Your Shifts</ion-label>
             </ion-item>
+
             <ion-item lines="full" color="light" [routerLink]="['/users/', user.id, 'shift-comments']" detail="true">
              <ion-icon slot="start" src="assets/icon8/comments.svg"></ion-icon>
               <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
-                View Your Comments
+                Your Comments
               </ion-label>
             </ion-item>
+
+        <ion-item color="light" [routerLink]="['/users/', user.id, 'reset-password']" detail="true">
+          <ion-icon slot="start" src="assets/icon8/password.svg"></ion-icon>
+          <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+            Reset Password
+          </ion-label>
+        </ion-item>
+
         <div *ngIf="shifts else loadingshifts">
           <ion-list>
+
             <ion-item class="ion-text-center"><ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" >Approved Upcoming Shifts</ion-label></ion-item>
+
             <ion-item color="medium" style="font-size: 0.8rem; text-align: center; font-family: Quicksand, sans-serif;">
               <ion-label>DATE</ion-label>
               <ion-label>START</ion-label>
               <ion-label>END</ion-label>
             </ion-item>
+
             <div *ngFor="let shift of shifts">
             <ion-item color="light" (click)="presentActionSheet(shift.id)" style="font-size: 0.8rem; text-align: center; font-family: Quicksand, sans-serif;" detail="true">
             <ion-label>{{shift.start | date: 'dd/MMM'}}</ion-label>
             <ion-label>{{shift.start | date: 'shortTime'}}</ion-label>
             <ion-label>{{shift.end | date: 'shortTime'}}</ion-label>
           </ion-item>
+
             </div>
           </ion-list>
         </div>

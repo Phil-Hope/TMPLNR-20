@@ -146,7 +146,7 @@ export class CalendarPage implements OnInit, OnDestroy {
         return results.map((shift: ScheduledShift) => {
           return {
             id: shift.id,
-            title: shift.onDuty.firstName + ' ' + shift.ShiftStatus,
+            title: shift.ShiftStatus,
             start: new Date(shift.start),
             end: new Date(shift.end),
             allDay: false,

@@ -1,6 +1,17 @@
 <app-header [pageTitle]="['Archived Messages']"></app-header>
 
 <ion-content>
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+
   <ion-list>
     <ion-list-header><ion-label>All Messages</ion-label></ion-list-header>
     <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
@@ -9,7 +20,7 @@
       <ion-label>Sender</ion-label>
       <ion-label>Received At</ion-label>
     </ion-item>
-    <div *ngIf="comments">
+    <div *ngIf="comments else loading">
       <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem" (click)="presentActionSheet(comment.id)" *ngFor="let comment of comments" detail="true">
         <ion-col><ion-label><ion-icon *ngIf="comment.isPrivate == true" src="assets/icon8/icons8-private-message.svg"></ion-icon>
           <ion-icon *ngIf="comment.isPrivate == false" src="assets/icon8/icons8-conference-foreground-selected.svg"></ion-icon>

@@ -5,7 +5,7 @@
   <ng-template #loading>
     <ion-card style="padding: 2rem; margin-top: 3rem;">
       <ion-card-header>
-        <ion-card-title class="ion-text-center">Loading...</ion-card-title>
+        <ion-card-title class="ion-text-center">Loading Contact Details...</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
@@ -46,7 +46,7 @@
       </ion-item>
     <ion-item lines="none"></ion-item>
 
-    <ion-item lines="none" color="secondary" style="font-family: Quicksand, sans-serif; font-size: 0.8rem; text-align: center;" detail="true" [routerLink]="['/messaging/', user.id, 'reply']">
+    <ion-item lines="none" color="secondary" style="font-family: Quicksand, sans-serif; font-size: 0.8rem; text-align: center;" detail="true" [routerLink]="['/messaging/', user.id, 'send-to']">
     <ion-label><ion-icon slot="start" size="medium" name="chatbox-ellipses-outline"></ion-icon> Send Message</ion-label>
     </ion-item>
     </ion-list>

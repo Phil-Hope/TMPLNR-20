@@ -1,0 +1,78 @@
+<app-header [pageTitle]="['New Message']"></app-header>
+
+<ion-content>
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+
+  <app-header-banner></app-header-banner>
+  <ion-card *ngIf="sentFrom else loading"><div *ngIf="recipient else loading">
+    <ion-card-header></ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="form" (ngSubmit)="sendUserMessage()">
+        <ion-input type="hidden" formControlName="recipient" [(ngModel)]="recipient.id" value="{{recipient.id}}"></ion-input>
+        <ion-input type="hidden" formControlName="isPrivate" value=true></ion-input>
+        <ion-input type="hidden" formControlName="authoredBy" [(ngModel)]="sentFrom.id" value="{{sentFrom.id}}"></ion-input>
+        <ion-input type="hidden" formControlName="dateOfComment" [(ngModel)]="date" value="{{date}}"></ion-input>
+
+        <ion-item>
+          <ion-col style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+            <ion-label position="floating">Subject:</ion-label>
+            <ion-input formControlName="subject"></ion-input>
+          </ion-col>
+
+          <ion-col style="text-align: center; font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+            <ion-label>Recipient:</ion-label>
+            <ion-label color="primary">{{recipient.firstName}} {{recipient.lastName}}</ion-label>
+          </ion-col>
+        </ion-item>
+
+        <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+          <ion-textarea placeholder="comment" rows="10" auto-grow="true" spellcheck="true" formControlName="comment"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-col size="12">
+            <ion-button size="block" color="success" type="submit">
+              <ion-icon slot="start" name="paper-plane-outline"></ion-icon>
+              <ion-label>Send</ion-label>
+            </ion-button>
+          </ion-col>
+        </ion-item>
+
+      </form>
+    </ion-card-content></div>
+  </ion-card>
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar color="primary">
+
+    <ion-buttons>
+      <ion-back-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" text="Back" defaultHref="/messaging"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      <ion-button color="light" [routerLink]="['/messaging/inbox']" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-icon slot="start" name="mail-unread-outline"></ion-icon>
+        <ion-label>Inbox</ion-label>
+      </ion-button>
+    </ion-title>
+
+    <ion-buttons slot="end">
+<ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/messaging/sent']">
+  <ion-icon name="send-outline" slot="end"></ion-icon>
+  <ion-label>Outbox</ion-label>
+</ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-footer>

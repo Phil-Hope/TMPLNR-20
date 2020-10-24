@@ -1,7 +1,18 @@
 <app-header [pageTitle]="['Your Comments']"></app-header>
 <ion-content>
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading Users Comments...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+
 <app-header-banner></app-header-banner>
-<ion-list>
+<ion-list *ngIf="comments else loading">
 
   <ion-item>
     <ion-label>Date</ion-label>

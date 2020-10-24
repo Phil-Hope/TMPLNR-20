@@ -1,6 +1,7 @@
 <app-header [pageTitle]="['Shift Comment']"></app-header>
 <ion-content>
 <app-header-banner></app-header-banner>
+
   <ng-template #loading>
     <ion-card style="padding: 2rem; margin-top: 3rem;">
       <ion-card-header>
@@ -11,6 +12,7 @@
       </ion-card-content>
     </ion-card>
   </ng-template>
+
   <ion-card *ngIf="comment else loading">
     <ion-item color="medium" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;"
               detail="true" [routerLink]="['/shifts/', comment.authoredBy.id, 'on-duty']">

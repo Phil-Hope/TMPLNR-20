@@ -1,6 +1,17 @@
 <app-header [pageTitle]="['Outbox']"></app-header>
 
 <ion-content>
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+
   <ion-list>
     <ion-list-header><ion-label style="text-align: center; font-family: Quicksand, sans-serif;">Sent Messages</ion-label></ion-list-header>
 
@@ -9,7 +20,7 @@
       <ion-label>Recipient</ion-label>
       <ion-label>Received At</ion-label>
     </ion-item>
-    <div *ngIf="comments">
+    <div *ngIf="comments else loading">
       <div *ngFor="let comment of comments">
 
         <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem" color="light" detail="true" [routerLink]="['/messaging/', comment.id, 'read']">

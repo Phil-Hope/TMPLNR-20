@@ -4,7 +4,7 @@
   <ng-template #loading>
     <ion-card style="padding: 2rem; margin-top: 3rem;">
       <ion-card-header>
-        <ion-card-title class="ion-text-center">Loading Profile...</ion-card-title>
+        <ion-card-title class="ion-text-center">Loading Comments...</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
@@ -13,25 +13,37 @@
   </ng-template>
 <ion-list *ngIf="comments else loading">
   <div *ngFor="let comment of comments">
-    <ion-card>
+    <ion-card *ngIf="comment.isPrivate === false">
+
   <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" color="light">
     <ion-label><strong>Comment Date:</strong></ion-label>
     <ion-label>{{comment.dateOfComment | date: 'dd/MMM hh:M a'}}</ion-label>
   </ion-item>
+
+      <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-label><strong>Shift Date:</strong></ion-label>
+        <ion-label>{{comment.shift.start | date: 'dd/MMM'}}</ion-label>
+      </ion-item>
+
     <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" detail="true" [routerLink]="['/shifts/', comment.authoredBy.id, 'on-duty']">
       <ion-label><strong>Comment By:</strong></ion-label>
       <ion-label>{{comment.authoredBy.firstName}} {{comment.authoredBy.lastName}}</ion-label>
     </ion-item>
-      <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" detail="true" [routerLink]="['/shifts/', comment.shift.onDuty.id, 'on-duty']">
+
+      <ion-item *ngIf="comment.shift.onDuty" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" detail="true" [routerLink]="['/shifts/', comment.shift.onDuty.id, 'on-duty']">
         <ion-label><strong>On Duty:</strong></ion-label>
         <ion-label>{{comment.shift.onDuty.firstName}} {{comment.shift.onDuty.lastName}}</ion-label>
       </ion-item>
+
     <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
-      <ion-label><strong>comment:</strong> {{comment.comment}}</ion-label>
+      <ion-label position="stacked">Comment:</ion-label>
+      <ion-text>{{comment.comment}}</ion-text>
     </ion-item>
+
       <ion-item color="light" detail="true" [routerLink]="['/shifts/', comment.shift.id, 'details']">
         <ion-label color="secondary" style="font-family: Quicksand, sans-serif; font-size: 0.9rem; text-align: center;">Related Shift</ion-label>
       </ion-item>
+
     </ion-card>
     </div>
 </ion-list>
@@ -39,7 +51,21 @@
 <ion-footer [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button text="back" defaultHref="/shifts/list"></ion-back-button>
+      <ion-back-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" text="Back" defaultHref="/shifts/list"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>
+      <ion-button color="light" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" [routerLink]="['/shifts/add']">
+        <ion-label>Add Shift</ion-label>
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+      </ion-button>
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/messaging']">
+        <ion-label>Messages</ion-label>
+        <ion-icon slot="end" name="chatbubbles-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

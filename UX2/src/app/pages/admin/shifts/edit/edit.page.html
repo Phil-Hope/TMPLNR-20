@@ -47,10 +47,7 @@
 
       <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
         <ion-label>Approved?</ion-label>
-        <ion-select [ngModel]="shift.isApproved" formControlName="isApproved">
-          <ion-select-option value=true>Approve</ion-select-option>
-          <ion-select-option value=false>Draft</ion-select-option>
-        </ion-select>
+        <ion-checkbox formControlName="isApproved" value=true></ion-checkbox>
       </ion-item>
 
       <ion-item lines="none">

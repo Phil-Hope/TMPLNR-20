@@ -1,9 +1,20 @@
 <app-header [pageTitle]="['Shift Dashboard']"></app-header>
 
 <ion-content>
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading Shifts...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+
 <app-header-banner></app-header-banner>
       <ion-item *ngFor="let shift of shifts">
-        <div *ngIf="shifts">
+        <div *ngIf="shifts else loading">
         <ion-avatar>
           <ion-img [hidden]="isLoading" (ionImgDidLoad)="isLoading = false" src="{{shift.onDuty.profilePicture}}"></ion-img>
         </ion-avatar>
@@ -33,7 +44,7 @@
 
     <ion-item  class="list-label">Options</ion-item>
 
-    <ion-item [routerLink]="['/shift-comments']" detail="true" lines="indent">
+    <ion-item [routerLink]="['/comments']" detail="true" lines="indent">
       <ion-avatar><ion-img src="assets/icon8/icons8-calendar-document-150.png"></ion-img></ion-avatar>
       <ion-ripple-effect></ion-ripple-effect>
       <ion-label class="list-label">Shift Comments</ion-label>
@@ -56,7 +67,7 @@
   </ion-list>
 </ion-card>
 </ion-content>
-<ion-footer>
+<ion-footer [translucent]="true">
   <ion-toolbar color="primary">
 
     <ion-buttons slot="start">

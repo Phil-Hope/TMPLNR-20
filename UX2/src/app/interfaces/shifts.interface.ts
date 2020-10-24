@@ -9,7 +9,7 @@ export class ScheduledShift {
      profilePicture: string;
    };
   ShiftStatus: string;
-  isApproved?: boolean;
+  isApproved: boolean;
    comments: {
     id: string;
     comment: string;

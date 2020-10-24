@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CommentsService} from "../../services/comments.service";
 import {ActivatedRoute} from "@angular/router";
 import {ShiftComments} from "../../../../interfaces/shift-comments.interface";
@@ -17,6 +17,8 @@ export class EditCommentPage implements OnInit {
   comment: ShiftComments;
   form: FormGroup;
   user: User;
+  users: User[];
+  date = new Date();
 
   constructor(
     private commentsService: CommentsService,
@@ -24,13 +26,16 @@ export class EditCommentPage implements OnInit {
     private fb: FormBuilder,
     private storage: Storage,
     private userService: UsersService
-    ) {
+  ) {
     this.form = this.fb.group({
       authoredBy: ['', Validators.required],
       shift: [''],
       comment: ['', Validators.required],
       dateOfComment: ['', Validators.required],
-      recipient: ['']
+      recipient: [''],
+      subject: ['', Validators.required],
+      markedAsRead: [false],
+      isPrivate: [false]
     });
   }
 
@@ -49,18 +54,25 @@ export class EditCommentPage implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.commentsService.getCommentById(id)
       .subscribe((data: ShiftComments) => this.comment = data);
+
     const value = await this.getStorage();
     this.getUserFromStorage(JSON.parse(value));
   }
-  onEditComment(){
+
+  onEditComment() {
     if (this.form.valid) {
       if (this.form.dirty) {
-        const f = { ...this.comment, ...this.form };
+        const f = {...this.comment, ...this.form};
         this.commentsService.editComment(f)
           .subscribe(data => console.log(JSON.stringify(data))
-        );
+          );
       }
     }
+  }
+
+  loadAllUsers() {
+    this.userService.loadAllUsers()
+      .subscribe((data: User[]) => this.users = data);
   }
 
   async getUserFromStorage(id: string) {

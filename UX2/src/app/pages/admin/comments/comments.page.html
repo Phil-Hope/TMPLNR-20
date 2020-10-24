@@ -1,9 +1,72 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>comments</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [pageTitle]="['Comments/Messages']"></app-header>
 
 <ion-content>
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
 
+<ion-list *ngIf="comments else loading">
+  <ion-item-group *ngFor="let comment of comments">
+<ion-item color="medium">
+  <ion-label>{{comment.id}}</ion-label>
+</ion-item>
+    <ion-item *ngIf="comment.authoredBy" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+      <ion-label>Sender:</ion-label>
+      <ion-label>{{comment.authoredBy.firstName}} {{comment.authoredBy.lastName}}</ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="comment.recipient" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+      <ion-label>Recipient:</ion-label>
+      <ion-label>{{comment.recipient.firstName}} {{comment.recipient.lastName}}</ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="comment.subject" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+      <ion-label>Subject:</ion-label>
+      <ion-label>{{comment.subject}}</ion-label>
+    </ion-item>
+
+    <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+      <ion-label>Date Of Comment:</ion-label>
+      <ion-label>{{comment.dateOfComment | date: 'medium'}}</ion-label>
+    </ion-item>
+
+    <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/admin/shifts/details/', comment.shift.id]" detail="true" color="light">
+      <ion-label>Related Shift</ion-label>
+    </ion-item>
+
+    <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/admin/comments/read/', comment.id]" detail="true" color="light">
+      <ion-label>Read Message</ion-label>
+    </ion-item>
+
+  </ion-item-group>
+</ion-list>
 </ion-content>
+
+<ion-footer [translucent]="true">
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-back-button text="Back" defaultHref="/admin"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-button color="light"
+                  style="font-family: Quicksand, sans-serif;
+                  font-size: 0.8rem;" [routerLink]="['/admin/shifts/list']">
+        <ion-label>Shifts</ion-label>
+      </ion-button>
+    </ion-title>
+    <ion-buttons style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" slot="end">
+      <ion-button [routerLink]="['/admin']">
+        <ion-label>Dashboard</ion-label>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-footer>

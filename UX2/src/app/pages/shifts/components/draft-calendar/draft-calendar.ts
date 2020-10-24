@@ -25,8 +25,7 @@ import {
   addDays,
   endOfDay,
   endOfMonth,
-  endOfWeek,
-  format,
+  endOfWeek, format,
   isSameDay,
   isSameMonth,
   startOfDay,
@@ -134,10 +133,8 @@ export class CalendarPage implements OnInit, OnDestroy {
     }[this.view];
 
     const params = new HttpParams()
-      .set('start[after]', format(getStart(this.viewDate), 'yyyy-MM-dd HH:mm:ss')
-      )
-      .set('end[before]', format(getEnd(this.viewDate), 'yyyy-MM-dd HH:mm:ss')
-      )
+      .set('start[after]', format(getStart(this.viewDate), 'yyyy-MM-dd HH:mm:ss'))
+      .set('end[before]', format(getEnd(this.viewDate), 'yyyy-MM-dd HH:mm:ss'))
       .set('isApproved', 'false');
     this.events$ = this.http.get(`${environment.apiUrl}/shifts.json`, {
       params, headers: new HttpHeaders({
@@ -148,11 +145,10 @@ export class CalendarPage implements OnInit, OnDestroy {
         return results.map((shift: ScheduledShift) => {
           return {
             id: shift.id,
-            title: shift.onDuty.firstName + ' ' + shift.ShiftStatus,
+            title: shift.ShiftStatus + '<br />' + shift.onDuty.firstName + '<br />' + shift.onDuty.lastName,
             start: new Date(shift.start),
             end: new Date(shift.end),
             allDay: false,
-            colors: shift.ShiftStatus,
             meta: {
               shift,
             },
@@ -166,7 +162,6 @@ export class CalendarPage implements OnInit, OnDestroy {
     this.destroy$.next();
     this.document.body.classList.remove(this.darkThemeClass);
   }
-
 
   dayClicked({
                date,

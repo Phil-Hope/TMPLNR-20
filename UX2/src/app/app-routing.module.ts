@@ -31,10 +31,20 @@ const routes: Routes = [
     canLoad: [AdminGuardGuard]
   },
   {
-    path: 'admin/shift-comments',
+    path: 'admin/comments',
     loadChildren: () => import('./pages/admin/comments/comments.module')
       .then( m => m.CommentsPageModule),
     canLoad: [AdminGuardGuard]
+  },
+  {
+    path: 'admin/comments/read/:id',
+    loadChildren: () => import('./pages/admin/comments/read/read.module')
+      .then( m => m.ReadPageModule)
+  },
+  {
+    path: 'admin/comments/delete/:id',
+    loadChildren: () => import('./pages/admin/comments/delete/delete.module')
+      .then( m => m.DeletePageModule)
   },
   {
     path: 'admin/shifts/add',
@@ -77,12 +87,6 @@ const routes: Routes = [
       .then(m => m.ContactModule)
   },
   {
-    path: 'reset-password',
-    loadChildren: () => import('./pages/admin/reset-password/reset-password.module')
-      .then( m => m.ResetPasswordPageModule),
-    canLoad: [AuthGuard]
-  },
-  {
     path: 'shifts',
     loadChildren: () => import('./pages/shifts/container/shifts-container.module')
       .then(m => m.ContainerPageModule),
@@ -113,13 +117,13 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
-    path: 'shifts/:id/view-shift-comments',
+    path: 'shifts/:id/comments/view',
     loadChildren: () => import('./pages/shifts/shift-comments/shift-comments/shift-comments.module')
       .then( m => m.ShiftCommentsPageModule),
     canLoad: [AuthGuard]
   },
   {
-    path: 'shifts/:id/add-comment',
+    path: 'shifts/:id/comments/add',
     loadChildren: () => import('./pages/shifts/shift-comments/add-comment/add-comment.module')
       .then( m => m.AddCommentPageModule),
     canLoad: [AuthGuard]
@@ -167,6 +171,11 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'messaging/:id/send-to',
+    loadChildren: () => import('./pages/messaging/send-to/send-to.module')
+      .then( m => m.SendToPageModule)
+  },
+  {
     path: 'messaging/:id/read',
     loadChildren: () => import('./pages/messaging/read/read.module')
       .then( m => m.ReadPageModule),
@@ -179,19 +188,19 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
-    path: 'shift-comments/:id/view',
+    path: 'comments/:id/view',
     loadChildren: () => import('./pages/shifts/shift-comments/view-comment/view-comment.module')
       .then( m => m.ViewCommentPageModule),
     canLoad: [AuthGuard]
   },
   {
-    path: 'shift-comments/:id/edit',
+    path: 'comments/:id/edit',
     loadChildren: () => import('./pages/shifts/shift-comments/edit-comment/edit-comment.module')
       .then( m => m.EditCommentPageModule),
     canLoad: [AuthGuard]
   },
   {
-    path: 'shift-comments/:id/delete',
+    path: 'comments/:id/delete',
     loadChildren: () => import('./pages/shifts/shift-comments/delete-comment/delete-comment.module')
       .then( m => m.DeleteCommentPageModule),
     canLoad: [AuthGuard]
@@ -237,6 +246,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/shifts/shift-comments/user-comments/user-comments.module')
       .then( m => m.UserCommentsPageModule),
     canLoad: [AdminGuardGuard]
+  },
+  {
+    path: 'users/:id/reset-password',
+    loadChildren: () => import('./pages/profile/reset-password/reset-password.module')
+      .then( m => m.ResetPasswordPageModule),
+    canLoad: [AuthGuard]
   },
   {
     path: 'users/profile',

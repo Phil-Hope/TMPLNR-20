@@ -1,6 +1,16 @@
 <app-header [pageTitle]="['Add Shift']"></app-header>
 
 <ion-content>
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
 
   <ion-card style="margin-top: 1rem;">
   <form [formGroup]="form" (ngSubmit)="addShift()">
@@ -32,7 +42,7 @@
     </ion-item-group>
 
 <ion-item-group>
-  <div *ngIf="user">
+  <div *ngIf="user else loading">
 <ion-input type="hidden" formControlName="onDuty" [(ngModel)]="user.id" value="{{user.id}}"></ion-input>
   </div>
   <ion-item>

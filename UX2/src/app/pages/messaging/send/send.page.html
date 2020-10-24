@@ -2,12 +2,23 @@
 <ion-content>
   <app-header-banner></app-header-banner>
 <ion-card>
+  <ng-template #loading>
+    <ion-card style="padding: 2rem; margin-top: 3rem;">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Loading...</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+
   <ion-list>
     <form [formGroup]="form" (ngSubmit)="onSendMessage()">
 
     <ion-item  style="font-size: 0.9em; font-family: Quicksand, sans-serif;"><ion-label position="floating">Subject:</ion-label>
     <ion-input formControlName="subject"></ion-input>
-      <ion-input *ngIf="user" type="hidden" formControlName="authoredBy" [(ngModel)]="user.id" value="{{user.id}}"></ion-input>
+      <ion-input *ngIf="user else loading" type="hidden" formControlName="authoredBy" [(ngModel)]="user.id" value="{{user.id}}"></ion-input>
     </ion-item>
 
       <ion-item lines="none" style="font-size: 0.9em; font-family: Quicksand, sans-serif;" *ngIf="users">

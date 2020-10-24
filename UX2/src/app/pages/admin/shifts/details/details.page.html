@@ -86,14 +86,14 @@
 
           <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
             <ion-col size="6">
-              <ion-button color="success" fill="clear" [routerLink]="['/shifts/', shift.id, 'add-comment']">
+              <ion-button color="success" fill="clear" [routerLink]="['/shifts/', shift.id, 'comments', 'add']">
                 <ion-icon slot="start" name="add-circle-outline"></ion-icon>
                 <ion-label size="small">Comment</ion-label>
               </ion-button>
             </ion-col>
           </ion-item>
           <div *ngIf="comments">
-            <ion-item [routerLink]="['/shift-comments/', comment.id, 'view']" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"  *ngFor="let comment of comments" detail="true">
+            <ion-item [routerLink]="['/comments/', comment.id, 'view']" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"  *ngFor="let comment of comments" detail="true">
               <ion-col><ion-label>Subject:</ion-label><br />
                 <ion-label *ngIf="comment.subject">{{comment.subject}}</ion-label>
                 <ion-label *ngIf="!comment.subject">No Subject</ion-label></ion-col>
@@ -136,9 +136,9 @@
     </ion-title>
 
     <ion-buttons slot="end">
-      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" [routerLink]="['/users/profile']">
-        <ion-icon slot="end" name="person-outline"></ion-icon>
-        <ion-label>Profile</ion-label>
+      <ion-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" [routerLink]="['/admin']">
+        <ion-icon slot="start" name="list-outline"></ion-icon>
+        <ion-label>Dashboard</ion-label>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
