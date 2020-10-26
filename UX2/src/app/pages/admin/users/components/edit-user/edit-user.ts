@@ -32,7 +32,7 @@ export class EditUserPage implements OnInit {
         contactNumber: ['', Validators.required],
         roles: [['ROLE_USER', 'ROLE_ADMIN'], Validators.required],
         profilePicture: ['', Validators.required],
-        wagePerHour: ['', Validators.required],
+        wagePerHour: ['', Validators.required]
       }
     );
   }
