@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 import {User} from '../../interfaces/user.interface';
 import {ActivatedRoute} from "@angular/router";
 import {Router} from "@angular/router";
@@ -14,7 +14,7 @@ import {tap} from "rxjs/operators";
   templateUrl: './profile.html',
   styleUrls: ['./profile.scss'],
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage implements OnInit, OnChanges {
 
   user: User;
   users: User[];
@@ -61,34 +61,26 @@ export class ProfilePage implements OnInit {
     await this.onLoadUpcomingApproved(JSON.parse(value));
   }
 
+ async ngOnChanges(changes: SimpleChanges) {
+    await this.getUserFromStorage(this.user.id);
+    await this.onLoadUpcomingApproved(this.user.id);
+  }
+
   async presentActionSheet(id: string) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Actions',
       buttons: [{
-        text: 'view',
+        text: 'View Details',
         icon: 'search-circle-outline',
         handler: () => {
           this.router.navigateByUrl(`/shifts/${id}/details`);
         }
-      }, {
-        text: 'edit',
-        icon: 'create-outline',
-        handler: () => {
-          this.router.navigateByUrl(`/shifts/${id}/edit`);
-        }
       },
         {
-          text: 'comment',
+          text: 'Add Comment',
           icon: 'chatbubble-outline',
           handler: () => {
-            this.router.navigateByUrl(`/shifts/${id}/add-comment`);
-          }
-        },
-        {
-          text: 'delete',
-          icon: 'trash-bin-outline',
-          handler: () => {
-            this.router.navigateByUrl(`/shifts/${id}/delete`);
+            this.router.navigateByUrl(`/shifts/${id}/comments/add`);
           }
         },
         {

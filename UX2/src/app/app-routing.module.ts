@@ -176,6 +176,11 @@ const routes: Routes = [
       .then( m => m.SendToPageModule)
   },
   {
+    path: 'messaging/:id/read-sent',
+    loadChildren: () => import('./pages/messaging/read-sent/read-sent.module')
+      .then( m => m.ReadSentPageModule)
+  },
+  {
     path: 'messaging/:id/read',
     loadChildren: () => import('./pages/messaging/read/read.module')
       .then( m => m.ReadPageModule),

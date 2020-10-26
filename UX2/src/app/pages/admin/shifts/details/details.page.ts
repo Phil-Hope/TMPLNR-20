@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 import {ShiftComments} from "../../../../interfaces/shift-comments.interface";
 import {ScheduledShift} from "../../../../interfaces/shifts.interface";
 import {ActivatedRoute} from "@angular/router";
@@ -10,7 +10,7 @@ import {CommentsService} from "../../../shifts/services/comments.service";
   templateUrl: './details.page.html',
   styleUrls: ['./details.page.scss'],
 })
-export class DetailsPage implements OnInit {
+export class DetailsPage implements OnInit, OnChanges {
 
   comments: ShiftComments[];
   shift: ScheduledShift;
@@ -27,6 +27,11 @@ export class DetailsPage implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.getShift(id);
     this.getComments(id);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.getShift(this.shift.id);
+    this.getComments(this.shift.id);
   }
 
   getShift(id: string) {

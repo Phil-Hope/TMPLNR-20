@@ -22,6 +22,7 @@ use TheCodingMachine\GraphQLite\Annotations\Query;
 use TheCodingMachine\GraphQLite\Annotations\Type;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 /**
  * User
  * @ApiResource(
@@ -29,6 +30,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  *     denormalizationContext={"groups"={"user:write"}, "swagger_definition_name"="Write"},
  *     shortName="user",
  * )
+ * @ApiFilter(BooleanFilter::class, properties={"recievedComments.markedAsRead"})
  * @ApiFilter(OrderFilter::class, properties={"lastName", "firstName"}, arguments={"orderParameterName"="order"})
  * @Type(name="Users")
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C74", columns={"email"})})
@@ -119,19 +121,20 @@ class User implements UserInterface
 
     /**
      * @ApiSubresource()
-     * @ORM\OneToMany(targetEntity=ScheduledShift::class, mappedBy="onDuty")
+     * @ORM\OneToMany(targetEntity=ScheduledShift::class, mappedBy="onDuty", cascade={"persist", "remove"})
      */
     private $shifts;
 
     /**
      * @ApiSubresource()
+     * @Groups({"user:read"})
      * @ORM\OneToMany(targetEntity=ShiftComments::class, mappedBy="authoredBy", cascade={"persist", "remove"})
      */
     private $comments;
 
     /**
      * @ApiSubresource()
-     * @ORM\OneToMany(targetEntity=ShiftComments::class, mappedBy="recipient")
+     * @ORM\OneToMany(targetEntity=ShiftComments::class, mappedBy="recipient", cascade={"persist", "remove"})
      */
     private $receivedComments;
 

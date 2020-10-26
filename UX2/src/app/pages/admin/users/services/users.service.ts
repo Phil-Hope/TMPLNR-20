@@ -45,7 +45,7 @@ export class UsersService {
 
   loadAllUsersShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
-      .set('order[shifts]', 'ASC');
+      .set('order[start]', 'asc');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {
         params, headers: new HttpHeaders({
@@ -58,7 +58,7 @@ export class UsersService {
 
   loadUsersUpcomingShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
-      .set('order[shifts]', 'ASC')
+      .set('order[start]', 'asc')
       .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'));
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {
@@ -72,7 +72,7 @@ export class UsersService {
 
   loadUsersPastShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
-      .set('order[shifts]', 'desc')
+      .set('order[start]', 'desc')
       .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'));
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {
@@ -86,7 +86,7 @@ export class UsersService {
 
   loadUsersPendingShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
-      .set('order[shifts]', 'ASC')
+      .set('order[start]', 'asc')
       .set('isApproved', 'false');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {
@@ -101,7 +101,7 @@ export class UsersService {
   loadUsersUpcomingPendingShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
-      .set('order[shifts]', 'ASC')
+      .set('order[start]', 'asc')
       .set('isApproved', 'false');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {
@@ -116,7 +116,7 @@ export class UsersService {
   loadUsersPastPendingShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
-      .set('order[shifts]', 'desc')
+      .set('order[start]', 'desc')
       .set('isApproved', 'false');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {
@@ -130,7 +130,7 @@ export class UsersService {
 
   loadUsersApprovedShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
-      .set('order[shifts]', 'ASC')
+      .set('order[start]', 'asc')
       .set('isApproved', 'true');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {
@@ -145,7 +145,7 @@ export class UsersService {
   loadUsersUpcomingApprovedShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
-      .set('order[shifts]', 'ASC')
+      .set('order[start]', 'asc')
       .set('isApproved', 'true');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {
@@ -160,7 +160,7 @@ export class UsersService {
   loadUsersPastApprovedShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
-      .set('order[shifts]', 'desc')
+      .set('order[start]', 'desc')
       .set('isApproved', 'true');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {
@@ -174,7 +174,7 @@ export class UsersService {
 
   loadUsersPendingPrimaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
-      .set('order[shifts]', 'ASC')
+      .set('order[start]', 'asc')
       .set('isApproved', 'false')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
@@ -190,7 +190,7 @@ export class UsersService {
   loadUsersUpcomingPendingPrimaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
-      .set('order[shifts]', 'ASC')
+      .set('order[start]', 'asc')
       .set('isApproved', 'false')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
@@ -206,7 +206,7 @@ export class UsersService {
   loadUsersPastPendingPrimaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
-      .set('order[shifts]', 'desc')
+      .set('order[start]', 'desc')
       .set('isApproved', 'false')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
@@ -221,7 +221,7 @@ export class UsersService {
 
   loadUsersPendingSecondaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
-      .set('order[shifts]', 'ASC')
+      .set('order[start]', 'asc')
       .set('isApproved', 'false')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
@@ -237,7 +237,7 @@ export class UsersService {
   loadUsersUpcomingPendingSecondaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
-      .set('order[shifts]', 'ASC')
+      .set('order[start]', 'asc')
       .set('isApproved', 'false')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
@@ -253,7 +253,7 @@ export class UsersService {
   loadUsersPastPendingSecondaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
-      .set('order[shifts]', 'desc')
+      .set('order[start]', 'desc')
       .set('isApproved', 'false')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
@@ -268,7 +268,7 @@ export class UsersService {
 
   loadUsersApprovedPrimaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
-      .set('order[shifts]', 'ASC')
+      .set('order[start]', 'asc')
       .set('isApproved', 'true')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
@@ -284,7 +284,7 @@ export class UsersService {
   loadUsersUpcomingApprovedPrimaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
-      .set('order[shifts]', 'ASC')
+      .set('order[start]', 'asc')
       .set('isApproved', 'true')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
@@ -300,7 +300,7 @@ export class UsersService {
   loadUsersPastApprovedPrimaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
-      .set('order[shifts]', 'desc')
+      .set('order[start]', 'desc')
       .set('isApproved', 'true')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
@@ -315,7 +315,7 @@ export class UsersService {
 
   loadUsersApprovedSecondaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
-      .set('order[shifts]', 'ASC')
+      .set('order[start]', 'asc')
       .set('isApproved', 'true')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
@@ -331,7 +331,7 @@ export class UsersService {
   loadUsersUpcomingApprovedSecondaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
-      .set('order[shifts]', 'ASC')
+      .set('order[start]', 'asc')
       .set('isApproved', 'true')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
@@ -347,7 +347,7 @@ export class UsersService {
   loadUsersPastApprovedSecondaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
-      .set('order[shifts]', 'desc')
+      .set('order[start]', 'desc')
       .set('isApproved', 'true')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
@@ -363,7 +363,7 @@ export class UsersService {
   loadUsersUpcomingSecondaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
-      .set('order[shifts]', 'ASC')
+      .set('order[start]', 'asc')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {
@@ -378,7 +378,7 @@ export class UsersService {
   loadUsersPastSecondaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
-      .set('order[shifts]', 'desc')
+      .set('order[start]', 'desc')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {
@@ -392,7 +392,7 @@ export class UsersService {
 
   loadUsersSecondaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
-      .set('order[shifts]', 'ASC')
+      .set('order[start]', 'asc')
       .set('ShiftStatus', 'secondary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {
@@ -407,7 +407,7 @@ export class UsersService {
   loadUsersUpcomingPrimaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('start[after]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
-      .set('order[shifts]', 'ASC')
+      .set('order[start]', 'asc')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {
@@ -422,7 +422,7 @@ export class UsersService {
   loadUsersPastPrimaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
       .set('start[before]', format(this.date, 'yyyy-MM-dd HH:mm:ss'))
-      .set('order[shifts]', 'desc')
+      .set('order[start]', 'desc')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {
@@ -436,7 +436,7 @@ export class UsersService {
 
   loadUsersPrimaryShifts(id: string): Observable<ScheduledShift[]> {
     const params = new HttpParams()
-      .set('order[shifts]', 'ASC')
+      .set('order[start]', 'asc')
       .set('ShiftStatus', 'primary');
     return this.http.get<ScheduledShift[]>(`${environment.apiUrl}/users/${id}/shifts.json`,
       {

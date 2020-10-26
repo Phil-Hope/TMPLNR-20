@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 import {ScheduledShift} from "../../../interfaces/shifts.interface";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UsersService} from "../../admin/users/services/users.service";
@@ -12,7 +12,7 @@ import {User} from "../../../interfaces/user.interface";
   templateUrl: './profile-shifts.page.html',
   styleUrls: ['./profile-shifts.page.scss'],
 })
-export class ProfileShiftsPage implements OnInit {
+export class ProfileShiftsPage implements OnInit, OnChanges {
 
   shifts: ScheduledShift[];
   approvedShifts: [];
@@ -32,8 +32,23 @@ export class ProfileShiftsPage implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.usersService.getUserById(id).subscribe((data: User) => this.user = data);
-    this.usersService.loadAllUsersShifts(id).subscribe((data: ScheduledShift[]) => this.shifts = data);
+    this.loadUser(id);
+    this.loadShifts(id);
+  }
+
+  loadUser(id: string) {
+    this.usersService.getUserById(id)
+      .subscribe((data: User) => this.user = data);
+  }
+
+  loadShifts(id: string) {
+    this.usersService.loadAllUsersShifts(id)
+      .subscribe((data: ScheduledShift[]) => this.shifts = data);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.loadShifts(this.user.id);
+    this.loadUser(this.user.id);
   }
 
   async presentActionSheet(id: string) {
@@ -49,21 +64,21 @@ export class ProfileShiftsPage implements OnInit {
         text: 'edit',
         icon: 'create-outline',
         handler: () => {
-          this.router.navigateByUrl(`/shifts/${id}/edit`);
+          this.router.navigateByUrl(`/users/profile/shifts/${id}/edit`);
         }
       },
         {
           text: 'comment',
           icon: 'chatbubble-outline',
           handler: () => {
-            this.router.navigateByUrl(`/shifts/${id}/add-comment`);
+            this.router.navigateByUrl(`/shifts/${id}/comments/add`);
           }
         },
         {
           text: 'delete',
           icon: 'trash-bin-outline',
           handler: () => {
-            this.router.navigateByUrl(`/shifts/${id}/delete`);
+            this.router.navigateByUrl(`/users/profile/shifts/${id}/delete`);
           }
         },
         {
@@ -145,7 +160,7 @@ export class ProfileShiftsPage implements OnInit {
       header: 'Upcoming Shifts',
       cssClass: 'my-custom-class',
       animated: true,
-      buttons: [        {
+      buttons: [{
         text: 'View All',
         handler: () => {
           this.onLoadUpcoming(id);
@@ -208,7 +223,7 @@ export class ProfileShiftsPage implements OnInit {
       header: 'Past Shifts',
       cssClass: 'my-custom-class',
       animated: true,
-      buttons: [        {
+      buttons: [{
         text: 'View All',
         cssClass: 'action-sheet-group',
         handler: () => {
@@ -353,6 +368,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadPending(id: string) {
     this.loadPending(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -373,6 +389,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadPastPending(id: string) {
     this.loadPastPending(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -393,6 +410,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadUpcomingPending(id: string) {
     this.loadUpcomingPending(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -414,6 +432,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadApproved(id: string) {
     this.loadApproved(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -434,6 +453,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadUpcomingApproved(id: string) {
     this.loadUpcomingApproved(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -454,6 +474,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadPastApproved(id: string) {
     this.loadPastApproved(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -474,6 +495,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadPrimaryShifts(id: string) {
     this.loadPrimaryShifts(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -494,6 +516,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadUpcomingPrimary(id: string) {
     this.loadUpcomingPrimary(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -514,6 +537,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadPastPrimary(id: string) {
     this.loadPastPrimary(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -534,6 +558,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadApprovedPrimary(id: string) {
     this.loadApprovedPrimary(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -554,6 +579,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadUpcomingApprovedPrimary(id: string) {
     this.loadUpcomingApprovedPrimary(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -574,6 +600,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadPastApprovedPrimary(id: string) {
     this.loadPastApprovedPrimary(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -594,6 +621,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadPendingPrimary(id: string) {
     this.loadPendingPrimary(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -614,6 +642,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadUpcomingPendingPrimary(id: string) {
     this.loadUpcomingPendingPrimary(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -634,6 +663,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadPastPendingPrimary(id: string) {
     this.loadPastPendingPrimary(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -654,6 +684,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadSecondary(id: string) {
     this.loadSecondary(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -674,6 +705,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadUpcomingSecondary(id: string) {
     this.loadUpcomingSecondary(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -694,6 +726,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadPastSecondary(id: string) {
     this.loadPastSecondary(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -714,6 +747,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadApprovedSecondary(id: string) {
     this.loadApprovedSecondary(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -734,6 +768,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadUpcomingApprovedSecondary(id: string) {
     this.loadUpcomingApprovedSecondary(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -754,6 +789,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadPastApprovedSecondary(id: string) {
     this.loadPastApprovedSecondary(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -774,6 +810,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadPendingSecondary(id: string) {
     this.loadPendingSecondary(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -794,6 +831,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadUpcomingPendingSecondary(id: string) {
     this.loadUpcomingPendingSecondary(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);
@@ -814,6 +852,7 @@ export class ProfileShiftsPage implements OnInit {
         })
       );
   }
+
   async onLoadPastPendingSecondary(id: string) {
     this.loadPastPendingSecondary(id)
       .subscribe((data: ScheduledShift[]) => this.shifts = data);

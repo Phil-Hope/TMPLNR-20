@@ -37,8 +37,8 @@ export class EditUserPage implements OnInit {
     );
   }
 
-  ngOnInit() {
-    this.getUser().subscribe(data => this.user = data);
+ async ngOnInit() {
+    this.getUser().subscribe((data: User) => this.user = data);
   }
 
   getUser(): Observable<any> {
@@ -57,7 +57,7 @@ export class EditUserPage implements OnInit {
         const f = {...this.user, ...this.form.value};
         this.userService.editUser(f)
           .pipe(
-            tap(_ => this.router.navigateByUrl(`/users/${_.id}/details`))
+            tap(_ => this.router.navigateByUrl(`/users`))
           )
           .subscribe(data => console.log('user edit: ' + JSON.stringify(data)));
       }

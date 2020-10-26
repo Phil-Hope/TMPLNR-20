@@ -3,7 +3,7 @@
   <ng-template #loading>
     <ion-card style="padding: 2rem; margin-top: 3rem;">
       <ion-card-header>
-        <ion-card-title class="ion-text-center">Loading Profile...</ion-card-title>
+        <ion-card-title class="ion-text-center">Loading Users Shifts...</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
@@ -26,8 +26,17 @@
       </ion-row>
     </ion-item-divider>
   </ion-list>
-  <ion-list>
-    <ion-title class="ion-text-center">Upcoming Shifts</ion-title>
+
+    <ion-item *ngIf="users">
+      <ion-label>Change User</ion-label>
+      <ion-select placeholder="users" name="users">
+        <div *ngFor="let user of users">
+          <ion-select-option (click)="loadUsersShifts(user.id)">{{user.firstName}} {{user.lastName}}</ion-select-option>
+        </div>
+      </ion-select>
+    </ion-item>
+
+  <ion-list *ngIf="user">
     <ion-card-header>
       <ion-item color="medium" style="font-family: Quicksand, sans-serif;">
         <ion-thumbnail><ion-img src="{{user.profilePicture}}"></ion-img></ion-thumbnail>
@@ -35,6 +44,7 @@
         <ion-col size="8" style="text-align: left;"><ion-label>{{user.firstName}} {{user.lastName}}</ion-label></ion-col>
       </ion-item>
     </ion-card-header>
+
     <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" class="ion-text-center">
       <ion-col><ion-label><strong>Date</strong></ion-label></ion-col>
       <ion-col><ion-label><strong>Start</strong></ion-label></ion-col>
@@ -43,8 +53,8 @@
       <ion-col><ion-label><strong>Approved</strong></ion-label></ion-col>
     </ion-item>
     <div *ngFor="let shifts of userShifts">
-      <ion-item *ngIf="shifts" class="shifts ion-text-center" style="font-family: Quicksand, sans-serif; font-size: 0.7rem;" [routerLink]="['/shifts/', shifts.id, '/details']" detail="true">
-        <ion-col><ion-label>{{shifts.start | date: 'shortDate'}}</ion-label></ion-col>
+      <ion-item *ngIf="shifts" class="shifts ion-text-center" style="font-family: Quicksand, sans-serif; font-size: 0.7rem;" [routerLink]="['/admin/shifts/details/', shifts.id]" detail="true">
+        <ion-col><ion-label>{{shifts.start | date: 'dd/MMM'}}</ion-label></ion-col>
         <ion-col><ion-label>{{shifts.start | date: 'shortTime' }}</ion-label></ion-col>
         <ion-col><ion-label>{{shifts.end | date: 'shortTime'}}</ion-label></ion-col>
         <ion-col>

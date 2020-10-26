@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {ScheduledShift} from "../../../../interfaces/shifts.interface";
@@ -13,7 +13,7 @@ import {AuthenticationService} from "../../../../authentication/authentication.s
   templateUrl: './shift-details.html',
   styleUrls: ['./shift-details.scss'],
 })
-export class ShiftDetailsPage implements OnInit {
+export class ShiftDetailsPage implements OnInit, OnChanges {
 
   shift: ScheduledShift;
   shift$: Observable<ScheduledShift>;
@@ -55,14 +55,23 @@ export class ShiftDetailsPage implements OnInit {
 
   async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.shiftsService.getShiftById(id)
-      .subscribe((data: ScheduledShift) => this.shift = data);
 
+    this.loadShift(id);
     this.getComments(id);
 
     setInterval(() => {
       this.date = new Date();
     }, 1000);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.loadShift(this.shift.id);
+    this.getComments(this.shift.id);
+  }
+
+  loadShift(id: string) {
+    this.shiftsService.getShiftById(id)
+      .subscribe((data: ScheduledShift) => this.shift = data);
   }
 
   getComments(id: string) {

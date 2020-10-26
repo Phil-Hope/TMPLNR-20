@@ -19,8 +19,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
  *     denormalizationContext={"groups"={"comments:write"}, "swagger_definition_name"="Write"},
  *     shortName="comments"
  * )
- * @ApiFilter(BooleanFilter::class, properties={"markedAsRead"})
- * @ApiFilter(BooleanFilter::class, properties={"isPrivate"})
+ * @ApiFilter(BooleanFilter::class, properties={"isPrivate", "markedAsRead"})
  * @ApiFilter(OrderFilter::class, properties={"dateOfComment"}, arguments={"orderParameterName"="order"})
  * @ORM\Table(name="shift_comments")
  * @ORM\Entity(repositoryClass="App\Repository\ShiftCommentsRepository")

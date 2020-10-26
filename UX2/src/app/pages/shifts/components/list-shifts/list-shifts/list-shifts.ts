@@ -35,7 +35,7 @@ export class ListShiftsPage implements OnInit {
     this.selectedShift = shift;
   }
 
-  ngOnInit() {
+ async ngOnInit() {
     this.loadAllShifts().subscribe(data => this.shifts = data);
 
     setInterval(() => {
@@ -58,7 +58,7 @@ export class ListShiftsPage implements OnInit {
           text: 'comment',
           icon: 'chatbubble-outline',
           handler: () => {
-            this.router.navigateByUrl(`/shifts/${id}/add-comment`);
+            this.router.navigateByUrl(`/shifts/${id}/comments/add`);
           }
         },
         {
@@ -174,7 +174,7 @@ export class ListShiftsPage implements OnInit {
       );
   }
 
-  onLoadAllShifts() {
+ async onLoadAllShifts() {
     this.loadAllShifts().subscribe((data: ScheduledShift[]) => this.shifts = data);
   }
 
@@ -194,7 +194,7 @@ export class ListShiftsPage implements OnInit {
       );
   }
 
-  onLoadUpcoming() {
+ async onLoadUpcoming() {
     this.loadUpcoming().subscribe((data: ScheduledShift[]) => this.shifts = data);
   }
 
@@ -214,7 +214,7 @@ export class ListShiftsPage implements OnInit {
       );
   }
 
-  onLoadPastShifts() {
+ async onLoadPastShifts() {
     this.loadPastShifts().subscribe((data: ScheduledShift []) => this.shifts = data);
   }
 
@@ -234,7 +234,7 @@ export class ListShiftsPage implements OnInit {
       );
   }
 
-  onLoadApprovedShifts() {
+  async onLoadApprovedShifts() {
     this.loadApprovedShifts().subscribe((data: ScheduledShift[]) => this.shifts = data);
   }
 
@@ -254,7 +254,7 @@ export class ListShiftsPage implements OnInit {
       );
   }
 
-  onLoadPendingShifts() {
+ async onLoadPendingShifts() {
     this.loadPendingShifts().subscribe((data: ScheduledShift[]) => this.shifts = data);
   }
 
@@ -274,7 +274,7 @@ export class ListShiftsPage implements OnInit {
       );
   }
 
-  onLoadLiveShifts() {
+  async onLoadLiveShifts() {
     this.loadLiveShifts().subscribe((data: ScheduledShift[]) => this.shifts = data);
   }
 
@@ -294,7 +294,7 @@ export class ListShiftsPage implements OnInit {
       );
   }
 
-  onLoadPendingPrimary() {
+ async onLoadPendingPrimary() {
     this.loadPendingPrimary().subscribe((data: ScheduledShift[]) => this.shifts = data);
   }
 
@@ -314,7 +314,7 @@ export class ListShiftsPage implements OnInit {
       );
   }
 
-  onLoadPendingSecondary() {
+ async onLoadPendingSecondary() {
     this.loadPendingSecondary().subscribe((data: ScheduledShift[]) => this.shifts = data);
   }
 
@@ -335,7 +335,7 @@ export class ListShiftsPage implements OnInit {
       );
   }
 
-  onLoadApprovedPrimary() {
+ async onLoadApprovedPrimary() {
     this.loadApprovedPrimary().subscribe((data: ScheduledShift[]) => this.shifts = data);
   }
 
@@ -355,7 +355,7 @@ export class ListShiftsPage implements OnInit {
       );
   }
 
-  onLoadApprovedSecondary() {
+ async onLoadApprovedSecondary() {
     this.loadApprovedSecondary().subscribe((data: ScheduledShift[]) => this.shifts = data);
   }
 

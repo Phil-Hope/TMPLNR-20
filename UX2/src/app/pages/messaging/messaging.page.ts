@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 import {CommentsService} from "../shifts/services/comments.service";
 import {User} from "../../interfaces/user.interface";
 import {UsersService} from "../admin/users/services/users.service";
@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
   templateUrl: './messaging.page.html',
   styleUrls: ['./messaging.page.scss'],
 })
-export class MessagingPage implements OnInit {
+export class MessagingPage implements OnInit, OnChanges {
 
   user: User;
   comments: ShiftComments[];
@@ -40,8 +40,13 @@ export class MessagingPage implements OnInit {
 
   async ngOnInit() {
     const value = await this.getStorage();
-    this.getUserFromStorage(JSON.parse(value));
-    this.getUsersComments(JSON.parse(value));
+    await this.getUserFromStorage(JSON.parse(value));
+    await this.getUsersComments(JSON.parse(value));
+  }
+
+  async ngOnChanges(changes: SimpleChanges) {
+    await this.getUserFromStorage(this.user.id);
+    await this.getUsersComments(this.user.id);
   }
 
   async presentActionSheet(id: string) {
@@ -73,8 +78,9 @@ export class MessagingPage implements OnInit {
     await actionSheet.present();
   }
 
-  onDeleteMessage(id: string) {
-    this.commentsService.deleteComment(id).subscribe(data => console.log(JSON.stringify(data)));
+  async onDeleteMessage(id: string) {
+    this.commentsService.deleteComment(id)
+      .subscribe(data => console.log(JSON.stringify(data)));
   }
 
   async getUsersComments(id: string) {
@@ -82,7 +88,8 @@ export class MessagingPage implements OnInit {
       .subscribe((data: ShiftComments[]) => this.comments = data);
   }
 
-  getUserFromStorage(id: string) {
-    this.userService.getUserById(id).subscribe((data: User) => this.user = data);
+  async getUserFromStorage(id: string) {
+    this.userService.getUserById(id)
+      .subscribe((data: User) => this.user = data);
   }
 }

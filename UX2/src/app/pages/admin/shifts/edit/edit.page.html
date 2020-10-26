@@ -38,7 +38,7 @@
 <ion-input formControlName="id" [ngModel]="shift.id" type="hidden" value="{{shift.id}}"></ion-input>
       <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" *ngIf="users">
         <ion-label>On Duty</ion-label>
-        <ion-select formControlName="onDuty" placeholder="{{shift.onDuty.firstName}} {{shift.onDuty.lastName}}" [(ngModel)]="shift.onDuty">
+        <ion-select formControlName="onDuty" placeholder="{{shift.onDuty.firstName}} {{shift.onDuty.lastName}}" [(ngModel)]="shift.onDuty.id">
           <div *ngFor="let user of users">
             <ion-select-option value="{{user.id}}">{{user.firstName}} {{user.lastName}}</ion-select-option>
           </div>

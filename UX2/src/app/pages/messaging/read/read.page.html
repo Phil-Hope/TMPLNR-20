@@ -48,7 +48,7 @@
 
   <ion-item>
     <ion-col>
-      <ion-button shape="round" size="block" color="success" [routerLink]="['/messaging/', comment.authoredBy.id, 'reply']">
+      <ion-button shape="round" size="block" color="success" [routerLink]="['/messaging/', comment.authoredBy.id, 'send-to']">
         <ion-icon slot="start" name="return-down-back-outline"></ion-icon>
         <ion-ripple-effect></ion-ripple-effect>
         <ion-label>Reply</ion-label>
@@ -72,8 +72,15 @@
         <ion-icon slot="start" name="chatbubbles-outline"></ion-icon>
         <ion-label>Messages</ion-label>
       </ion-button>
-
     </ion-buttons>
+
+    <ion-title>
+      <ion-button [routerLink]="['/messaging/send']" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" color="light">
+        <ion-icon slot="start" name="mail-unread-outline"></ion-icon>
+        <ion-label>New Message</ion-label>
+      </ion-button>
+    </ion-title>
+
     <ion-buttons slot="end">
       <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/shifts']">
         <ion-icon slot="end" name="calendar-outline"></ion-icon>
