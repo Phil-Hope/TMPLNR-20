@@ -33,7 +33,7 @@ yes | symfony console doctrine:fixtures:load
 
 symfony console cache:clear
 
-composer req test
+composer require symfony/test-pack
 
 symfony server:ca:install
 
