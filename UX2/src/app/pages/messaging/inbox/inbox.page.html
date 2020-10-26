@@ -4,7 +4,7 @@
   <ng-template #loading>
     <ion-card style="padding: 2rem; margin-top: 3rem;">
       <ion-card-header>
-        <ion-card-title class="ion-text-center">Loading...</ion-card-title>
+        <ion-card-title class="ion-text-center">Loading Messages...</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <ion-spinner style="position: absolute; left: 45%; right: 45%"></ion-spinner>
@@ -14,24 +14,43 @@
 
   <ion-list>
     <ion-list-header><ion-label>All Messages</ion-label></ion-list-header>
-    <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
-      <ion-label>Private</ion-label>
-      <ion-label>Subject</ion-label>
-      <ion-label>Sender</ion-label>
-      <ion-label>Received At</ion-label>
+    <ion-item color="light">
+      <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+        <strong>
+          Subject
+        </strong>
+      </ion-label>
+      <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+        <strong>
+          Sender
+        </strong>
+      </ion-label>
+      <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+        <strong>
+          Received At
+        </strong>
+      </ion-label>
     </ion-item>
+
     <div *ngIf="comments else loading">
       <ion-item style="font-family: Quicksand, sans-serif; font-size: 0.8rem" (click)="presentActionSheet(comment.id)" *ngFor="let comment of comments" detail="true">
-        <ion-col><ion-label><ion-icon *ngIf="comment.isPrivate == true" src="assets/icon8/icons8-private-message.svg"></ion-icon>
-          <ion-icon *ngIf="comment.isPrivate == false" src="assets/icon8/icons8-conference-foreground-selected.svg"></ion-icon>
-        </ion-label></ion-col>
         <ion-col>
-          <ion-label *ngIf="!comment.subject"><p>NONE</p></ion-label>
-          <ion-label *ngIf="comment.subject">{{comment.subject}}</ion-label></ion-col>
-        <ion-col><ion-label>{{comment.authoredBy.firstName}}<br />{{comment.authoredBy.lastName}}</ion-label></ion-col>
-        <ion-col><ion-label>{{comment.dateOfComment | date: 'shortTime'}}<br />{{comment.dateOfComment | date: 'dd/MMM'}}</ion-label></ion-col>
+          <ion-label *ngIf="!comment.subject">
+            <p>NONE</p>
+          </ion-label>
+          <ion-text *ngIf="comment.subject">{{comment.subject}}</ion-text>
+        </ion-col>
+        <ion-col>
+          <ion-label>{{comment.authoredBy.firstName}}<br />
+            {{comment.authoredBy.lastName}}</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>{{comment.dateOfComment | date: 'shortTime'}}<br />
+            {{comment.dateOfComment | date: 'dd/MMM'}}</ion-label>
+        </ion-col>
       </ion-item>
     </div>
+
   </ion-list>
 </ion-content>
 <ion-footer [translucent]="true">
@@ -39,17 +58,20 @@
     <ion-buttons>
       <ion-back-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" defaultHref="/messaging" text="Back"></ion-back-button>
     </ion-buttons>
+
     <ion-title>
       <ion-button color="light" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/messaging/send']">
         <ion-icon slot="end" name="paper-plane-outline"></ion-icon>
         <ion-label>New Message</ion-label>
       </ion-button>
     </ion-title>
+
     <ion-buttons *ngIf="user" slot="end">
       <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/messaging/sent']">
         <ion-icon slot="end" name="file-tray-full-outline"></ion-icon>
         <ion-label>Outbox</ion-label>
       </ion-button>
     </ion-buttons>
+
   </ion-toolbar>
 </ion-footer>

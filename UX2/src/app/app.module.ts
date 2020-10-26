@@ -33,7 +33,9 @@ export function jwtOptionsFactory(storage) {
 
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      mode: 'ios'
+    }),
     BrowserAnimationsModule,
     IonicStorageModule.forRoot(),
     AppRoutingModule,

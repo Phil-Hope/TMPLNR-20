@@ -18,11 +18,13 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import ('./pages/home/home.module')
       .then(m => m.HomePageModule),
+    data: { preload: true }
   },
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module')
       .then(m => m.LoginModule),
+    data: { preload: true }
   },
   {
     path: 'admin',
@@ -84,13 +86,15 @@ const routes: Routes = [
   {
     path: 'contact',
     loadChildren: () => import('./pages/home/components/contact/contact.module')
-      .then(m => m.ContactModule)
+      .then(m => m.ContactModule),
+    data: { preload: true }
   },
   {
     path: 'shifts',
     loadChildren: () => import('./pages/shifts/container/shifts-container.module')
       .then(m => m.ContainerPageModule),
-    canLoad: [AuthGuard]
+    canLoad: [AuthGuard],
+    data: { preload: true }
   },
   {
     path: 'shifts/add',
@@ -144,7 +148,8 @@ const routes: Routes = [
     path: 'messaging',
     loadChildren: () => import('./pages/messaging/messaging.module')
       .then( m => m.MessagingPageModule),
-    canLoad: [AuthGuard]
+    canLoad: [AuthGuard],
+    data: { preload: true }
   },
   {
     path: 'messaging/send',
@@ -262,13 +267,15 @@ const routes: Routes = [
     path: 'users/profile',
     loadChildren: () => import('./pages/profile/profile.module')
       .then(m => m.ProfileModule),
-    canLoad: [AdminGuardGuard]
+    canLoad: [AdminGuardGuard],
+    data: { preload: true }
   },
   {
     path: 'users/profile/:id/shifts',
     loadChildren: () => import('./pages/profile/profile-shifts/profile-shifts.module')
       .then( m => m.ProfileShiftsPageModule),
-    canLoad: [AdminGuardGuard]
+    canLoad: [AdminGuardGuard],
+    data: { preload: true }
   },
   {
     path: 'users/profile/shifts/:id/delete',

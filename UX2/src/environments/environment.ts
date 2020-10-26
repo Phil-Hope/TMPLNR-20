@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  // apiUrl: 'https://xavrom.tech/public/index.php/',
+  // apiUrl: 'https://xavrom.tech/public/index.php',
   apiUrl: 'https://localhost:8000',
   firebase: {
     apiKey: 'AIzaSyBzoOhQyM0Tz31EZGNI-ot6eJpXSeNWBxc',

@@ -54,9 +54,12 @@
         </ion-item>
     </ion-item-group>
  <ion-col size="12">
-   <ion-item style="margin-top: 2rem;">
+   <ion-item style="margin-top: 2rem;" lines="none">
      <ion-col size="12">
-      <ion-button type="submit" size="full" color="success">Save Shift</ion-button>
+      <ion-button type="submit" size="block" color="success">
+        <ion-img src="assets/icon8/icons8-save-close.svg" slot="start" style="height: 4rem; width: 4rem;"></ion-img>
+        <ion-label>Save</ion-label>
+      </ion-button>
      </ion-col>
    </ion-item>
  </ion-col>
@@ -72,7 +75,7 @@
 
 
 <ion-buttons slot="start">
-<ion-back-button defaultHref="/shifts" text="back"></ion-back-button>
+<ion-back-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" defaultHref="/shifts" text="Back"></ion-back-button>
 </ion-buttons>
   </ion-toolbar>
 </ion-footer>
