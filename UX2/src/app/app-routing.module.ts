@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AdminGuardGuard} from "./authentication/admin-guard.guard";
 import {AuthGuard} from "./guards/auth.guard";
+import {AutoLoginGuard} from "./guards/auto-login.guard";
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
     path: 'welcome',
     loadChildren: () => import('./pages/welcome/welcome.module')
       .then(m => m.WelcomeModule),
+    canLoad: [AutoLoginGuard]
   },
   {
     path: 'home',

@@ -50,9 +50,9 @@
          Users - Add New
         </ion-label>
       </ion-item>
-    <ion-item detail="true" lines="full" [routerLink]="['/admin/comments']">
-      <ion-icon size="small" src="assets/icon8/comments.svg" slot="start"></ion-icon>
-      <ion-label style="font-size: 0.9rem; font-family: Quicksand, sans-serif;">Comments</ion-label>
+    <ion-item detail="true" lines="none" [routerLink]="['/admin/comments']">
+      <ion-icon size="large" src="assets/icon8/comments.svg" slot="start"></ion-icon>
+      <ion-label style="font-size: 0.9rem; font-family: Quicksand, sans-serif;">User Comments/Messages</ion-label>
     </ion-item>
   </ion-item-group>
 </ion-list>
@@ -63,11 +63,13 @@
 <ion-footer [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons>
-      <ion-back-button text="Back"></ion-back-button>
+      <ion-back-button style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" text="Back"></ion-back-button>
     </ion-buttons>
 
     <ion-title style="text-align: center;">
-      <h4>{{date | date: 'shortTime'}}</h4>
+        <ion-button color="light"  style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+        <ion-label>{{date | date: 'shortTime'}}</ion-label>
+        </ion-button>
     </ion-title>
 
   </ion-toolbar>

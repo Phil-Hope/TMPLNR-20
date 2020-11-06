@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UsersService} from "../../admin/users/services/users.service";
 import {tap} from "rxjs/operators";
 import {User} from "../../../interfaces/user.interface";
+import {Storage} from "@ionic/storage";
 
 
 @Component({
@@ -24,6 +25,7 @@ export class ProfileUserPage implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private usersService: UsersService,
+    private storage: Storage
   ) { }
 
   ngOnInit() {
@@ -47,8 +49,11 @@ export class ProfileUserPage implements OnInit {
         this.loading = true;
         this.usersService.editUser(f)
           .pipe(
-            tap(_ => console.log('User Updated Successfully!')),
-          ).subscribe(data => { this.router.navigateByUrl('/users/profile'); } );
+            tap(_ => alert('Details Updated! Please login again for changes to take effect.')),
+              tap(async _ => await this.storage.clear().then(() => {
+                this.router.navigateByUrl('/login');
+              }) )
+          ).subscribe((data: User) => this.user = data);
       }
     }
   }

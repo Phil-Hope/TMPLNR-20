@@ -1,59 +1,66 @@
 <app-header [pageTitle]="['Add New Employee']"></app-header>
 <ion-content [scrollEvents]="true">
   <ion-card>
-  <ion-list>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <ion-list lines="inset">
-          <ion-row>
-            <ion-col>
-              <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
-                <ion-label position="stacked">
-                  First Name
-                </ion-label>
+
+          <ion-item lines="none" color="light"></ion-item>
+
+          <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+            <ion-avatar slot="start">
+              <ion-img src="assets/icon8/icons8-edit-user.svg"></ion-img>
+            </ion-avatar>
+            <ion-row>
+            <ion-col size="4">
+                <ion-label position="floating" color="primary">First Name</ion-label>
                 <ion-input type="text" required="true" autocomplete="given-name" formControlName="firstName"></ion-input>
-              </ion-item>
             </ion-col>
-            <ion-col>
-              <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
-                <ion-label position="stacked">
-                  Last Name
-                </ion-label>
+            <ion-col size="4">
+                <ion-label position="floating" color="primary">Last Name</ion-label>
                 <ion-input type="text" required="true"  autocomplete="family-name" formControlName="lastName"></ion-input>
-              </ion-item>
             </ion-col>
-          </ion-row>
+            </ion-row>
+          </ion-item>
+
               <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
-                <ion-label position="stacked">
-                  <ion-icon name="call-outline"></ion-icon>
-                  Contact Number
-                </ion-label>
+                <ion-avatar slot="start">
+                  <ion-img src="assets/icon8/icons8-phone.svg"></ion-img>
+                </ion-avatar>
+                <ion-label position="floating" color="primary">Contact Number</ion-label>
                 <ion-input type="text" required="true"  formControlName="contactNumber"></ion-input>
               </ion-item>
+
           <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
-            <ion-label position="stacked">
-              <ion-icon name="image-outline"></ion-icon>
-              Profile Picture URL
-            </ion-label>
+            <ion-avatar slot="start">
+              <ion-img src="assets/icon8/icons8-picture.svg"></ion-img>
+            </ion-avatar>
+            <ion-label position="floating" color="primary">Profile Picture URL</ion-label>
             <ion-input type="text" formControlName="profilePicture"></ion-input>
           </ion-item>
+
           <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
-            <ion-label position="stacked">
-              Wage Per Hour
-            </ion-label>
+            <ion-avatar slot="start">
+              <ion-img src="assets/icon8/icons8-money.svg"></ion-img>
+            </ion-avatar>
+            <ion-label position="floating" color="primary">Wage Per Hour</ion-label>
             <ion-input type="text" required="true"  formControlName="wagePerHour"></ion-input>
           </ion-item>
+
           <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
-              <ion-label position="stacked">Role</ion-label>
+            <ion-avatar slot="start">
+              <ion-img src="assets/icon8/icons8-admin-settings-male.svg" size="small"></ion-img>
+            </ion-avatar>
+              <ion-label position="floating" color="primary">Role</ion-label>
               <ion-select required="true" multiple="true" formControlName="roles" placeholder="select role">
               <ion-select-option value="ROLE_USER">Employee</ion-select-option>
               <ion-select-option value="ROLE_ADMIN">Admin</ion-select-option>
               </ion-select>
           </ion-item>
+
               <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
-                <ion-label position="stacked">
-                  <ion-icon name="mail-outline"></ion-icon>
-                  email
-                </ion-label>
+                <ion-avatar slot="start">
+                <ion-img src="assets/icon8/icons8-email.svg"></ion-img>
+                </ion-avatar>
+                <ion-label position="floating" color="primary">Email</ion-label>
                 <ion-input type="text" required="true" autocomplete="email" formControlName="email"></ion-input>
               </ion-item>
 
@@ -68,48 +75,43 @@
           </ng-container>
 
               <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
-                <ion-label position="stacked">
-                  <ion-icon slot="start" name="lock-closed"></ion-icon>
-                  password
-                </ion-label>
+                <ion-avatar slot="start">
+                  <ion-img src="assets/icon8/icons8-security-configuration.svg"></ion-img>
+                </ion-avatar>
+                <ion-label position="floating" color="primary">Password</ion-label>
                 <ion-input type="password" required="true"  formControlName="password"></ion-input>
               </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">
-              <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
-              <span> confirm password</span>
-            </ion-label>
+          <ion-item lines="none" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+            <ion-avatar slot="start">
+              <ion-img src="assets/icon8/icons8-security-configuration (1).svg"></ion-img>
+            </ion-avatar>
+            <ion-label position="floating" color="primary">Confirm Password</ion-label>
             <ion-input type="password" formControlName="confirmPassword"></ion-input>
           </ion-item>
+
           <ion-item lines="none">
             <ion-col>
             <ion-button color="success" size="block" type="submit" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
-              <ion-icon slot="start" name="checkbox-outline"></ion-icon>
-              <ion-label>Submit</ion-label>
+              <ion-img src="assets/icon8/icons8-save-close.svg" style="width: 3rem; height: 3rem;"></ion-img>
+              <ion-label>Save</ion-label>
             </ion-button>
             </ion-col>
           </ion-item>
-        </ion-list>
+
         </form>
-  </ion-list>
   </ion-card>
 </ion-content>
+
 <ion-footer [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" text="Back" defaultHref="/users"></ion-back-button>
     </ion-buttons>
     <ion-title style="text-align: center;">
-      <ion-label style="font-family: Quicksand, sans-serif;">{{date | date: 'shortTime'}}</ion-label>
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
-        <ion-icon slot="end" name="exit-outline"></ion-icon>
-        <ion-label>
-          Logout
-        </ion-label>
+      <ion-button color="light">
+      <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">{{date | date: 'shortTime'}}</ion-label>
       </ion-button>
-    </ion-buttons>
+    </ion-title>
   </ion-toolbar>
 </ion-footer>

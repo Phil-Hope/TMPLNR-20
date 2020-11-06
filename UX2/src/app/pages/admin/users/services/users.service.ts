@@ -465,8 +465,7 @@ export class UsersService {
           'Content-Type': 'application/json'
         })
       }).pipe(
-      tap(_ => alert(`User ${user.firstName} ${user.lastName} was Successfully Updated!`)),
-      tap(data => console.log('edit user: ' + JSON.stringify(data)))
+      tap(_ => console.log(`User ${user.firstName} ${user.lastName} was Successfully Updated!`))
     );
   }
 
@@ -477,8 +476,7 @@ export class UsersService {
           'Content-Type': 'application/json'
         })
       }).pipe(
-      tap(_ => alert('User Successfully Deleted!')),
-      tap(data => console.log('delete user: ' + JSON.stringify(data)))
+      tap(_ => console.log('User Successfully Deleted!'))
     );
   }
 
@@ -490,7 +488,9 @@ export class UsersService {
           {
             'Content-Type': 'application/json'
           })
-      });
+      }).pipe(
+          tap(_ => console.log('Password reset successfully!'))
+    );
   }
 
   registerUser(user: User): Observable<User> {

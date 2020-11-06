@@ -1,6 +1,7 @@
 <app-header [pageTitle]="['Add Comment']"></app-header>
 
 <ion-content>
+
   <ng-template #loading>
     <ion-card style="padding: 2rem; margin-top: 3rem;">
       <ion-card-header>
@@ -11,16 +12,29 @@
       </ion-card-content>
     </ion-card>
   </ng-template>
+
 <div *ngIf="shift else loading">
 <ion-card>
-  <ion-card-header>Shift Details</ion-card-header>
-  <ion-item detail="true" [routerLink]="['/shifts/', shift.onDuty.id, 'on-duty']" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;"><ion-label>On Duty:</ion-label><ion-label>{{shift.onDuty.firstName}} {{shift.onDuty.lastName}}</ion-label></ion-item>
-  <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
-    <ion-label>Date</ion-label>
-    <ion-label>Start</ion-label>
-    <ion-label>End</ion-label>
-  </ion-item>
+  <ion-card-header color="light">
+    <ion-title style="font-family: Quicksand, sans-serif;">Shift Details</ion-title>
+  </ion-card-header>
+
+  <ion-item detail="true" [routerLink]="['/shifts/', shift.onDuty.id, 'on-duty']" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+    <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+    <ion-label>On Duty:</ion-label>
+    <ion-label color="primary">{{shift.onDuty.firstName}} {{shift.onDuty.lastName}}</ion-label></ion-item>
   <ion-item>
+    <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+      <strong>Date</strong>
+    </ion-label>
+    <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+      <strong>Start</strong>
+    </ion-label>
+    <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
+      <strong>End</strong>
+    </ion-label>
+  </ion-item>
+  <ion-item lines="none">
     <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">{{shift.start | date: 'd/MMM'}}</ion-label>
   <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">{{shift.start | date: 'shortTime'}}</ion-label>
     <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">{{shift.end | date: 'shortTime'}}</ion-label>
@@ -29,24 +43,33 @@
   <ion-card-content>
     <ion-list>
       <form [formGroup]="form" (ngSubmit)="addCommentToShift()">
-        <ion-select formControlName="recipient" placeholder="Recipient">
+
+        <ion-item>
+        <ion-select style="font-size: 0.8rem; font-family: Quicksand, sans-serif;" formControlName="recipient" placeholder="Recipient">
           <div *ngFor="let receiver of receivers">
           <ion-select-option value="/users/{{receiver.id}}">{{receiver.firstName}} {{receiver.lastName}}</ion-select-option>
           </div>
         </ion-select>
+        </ion-item>
+
       <ion-item class="input-class">
         <ion-icon slot="start" name="chatbox-outline"></ion-icon>
-        <ion-textarea placeholder="Comment" formControlName="comment"></ion-textarea>
+        <ion-textarea style="font-size: 0.8rem; font-family: Quicksand, sans-serif; height: 10rem;" placeholder="Comment" formControlName="comment"></ion-textarea>
       </ion-item>
+
         <ion-input type="hidden" formControlName="authoredBy" [(ngModel)]="user.id" value="/users/{{user.id}}"></ion-input>
         <ion-input formControlName="dateOfComment" type="hidden" value="{{date}}" [(ngModel)]="date"></ion-input>
         <ion-input formControlName="shift" value="/shifts/{{shift.id}}" type="hidden" [(ngModel)]="shift.id"></ion-input>
-        <ion-item>
-          <ion-col><ion-button size="block" color="success" type="submit">
+
+        <ion-item lines="none">
+          <ion-col>
+            <ion-button size="block" color="success" type="submit">
             <ion-icon slot="end" name="paper-plane-outline"></ion-icon>
-            <ion-label>SEND</ion-label></ion-button>
+              <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+            <ion-label style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">Send</ion-label></ion-button>
           </ion-col>
         </ion-item>
+
       </form>
     </ion-list>
   </ion-card-content>
@@ -60,12 +83,14 @@
 </ion-buttons>
     <ion-title>
       <ion-button color="light" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/shifts/add']">
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect>
         <ion-icon name="add-circle-outline" slot="start"></ion-icon>
         <ion-label>Add shift</ion-label>
       </ion-button>
     </ion-title>
     <ion-buttons slot="end">
       <ion-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" [routerLink]="['/messaging']">
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect>
         <ion-icon slot="end" name="chatbubbles-outline"></ion-icon>
         <ion-label>Messages</ion-label>
       </ion-button>

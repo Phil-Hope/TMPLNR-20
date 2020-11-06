@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 import {CanLoad, Router} from '@angular/router';
 import {AuthenticationService} from "../authentication/authentication.service";
-import {filter, map, take} from 'rxjs/operators';
-import {Observable} from "rxjs";
 import {Storage} from "@ionic/storage";
 
 @Injectable({

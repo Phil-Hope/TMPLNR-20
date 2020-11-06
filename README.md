@@ -37,6 +37,12 @@ In the project root, run: `sh install.sh`
 the backend webservice is now running at https://localhost:8000 and the tests have been executed.
 
 * #### Automated Webservice tests
+To run the test script manually:
+
+In the PROJ directory, run: `php bin/phpunit`
+
+The location of the TestScript php file is: `PROJ/tests/ApiTest.php`
+
 
 
       There are 16 tests that are performed in total.

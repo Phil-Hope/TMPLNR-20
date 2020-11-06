@@ -38,6 +38,9 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 
+// Waiting for PROJ 2 to be marked.
+// Disabled security on all endpoints so the Test Script works correctly.
+
 // *   attributes={"security"="is_granted('ROLE_USER')"},
 // *   collectionOperations={
 // *   "get",

@@ -18,6 +18,7 @@ export class AddPage implements OnInit {
   users: User[];
   form: FormGroup;
   submitted = false;
+  date = new Date();
 
   constructor(
     private fb: FormBuilder,
@@ -37,6 +38,10 @@ export class AddPage implements OnInit {
   ngOnInit() {
     this.usersService.loadAllUsers()
       .subscribe((data: User[]) => this.users = data);
+
+    setInterval(() => {
+      this.date = new Date();
+    }, 1000);
   }
 
   addShift() {

@@ -134,7 +134,7 @@ export class AppComponent implements OnInit {
     this.userIsAdmin = false;
     this.userIsAuthenticated = false;
     await this.storage.clear().then(() => {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/login');
     });
   }
 

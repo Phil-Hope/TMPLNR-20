@@ -10,10 +10,9 @@ import {
 
 import {Observable, throwError, from} from 'rxjs';
 import {map, catchError, switchMap} from 'rxjs/operators';
-
 import {Storage} from '@ionic/storage';
-
 import {AlertController} from "@ionic/angular";
+import {Router} from "@angular/router";
 
 
 const TOKEN_KEY = 'token';
@@ -25,7 +24,10 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         Accept: 'application/json',
         'Content-Type': 'application/json'
     };
-    constructor(private storage: Storage, private alertCtrl: AlertController) {
+    constructor(
+        private storage: Storage,
+        private alertCtrl: AlertController,
+        private router: Router) {
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -49,10 +51,9 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                             }
                             return event;
                         }),
-                        catchError((error: HttpErrorResponse) => {
+                        catchError( (error: HttpErrorResponse) => {
                             const status = error.status;
                             const reason = error && error.error.reason ? error.error.reason : '';
-
                             this.presentAlert(status, reason);
                             return throwError(error);
                         })
@@ -64,11 +65,14 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     async presentAlert(status, reason) {
         const alert = await this.alertCtrl.create({
             header: status + ' Error',
-            subHeader: 'An Error Occurred!',
+            subHeader: 'Unfortunately an error has occurred with your security token! ' +
+                'You will be redirected to the login screen to re-authenticated your session.',
             message: reason,
             buttons: ['OK']
         });
-
         await alert.present();
+        await this.storage.clear().then(() => {
+            this.router.navigateByUrl('/login');
+        });
     }
 }

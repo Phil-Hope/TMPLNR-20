@@ -18,13 +18,13 @@
     <ion-input type="hidden" formControlName="id" [ngModel]="shift.id" value="{{shift.id}}"></ion-input>
     <ion-input type="hidden" formControlName="isApproved" value=false [ngModel]="shift.isApproved"></ion-input>
     <ion-input type="hidden" formControlName="onDuty" [ngModel]="shift.onDuty.id" value="{{shift.onDuty.id}}"></ion-input>
-    <ion-card-header class="ion-text-center">Edit Shift Form</ion-card-header>
+    <ion-card-header color="light" class="ion-text-center" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">Edit Shift Form</ion-card-header>
   <ion-card-content>
     <ion-list>
       <ion-item lines="none"></ion-item>
 
       <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
-        <ion-label>Start:</ion-label>
+        <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">Start:</ion-label>
         <ion-datetime
           [ngModel]="shift.start"
           picker-format="DD MMM YY h:mm A"
@@ -36,7 +36,7 @@
       </ion-item>
 
       <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
-        <ion-label>Finish:</ion-label>
+        <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">Finish:</ion-label>
         <ion-datetime
           [ngModel]="shift.end"
           picker-format="DD MMM YY h:mm A"
@@ -50,7 +50,7 @@
 <ion-item lines="none"></ion-item>
 
       <ion-item style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
-        <ion-label>Call Level</ion-label>
+        <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">Call Level</ion-label>
         <ion-select formControlName="ShiftStatus" [ngModel]="shift.ShiftStatus">
           <ion-select-option value="primary">Primary</ion-select-option>
           <ion-select-option value="secondary">Secondary</ion-select-option>
@@ -62,8 +62,9 @@
       <ion-item lines="none" *ngIf="shift.isApproved === false">
         <ion-col size="12">
           <ion-button size="block" type="submit" color="success">
-            <ion-icon slot="start" name="checkbox-outline"></ion-icon>
-            <ion-label>Submit Changes</ion-label>
+            <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+            <ion-img src="assets/icon8/icons8-save-close.svg" style="height: 3rem; width: 3rem;"></ion-img>
+            <ion-label style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">Save Changes</ion-label>
           </ion-button>
         </ion-col>
       </ion-item>
@@ -84,6 +85,7 @@
 <ion-footer [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
+      <ion-ripple-effect type="unbounded"></ion-ripple-effect>
       <ion-back-button style="font-family: Quicksand, sans-serif; font-size: 0.8rem;" text="Back" defaultHref="/users/profile"></ion-back-button>
     </ion-buttons>
 
@@ -92,10 +94,12 @@
       <ion-button color="light" [routerLink]="['/shifts/add']" style="font-size: 0.8rem; font-family: Quicksand, sans-serif;">
         <ion-label>Add Shift</ion-label>
         <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect>
       </ion-button>
     </ion-title>
     <ion-buttons slot="end">
       <ion-button [routerLink]="['/messaging']" style="font-family: Quicksand, sans-serif; font-size: 0.8rem;">
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect>
         <ion-label>Messages</ion-label>
         <ion-icon name="chatbubbles-outline" slot="end"></ion-icon>
       </ion-button>
