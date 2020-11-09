@@ -75,7 +75,7 @@
             </ion-item>
           </ion-menu-toggle>
 
-          <ion-menu-toggle *ngIf="userIsAuthenticated">
+          <ion-menu-toggle *ngIf="userIsAuthenticated" autoHide="false">
             <ion-item color="light" detail="false" (click)="logout()">
               <ion-ripple-effect type="bounded"></ion-ripple-effect>
               <ion-icon slot="start" name="log-out-outline"></ion-icon>
@@ -84,6 +84,7 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
+
             <ion-item>
               <ion-icon slot="start" name="moon"></ion-icon>
               <ion-label color="medium">DARK MODE</ion-label>
