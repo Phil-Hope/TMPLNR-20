@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css"
+          integrity="sha384-CuOF+2SnTUfTwSZjCXf01h7uYhfOBuxIhGKPbfEJ3+FqH/s6cIFN9bGr1HmAg4fQ" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <meta content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport"/>
+    <title>XAVROM Teamplanner Help Document</title>
+    <style>
+        .blk-bg {
+            background-color: black;
+            color: white;
+            padding-top: 0.1rem;
+            padding-bottom: 0.1rem;
+        }
+        h4, H1 {
+            font-family: Bebas Neue, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img alt="company logo" src="https://media.publit.io/file/icon-128x128.png"/>
+        </a>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a aria-controls="installation" aria-selected="true" class="nav-link active" data-toggle="tab"
+                   href="#installation"
+                   id="installation-tab" role="tab">Installation</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a aria-controls="backend" aria-selected="false" class="nav-link" data-toggle="tab" href="#backend"
+                   id="backend-tab" role="tab">Backend Info</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a aria-controls="frontend" aria-selected="false" class="nav-link" data-toggle="tab" href="#frontend"
+                   id="frontend-tab" role="tab">Frontend Info</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="tab-content" id="myTabContent">
+
+    <div aria-labelledby="installation-tab" class="tab-pane fade show active" id="installation" role="tabpanel">
+        <h1 class="text-center">Installation Guide</h1>
+        <h4 class="text-center">Team Planner 20</h4>
+        <h6 class="text-center">Rostering Application</h6>
+        <div style="padding: 1rem;"></div>
+        <div class="container">
+            <div class="card">
+                <div class="card-header" style="padding-top: 1rem;">
+                    <h4>Install the required packages</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><h6>Nodejs and Npm</h6>
+                            For Windows: <a href="https://nodejs.org/en/#home-downloadhead">Link</a>
+                            <br/>
+                            For Ubuntu: <span class="blk-bg">sudo apt-get nodejs</span>
+                            <br/>
+                            For Fedora/Centos: <span class="blk-bg">sudo dnf install nodejs</span>
+                        </li>
+                        <li><h6>Angular CLI</h6> <span class="blk-bg">npm i -g @angular/cli </span></li>
+                        <li><h6>Ionic CLI</h6> <span class="blk-bg">npm i -g @ionic/cli </span></li>
+                        <hr/>
+                        <li><h6>Symfony CLI</h6> <br/>
+                            <strong>Windows: </strong><a href="https://get.symfony.com/cli/setup.exe">Link</a> <br/>
+                            <strong>Linux: </strong><span class="blk-bg">wget https://get.symfony.com/cli/installer -O - | bash</span><br/>
+                            <strong>MacOS: </strong><span class="blk-bg">curl -sS https://get.symfony.com/cli/installer | bash</span>
+                        </li>
+                        <li>Other Requirements:
+                            <br/>
+                            MariaDB / MySQL
+                            <br/>
+                            PHP 7.2 or Higher
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" style="padding-top: 1rem;">
+                    <h4>Clone Repository</h4>
+                </div>
+                <div class="card-body">
+                    <strong>In your terminal:</strong> <span class="blk-bg">git clone https://github.com/lrdswag/TMPLNR-20.git</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" style="padding-top: 1rem;">
+                    <h4>Automatic Installation</h4>
+                </div>
+                <div class="card-body">
+                    <p>Open the cloned project and in the root of the directory, in your terminal run</p>
+                    Unix/Linux: <span class="blk-bg">sh install.sh</span>
+                    <br/>
+                    Windows/MacOS: <span class="blk-bg">./install.sh</span>
+                    <br/>
+                    <p>When the file begins to execute it will prompt you for the username and password for you MySQL
+                        database.</p>
+                    <p>The name for the database has already been set to TMPLNR20, if you need for it to be changed you
+                        can alter after the install script runs.</p>
+                    <p>This will require some of the manual configuration listed below.</p>
+                    <p>During the installation, all of the needed composer and node packages are installed, the web
+                        server for the front end and the back end are installed.</p>
+                    <p>Also, the test bundle is installed and 16 tests are performed on the API endpoints. These tests
+                        are visible in the terminal during the installation.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" style="padding-top: 1rem;">
+                    <h4>Manual Installation</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>
+                            <strong>Install packages</strong>
+                            <br/>
+                            <p>In the PROJ folder, in your terminal, run: <span class="blk-bg">composer install</span>
+                                <br/>
+                                In the UX2 folder, in your terminal, run: <span class="blk-bg">npm install</span>
+                                <br/>
+                                All the needed packages should now be install and ready to use.
+                            </p>
+                        </li>
+                        <li>
+                            <strong>Database Configuration</strong>
+                            <br/>
+                            <p>Navigate to the PROJ directory.</p>
+                            <p>In the .env file, add the following line: <br/>
+                                DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=8.0 <--
+                                change to your version
+                            </p>
+                            <br/>
+                            <p>In the .env.test file add the following:
+                                <br/>
+                                DATABASE_URL=mysql://db_name:db_password@127.0.0.1:3306/test_db?serverVersion=8.0
+                            </p>
+                            <strong>Create the Database</strong>
+                            <br/>
+                            <p>In the PROJ directory, in your terminal, run: <span class="blk-bg">symfony console doctrine:database:create</span>
+                            </p>
+                            <p>To generate the schema, in your terminal, run: <span class="blk-bg">symfony console doctrine:schema:update --force</span>
+                            </p>
+                            <p>To create the test database, in your terminal, run: <span class="blk-bg">symfony console doctrine:database:create --env=test</span>
+                            </p>
+                            <p>To generate the test schema, in your terminal, run: <span class="blk-bg">symfony console doctrine:schema:create --env=test</span>
+                            </p>
+                        </li>
+                        <li>
+                            <strong>Run API Tests</strong>
+                            <p>In the PROJ directory, in your terminal, run: <span class="blk-bg">php bin/phpunit</span>
+                            </p>
+                            <p>You should then see the 16 tests being performed in the terminal window.</p>
+                            <p>The file responsible for running the tests is located in the PROJ/tests/ApiTest.php
+                                file</p>
+                            <p>I have included comments in the Doc Blocks above each function explaining how each test
+                                is intended to work.</p>
+                        </li>
+                        <li>
+                            <strong>Start Symfony Web Server</strong>
+                            <br/>
+                            <p>To install the SSL certificate which is needed as the frontend is pointed to
+                                https://localhost:8000</p>
+                            <p>In the PROJ directory, in your terminal, run: <span class="blk-bg">symfony server:ca:install</span>
+                                <br/>
+                                Type yes if prompted.
+                            </p>
+                            <p><strong>To start the Symfony Webserver:</strong>
+                                <br/>
+                                In the PROJ directory, in your terminal, run: <span class="blk-bg">symfony serve</span>
+                            </p>
+                        </li>
+                        <li>
+                            <strong>Load the dummy data</strong>
+                            <p>In the PROJ directory, in your terminal, run: <span class="blk-bg">symfony console doctrine:fixtures:load</span>
+                            </p>
+                            <p>You will be prompted if you accept purging the database, select yes. This does not remove
+                                the database, it will only remove any data held in the database.</p>
+                        </li>
+                        <li>
+                            <strong>Start the Front End Webserver</strong>
+                            <p>In the UX2 folder, in the terminal, run: <span class="blk-bg">npm start</span></p>
+                        </li>
+                        <li>
+                            <strong>Login</strong>
+                            <p>The webserver is now running at https://localhost:8000</p>
+                            <p>The front end is now running at http://localhost:4200</p>
+                            <p>Navigate to http://localhost:4200</p>
+                            <p>You may skip the welcome page by clicking skip in the top right.</p>
+                            <p>Thanks to the loaded dummy data you may log in with
+                                <br/>
+                                email: admin@example.com
+                                <br/>
+                                password: password
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div aria-labelledby="backend-tab" class="tab-pane fade" id="backend" role="tabpanel">
+        <h1 class="text-center">Backend Information</h1>
+        <h4 class="text-center">Symfony 5</h4>
+        <div class="container">
+            <div class="card">
+                <div class="card-header" style="padding-top: 1rem;">
+                    <h4>Security</h4>
+                </div>
+
+            <div class="card-body">
+                <strong>JWT</strong>
+                <p>For the authentication of users I have utilized JSON Web Tokens with the aid of the
+                    <a href="https://github.com/lexik/LexikJWTAuthenticationBundle">Lexik JWT Authentication bundle</a>
+                    <br />
+                    By utilizing JWT I am able to send my front end with a RS256 encoded token which includes the necessary information needed to
+                    authenticate the user with each request. The JWT includes the user UUID as well as the users roles (ROLE_USER or ROLE_ADMIN).
+                </p>
+                <p>To utilize this package to its full potential I have created 3 event listener classes:
+                    <ul>
+                <li>AuthenticationFailureResponse.php
+                <br />
+                    This will send the front end a customized error upon the attempted use of an invalid JWT.
+                </li>
+                <li>AuthenticationSuccessListener.php
+                <br />
+                This was added to customize which content was to ne included in the JWT payload.
+                </li>
+                <li>JWTCreatedListener.php
+                <br />
+                    This was implemented to include the IP address of the client in the payload which is then checked
+                    upon each time it is used.
+                </li>
+            </ul>
+                </p>
+                <strong>Argon2i Password Encryption</strong>
+                <p>For this application I have implemented Argon2i as the encoding method for all users.</p>
+                <p>To ensure that the users password is encrypted each time a new user is created and when a user changes their password,
+                I have created a Data Persister class: UserDataPersister.php
+                <br />
+                This is similar to an event listener class except that it alters the data before it is stored in the database.
+                    In this case, it listens for any event where the user has created or edited a password and changes the string value to the encoded value
+                    before saving it in to the database. This prevents any string values for passwords being stored in the database.
+                </p>
+            </div>
+            </div>
+            <div class="card">
+                <div class="card-header" style="padding-top: 1rem;">
+                    <h4>API Endpoints</h4>
+                </div>
+                <div class="card-body">
+                    <strong>Api Platform</strong>
+                    <p>For this application I have utilized API-Platform core bundle.</p>
+                    <p>It works by using the schema mapped by doctrine ORM and the annotations in the DOC Blocks</p>
+                    <p>Simply by adding @ApiResource to the DOC Block above the entity class it then exposed all the CRUD endpoints needed.</p>
+                    <p>Including POST, GET (one), GET (all), PUT, PATCH and DELETE</p>
+                    <br />
+                    <p>Api platform was able to offer so much more functionality then just this.</p>
+                    <p>By using the @Groups annotation, I could group together what data from other entities that shared relation to show in my JSON requests.</p>
+                    <p>Such as, for a scheduled shift, I can see the onDuty.firstName onDuty.lastName onDuty.id and so on.</p>
+                    <p>This became extremely useful for expanding on how I could implement Angular's Routing through the front end of my app.</p>
+                    <br />
+                    <p>Another API Platform feature that was extremely useful was the @ApiFilter. With this I could add boolean types and filter by true or false. Which
+                    was extremely useful for only shifts that have been approved by the manager or if a new message had been read or not.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" style="padding-top: 1rem;">
+                    <h4>Form Validation</h4>
+                </div>
+                <div class="card-body">
+                    <strong>Doctrine ORM</strong>
+                    <p>One of the great things using and ORM is that the back end knows exactly what type of data to expect before it interacts with the database.</p>
+                    <p>With every attribute of every entity assigned the appropriate data type including whether it is nullable or not. In the annotations in the DOC Blocks I can also set
+                    a maximum or minimum length for each attribute.</p>
+                    <br />
+                    <strong>Api Platform</strong>
+                    <p>Api Platform also utilizes these annotation in the DOC Blocks and is the first point of validation against these data types.</p>
+                    <p>Before any data is handled by Doctrine ORM and Doctrine DBAL, API-Platform checks the received JSON data against the configured data types.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" style="padding-top: 1rem;">
+                    <h4>API Tests</h4>
+                </div>
+                <div class="card-body">
+                    <strong>Symfony Test Bundle</strong>
+                    <p>For the test scripts I have utilized the Symfony Test Bundle.</p>
+                    <p>In it, I am able to write a public function that tests the endpoints with the given data.</p>
+                    <p>At the bottom of each function the is a assertions method which is used to assign the expected response code and is checked against
+                    that expected code during the test. If the incorrect status code is received the assertion will fail.</p>
+                    <p>This file is located in PROJ/tests/ApiTest.php</p>
+                    <p>In it are the instantiation of the User Class and with each of the functions, this user is created, then the login function is used to authenticated and the
+                    desired HTTP request is then made.</p>
+                    <p>The test functions are as follows</p>
+                    <ul>
+                        <li>create user (POST) - 201 CREATED</li>
+                        <li>edit user (PUT) - 200 OK</li>
+                        <li>delete user (DELETE) - 204 NO CONTENT</li>
+                        <li>get user (GET) - 200 OK</li>
+                        <li>get users (GET) - 200 OK</li>
+                        <li>user login (POST) - 200 OK</li>
+                        <li>create shift (POST) - 201 CREATED</li>
+                        <li>edit shift (PUT) - 200 OK</li>
+                        <li>get shift (GET) - 200 OK</li>
+                        <li>get shifts (GET) - 200 OK</li>
+                        <li>delete shift (DELETE) - 204 NO CONTENT</li>
+                        <li>create comment (POST) - 201 CREATED</li>
+                        <li>edit comment (PUT) - 200 OK</li>
+                        <li>delete comment (DELETE) - 204 NO CONTENT</li>
+                        <li>get comment (GET) - 200 OK</li>
+                        <li>get comments (GET) - 200 OK</li>
+                    </ul>
+                    <p>After running the tests, a log of the results should be generated at PROJ/src/var/test.log</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" style="padding-top: 1rem;">
+                    <h4>Routes</h4>
+                </div>
+                <div class="card-body">
+                    <p>Below are a list of the available routes that can be used with the WebService.</p>
+                    <ul>
+                        <li>/login</li>
+                        <li>/logout</li>
+                        <li>/shifts.json</li>
+                        <li>/shifts/{uuid}.json</li>
+                        <li>/shifts/{uuid/comments.json</li>
+                        <li>/comments.json</li>
+                        <li>/comments/{uuid}.json</li>
+                        <li>/users.json</li>
+                        <li>/users/{uuid}.json</li>
+                        <li>/users/{uuid}/shifts.json</li>
+                        <li>/users/{uuid}/shifts/{uuid}/comments.json</li>
+                        <li>/users/{uuid}/comments.json</li>
+                        <li>/users/{uuid}/received_comments.json</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4>UUID</h4>
+                </div>
+                <div class="card-body">
+                    <strong>Ramsey's UUID Bundle</strong>
+                    <p>Rather then using auto incrementing primary keys which hold a security risk, I have utilized UUID by use of two packages.</p>
+                    <ul>
+                        <li>ramsey/uuid</li>
+                        <li>ramsey/uuid-doctrine</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div aria-labelledby="frontend-tab" class="tab-pane fade" id="frontend" role="tabpanel">
+        <h1 class="text-center">Frontend Information</h1>
+        <h4 class="text-center">Angular 10 + Ionic 5</h4>
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Local Storage</h4>
+                </div>
+                <div class="card-body">
+                    <strong>Ionic Storage Module</strong>
+                    <p>To save the JWT in the user's browser I have utilized the Ionic Storage module.</p>
+                    <p>By default it will save the JWT which I have coded to be split in to 3 separate values of data in the IndexedDB, if for some reason the default location does not work
+                    it will be saved using WebSQL.</p>
+                    <p>One field is the token value, which is sent with each request using a http.interceptor.ts file that I have created.</p>
+                    <p>The other two are the user's uuid and the user's roles.</p>
+                    <p>If a token is present, the app.component.ts which holds the main navigation will display the links that are only visible to a user once they have a JWT in their browser.</p>
+                    <p>After login and the JWT is received, the user is redirected to the user profile where the payload value containing the user's UUID is used with the get request for the user's
+                    information. I decided to store this in local storage due to the convenience of having it ready for is the user is to navigate back to the profile at any stage.</p>
+                    <p>The app.component.ts also has a function that checks whether the user is granted ROLE_ADMIN or only ROLE_USER</p>
+                    <p>This will dictate what links are shown in the navigation sidebar.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Security</h4>
+                </div>
+                <div class="card-body">
+                    <strong>Guards</strong>
+                    <p>To ensure that it is not possible to simply point to a secured page in the URL, I have utilized 2 guard services.</p>
+                    <ul>
+                        <li>auth.guard.ts</li>
+                        <li>admin.guard.ts</li>
+                    </ul>
+                    <p>The Auth guard has been registered with the applicable routes that I wish to be seen to users that have been authenticated.</p>
+                    <p>And the Admin guard is for when the user has been authenticated as ROLE_ADMIN.</p>
+                    <strong>Authentication</strong>
+                    <p>Authentication is handled in the authentication.service.ts file.</p>
+                    <p>This file is declared as a service in the login module and the form values are used in a HTTP POST to the login endpoint.</p>
+                    <p>In this login function on the authentication.service.ts, an if statement will save the JWT payload and split it in to 3 separate values instead of one object,
+                    for convenience purposes with other functions though-out the app.</p>
+                    <p>In the same function it routes the user to the profile page.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Form Validation</h4>
+                </div>
+                <div class="card-body">
+                    <strong>Angular Reactive Forms</strong>
+                    <p>One of the best tools for form validation is the Forms Module that comes with Angular.</p>
+                    <p>By default, Angular does not trust and user input and this also includes any javascript that can be executed.</p>
+                    <p>Part of the strength of its security is its ability to link with the strictly typed nature of TypeScript.</p>
+                    <p>Because all of my entities that the front end interacts with have been mapped using and interface class, Angular knows exactly what data to
+                    expect in its forms with the necessary form fields.</p>
+                    <p>In the services that utilized for HTTP requests, each form field is named against the already dictated data types in the interface classes.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Calendars</h4>
+                </div>
+                <div class="card-body">
+                    <strong>Angular Calendar 6+</strong>
+                    <p>Being a rostering app, the inclusion of an interactive calendar felt very important. After trialling a few, this one felt very customizable and
+                    perfect for what I wanted.</p>
+                    <p>The events on the calendar are clicked and navigate you to the Shift Details page to view and from there you can click edit and begin making changes to the shift.</p>
+                    <p>As a means to provide a great visual tool for planning and approving shifts, I implemented this calendar twice.</p>
+                    <p>One Calendar displays all shifts pending approval from the manager and the other is the official calendar showing approved shifts.</p>
+                    <p>The calendar shows, Month, Week and Day views.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Timezones</h4>
+                </div>
+                <div class="card-body">
+                    <strong>DATE-FNS</strong>
+                    <p>As the recommended module for Angular Calendar I have utilized this work along side it to ensure that the shifts are rendered to local time according the
+                    users browser.</p>
+                    <strong>MomentJS</strong>
+                    <p>As this is my personal preference I also utilized MomentJS for altering saved shifts in to UTC format, prior to saving in the database.</p>
+                    <p>All shifts are saved in UTC format and then rendered to local time using the date pipe which is included with Angular.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Angular Features</h4>
+                </div>
+                <div class="card-body">
+                    <strong>Observables</strong>
+                    <p>One of the things I have found challenging to learn, but am so glad to have learned is Observables.</p>
+                    <p>After mapping out the expected JSON structure and the data types of the entities that will be used in the HTTP requests, you
+                    care able to make a HTTP request and Observable of that Entity Class. This meant that in any component, to have access to the http call, I only needed to subscribe
+                    to it. It would then know if it should be one instance of the entity or an array of the entity.</p>
+                    <p>This made the use of interpolation extremely easy.</p>
+                    <strong>ngIF + ngFor</strong>
+                    <p>The ngIf and ngFor functions that are built in to Angular are very useful and I have used them all through out my application.</p>
+                    <p>With the ngFor, it is used to iterate through an array of json data.</p>
+                    <p>The ngIf allowed for simple if statements directly in the html elements.</p>
+                    <p>This was great for implementing the spinner for loading. As if the content was not there, else #loading for the ngTemplate that included the html for the spinner.
+                    </p>
+                    </p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Navigating the App</h4>
+                </div>
+                <div class="card-body">
+                    <strong>Shifts</strong>
+                    <p>There are 3 main sections where interacting with shifts takes place.</p>
+                    <p>When you first login you are given I quick view of your upcoming approved shifts.</p>
+                    <p>From your profile you can view all your personal shifts.</p>
+                    <p>On this page I implemented some filters which are found at the top of the page.</p>
+                    <p>There are 3 different filter buttons, one is for past shifts, all shifts, and upcoming shifts.</p>
+                    <p>After pressing any of those buttons you get an action card appear from the bottom of the screen giving you a more details set of
+                    options for filtering the shifts.</p>
+                    <p>The Shifts dashboard displays all shifts. On this page you can also use a filter which is again located at the top of the page.</p>
+                    <p>To create a shift, you can go to the create shift link located in the shifts dashboard.</p>
+                    <p>In this area the onDuty field is filled in using your UUID which is stored in local storage.</p>
+                    <p>Only the admin user is able to create shifts and assign it to an employee.</p>
+                    <p>To edit a shift, you can either do this by clicking on a shift in the list containing your personal shift or if you are admin you can edit any ones shift.</p>
+                    <p>Note that, if your shift is already approved and you are not admin, an admin user will have to be notified to have it changed.</p>
+                    <p>To delete a shift, it is done the same by clicking on a shift in your personal shift list.</p>
+                    <p>This is again, the same where only and admin user can delete a shift after its approval. And a user can only delete a shift that is belonging to them.</p>
+                    <p>In the Admin section there are also some shift, this is very muuch similiar to the shifts dashboard except with some more visible information which is
+                    suited for admin use.</p>
+                    <p>All shifts are displayed on two separate calendars, Approved and Draft.</p>
+                    <p>You can click the links on the calendar to navigate and vies the shift details, and from this screen you may edit if the shift belongs to you or if you
+                    are admin. As well as delete with the same rules applying.</p>
+                    <br />
+                    <strong>Messaging</strong>
+                    <p>To provide a tool to assist with how the team members can collaborate with each other and organize and better organize there scheduling.</p>
+                    <p>I felt that adding personal messaging would be something to help this process.</p>
+                    <p>In the navigation sidebar you will see a link for messaging.</p>
+                    <p>When navigating to this page you view your unread messages.</p>
+                    <p>When you open a message to read, I have created a put request the automatically updates the message to boolean "isRead" = true</p>
+                    <p>From this page you can view all messages that you have sent and all read messages.</p>
+                    <p>When sending a message, it performs a GET request for all users which populate the selection modal for choosing a recipient for the message.</p>
+                    <p>The sender field is pre-populated by using the UUID from localstorage and the isPrivate value is set to true in a a hidden form field.</p>
+                    <p>To prevent personal messages that have been linked to a shift appearing on the shift comments screen I added the boolean isPrivate as a
+                    way to mitigate that from occurring.</p>
+                    <p>To ensure that no inappropriate messaging is occurring, I have made a messaging page for admin, this includes all messages and shift comments.</p>
+                    <p>This can also be used as a way to ensure that any information is accessible that may be sitting in a personal message box.</p>
+                    <br />
+                    <strong>Shift Comments</strong>
+                    <p>This shares the same database table as the messaging content, but due to the once boolean field mentioned above, I was able to
+                    make it work easily with both scenarios.</p>
+                    <p>The objective that I had envisaged for shift comments, was to allow a note to be left on a specific shift. Because of the nature of the client scenario, which
+                    is a on call support that operates world wide it would be extremely useful for a note to be left on the next persons shift to pick up where they left of for a customer issue
+                    for example.</p>
+                    <p>This can be created by clicking on the shift and clicking on the add comment button, you can choose to make someone the recipient or leave it blank.</p>
+                    <p>Shift comments can only be edited by the author or by an admin user, this is also the same for deleting a shift comment.</p>
+                    <p>These comments are set as cascade on update and delete, so if the shift is deleted then the comment is too.</p>
+                    <br />
+                    <strong>Users</strong>
+                    <p>Due to the nature of how this app is intended to be used, I completely removed the registration page that I had originally created.</p>
+                    <p>This is because no external user's should be able to register, rather if an employee will be anticipated to use the rostering app, then the manager will create
+                    there login account for them.</p>
+                    <p>After logging in the user can then change their password and update their user details.</p>
+                    <p>In the profile page, there is a link that directs you to the change password form, and one for the changing your details.</p>
+                    <p>Because the email and password is used to authenticate with backend with every request, I have made it so it automatically logs the user out and redirects to the login
+                    page. This will then give the user the JWT with correct payload.</p>
+                    <p>In the admin section you will find a users list page, from this you can edit or delete a user, view their upcoming shifts or send the user a message.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script crossorigin="anonymous"
+        integrity="sha384-popRpmFF9JQgExhfw5tZT4I9/CI5e2QcuUZPOVXb1m7qUmeR2b50u+YFEYe1wgzy"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</html>
