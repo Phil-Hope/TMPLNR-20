@@ -37,7 +37,7 @@ or in your terminal:
 
 * #### Automated Application Installation
 
-In the project root, run: `sh install.sh`
+In the project root, run (linux/mac): `sh install.sh` (windows): `bash install.sh`
 
 the backend webservice is now running at https://localhost:8000 and the tests have been executed.
 
