@@ -1,6 +1,6 @@
 # ![TMPLNR LOGO](UX2/src/assets/icons/icon-96x96.png)  UX Cluster / Project Implementation Cluster
 
-###Symfony WebService + Ionic-Angular Rostering PWA. 
+### Symfony WebService + Ionic-Angular Rostering PWA. 
 
 Requirements for Installation: 
 
@@ -37,7 +37,7 @@ or in your terminal:
 
 * #### Automated Application Installation
 
-In the project root, run: `sh install.sh`
+In the project root, run (linux/mac): `sh install.sh` (windows): `bash install.sh`
 
 the backend webservice is now running at https://localhost:8000 and the tests have been executed.
 
