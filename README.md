@@ -14,7 +14,7 @@ Requirements for Installation:
 
 5) openssl
 
-6) PHP 7.2 or higher
+6) PHP 7.4
 
 7) Symfony CLI 
    
